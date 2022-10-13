@@ -14,7 +14,11 @@ namespace BookStore.Pages
 
         public void OnGet()
         {
-
         }
+
+        //public IActionResult OnPost()
+        //{
+        //    return Page();
+        //}
     }
 }
