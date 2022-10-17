@@ -1,1 +1,22 @@
 ﻿
+h2{
+    font-size: 34px;
+}
+
+h3, h2 {
+    font-family: 'Segoe UI Emoji';
+}
+
+.content{
+    display: flex;
+}
+
+img {
+    width: 400px;
+    height: 600px;
+    margin: 10px 20px 10px 10px;
+}
+
+p{
+    font-size:20px;
+}

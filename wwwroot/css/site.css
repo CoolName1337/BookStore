@@ -1,5 +1,5 @@
 
-p {
+.nav-ul p {
     font-size: 40px;
 }
 
@@ -9,26 +9,52 @@ p {
     align-items: center;
 }
 
-input[type="search"]{
+p {
+    font-family: 'Segoe UI Emoji';
+}
+
+.nav-main-hr {
+    margin: -50px auto 10px;
+    padding: 0;
+    height: 50px;
+    border: none;
+    border-bottom: 1px solid #1f1209;
+    box-shadow: 0 20px 20px -20px #333;
+    width: 85%;
+}
+
+nav {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.search-form{
+    display:flex;
+}
+
+input[type="search"] {
     padding: 10px;
-    font-size:20px;
-    height:40px;
-    width:700px;
+    font-size: 20px;
+    height: 40px;
+    width: 450px;
     border: 1px solid gray;
 }
 
-.btn-search{
-    height:40px;
-    width:40px;
-    font-size:20px;
+.btn-search {
+    height: 40px;
+    width: 40px;
+    font-size: 20px;
 }
 
 li {
-    padding: 0.5em;
+    padding: 0 0.5em;
     font-size: 32px;
 }
 
-
+main {
+    max-width: 1000px;
+    margin: 40px auto 10px;
+}
 
 a.nav-a {
     font-family:'Segoe UI';
@@ -36,52 +62,6 @@ a.nav-a {
     color: black;
 }
 
-/*
-a.navbar-brand {
-    white-space: normal;
-    text-align: center;
-    word-break: break-all;
+p.ballance{
+    font-size:18px;
 }
-
-a {
-    color: yellow;
-    font-size: 30px;
-}
-
-.btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-}
-
-.border-top {
-    border-top: 1px solid #e5e5e5;
-}
-
-.border-bottom {
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-    font-size: 1rem;
-    line-height: inherit;
-}
-
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    line-height: 60px;
-}
-*/

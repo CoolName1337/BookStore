@@ -1,3 +1,5 @@
+using BookStore.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -13,6 +15,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -22,4 +25,15 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+using (ApplicationContext db = new())
+{
+    User[] users = new[] { new User { Name = "Chmo", Balance = 228 }, new User { Name = "Kak", Balance = 14 }, new User { Name = "shk", Balance = 88 } };
+    Book[] books = new[] { new Book { Title = "Pisya Popa 1", Price = 69 }, new Book { Title = "Pisya Popa 3", Price = 69 }, new Book { Title = "Pisya Popa 3", Price = 231 } };
+
+    db.Users.AddRange(users);
+    db.Books.AddRange(books);
+    db.SaveChanges();
+}
+
 app.Run();
+

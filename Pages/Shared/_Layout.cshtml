@@ -16,22 +16,30 @@
 <body>
     <header>
         <nav>
-            <form></form>
             <div>
                 <ul class="nav-ul">
                     <li> <a class="nav-a" asp-page="/Index">BookStore</a> </li>
-                    <li> <a class="nav-a" asp-page="/Privacy">Каталог</a> </li>
+                    <li> <a class="nav-a" asp-page="/BookPage">Каталог</a> </li>
                     <li> <a class="nav-a" asp-page="/Privacy">Избранное</a> </li>
                     <li> <a class="nav-a" asp-page="/Privacy">Мои книги</a> </li>
                     <li>
-                        <input type="search" name="req-search"/>
+                        <form class="search-form" method="post">
+                            <input type="search" name="req-search" />
+                            <button class="btn-search">🔍</button>
+                        </form>
                     </li>
                     <li>
-                        <button class="btn-search" style="margin-left:-25px;">🔍</button>
+                        <p class="ballance">2000$</p>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="~/images/accountLogo.png" width="40px" height="40px"/>
+                        </a>
                     </li>
                 </ul>
             </div>
         </nav>
+        <hr class="nav-main-hr"/>
     </header>
     <div class="container">
         <main role="main">

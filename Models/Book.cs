@@ -7,29 +7,18 @@ public enum Genres
     Porn,
     WomansShit,
     MansShit,
-    Science,
 }
-
-internal class Rating
-{
-    public decimal Get() => stars.Values.Sum() / stars.Count();
-    Dictionary<int, int> stars = new();
-    public void AddStar(int id, int s) => stars.Add(id, s);
-    public void RemoveStar(int id) => stars.Remove(id);
-}
-
 public class Book
 {
-    [Range(0, 1000)]
+    public int Id { get; set; }
+    [Required]
+    public string? Title { get; set; }
     public decimal Price { get; set; }
-    [Required]
-    public string Name { get; set; } = "Undefined";
-    [Required]
-    public string Data { get; set; }
-    public string Description { get; set; }
-
-    private bool isBought = false;
-
+    public string? Description { get; set; }
+    public string? Source { get; set; }
+    public string? Writer { get; set; }
     [Range(0, 5)]
-    private decimal Rating;
+    public decimal Rate { get; set; }
+    public List<User> Users { get; set; }
+
 }

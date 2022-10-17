@@ -14,4 +14,8 @@
     <None Include="wwwroot\images\BookPreview.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.10" />
+  </ItemGroup>
+
 </Project>
