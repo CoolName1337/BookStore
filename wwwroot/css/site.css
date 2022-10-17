@@ -9,9 +9,6 @@
     align-items: center;
 }
 
-p {
-    font-family: 'Segoe UI Emoji';
-}
 
 .nav-main-hr {
     margin: -50px auto 10px;
@@ -24,7 +21,7 @@ p {
 }
 
 nav {
-    max-width: 80%;
+    max-width: 90%;
     margin: 0 auto;
 }
 
@@ -36,14 +33,22 @@ input[type="search"] {
     padding: 10px;
     font-size: 20px;
     height: 40px;
-    width: 450px;
-    border: 1px solid gray;
+    width: 400px;
+    border: 2px solid gray;
+    border-style: solid none solid solid;
+    border-radius: 4px 0 0 4px;
+}
+
+p, h2, h1, a, button {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 5px 0;
 }
 
 .btn-search {
     height: 40px;
     width: 40px;
     font-size: 20px;
+    background-color: dimgray;
 }
 
 li {
@@ -57,7 +62,6 @@ main {
 }
 
 a.nav-a {
-    font-family:'Segoe UI';
     text-decoration: None;
     color: black;
 }

@@ -8,6 +8,7 @@ public enum Genres
     WomansShit,
     MansShit,
 }
+
 public class Book
 {
     public int Id { get; set; }
@@ -19,6 +20,9 @@ public class Book
     public string? Writer { get; set; }
     [Range(0, 5)]
     public decimal Rate { get; set; }
+    public DateTime AddingDate { get; set; }
+    public DateTime DateOfCreation { get; set; }
+    
     public List<User> Users { get; set; }
 
 }

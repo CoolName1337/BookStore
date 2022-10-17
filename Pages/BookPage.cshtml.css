@@ -1,13 +1,13 @@
 ﻿
-h2{
-    font-size: 34px;
+h2 {
+    font-size: 24px;
 }
 
-h3, h2 {
-    font-family: 'Segoe UI Emoji';
+p.description-title {
+    font-weight:bold;
 }
 
-.content{
+.content {
     display: flex;
 }
 
@@ -15,6 +15,21 @@ img {
     width: 400px;
     height: 600px;
     margin: 10px 20px 10px 10px;
+}
+
+button.buy-btn {
+    background-color: green;
+    border-style: none;
+    font-size: 26px;
+    border-radius: 6px;
+    font-weight: bold;
+    color: white;
+    width: 300px;
+    height: 50px;
+}
+
+button:hover {
+    background-color: darkgreen;
 }
 
 p{
