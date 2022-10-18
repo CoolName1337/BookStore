@@ -19,12 +19,12 @@
             <div>
                 <ul class="nav-ul">
                     <li> <a class="nav-a" asp-page="/Index">BookStore</a> </li>
-                    <li> <a class="nav-a" asp-page="/BookPage">Каталог</a> </li>
+                    <li> <a class="nav-a" asp-page="/Index">Каталог</a> </li>
                     <li> <a class="nav-a" asp-page="/Privacy">Избранное</a> </li>
                     <li> <a class="nav-a" asp-page="/Privacy">Мои книги</a> </li>
                     <li>
-                        <form class="search-form" method="post">
-                            <input type="search" name="req-search" placeholder="Любые ключевые слова..." />
+                        <form class="search-form" method="post" asp-page="SearchResult">
+                            <input type="search" name="search" placeholder="Любые ключевые слова..."/>
                             <button class="btn-search" type="submit">🔍</button>
                         </form>
                     </li>

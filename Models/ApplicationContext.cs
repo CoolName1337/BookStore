@@ -8,7 +8,6 @@ namespace BookStore.Models
         public DbSet<Book> Books { get; set; } = null;
         public ApplicationContext()
         {
-            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

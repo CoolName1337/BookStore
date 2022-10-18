@@ -1,0 +1,29 @@
+﻿@page
+@using Models
+@model BookStore.Pages.SearchResultModel
+@{
+
+}
+
+
+@if (Model.ResultBooks.Length!=0)
+{
+    <ul class="results-panel">
+        @foreach (Book book in Model.ResultBooks)
+        {
+            <li>
+                <div class="result-panel">
+                    <a href="/BookPage?id=@book.Id"> <img class="mini-book-img" alt="Картинка не найдена" src=@book.Source /> </a>
+                    <div>
+                        <a class="title" href="/BookPage?id=@book.Id">@book.Title</a>
+                        <p class="writer">Автор: @book.Writer</p>
+                        <p class="description">Описание: <br /> @book.Description</p>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+}
+else{
+    <p class="bad-result">По запросу <strong>@Model.RequestString</strong> ничего не найдено</p>
+}

@@ -25,8 +25,10 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+new ApplicationContext().Database.EnsureDeleted();
 using (ApplicationContext db = new())
 {
+
     User[] users = new[] { new User { Name = "Chmo", Balance = 228 }, new User { Name = "Kak", Balance = 14 }, new User { Name = "shk", Balance = 88 } };
     Book[] books = new[] { new Book { Title = "Pisya Popa 1", Price = 69 }, new Book { Title = "Pisya Popa 3", Price = 69 }, new Book { Title = "Pisya Popa 3", Price = 231 } };
 

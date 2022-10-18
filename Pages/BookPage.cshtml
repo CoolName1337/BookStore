@@ -4,16 +4,15 @@
 }
 
 <div class="content">
-    <img src="/images/BookPreview.png" />
+    <img src=@Model.TakedBook.Source alt="Картинка не найдена"/>
     <div>
-        <h2 class="title">Пися попа 2</h2>
-        <p class="writer">Автор: Lither Adolf</p>
+        <h2 class="title">@(Model.TakedBook.Title ?? "Без названия")</h2>
+        <p class="writer">Автор: @(Model.TakedBook.Writer ?? "Неизвестен")</p>
         <br />
         <p class="description-title">Описание книги</p>
-        <p class="description">Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla 
-            bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla</p>
+        <p class="description">@(Model.TakedBook.Description ?? "-")</p>
         <form>
-            <button class="buy-btn" type="button" name="buy-btn">КУПИТЬ ЗА 1000$</button>
+            <button class="buy-btn" type="button" name="buy-btn">КУПИТЬ ЗА @Model.TakedBook.Price</button>
         </form>
     </div>
 </div>

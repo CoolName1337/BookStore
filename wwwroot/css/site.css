@@ -1,4 +1,14 @@
 
+p, h2, h1, a, button {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+    transition: all 0.4s ease;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
 .nav-ul p {
     font-size: 40px;
 }
@@ -39,19 +49,21 @@ input[type="search"] {
     border-radius: 4px 0 0 4px;
 }
 
-p, h2, h1, a, button {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 5px 0;
-}
 
 .btn-search {
     height: 40px;
     width: 40px;
     font-size: 20px;
+    border-radius: 0 4px 4px 0;
     background-color: dimgray;
 }
 
-li {
+
+.btn-search:hover {
+    background-color: #393939;
+}
+
+ul.nav-ul li {
     padding: 0 0.5em;
     font-size: 32px;
 }
@@ -61,7 +73,7 @@ main {
     margin: 40px auto 10px;
 }
 
-a.nav-a {
+a {
     text-decoration: None;
     color: black;
 }
