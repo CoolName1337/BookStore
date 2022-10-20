@@ -3,18 +3,24 @@
 @{
 }
 
-
-<div>
-    <form method="post">
-        <div>
-            <label>Username</label>
-            <input asp-for="Credential.Name" />
-        </div>
-        <div>
-            <label>Password</label>
-            <input asp-for="Credential.Password" />
-        </div>
-        <button type="submit">Login</button>
-    </form>
-
-</div>
+<h2>Вход в приложение</h2>
+<form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <label asp-for="model.Username"></label><br />
+        <input asp-for="model.Username" />
+        <span asp-validation-for="model.Username"></span>
+    </div>
+    <div>
+        <label asp-for="model.Password"></label><br />
+        <input asp-for="model.Password" />
+        <span asp-validation-for="model.Password"></span>
+    </div>
+    <div>
+        <label asp-for="model.RememberMe"></label><br />
+        <input asp-for="model.RememberMe" />
+    </div>
+    <div>
+        <input type="submit" value="Войти" />
+    </div>
+</form>

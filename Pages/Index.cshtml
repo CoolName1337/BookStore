@@ -3,31 +3,27 @@
 @{
     ViewData["Title"] = "Home page";
 }
+<div class="all-books-container">
+    <ul class="books-container">
+        @foreach (var book in Model.Books)
+        {
+            string BookHref = $"/BookPage?id={book.Id}";
+            <li class="book-container">
+                <a href=@BookHref><img class="book-preview" src=@book.Source /></a>
+                <div class="book-info">
+                    <a href=@BookHref>@book.Title</a>
+                    <p class="writer">@book.Writer</p>
+                    <div>
+                        <b>@book.Price</b>
+                        &nbsp;
+                        <span>руб.</span>
+                    </div>
+                    <form>
+                        <button>Купить</button>
+                    </form>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
 
-
-
-
-
-
-
-<p>
-    LineLineLineLineLineLineLineLineLineLineLineLineLine
-    LineLineLineLineLineLineLineLineLineLineLineLineLine
-    LineLineLineLineLineLineLineLineLineLineLineLineLine
-</p>
-
-
-
-<p>
-    LineLineLineLineLineLineLineLineLineLineLineLineLine
-    LineLineLineLineLineLineLineLineLineLineLineLineLine
-    LineLineLineLineLineLineLineLineLineLineLineLineLine
-</p>
-
-
-
-<p>
-    LineLineLineLineLineLineLineLineLineLineLineLineLine
-    LineLineLineLineLineLineLineLineLineLineLineLineLine
-    LineLineLineLineLineLineLineLineLineLineLineLineLine
-</p>

@@ -1,18 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 
 namespace BookStore.Models
 {
-    public class ApplicationContext : DbContext
+    public class ApplicationContext : IdentityDbContext<User>
     {
-        public DbSet<User> Users { get; set; } = null;
-        public DbSet<Book> Books { get; set; } = null;
+        public DbSet<Book> Books { get; set; }
         public ApplicationContext()
         {
             Database.EnsureCreated();
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            optionsBuilder.UseSqlite("Data Source=MegaDB.db");
+            options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=usersstoredb;Trusted_Connection=True;");
         }
     }
 }

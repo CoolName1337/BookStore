@@ -1,6 +1,19 @@
 using BookStore.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<ApplicationContext>();
+
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+})
+    .AddEntityFrameworkStores<ApplicationContext>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -15,27 +28,15 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapRazorPages();
 
-new ApplicationContext().Database.EnsureDeleted();
-using (ApplicationContext db = new())
-{
-
-    User[] users = new[] { new User { Name = "Chmo", Balance = 228 }, new User { Name = "Kak", Balance = 14 }, new User { Name = "shk", Balance = 88 } };
-    Book[] books = new[] { new Book { Title = "Pisya Popa 1", Price = 69 }, new Book { Title = "Pisya Popa 3", Price = 69 }, new Book { Title = "Pisya Popa 3", Price = 231 } };
-
-    db.Users.AddRange(users);
-    db.Books.AddRange(books);
-    db.SaveChanges();
-}
 
 app.Run();
 

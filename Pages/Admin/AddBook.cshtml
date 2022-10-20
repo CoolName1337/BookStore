@@ -1,0 +1,11 @@
+﻿@page
+@model BookStore.Pages.Admin.AddBookModel
+
+<form method="post" enctype="multipart/form-data">
+    <input type="file" asp-for="UploadImg" />
+    <input asp-for="CreatedBook.Title" placeholder="Название"/><br />
+    <input asp-for="CreatedBook.Writer" placeholder="Писатель"/><br />
+    <input asp-for="CreatedBook.Description" placeholder="Описание"/><br />
+    <input asp-for="CreatedBook.Price" placeholder="Цена"/><br />
+    <button type="submit">Добавить</button>
+</form>

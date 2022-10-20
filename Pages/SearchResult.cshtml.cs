@@ -27,7 +27,8 @@ namespace BookStore.Pages
         {
             if (search == "" || search == " ") return;
             RequestString = search;
-            using (ApplicationContext db = new()){
+            using (ApplicationContext db = new())
+            {
                 Book[] allBooks = db.Books.ToArray();
                 ResultBooks = (from book in allBooks where CheckBook(book, search ?? "") select book).ToArray();
             }

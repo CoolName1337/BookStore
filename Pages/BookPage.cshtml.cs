@@ -8,14 +8,13 @@ namespace BookStore.Pages
     {
         public Book TakedBook = null;
 
-        public void OnGet()
+        public void OnGet(int id)
         {
-            string id = Request.Query["id"];
             using (ApplicationContext db = new())
             {
                 foreach (Book book in db.Books.ToArray())
                 {
-                    if (book.Id == int.Parse(id))
+                    if (book.Id == id)
                     {
                         TakedBook = book;
                         return;

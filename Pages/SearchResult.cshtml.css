@@ -21,6 +21,11 @@ p{
 
 }
 
+img {   
+    width: 145px;
+    height: 200px;
+}
+
 p.bad-result{
     font-size: 24px;
 }

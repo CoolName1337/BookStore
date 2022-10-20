@@ -31,11 +31,25 @@
                     <li>
                         <p class="ballance">2000$</p>
                     </li>
-                    <li>
-                        <a href="#">
-                            <img src="~/images/accountLogo.png" width="40" height="40"/>
-                        </a>
-                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <a asp-page="#">@User.Identity.Name</a>
+                        </li>
+                        <li>
+                            <a asp-page="/Account/Logout">Выйти</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a asp-page="/Account/Login">Войти</a>
+                        </li>
+                        <li>
+                            <a asp-page="/Account/Register">Зарегистрироваться</a>
+                        </li>
+
+                    }
                 </ul>
             </div>
         </nav>
