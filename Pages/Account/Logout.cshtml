@@ -1,13 +1,14 @@
 ﻿@page
 @model BookStore.Pages.Account.LogoutModel
 @{
+    ViewData["Title"] = "Выход?";
 }
 
-<div>
-    <p>Вы точно хотите выйти?</p>
+<div class="content">
+    <p>Выйти из аккаунта?</p>
     <form method="post">
-        <button name="IsLogout" value="True">Да)))</button>
-        <button name="IsLogout" value="False">Не(((</button>
+        <button class="accept-btn" name="IsLogout" value="True">Да</button>
+        <button class="reject-btn" name="IsLogout" value="False">Нет</button>
     </form>
 
 </div>

@@ -1,0 +1,36 @@
+﻿
+div.container{
+    max-width: 1200px;
+    margin: auto;
+}
+
+div.content{
+    font-size: 36px;
+}
+
+button.accept-btn {
+    color: #831818;
+    border-color: #831818;
+}
+
+button.reject-btn {
+    color: #177e16;
+    border-color: #177e16;
+}
+
+button.reject-btn:hover {
+    background-color: #177e16;
+    color: white;
+}
+
+
+button.accept-btn:hover {
+    background-color: #831818;
+    color:white;
+}
+
+button {
+    font-size: 36px;
+    width: 200px;
+    transition:all 0.8s ease;
+}
