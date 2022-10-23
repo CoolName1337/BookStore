@@ -1,18 +1,54 @@
 ﻿@page
 @model BookStore.Pages.BookPageModel
 @{
+    ViewData["Title"] = Model.TakedBook?.Title ?? "deleted";
 }
 
 <div class="content">
-    <img src=@Model.TakedBook.Source alt="Картинка не найдена"/>
-    <div>
-        <h2 class="title">@(Model.TakedBook.Title ?? "Без названия")</h2>
-        <p class="writer">Автор: @(Model.TakedBook.Writer ?? "Неизвестен")</p>
-        <br />
+    <div class="title-container">
+        <img src=@Model.TakedBook.SourceImage alt="Картинка не найдена" />
+        <div>
+            <div class="title" style="display:flex">
+                <h2>@Model.TakedBook.Title</h2>
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.IsInRole("creator")))
+                {
+                    <a href="/Admin/EditBook?Id=@Model.TakedBook.Id"><img class="setting-img" src="/images/server/setting.png" /></a>
+                }
+            </div>
+            <p class="writer">Автор: @Model.TakedBook.Writer</p><br />
+            <form method="post" style="display:flex">
+                <input name="id" value=@Model.TakedBook.Id hidden />
+                @if (User.Identity.IsAuthenticated && Model.user.AvailableBooks.Any(book=>book.Id == Model.TakedBook.Id))
+                {
+                    <button class="buy-btn" type="submit" name="interact_btn" value="dwn">Скачать</button>
+                }
+                else{
+                    <button class="buy-btn" type="submit" name="interact_btn" value="buy">КУПИТЬ ЗА @Model.TakedBook.Price</button>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    string id = Model.user.FindFav(Model.TakedBook.Id.ToString());
+                    if (string.IsNullOrEmpty(id))
+                    {
+                        <button class="unfav-btn" type="submit" name="interact_btn" value="unf">♡</button>
+                    }
+                    else
+                    {
+                        <button class="fav-btn" type="submit" name="interact_btn" value="fav">♡</button>
+                    }
+                }
+            </form>
+
+        </div>
+    </div>
+    <div class="desription-container">
+
         <p class="description-title">Описание книги</p>
-        <p class="description">@(Model.TakedBook.Description ?? "-")</p>
-        <form>
-            <button class="buy-btn" type="button" name="buy-btn">КУПИТЬ ЗА @Model.TakedBook.Price</button>
-        </form>
+        <p class="description">
+            @foreach (string str in @Model.TakedBook.Description.Split('\n')){
+                @str
+                <br />
+            }
+        </p>
     </div>
 </div>

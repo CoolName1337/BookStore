@@ -2,22 +2,22 @@
 @using Models
 @model BookStore.Pages.SearchResultModel
 @{
-
+    ViewData["Title"] = "Поиск";
 }
 
 
-@if (Model.ResultBooks.Length!=0)
+@if (Model.ResultBooks != null && Model.ResultBooks.Length != 0)
 {
+    <h1 class="search-result-title">Результаты поиска <strong>@Model.RequestString</strong></h1>
     <ul class="results-panel">
         @foreach (Book book in Model.ResultBooks)
         {
             <li>
                 <div class="result-panel">
-                    <a href="/BookPage?id=@book.Id"> <img class="mini-book-img" src=@book.Source /> </a>
-                    <div>
+                    <a href="/BookPage?id=@book.Id"> <img class="mini-book-img" src=@book.SourceImage /> </a>
+                    <div class="result-info">
                         <a class="title" href="/BookPage?id=@book.Id">@book.Title</a>
                         <p class="writer">Автор: @book.Writer</p>
-                        <p class="description">Описание: <br /> @book.Description</p>
                     </div>
                 </div>
             </li>

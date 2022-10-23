@@ -1,11 +1,33 @@
 ﻿@page
 @model BookStore.Pages.Admin.AddBookModel
+@{
+    ViewData["Title"] = "Добавить книгу";
+}
 
-<form method="post" enctype="multipart/form-data">
-    <input type="file" asp-for="UploadImg" />
-    <input asp-for="CreatedBook.Title" placeholder="Название"/><br />
-    <input asp-for="CreatedBook.Writer" placeholder="Писатель"/><br />
-    <input asp-for="CreatedBook.Description" placeholder="Описание"/><br />
-    <input asp-for="CreatedBook.Price" placeholder="Цена"/><br />
-    <button type="submit">Добавить</button>
-</form>
+<div class="content">
+    <form method="post" enctype="multipart/form-data">
+        <div class="create-container">
+            <input class="input-file" type="file" name="file" value="@Model.CreatedBook.SourceFile" /><br />
+            <div class="handler">
+                <input class="input-img" type="file" name="img" value="@Model.CreatedBook.SourceImage" />
+                <div>
+                    <input class="input-title" name="title" placeholder="Название" value="@Model.CreatedBook.Title" /><br />
+                    <input class="input-writer" name="writer" placeholder="Писатель" value="@Model.CreatedBook.Writer"/><br /><br />
+                    <textarea class="input-descr" placeholder="Описание" name="descr">@Model.CreatedBook.Description</textarea><br /><br />
+                    <input class="input-price" name="price" placeholder="Цена" value="@Model.CreatedBook.Price" /><br />
+                    <button class="input-submit create-btn" type="submit" name="WantToCreate" value="true">Добавить</button>
+                    <button class="input-submit cancel-btn" type="submit">Отмена</button>
+                </div>
+            </div>
+            <span style="color:red">
+                @foreach (string exc in Model.exceptionRes)
+                {
+                    <span>@exc</span><br />
+                }
+            </span>
+        </div>
+        
+        
+    </form>
+</div>
+

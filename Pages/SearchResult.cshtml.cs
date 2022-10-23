@@ -6,33 +6,20 @@ namespace BookStore.Pages
 {
     public class SearchResultModel : PageModel
     {
-        public Book[] ResultBooks = new Book[0];
+        public Book[] ResultBooks;
         public string? RequestString;
-
-        private bool CheckBook(Book book, string req)
+        public void OnGet(string search)
         {
-            bool _ = 
-                (book.Title?.ToUpper().Contains(req.ToUpper()) ?? false) || 
-                (book.Writer?.ToUpper().Contains(req.ToUpper()) ?? false) || 
-                (book.Description?.ToUpper().Contains(req.ToUpper()) ?? false);
-            return _;
-        }
-
-        public void OnGet()
-        {
-
-        }
-
-        public void OnPost(string? search)
-        {
-            if (search == "" || search == " ") return;
+            if (string.IsNullOrEmpty(search) || search == " ") return;
             RequestString = search;
             using (ApplicationContext db = new())
             {
-                Book[] allBooks = db.Books.ToArray();
-                ResultBooks = (from book in allBooks where CheckBook(book, search ?? "") select book).ToArray();
+                ResultBooks = db.Books.Where((book) =>
+                book.Title.ToUpper().Contains(search.ToUpper()) ||
+                book.Writer.ToUpper().Contains(search.ToUpper()) ||
+                book.Description.ToUpper().Contains(search.ToUpper())).ToArray();
             }
-
         }
+
     }
 }

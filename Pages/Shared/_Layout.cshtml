@@ -14,59 +14,55 @@
     <link rel="stylesheet" href="~/BookStore.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav>
-            <div>
-                <ul class="nav-ul">
-                    <li> <a class="nav-a" asp-page="/Index">BookStore</a> </li>
-                    <li> <a class="nav-a" asp-page="/Index">Каталог</a> </li>
-                    <li> <a class="nav-a" asp-page="/Privacy">Избранное</a> </li>
-                    <li> <a class="nav-a" asp-page="/Privacy">Мои книги</a> </li>
-                    <li>
-                        <form class="search-form" method="post" asp-page="SearchResult">
-                            <input type="search" name="search" placeholder="Любые ключевые слова..."/>
-                            <button class="btn-search" type="submit">🔍</button>
-                        </form>
-                    </li>
-                    <li>
-                        <p class="ballance">2000$</p>
-                    </li>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li>
-                            <a asp-page="#">@User.Identity.Name</a>
-                        </li>
-                        <li>
-                            <a asp-page="/Account/Logout">Выйти</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li>
-                            <a asp-page="/Account/Login">Войти</a>
-                        </li>
-                        <li>
-                            <a asp-page="/Account/Register">Зарегистрироваться</a>
-                        </li>
+    
+    <div class="all-nav-panel">
+        <ul class="nav-panel">
+            <li>
+                <a class="nav-a" asp-page="/Index">BookStore</a>
+            </li>
+            <li>
+                <form class="search-form" action="/SearchResult" method="get">
+                    <input class="input-search" type="search" name="search" placeholder="Любые ключевые слова..." />
+                    <button class="btn-search" type="submit">🔍</button>
+                </form>
+            </li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="dropdown" style="float:right;">
+                    <a class="drop-profile" class="nav-a" asp-page="#">@User.Identity.Name</a>
 
-                    }
-                </ul>
-            </div>
-        </nav>
-        <hr class="nav-main-hr"/>
-    </header>
+                    <div class="dropdown-content">
+                        <a href="/Account/Favorite">Избранное</a>
+                        <a href="/Account/MyBooks">Мои книги</a>
+                        @if (User.IsInRole("admin") || User.IsInRole("creator"))
+                        {
+                            <a asp-page="/Admin/AddBook">Добавить книгу</a>
+                        }
+                        <a asp-page="/Account/Logout">Выйти</a>
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li style="float:right">
+                    <a asp-page="/Account/Register">Регистрация</a>
+                </li>
+                <li style="float:right">
+                    <a asp-page="/Account/Login">Войти</a>
+                </li>
+            }
+        </ul>
+        <div class="title-page-div">
+            @ViewData["Title"]
+        </div>
+
+    </div>
     <div class="container">
         <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer>
-        <div class="container">
-            &copy; It's OK<br>
-            Ноль инфы соре...
-        </div>
-    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

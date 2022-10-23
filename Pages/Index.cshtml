@@ -1,7 +1,7 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Главная";
 }
 <div class="all-books-container">
     <ul class="books-container">
@@ -9,18 +9,19 @@
         {
             string BookHref = $"/BookPage?id={book.Id}";
             <li class="book-container">
-                <a href=@BookHref><img class="book-preview" src=@book.Source /></a>
-                <div class="book-info">
-                    <a href=@BookHref>@book.Title</a>
-                    <p class="writer">@book.Writer</p>
-                    <div>
-                        <b>@book.Price</b>
-                        &nbsp;
-                        <span>руб.</span>
+                <a href=@BookHref><img class="book-preview" src=@book.SourceImage /></a>
+                <div class="hover-book">
+                    <div class="hover-title">
+                        <a href=@BookHref class="title">@book.Title</a>
+                        <div class="writer">@book.Writer</div>
                     </div>
-                    <form>
-                        <button>Купить</button>
-                    </form>
+                    @if (Admin.Admin.GetUser(User).AvailableBooks.Any(uBook => book.Id == uBook.Id))
+                    {
+                        <a class="dwn-btn" href=@book.SourceFile>Скачать</a>
+                    }
+                    else{
+                        <a class="buy-btn" href=@BookHref>Купить</a>
+                    }
                 </div>
             </li>
         }

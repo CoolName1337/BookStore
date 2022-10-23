@@ -1,36 +1,75 @@
 ﻿
 h2 {
     font-size: 24px;
+    margin:0;
 }
 
 p.description-title {
     font-weight:bold;
 }
 
-.content {
+div.title {
+    align-items: center;
+}
+
+div.content {
+    max-width: 1200px;
+    margin: auto;
+}
+
+div.title-container {
     display: flex;
 }
 
 img {
-    width: 400px;
+    width: 440px;
     height: 600px;
-    margin: 10px 20px 10px 10px;
+    margin: 0 20px;
 }
 
+button{
+    transition: all 0.6s ease;  
+}
 button.buy-btn {
-    background-color: green;
+    background-color: #39c724;
     border-style: none;
-    font-size: 26px;
+    font-size: 22px;
     font-weight: bold;
     color: white;
-    width: 300px;
+    width: 250px;
     height: 50px;
 }
-
-button:hover {
+button.buy-btn:hover {
     background-color: darkgreen;
 }
+.fav-btn, .unfav-btn {
+    color: blueviolet;
+    background-color: pink;
+    border: none;
+    width: 50px;
+    font-size: 30px;
+    padding: 0;
+    margin-left: 10px;
+}
+button.unfav-btn {
+    border: 2px solid pink;
+    background-color: white;
+}
+button:hover {
+    background-color: #f18de6;
+}
 
-p{
-    font-size:20px;
+p {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+}
+
+img.setting-img{
+    width:30px;
+    height:30px;
+}
+
+div.desription-container{
+    margin-top:10px;
+    padding:20px;
 }
