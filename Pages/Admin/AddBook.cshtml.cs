@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
+using System.Text;
 
 namespace BookStore.Pages.Admin
 {
@@ -66,7 +67,7 @@ namespace BookStore.Pages.Admin
             else
                 exceptionRes.Add($"Поле: PRICE должно быть только числом\n");
 
-            foreach (string key in Request.Form.Keys.Except(new List<string> { "file", "img", "price", "WantToCreate" }))
+            foreach (string key in Request.Form.Keys.Except(new List<string> { "price", "WantToCreate" }))
                 if (string.IsNullOrEmpty(Request.Form[key]))
                     exceptionRes.Add($"Поле: {key.ToUpper()} обязательно\n");
             if (exceptionRes.Count > 0)

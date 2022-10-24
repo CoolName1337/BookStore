@@ -11,16 +11,10 @@ namespace BookStore.Pages.Account
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Имя пользователя")]
         public string Username { get; set; }
 
         [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Пароль")]
         public string Password { get; set; }
-
-        [Display(Name = "Запомнить?")]
-        public bool RememberMe { get; set; }
 
     }
     public class LoginModel : PageModel
@@ -37,24 +31,22 @@ namespace BookStore.Pages.Account
 
         }
 
-        private async Task<IActionResult> Login()
+        private async Task<IActionResult> Login(bool remember)
         {
+            model = new LoginViewModel() { Username = Request.Form["username"], Password = Request.Form["password"] };
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
+                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, remember, false);
                 if (result.Succeeded)
-                    return RedirectToPage("/Index");    
+                    return RedirectToPage("/Index");
             }
-            else
-            {
-                ModelState.AddModelError("", "Неправильный логин и (или) пароль");
-            }
+            ModelState.AddModelError("", "Неправильный логин и (или) пароль");
             return Page();
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost(bool remember)
         {
-            return await Login();
+            return await Login(remember);
         }
     }
 }

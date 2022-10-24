@@ -1,28 +1,30 @@
 ﻿@page
 @model BookStore.Pages.Account.LoginModel
 @{
+    ViewData["Title"] = "Вход";
 }
 
 <div class="content">
-    <h2>Вход в приложение</h2>
+    <h2>Вход в BookStore</h2>
     <form method="post">
-        <div asp-validation-summary="ModelOnly"></div>
+        @if (ModelState.ErrorCount > 0)
+        {
+            <div class="exception">Неправильный логин и (или) пароль</div>
+        }
         <div>
-            <label></label><br />
-            <input/>
-            <span asp-validation-for="model.Username"></span>
+            <label>Имя пользователя</label><br />
+            <input class="user-inp" name="username" value="@Model.model.Username" />
         </div>
         <div>
-            <label></label><br />
-            <input/>
-            <span asp-validation-for="model.Password"></span>
+            <label>Пароль</label><br />
+            <input class="user-inp" type="password" name="password" />
         </div>
         <div>
-            <label></label><br />
-            <input/>
+            <label>Запомнить?</label><br />
+            <input class="rem-chk" type="checkbox" name="remember" value="true" />
         </div>
         <div>
-            <button type="submit">Войти</button>
+            <button class="subm-btn" type="submit">Войти</button>
         </div>
     </form>
 </div>

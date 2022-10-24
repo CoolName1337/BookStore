@@ -1,6 +1,7 @@
 using BookStore.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
@@ -10,22 +11,15 @@ namespace BookStore.Pages.Account
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "Имя пользователя")]
         public string Username { get; set; }
 
         [Required]
-        [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Пароль")]
         public string Password { get; set; }
 
         [Required]
-        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
-        [DataType(DataType.Password)]
-        [Display(Name = "Подтвердить пароль")]
         public string PasswordConfirm { get; set; }
     }
     public class RegisterModel : PageModel
@@ -41,6 +35,8 @@ namespace BookStore.Pages.Account
         }
         private async Task<IActionResult> Register()
         {
+            model = new RegisterViewModel() { Username = Request.Form["username"], Email=Request.Form["email"], 
+                Password = Request.Form["password"], PasswordConfirm = Request.Form["passwordConfirm"] };
             if (ModelState.IsValid)
             {
                 User user = new User { Email = model.Email, UserName = model.Username};
@@ -56,7 +52,7 @@ namespace BookStore.Pages.Account
                 {
                     foreach (var error in result.Errors)
                     {
-                        ModelState.AddModelError(string.Empty, error.Description);
+                        ModelState.AddModelError("error", error.Description);
                     }
                 }
             }

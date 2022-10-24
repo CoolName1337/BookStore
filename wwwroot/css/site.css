@@ -77,7 +77,6 @@ div.title-page-div {
 .nav-panel li a, .dropdown-content a {
     font-size: 24px;
     color: white;
-    text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     transition: all 0.4s ease;

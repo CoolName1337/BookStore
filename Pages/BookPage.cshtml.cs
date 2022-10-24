@@ -39,8 +39,7 @@ namespace BookStore.Pages
                 {
                     case "dwn":
                         string file = db.Books.Find(int.Parse(Request.Form["Id"])).SourceFile;
-                        return Redirect(file);
-                        break;
+                        return Redirect("files/"+ System.Net.WebUtility.UrlEncode(file.Replace("/files/", "")).Replace("+", " "));
                     case "buy":
                         Book book = db.Books.Find(int.Parse(Request.Form["Id"]));
                         user.BuyBook(book);

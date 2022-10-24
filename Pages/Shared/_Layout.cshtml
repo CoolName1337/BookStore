@@ -38,6 +38,10 @@
                         {
                             <a asp-page="/Admin/AddBook">Добавить книгу</a>
                         }
+                        @if (User.IsInRole("creator"))
+                        {
+                            <a asp-page="/Creator/EditRoles">Управление</a>
+                        }
                         <a asp-page="/Account/Logout">Выйти</a>
                     </div>
                 </li>
