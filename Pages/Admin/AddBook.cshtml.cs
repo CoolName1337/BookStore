@@ -34,6 +34,8 @@ namespace BookStore.Pages.Admin
             {
                 string Id = claims.Claims.First().Value;
                 user = db.Users.Include(user => user.AvailableBooks).First(user => user.Id == Id);
+                db.Update(user);
+                db.SaveChanges();
             }
             return user;
         }

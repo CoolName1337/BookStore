@@ -20,8 +20,7 @@ div.content {
 div.title-container {
     display: flex;
 }
-
-img {
+img.book-preview {
     width: 440px;
     height: 600px;
     margin: 0 20px;
@@ -55,7 +54,7 @@ button.unfav-btn {
     border: 2px solid pink;
     background-color: white;
 }
-button:hover {
+button.fav-btn:hover, button.unfav-btn:hover {
     background-color: #f18de6;
 }
 
@@ -63,7 +62,6 @@ p {
     font-size: 20px;
     margin: 0 0 10px 0;
 }
-
 img.setting-img{
     width:30px;
     height:30px;
@@ -72,4 +70,80 @@ img.setting-img{
 div.desription-container{
     margin-top:10px;
     padding:20px;
+}
+
+
+.filler {
+    position: absolute;
+    width: 100%;
+    background-color: #fcff00;
+    z-index: -1;
+    bottom:0;
+}
+.rating-button {
+    border: 2px solid orange;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    position: relative;
+    display: inline-block;
+}
+.rating-button:hover{
+    cursor:pointer;
+}
+
+div.rating-droppanel {
+    display: none;
+    position: absolute;
+    width: 230px;
+    height: 150px;
+    background-color: whitesmoke;
+    padding:20px;
+    font-size: 20px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+div.dropdown-rating {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.star-1{
+    border:2px solid orange;
+}
+.rating-number {
+    font-size:40px;
+    color:orange;
+}
+.rating-count {
+    font-size: 16px;
+    margin-bottom: 10px;
+
+}
+
+.star {
+    cursor: pointer;
+    fill: white;
+    stroke: gray;
+    stroke-width: 1px;
+    fill-rule: nonzero;
+}
+.star:hover {
+    fill: orange;
+    stroke: none;
+}
+
+.stars-container{
+    margin-top:12px;
+    display:flex;
+}
+div.dropdown-rating:hover .rating-droppanel {
+    display: block;
+}
+
+.rate-btn{
+    border:none;
+    padding:0;
+    margin:0;
+    color:orange;
 }

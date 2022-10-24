@@ -27,21 +27,22 @@ namespace BookStore.Pages
             }
         }
 
-        public IActionResult OnPost(string interact_btn)
+        public IActionResult OnPost(string interact_btn, int setRating)
         {
             if (!User.Identity.IsAuthenticated) return RedirectToPage("/Account/Login");
-
             using (ApplicationContext db = new())
             {
-                string id = User.Claims.First().Value;
-                user = db.Users.Find(id);
+                User user = Admin.Admin.GetUser(User);
+                Book book = db.Books.Find(int.Parse(Request.Form["Id"]));
+                if ((setRating < 0 || setRating > 5 ? 0 : setRating) != 0)
+                {
+                    user.RateBook(book, setRating);
+                }
                 switch (interact_btn)
                 {
                     case "dwn":
-                        string file = db.Books.Find(int.Parse(Request.Form["Id"])).SourceFile;
-                        return Redirect("files/"+ System.Net.WebUtility.UrlEncode(file.Replace("/files/", "")).Replace("+", " "));
+                        return Redirect("files/" + System.Net.WebUtility.UrlEncode(book.SourceFile.Replace("/files/", "")).Replace("+", " "));
                     case "buy":
-                        Book book = db.Books.Find(int.Parse(Request.Form["Id"]));
                         user.BuyBook(book);
                         break;
                     case "fav":
@@ -53,9 +54,9 @@ namespace BookStore.Pages
                     default:
                         break;
                 }
+                db.Update(user);
                 db.SaveChanges();
             }
-            
             return RedirectToPage("/BookPage", new { Id = Request.Form["Id"] });
         }
 
