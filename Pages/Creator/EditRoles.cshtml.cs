@@ -64,6 +64,7 @@ namespace BookStore.Pages.Creator
                 switch (interactBtn)
                 {
                     case "delUser":
+                        user.Dispose();
                         await _userManager.DeleteAsync(user);
                         break;
                     case "setAdmin":

@@ -18,7 +18,7 @@
                 </div>
                 @if (Admin.Admin.GetUser(User).AvailableBooks.Any(uBook => book.Id == uBook.Id))
                 {
-                    <a class="dwn-btn" href=@book.SourceFile>Скачать</a>
+                    <a class="dwn-btn" href=@BookHref>Скачать</a>
                 }
                 else
                 {

@@ -6,13 +6,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using System;
+using Microsoft.AspNetCore.Identity;
 
 namespace BookStore.Pages
 {
     public class BookPageModel : PageModel
     {
         public Book TakedBook;
-        public User user;
+        public User CurrentUser;
+
+        UserManager<User> _userManager;
+        public BookPageModel(UserManager<User> userManager) => _userManager = userManager;
         public void OnGet(int id)
         {
             using (ApplicationContext db = new())
@@ -20,42 +24,46 @@ namespace BookStore.Pages
 
                 if (User.Identity.IsAuthenticated)
                 {
-                    user = Admin.Admin.GetUser(User);
+                    CurrentUser = Admin.Admin.GetUser(User);
                 }
 
                 TakedBook = db.Books.Find(id);
             }
         }
 
-        public IActionResult OnPost(string interact_btn)
+        public async Task<IActionResult> OnPost(string interact_btn)
         {
             if (!User.Identity.IsAuthenticated) return RedirectToPage("/Account/Login");
 
             using (ApplicationContext db = new())
             {
-                string id = User.Claims.First().Value;
-                user = db.Users.Find(id);
+                User user = await _userManager.FindByIdAsync(User.Claims.First().Value);
+                Book book = db.Books.Find(int.Parse(Request.Form["Id"]));
                 switch (interact_btn)
                 {
                     case "dwn":
-                        string file = db.Books.Find(int.Parse(Request.Form["Id"])).SourceFile;
-                        return Redirect("files/"+ System.Net.WebUtility.UrlEncode(file.Replace("/files/", "")).Replace("+", " "));
+                        string file = book.SourceFile;
+                        return Redirect("files/" + System.Net.WebUtility.UrlEncode(file.Replace("/files/", "")).Replace("+", " "));
                     case "buy":
-                        Book book = db.Books.Find(int.Parse(Request.Form["Id"]));
                         user.BuyBook(book);
                         break;
                     case "fav":
-                        user.DeleteFavoriteBook(Request.Form["Id"]);
+                        user.DeleteFavoriteBook(book.Id.ToString());
                         break;
                     case "unf":
-                        user.AddFavoriteBook(Request.Form["Id"]);
+                        user.AddFavoriteBook(book.Id.ToString());
                         break;
                     default:
+                        if (int.TryParse(interact_btn, out int rating) && rating > 0 && rating <= 5)
+                        {
+                            user.RateBook(book, rating);
+                        }
                         break;
                 }
+                db.Update(user);
                 db.SaveChanges();
             }
-            
+
             return RedirectToPage("/BookPage", new { Id = Request.Form["Id"] });
         }
 
