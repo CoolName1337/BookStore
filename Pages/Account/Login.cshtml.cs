@@ -1,52 +1,34 @@
-using BookStore.Models;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.ComponentModel.DataAnnotations;
-using System.Security.Claims;
-
+using BookStore.BAL.Services;
+using BookStore.DAL.Models;
 namespace BookStore.Pages.Account
 {
-    public class LoginViewModel
-    {
-        [Required]
-        public string Username { get; set; }
-
-        [Required]
-        public string Password { get; set; }
-
-    }
     public class LoginModel : PageModel
     {
-        [BindProperty]
-        public LoginViewModel model { get; set; } = new(); 
-        private readonly SignInManager<User> _signInManager;
-        public LoginModel(SignInManager<User> signInManager)
-        {
-            _signInManager = signInManager;
-        }
-        public void OnGet()
-        {
+        public string Username = "";
+        private readonly ServiceUser _serviceUser;
 
+        public LoginModel(UserManager<User> userManager, SignInManager<User> signInManager)
+        {
+            _serviceUser = new(userManager, signInManager);
         }
 
-        private async Task<IActionResult> Login(bool remember)
+        public async Task<IActionResult> OnPostAsync(bool remember)
         {
-            model = new LoginViewModel() { Username = Request.Form["username"], Password = Request.Form["password"] };
-            if (ModelState.IsValid)
+            var result = await _serviceUser.Login(Request.Form["username"], Request.Form["password"], remember);
+
+            if (result.Succeeded)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, remember, false);
-                if (result.Succeeded)
-                    return RedirectToPage("/Index");
+                return RedirectToPage("/Index");
             }
-            ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+
+            ModelState.AddModelError("", "");
             return Page();
         }
 
-        public async Task<IActionResult> OnPost(bool remember)
-        {
-            return await Login(remember);
-        }
+        public void OnGet() { }
     }
+
 }

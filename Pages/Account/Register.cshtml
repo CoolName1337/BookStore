@@ -6,20 +6,20 @@
 <div class="content">
     <h2>Регистрация</h2>
     <form method="post">
-        @if (ModelState.ErrorCount > 0)
+        @foreach (var error in ModelState.Values)
         {
-            <div class="exception">@ModelState["error"].Errors[0].ErrorMessage</div>
+            <div class="exception">@error.Errors[0].ErrorMessage</div>
         }
         <div>
             <label>Имя пользователя</label><br />
-            <input class="user-inp" name="username" value="@Model.model.Username" />
+            <input class="user-inp" name="username" value="@Model.Username" />
         </div>
         <div>
             <label>Электронная почта</label><br />
-            <input class="user-inp" name="email" value="@Model.model.Email" />
+            <input class="user-inp" name="email" value="@Model.Email" />
         </div>
         <div>
-            <label>Пароль</label><br/>
+            <label>Пароль</label><br />
             <input class="user-inp" type="password" name="password" />
         </div>
         <div>

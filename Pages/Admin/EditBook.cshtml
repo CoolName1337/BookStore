@@ -19,10 +19,9 @@
                 </div>
             </div>
             <span style="color:red">
-                @foreach (string exc in Model.exceptionRes)
+                @foreach (string err in Model.ActionResult.Errors)
                 {
-                    <span>@exc</span>
-
+                    <span>@err</span>
                     <br />
                 }
             </span>

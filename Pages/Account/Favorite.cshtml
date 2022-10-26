@@ -16,7 +16,7 @@
                     <a href=@BookHref class="title">@book.Title</a>
                     <div class="writer">@book.Writer</div>
                 </div>
-                @if (Admin.Admin.GetUser(User).AvailableBooks.Any(uBook => book.Id == uBook.Id))
+                @if (kaka)
                 {
                     <a class="dwn-btn" href=@BookHref>Скачать</a>
                 }

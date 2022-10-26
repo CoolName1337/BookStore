@@ -20,7 +20,7 @@
                 </div>
             </div>
             <span style="color:red">
-                @foreach (string exc in Model.exceptionRes)
+                @foreach (string exc in Model.ActionResult.Errors)
                 {
                     <span>@exc</span><br />
                 }

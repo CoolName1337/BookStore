@@ -15,4 +15,8 @@
     <Folder Include="wwwroot\files\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BookStore.BAL\BookStore.BAL.csproj" />
+  </ItemGroup>
+
 </Project>

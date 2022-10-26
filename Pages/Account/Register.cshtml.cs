@@ -1,73 +1,41 @@
-using BookStore.Models;
+using BookStore.BAL.Services;
+using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
 
-namespace BookStore.Pages.Account
+namespace BookStore.Pages.Account;
+
+public class RegisterModel : PageModel
 {
-    public class RegisterViewModel
+    public string Username = "";
+    public string Email = "";
+    private readonly ServiceUser _serviceUser;
+    public RegisterModel(UserManager<User> userManager, SignInManager<User> signInManager)
     {
-        [Required]
-        public string Username { get; set; }
-
-        [Required]
-        public string Email { get; set; }
-
-        [Required]
-        public string Password { get; set; }
-
-        [Required]
-        public string PasswordConfirm { get; set; }
+        _serviceUser = new(userManager, signInManager);
     }
-    public class RegisterModel : PageModel
+
+    public async Task<IActionResult> OnPostAsync()
     {
-        [BindProperty]
-        public RegisterViewModel model { get; set; } = new RegisterViewModel();
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-        public RegisterModel(UserManager<User> userManager, SignInManager<User> signInManager)
+        Username = Request.Form["username"];
+        Email = Request.Form["email"];
+
+        var result = await _serviceUser.Register(
+            Request.Form["username"],
+            Request.Form["email"],
+            Request.Form["passwordConfirm"],
+            Request.Form["password"]
+            );
+
+        if (result.Succeeded)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-        }
-        private async Task<IActionResult> Register()
-        {
-            model = new RegisterViewModel() { Username = Request.Form["username"], Email=Request.Form["email"], 
-                Password = Request.Form["password"], PasswordConfirm = Request.Form["passwordConfirm"] };
-            if (ModelState.IsValid)
-            {
-                User user = new User { Email = model.Email, UserName = model.Username};
-
-                var result = await _userManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, false);
-                    return RedirectToPage("/Index");
-                }
-                else
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("error", error.Description);
-                    }
-                }
-            }
-            return Page();
-
+            return RedirectToPage("/Index");
         }
 
-        public void OnGet()
-        {
-
-        }
-
-        public async Task<IActionResult> OnPost()
-        {
-            return await Register();
-        }
+        ModelState.AddModelError("", result.Errors.First().Description);
+        return Page();
     }
+    public void OnGet() { }
 }
+

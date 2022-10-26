@@ -1,4 +1,5 @@
-using BookStore.Models;
+using BookStore.BAL.Services;
+using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,16 +8,16 @@ namespace BookStore.Pages.Account
 {
     public class LogoutModel : PageModel
     {
-        private readonly SignInManager<User> _signInManager;
-        public LogoutModel(SignInManager<User> signInManager) => _signInManager = signInManager;
-
-        public void OnGet()
+        private readonly ServiceUser _serviceUser;
+        public LogoutModel(UserManager<User> userManager, SignInManager<User> signInManager)
         {
+            _serviceUser = new(userManager, signInManager);
         }
+        public void OnGet() { }
 
-        public async Task<IActionResult> OnPost(bool IsLogout)
+        public IActionResult OnPost(bool IsLogout)
         {
-            if (IsLogout) await _signInManager.SignOutAsync();
+            if (IsLogout) _serviceUser.Logout();
             return RedirectToPage("/Index");
         }
 
