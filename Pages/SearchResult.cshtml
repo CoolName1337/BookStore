@@ -1,16 +1,15 @@
 ﻿@page
-@using Models
 @model BookStore.Pages.SearchResultModel
 @{
     ViewData["Title"] = "Поиск";
 }
 
 
-@if (Model.ResultBooks != null && Model.ResultBooks.Length != 0)
+@if (Model.ResultBooks != null && Model.ResultBooks.Count() != 0)
 {
     <h1 class="search-result-title">Результаты поиска <strong>@Model.RequestString</strong></h1>
     <ul class="results-panel">
-        @foreach (Book book in Model.ResultBooks)
+        @foreach (var book in Model.ResultBooks)
         {
             <li>
                 <div class="result-panel">

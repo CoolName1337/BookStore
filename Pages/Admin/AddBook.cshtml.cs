@@ -25,11 +25,11 @@ public class AddBookModel : PageModel
             Request.Form.Files["file"],
             Request.Form.Files["img"]
             );
+        CreatedBook = ActionResult.Value ?? new();
         if (ActionResult.Succeed)
         {
-            return RedirectToPage("/BookPage", new { Id = CreatedBook.Id });
+            return RedirectToPage("/BookPage", new { Id = ActionResult.Value.Id });
         }
-        CreatedBook = ActionResult.Value ?? new();
         return Page();
     }
 }

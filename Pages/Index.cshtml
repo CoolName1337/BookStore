@@ -15,9 +15,10 @@
                         <a href=@BookHref class="title">@book.Title</a>
                         <div class="writer">@book.Writer</div>
                     </div>
-                    @if (User.Identity.IsAuthenticated && Admin.Admin.GetUser(User).AvailableBooks.Any(uBook => book.Id == uBook.Id))
+                    @if (User.Identity.IsAuthenticated && 
+                    Model._serviceUser.GetUser(User).AvailableBooks.Any(uBook => book.Id == uBook.Id))
                     {
-                        <a class="dwn-btn" href=@book.SourceFile>Скачать</a>
+                        <a class="dwn-btn" href=@Model._serviceBook.GetCorrectPath(book)>Скачать</a>
                     }
                     else{
                         <a class="buy-btn" href=@BookHref>Купить</a>

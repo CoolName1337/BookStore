@@ -1,38 +1,32 @@
-using BookStore.Models;
-using Microsoft.AspNetCore.Authorization;
+using BookStore.BAL.Services;
+using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Data;
-using System.Xml.Linq;
 
-namespace BookStore.Pages.Creator
+namespace BookStore.Pages.Creator;
+
+public class InitializeRolesModel : PageModel
 {
-    public class InitializeRolesModel : PageModel
+    private readonly ServiceUser _serviceUser;
+    private readonly ServiceRole _serviceRole;
+    public InitializeRolesModel(RoleManager<IdentityRole> roleManager, UserManager<User> userManager, SignInManager<User> signInManager)
     {
-        private readonly UserManager<User> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        public InitializeRolesModel(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
-        {
-            _roleManager = roleManager;
-            _userManager = userManager;
-        }
-        public async Task OnGet()
-        {
-            using(ApplicationContext db = new())
-            {
-                if (User.Identity.IsAuthenticated && db.Users.Count()==1)
-                {
-                    var adminResult = await _roleManager.CreateAsync(new IdentityRole("admin"));
-                    var creatorResult = await _roleManager.CreateAsync(new IdentityRole("creator"));
-                    await _userManager.AddToRolesAsync(await _userManager.FindByNameAsync(User.Identity.Name), new List<string>() { "creator" });
-                }
-                
-            }
-        }
-
-
-
-
+        _serviceUser = new(userManager, signInManager);
+        _serviceRole = new(roleManager);
     }
+    public async Task<IActionResult> OnGet()
+    {
+        if (User.Identity?.IsAuthenticated ?? false && _serviceUser.GetUsers().Count() > 0)
+        {
+            await _serviceRole.Create("admin");
+            await _serviceRole.Create("creator");
+            await _serviceUser.AddRole(_serviceUser.GetUser(User), "creator");
+        }
+        return RedirectToPage("/Index");
+    }
+
+
+
+
 }

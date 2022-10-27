@@ -63,7 +63,7 @@
                 }
                 @if (User.Identity.IsAuthenticated)
                 {
-                    string id = Model.CurrentUser.FindFav(Model.TakedBook.Id.ToString());
+                    string id = Model.serviceUser.FindFav(Model.CurrentUser, Model.TakedBook.Id.ToString());
                     if (string.IsNullOrEmpty(id))
                     {
                         <button class="unfav-btn" type="submit" name="interact_btn" value="unf">♡</button>

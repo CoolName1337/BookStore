@@ -8,9 +8,10 @@ namespace BookStore.Pages.Account;
 
 public class RegisterModel : PageModel
 {
-    public string Username = "";
-    public string Email = "";
     private readonly ServiceUser _serviceUser;
+    public string Username { get; set; } = "";
+    public string Email { get; set; } = "";
+
     public RegisterModel(UserManager<User> userManager, SignInManager<User> signInManager)
     {
         _serviceUser = new(userManager, signInManager);

@@ -1,71 +1,66 @@
+using BookStore.BAL.Services;
+using BookStore.DAL.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using BookStore.Models;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
-using System.IO;
-using System;
-using Microsoft.AspNetCore.Identity;
 
-namespace BookStore.Pages
+namespace BookStore.Pages;
+
+public class BookPageModel : PageModel
 {
-    public class BookPageModel : PageModel
+    public readonly ServiceUser serviceUser;
+    private readonly ServiceBook _serviceBook = new();
+    public Book TakedBook { get; set; }
+    public User CurrentUser { get; set; }
+
+    public BookPageModel(UserManager<User> userManager, SignInManager<User> signInManager)
     {
-        public Book TakedBook;
-        public User CurrentUser;
-
-        UserManager<User> _userManager;
-        public BookPageModel(UserManager<User> userManager) => _userManager = userManager;
-        public void OnGet(int id)
-        {
-            using (ApplicationContext db = new())
-            {
-
-                if (User.Identity.IsAuthenticated)
-                {
-                    CurrentUser = Admin.Admin.GetUser(User);
-                }
-
-                TakedBook = db.Books.Find(id);
-            }
-        }
-
-        public async Task<IActionResult> OnPost(string interact_btn)
-        {
-            if (!User.Identity.IsAuthenticated) return RedirectToPage("/Account/Login");
-
-            using (ApplicationContext db = new())
-            {
-                User user = await _userManager.FindByIdAsync(User.Claims.First().Value);
-                Book book = db.Books.Find(int.Parse(Request.Form["Id"]));
-                switch (interact_btn)
-                {
-                    case "dwn":
-                        string file = book.SourceFile;
-                        return Redirect("files/" + System.Net.WebUtility.UrlEncode(file.Replace("/files/", "")).Replace("+", " "));
-                    case "buy":
-                        user.BuyBook(book);
-                        break;
-                    case "fav":
-                        user.DeleteFavoriteBook(book.Id.ToString());
-                        break;
-                    case "unf":
-                        user.AddFavoriteBook(book.Id.ToString());
-                        break;
-                    default:
-                        if (int.TryParse(interact_btn, out int rating) && rating > 0 && rating <= 5)
-                        {
-                            user.RateBook(book, rating);
-                        }
-                        break;
-                }
-                db.Update(user);
-                db.SaveChanges();
-            }
-
-            return RedirectToPage("/BookPage", new { Id = Request.Form["Id"] });
-        }
-
+        serviceUser = new(userManager, signInManager);
     }
+    public IActionResult OnGet(int id)
+    {
+        if (User.Identity.IsAuthenticated)
+        {
+            CurrentUser = serviceUser.GetUser(User);
+        }
+        TakedBook = _serviceBook[id];
+        if (TakedBook == null)
+        {
+            return RedirectToPage("/Index");
+        }
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPost(string interact_btn)
+    {
+        if (!User.Identity.IsAuthenticated) return RedirectToPage("/Account/Login");
+
+        CurrentUser = serviceUser.GetUser(User);
+        TakedBook = _serviceBook[int.Parse(Request.Form["Id"])];
+        switch (interact_btn)
+        {
+            case "dwn":
+                return Redirect(_serviceBook.GetCorrectPath(TakedBook));
+            case "buy":
+                await serviceUser.TryBuyBook(CurrentUser, TakedBook);
+                break;
+            case "fav":
+                await serviceUser.DeleteFavoriteBook(CurrentUser, TakedBook.Id.ToString());
+                break;
+            case "unf":
+                await serviceUser.AddFavoriteBook(CurrentUser, TakedBook.Id.ToString());
+                break;
+            default:
+                if (int.TryParse(interact_btn, out int rating) && rating > 0 && rating <= 5)
+                {
+                    CurrentUser.RateBook(TakedBook, rating);
+                }
+                break;
+        }
+        await _serviceBook.Update(TakedBook);
+        await serviceUser.UpdateUser(CurrentUser);
+
+        return RedirectToPage("/BookPage", new { Id = Request.Form["Id"] });
+    }
+
 }

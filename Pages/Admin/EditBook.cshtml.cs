@@ -9,7 +9,7 @@ namespace BookStore.Pages.Admin;
 [Authorize(Roles = "creator,admin")]
 public class EditBookModel : PageModel
 {
-    ServiceBook _serviceBook = new();
+    private ServiceBook _serviceBook = new();
     public Book ChangedBook { get; set; }
     public BAL.Services.ActionResult<Book> ActionResult = new();
     public void OnGet(int id)
@@ -29,7 +29,7 @@ public class EditBookModel : PageModel
             return RedirectToPage("/BookPage", new { Id = id });
         }
 
-        var res = await _serviceBook.Edit(
+        ActionResult = await _serviceBook.Edit(
             id,
             Request.Form["title"],
             Request.Form["writer"],
@@ -39,8 +39,8 @@ public class EditBookModel : PageModel
             Request.Form.Files["img"]
             );
 
-        ChangedBook = res.Value;
-        if (res.Succeed)
+        ChangedBook = ActionResult.Value;
+        if (ActionResult.Succeed)
         {
             return RedirectToPage("/BookPage", new { Id = ChangedBook.Id });
         }

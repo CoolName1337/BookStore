@@ -1,82 +1,80 @@
-using BookStore.Models;
+using BookStore.BAL.Services;
+using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Data;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
-namespace BookStore.Pages.Creator
+namespace BookStore.Pages.Creator;
+
+public class UserRoleModel
 {
-    public class UserRoleModel
-    {
-        public User currentUser { get; set; }
-        public List<string> userRoles { get; set; }
+    public User currentUser { get; set; }
+    public List<string> userRoles { get; set; }
 
+}
+
+[Authorize(Roles = "creator")]
+public class EditRolesModel : PageModel
+{
+    private readonly ServiceUser _serviceUser;
+    public string SearchReq { get; set; } = "";
+    public List<UserRoleModel> Users { get; set; } = new();
+
+    public EditRolesModel(UserManager<User> userManager, SignInManager<User> signInManager)
+    {
+        _serviceUser = new(userManager, signInManager);
+    }
+    public IActionResult OnGet(string searchReq)
+    {
+        SearchReq = searchReq;
+        foreach (User user in _serviceUser.GetUsers())
+        {
+            if (user == _serviceUser.GetUser(User)) continue;
+            Users.Add(new UserRoleModel() { currentUser = user, userRoles = _serviceUser.GetRoles(user).ToList() });
+        }
+        return Page();
     }
 
-    [Authorize(Roles = "creator")]
-    public class EditRolesModel : PageModel
+    public async Task<IActionResult> OnPost(string searchReq, string interactBtn, string id)
     {
-        public string SearchReq { get; set; }
-        public List<UserRoleModel> Users { get; set; } = new();
-        RoleManager<IdentityRole> _roleManager;
-        UserManager<User> _userManager;
-        public EditRolesModel(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
+        if (interactBtn == null && !string.IsNullOrEmpty(searchReq))
         {
-            _roleManager = roleManager;
-            _userManager = userManager;
-        }
-        public async Task<IActionResult> OnGet(string searchReq)
-        {
-            using (ApplicationContext db = new())
+            SearchReq = searchReq;
+            foreach (User user in _serviceUser.GetUsers(user => user.UserName.Contains(searchReq) || user.Email.Contains(searchReq)))
             {
-                foreach (User user in db.Users.ToList())
-                {
-                    if (user.Id == User.Claims.First().Value) continue;
-                    var identityRoles = await _userManager.GetRolesAsync(user);
-                    Users.Add(new UserRoleModel() { currentUser = user, userRoles = identityRoles.ToList() });
-                }
+                if (user == _serviceUser.GetUser(User)) continue;
+                Users.Add(new UserRoleModel() { currentUser = user, userRoles = _serviceUser.GetRoles(user).ToList() });
             }
             return Page();
         }
-
-        public async Task<IActionResult> OnPost(string searchReq,bool wantToClear, string interactBtn, string id)
+        else
         {
-            if (interactBtn == null && !string.IsNullOrEmpty(searchReq))
+            User user = _serviceUser[id];
+            switch (interactBtn)
             {
-                SearchReq = searchReq;
-                using (ApplicationContext db = new())
-                {
-                    var users = db.Users.Where(user =>user.UserName.Contains(searchReq) || user.Email.Contains(searchReq));
-                    foreach (var user in users)
+                case "delUser":
+                    var ratingBooks = user.RatingBooks;
+                    ServiceBook _serviceBook = new ServiceBook();
+                    foreach (int bookId in ratingBooks.Keys)
                     {
-                        if (user.Id == User.Claims.First().Value) continue;
-                        var identityRoles = await _userManager.GetRolesAsync(user);
-                        Users.Add(new UserRoleModel() { currentUser = user, userRoles = identityRoles.ToList() });
+                        Book book = _serviceBook[bookId];
+                        if (book == null) continue;
+                        book.DeleteRating(ratingBooks[bookId]);
+                        await _serviceBook.Update(book);
                     }
-                }
-                return Page();
+                    await _serviceUser.DeleteUser(user);
+                    break;
+                case "setAdmin":
+                    await _serviceUser.AddRole(user, "admin");
+                    break;
+                case "remAdmin":
+                    await _serviceUser.RemoveRole(user, "admin");
+                    break;
             }
-            else
-            {
-                User user = await _userManager.FindByIdAsync(id);
-                switch (interactBtn)
-                {
-                    case "delUser":
-                        user.Dispose();
-                        await _userManager.DeleteAsync(user);
-                        break;
-                    case "setAdmin":
-                        await _userManager.AddToRoleAsync(user, "admin");
-                        break;
-                    case "remAdmin":
-                        await _userManager.RemoveFromRoleAsync(user, "admin");
-                        break;
-                }
-            }
-            return RedirectToPage("/Creator/EditRoles");
-
         }
+        return RedirectToPage("/Creator/EditRoles");
+
     }
 }

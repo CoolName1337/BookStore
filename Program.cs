@@ -1,8 +1,6 @@
-using BookStore.Models;
+using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.FileProviders;
 using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
