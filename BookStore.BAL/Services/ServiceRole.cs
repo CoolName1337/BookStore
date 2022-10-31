@@ -1,14 +1,15 @@
-﻿using BookStore.DAL.Repositories;
+﻿using BookStore.BAL.Interfaces;
+using BookStore.DAL.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
 namespace BookStore.BAL.Services;
 
-public class ServiceRole
+public class ServiceRole : IServiceRole
 {
-    private RepositoryRole _repositoryRole;
-    public ServiceRole(RoleManager<IdentityRole> roleManager)
+    private IRepositoryRole _repositoryRole;
+    public ServiceRole(IRepositoryRole repositoryRole)
     {
-        _repositoryRole = new(roleManager);
+        _repositoryRole = repositoryRole;
     }
 
     public async Task Create(string roleName)

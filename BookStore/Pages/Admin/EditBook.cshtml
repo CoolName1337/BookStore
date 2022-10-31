@@ -1,0 +1,33 @@
+﻿@page
+@model BookStore.Pages.Admin.EditBookModel
+@{
+    ViewData["Title"] = "Редактировать книгу";
+}
+<div class="content">
+    <form method="post" enctype="multipart/form-data">
+        <div class="create-container">
+            <input class="input-file" type="file" name="file" value="@Model.ChangedBook.SourceFile" /><br />
+            <div class="handler">
+                <input class="input-img" type="file" name="img" value="@Model.ChangedBook.SourceImage" />
+                <div>
+                    <input class="input-title" name="title" placeholder="Название" value="@Model.ChangedBook.Title" /><br />
+                    <input class="input-writer" name="writer" placeholder="Писатель" value="@Model.ChangedBook.Writer" /><br /><br />
+                    <textarea class="input-descr" placeholder="Описание" name="descr">@Model.ChangedBook.Description</textarea><br /><br />
+                    <input class="input-price" name="price" placeholder="Цена" value="@Model.ChangedBook.Price" /><br />
+                    <button class="input-submit update-btn" type="submit" name="WantToUpdate" value="true">Сохранить</button>
+                    <button class="input-submit cancel-btn" type="submit">Отмена</button>
+                </div>
+            </div>
+            <span style="color:red">
+                @foreach (string err in Model.ActionResult.Errors)
+                {
+                    <span>@err</span>
+                    <br />
+                }
+            </span>
+            <button class="input-submit delete-btn" type="submit" name="WantToDelete" value="true">Удалить</button>
+        </div>
+
+
+    </form>
+</div>

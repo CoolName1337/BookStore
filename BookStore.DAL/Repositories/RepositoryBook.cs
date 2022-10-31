@@ -1,10 +1,12 @@
-﻿using BookStore.DAL.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using BookStore.DAL.Context;
+using BookStore.DAL.Interfaces;
+using BookStore.DAL.Models;
 
 namespace BookStore.DAL.Repositories;
 
-public class RepositoryBook
+public class RepositoryBook : IRepositoryBook
 {
+    
     private readonly ApplicationContext _db = new();
     public async Task<int> Create(Book book)
     {

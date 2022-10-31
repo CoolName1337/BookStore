@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using BookStore.DAL.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace BookStore.DAL.Repositories;
 
-public class RepositoryRole
+public class RepositoryRole : IRepositoryRole
 {
     private readonly RoleManager<IdentityRole> _roleManager;
     public RepositoryRole(RoleManager<IdentityRole> roleManager)

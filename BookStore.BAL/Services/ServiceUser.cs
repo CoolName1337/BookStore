@@ -1,17 +1,18 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using BookStore.BAL.Interfaces;
+using BookStore.DAL.Interfaces;
 using BookStore.DAL.Models;
-using BookStore.DAL.Repositories;
+using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
 namespace BookStore.BAL.Services;
 
-public class ServiceUser
+public class ServiceUser : IServiceUser
 {
-    public readonly RepositoryUser _repository;
+    public readonly IRepositoryUser _repository;
 
-    public ServiceUser(UserManager<User> userManager, SignInManager<User> signInManager)
+    public ServiceUser(IRepositoryUser repository)
     {
-        _repository = new(userManager, signInManager);
+        _repository = repository;
     }
     
     public async Task RateBook(User user, Book book, int rating)
@@ -115,5 +116,4 @@ public class ServiceUser
     {
         get => _repository[Id];
     }
-
 }

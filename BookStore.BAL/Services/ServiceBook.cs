@@ -1,23 +1,25 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BookStore.BAL.Interfaces;
+using BookStore.DAL.Interfaces;
 using BookStore.DAL.Models;
-using BookStore.DAL.Repositories;
+using Microsoft.AspNetCore.Http;
 
 namespace BookStore.BAL.Services;
 
-public class ServiceBook
+public class ServiceBook : IServiceBook
 {
-    private RepositoryBook _repositoryBook = new();
+    private IRepositoryBook _repositoryBook;
+
+    public ServiceBook(IRepositoryBook repositoryBook)
+    {
+        _repositoryBook = repositoryBook;
+    }
 
     public async Task<ActionResult<Book>> Verificate(string title, string writer, string descr, string price, IFormFile sourceFile, IFormFile sourceImage)
     {
         //sorry...
 
         ActionResult<Book> actionResult = new(); 
+
         Book book = new Book()
         {
             Title = title,
@@ -106,7 +108,6 @@ public class ServiceBook
     {
         await _repositoryBook.Update(book);
     }
-
     public Book? this[int Id]
     {
         get => _repositoryBook[Id];

@@ -1,0 +1,23 @@
+﻿@page
+@model BookStore.Pages.Account.MyBooksModel
+@{
+    ViewData["Title"] = "Мои книги";
+}
+
+
+<ul class="books-container">
+    @foreach (var book in Model.MyBooks)
+    {
+        string BookHref = $"/BookPage?id={book.Id}";
+        <li class="book-container">
+            <a href=@BookHref><img class="book-preview" src=@book.SourceImage /></a>
+            <div class="hover-book">
+                <div class="hover-title">
+                    <a href=@BookHref class="title">@book.Title</a>
+                    <div class="writer">@book.Writer</div>
+                </div>
+                <a class="dwn-btn" href=@BookHref>Скачать</a>
+            </div>
+        </li>
+    }
+</ul>

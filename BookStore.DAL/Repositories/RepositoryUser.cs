@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using BookStore.DAL.Models;
 using Microsoft.EntityFrameworkCore;
+using BookStore.DAL.Interfaces;
 
 namespace BookStore.DAL.Repositories;
 
-public class RepositoryUser
+public class RepositoryUser : IRepositoryUser
 {
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;

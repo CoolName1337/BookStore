@@ -1,0 +1,28 @@
+﻿@page
+@model BookStore.Pages.SearchResultModel
+@{
+    ViewData["Title"] = "Поиск";
+}
+
+
+@if (Model.ResultBooks != null && Model.ResultBooks.Count() != 0)
+{
+    <h1 class="search-result-title">Результаты поиска <strong>@Model.RequestString</strong></h1>
+    <ul class="results-panel">
+        @foreach (var book in Model.ResultBooks)
+        {
+            <li>
+                <div class="result-panel">
+                    <a href="/BookPage?id=@book.Id"> <img class="mini-book-img" src=@book.SourceImage /> </a>
+                    <div class="result-info">
+                        <a class="title" href="/BookPage?id=@book.Id">@book.Title</a>
+                        <p class="writer">Автор: @book.Writer</p>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+}
+else{
+    <p class="bad-result">По запросу <strong>@Model.RequestString</strong> ничего не найдено</p>
+}
