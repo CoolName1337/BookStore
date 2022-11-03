@@ -22,12 +22,6 @@
             <li>
                 <a class="nav-a" asp-page="/Index">BookStore</a>
             </li>
-            <li>
-                <form class="search-form" action="/SearchResult" method="get">
-                    <input class="input-search" type="search" name="search" placeholder="Любые ключевые слова..." />
-                    <button class="btn-search" type="submit">🔍</button>
-                </form>
-            </li>
             @if (User.Identity.IsAuthenticated)
             {
                 <li class="dropdown" style="float:right;">
@@ -58,17 +52,22 @@
                 </li>
             }
         </ul>
-        <div class="title-page-div">
-            @ViewData["Title"]
+        <div class="search-dropdown">
+            <div class="drop-clicker">🔍</div>
+            <div class="dropdown-search-content">
+                <form class="search-form" action="/SearchResult" method="get">
+                    <input class="input-search" type="search" name="search" placeholder="Любые ключевые слова..." />
+                    <button class="btn-search" type="submit">🔍</button>
+                </form>
+            </div>
         </div>
-
     </div>
+    
     <div class="container">
         <main role="main">
             @RenderBody()
         </main>
     </div>
-
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

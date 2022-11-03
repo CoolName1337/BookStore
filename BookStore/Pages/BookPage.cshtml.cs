@@ -1,7 +1,5 @@
 using BookStore.BAL.Interfaces;
-using BookStore.BAL.Services;
 using BookStore.DAL.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -9,15 +7,19 @@ namespace BookStore.Pages;
 
 public class BookPageModel : PageModel
 {
-    public readonly IServiceUser _serviceUser;
     private readonly IServiceBook _serviceBook;
+    public readonly IServiceRating _serviceRating;
+    public readonly IServiceUser _serviceUser;
+    public readonly IServiceFavorite _serviceFavorite;
     public Book TakedBook { get; set; }
     public User CurrentUser { get; set; }
 
-    public BookPageModel(IServiceBook serviceBook, IServiceUser serviceUser)
+    public BookPageModel(IServiceBook serviceBook, IServiceUser serviceUser, IServiceRating serviceRating, IServiceFavorite serviceFavorite)
     {
         _serviceUser = serviceUser;
         _serviceBook = serviceBook;
+        _serviceRating = serviceRating;
+        _serviceFavorite = serviceFavorite;
     }
     public IActionResult OnGet(int id)
     {
@@ -47,22 +49,15 @@ public class BookPageModel : PageModel
                 await _serviceUser.TryBuyBook(CurrentUser, TakedBook);
                 break;
             case "fav":
-                await _serviceUser.DeleteFavoriteBook(CurrentUser, TakedBook.Id.ToString());
-                break;
-            case "unf":
-                await _serviceUser.AddFavoriteBook(CurrentUser, TakedBook.Id.ToString());
+                await _serviceFavorite.TryLike(CurrentUser, TakedBook);
                 break;
             default:
                 if (int.TryParse(interact_btn, out int rating) && rating > 0 && rating <= 5)
                 {
-                    CurrentUser.RateBook(TakedBook, rating);
+                    await _serviceRating.TryRateBook(CurrentUser, TakedBook, rating);
                 }
                 break;
         }
-        await _serviceBook.Update(TakedBook);
-        await _serviceUser.UpdateUser(CurrentUser);
-
         return RedirectToPage("/BookPage", new { Id = Request.Form["Id"] });
     }
-
 }

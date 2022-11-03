@@ -1,8 +1,6 @@
 using BookStore.BAL.Interfaces;
-using BookStore.BAL.Services;
 using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
@@ -20,14 +18,12 @@ public class UserRoleModel
 public class EditRolesModel : PageModel
 {
     private readonly IServiceUser _serviceUser;
-    private readonly IServiceBook _serviceBook;
     public string SearchReq { get; set; } = "";
     public List<UserRoleModel> Users { get; set; } = new();
 
-    public EditRolesModel(IServiceUser serviceUser, IServiceBook serviceBook)
+    public EditRolesModel(IServiceUser serviceUser)
     {
         _serviceUser = serviceUser;
-        _serviceBook = serviceBook;
     }
     public IActionResult OnGet(string searchReq)
     {
@@ -58,14 +54,6 @@ public class EditRolesModel : PageModel
             switch (interactBtn)
             {
                 case "delUser":
-                    var ratingBooks = user.RatingBooks;
-                    foreach (int bookId in ratingBooks.Keys)
-                    {
-                        Book book = _serviceBook[bookId];
-                        if (book == null) continue;
-                        book.DeleteRating(ratingBooks[bookId]);
-                        await _serviceBook.Update(book);
-                    }
                     await _serviceUser.DeleteUser(user);
                     break;
                 case "setAdmin":

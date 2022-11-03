@@ -1,7 +1,4 @@
 using BookStore.BAL.Interfaces;
-using BookStore.BAL.Services;
-using BookStore.DAL.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -31,4 +28,3 @@ public class LoginModel : PageModel
 
     public void OnGet() { }
 }
-
