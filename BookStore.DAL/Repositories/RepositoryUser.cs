@@ -56,14 +56,26 @@ public class RepositoryUser : IRepositoryUser
 
     public IEnumerable<User> GetUsers()
     {
-        return _userManager.Users.ToList();
+        return _userManager.Users
+            .Include(user => user.AvailableBooks)
+            .Include(user => user.Ratings)
+            .Include(user => user.Favorites)
+            .ToList();
     }
     public IEnumerable<User> GetUsers(Func<User,bool> predicate)
     {
-        return _userManager.Users.Where(predicate);
+        return _userManager.Users
+            .Include(user => user.AvailableBooks)
+            .Include(user => user.Ratings)
+            .Include(user => user.Favorites)
+            .Where(predicate);
     }
     public User this[string Id]
     {
-        get => _userManager.Users.Include(user=>user.AvailableBooks).First(user=>user.Id == Id);
+        get => _userManager.Users
+            .Include(user=>user.AvailableBooks)
+            .Include(user=>user.Ratings)
+            .Include(user => user.Favorites)
+            .First(user=>user.Id == Id);
     }
 }

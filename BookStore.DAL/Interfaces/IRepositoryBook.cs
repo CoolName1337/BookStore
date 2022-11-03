@@ -4,9 +4,9 @@ namespace BookStore.DAL.Interfaces;
 
 public interface IRepositoryBook
 {
-    Task<int> Create(Book book);
+    Task Create(Book book);
 
-    void Delete(Book book);
+    Task Delete(Book book);
 
     Task Update(Book book);
     IEnumerable<Book> GetBooks();

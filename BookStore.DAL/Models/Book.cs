@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace BookStore.DAL.Models;
+﻿namespace BookStore.DAL.Models;
 
 public class Book
 {
@@ -13,31 +11,11 @@ public class Book
     public string Writer { get; set; } = "";
     public DateTime AddingDate { get; set; }
     public DateTime DateOfCreation { get; set; }
-    public List<User> Users { get; set; } = new List<User>();
-    public string _ratingString { get; set; } = "";
-
-
-
-    public void AddRating(int rating)
-    {
-        _ratingString += rating.ToString();
-    }
-    public void DeleteRating(int rating)
-    {
-        var list = _ratingString.ToList();
-        list.Remove(rating.ToString()[0]);
-        _ratingString = string.Join("", list);
-    }
-
-    [NotMapped]
-    public double Rating
-    {
-        get => _ratingString.Length == 0 ? 0 : Math.Round(_ratingString.ToArray().Average(str => int.Parse(str.ToString())), 1, MidpointRounding.ToEven);
-    }
-    [NotMapped]
-    public int RatingCount
-    {
-        get => _ratingString.Length;
-    }
-
+    public List<User> Users { get; set; } = new();
+    public List<Rating> Ratings { get; set; } = new();
+    public List<Favorite> Favorites { get; set; } = new();
+    public List<Genre> Genres { get; set; } = new();
+    public int Bought { get; set; }
+    public string _genreString { get; set; } = "";
+    public string _commentString { get; set; } = "";
 }

@@ -1,6 +1,7 @@
 ﻿using BookStore.DAL.Context;
 using BookStore.DAL.Interfaces;
 using BookStore.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.DAL.Repositories;
 
@@ -8,16 +9,16 @@ public class RepositoryBook : IRepositoryBook
 {
     
     private readonly ApplicationContext _db = new();
-    public async Task<int> Create(Book book)
+    public async Task Create(Book book)
     {
-        Book _book = _db.Add<Book>(book).Entity;
-        return await _db.SaveChangesAsync();
+        _db.Add(book);
+        await _db.SaveChangesAsync();
     }
 
-    public void Delete(Book book)
+    public async Task Delete(Book book)
     {
-        _db.Remove<Book>(book);
-        _db.SaveChangesAsync();
+        _db.Remove(book);
+        await _db.SaveChangesAsync();
     }
 
     public async Task Update(Book book)
@@ -27,14 +28,23 @@ public class RepositoryBook : IRepositoryBook
     }
     public IEnumerable<Book> GetBooks()
     {
-        return _db.Books.ToList();
+        return _db.Books
+            .Include(book => book.Ratings)
+            .Include(book => book.Favorites)
+            .ToList();
     }
     public IEnumerable<Book> GetBooks(Func<Book, bool> predicate)
     {
-        return _db.Books.Where(predicate);
+        return _db.Books
+            .Include(book=>book.Ratings)
+            .Include(book => book.Favorites)
+            .Where(predicate);
     }
     public Book? this[int Id]
     {
-        get => _db.Find<Book>(Id);
+        get => _db.Books
+            .Include(book => book.Ratings)
+            .Include(book => book.Favorites)
+            .FirstOrDefault(book=>book.Id == Id);
     }
 }
