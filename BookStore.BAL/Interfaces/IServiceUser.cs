@@ -6,7 +6,6 @@ namespace BookStore.BAL.Interfaces;
 
 public interface IServiceUser
 {
-    public Task RateBook(User user, Book book, int rating);
     public Task TryBuyBook(User user, Book book);
     public Task AddRole(User user, string roleName);
 
@@ -22,10 +21,6 @@ public interface IServiceUser
     public Task UpdateUser(User user);
     public Task UpdateUser(string id);
 
-    public Task AddFavoriteBook(User user, string bookId);
-    public Task DeleteFavoriteBook(User user, string bookId);
-    public HashSet<string> GetAllFavoriteBooks(User user);
-    public string FindFav(User user, string bookId);
     public IEnumerable<User> GetUsers();
 
     public IEnumerable<User> GetUsers(Func<User, bool> predicate);

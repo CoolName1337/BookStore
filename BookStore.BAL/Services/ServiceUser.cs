@@ -15,14 +15,10 @@ public class ServiceUser : IServiceUser
         _repository = repository;
     }
     
-    public async Task RateBook(User user, Book book, int rating)
-    {
-        user.RateBook(book, rating);
-        await UpdateUser(user);
-    }
     
     public async Task TryBuyBook(User user, Book book)
     {
+        book.Bought++;
         user.AvailableBooks.Add(book);
     }
     public async Task AddRole(User user, string roleName)
@@ -76,32 +72,6 @@ public class ServiceUser : IServiceUser
 
     public async Task UpdateUser(User user) => await _repository.Update(user);
     public async Task UpdateUser(string id) => await UpdateUser(_repository[id]);
-
-
-    public async Task AddFavoriteBook(User user, string bookId)
-    {
-        user._favoriteBooks += $"{bookId} ";
-        await UpdateUser(user);
-    }
-    public async Task DeleteFavoriteBook(User user, string bookId)
-    {
-        HashSet<string> favs = GetAllFavoriteBooks(user);
-        favs.Remove(bookId);
-        user._favoriteBooks = string.Join(' ', favs);
-        await UpdateUser(user);
-    }
-    public HashSet<string> GetAllFavoriteBooks(User user)
-    {
-        if (user._favoriteBooks.Length == 0)
-        {
-            return new HashSet<string>();
-        }
-        return user._favoriteBooks.Trim().Split(" ").ToHashSet();
-    }
-    public string FindFav(User user, string bookId)
-    {
-        return GetAllFavoriteBooks(user).FirstOrDefault(id => bookId == id);
-    }
 
     public IEnumerable<User> GetUsers()
     {
