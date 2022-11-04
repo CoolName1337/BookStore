@@ -1,5 +1,3 @@
-<<<<<<< HEAD:wwwroot/css/site.css
-
 html {
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -9,64 +7,176 @@ button {
     border-radius: 6px;
 }
 
-/*search form*/
+/*search dropdown*/
 /*#################################################*/
-
-.drop-clicker {
+.dropbtn-search {
+    border-radius: 0;
     transition: all 0.4s ease;
-    cursor: pointer;
     background-color: #333;
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    font-size: 36px;
-    border-radius: 0 0 8px 8px;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
 }
 
-.drop-clicker:hover {
+/* Dropdown button on hover & focus */
+.dropbtn-search:hover{
     background-color: #111;
 }
 
-.dropdown-search-content {
+/* The container <div> - needed to position the dropdown content */
+.dropdown-search {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content-search {
+    padding:8px;
     display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    transition: all 0.4s ease;
+    width: 300px;
+    min-height:100%;
+    background-color: #333;
 }
 
-
-
-
-
-
-
-
-
-
-/*
-.input-search {
-    width: 250px;
-    box-sizing: border-box;
-    border: none;
-    border-radius: 4px 0 0 4px;
-    font-size: 16px;
-    background-repeat: no-repeat;
-    padding: 12px;
-    transition: width 0.4s ease-in-out;
-}
-
-.input-search:focus {
-    align-items: center;
-    width: 600px;
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+    display: block;
 }
 
 .search-form {
-    margin-top: 7px;
-    display: flex;
+    width: 100%;
+}
+
+.input-search {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #111;
+    border-radius: 4px;
+    font-size: 16px;
+    background-repeat: no-repeat;
+    padding: 12px;
 }
 
 .btn-search {
-    border-radius: 0 4px 4px 0;
+    transition: all 0.4s ease;
     border: none;
-    width: 43px;
-}*/
+    background-color: #333;
+    color: #8a8a8a;
+    font-size: 30px;
+    min-width: 100%;
+    margin: auto;
+}
+
+.btn-search:hover{
+    background-color:#111;
+}
+
+.input-genre {
+    box-sizing: border-box;
+    background-color: #1d1d1d;
+    color: #b1b1b1;
+    border: none;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.div-genre {
+    color: white;
+    margin: 10px 0 10px 0;
+}
+
+.input-genre {
+    width:100%;
+
+}
+
+
+.hidden{
+    display:none !important;
+}
+
+
+
+
+
+
+
+
+
+.selectBox {
+    margin: 5px 0 5px 0;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #111;
+    border-radius: 4px;
+    font-size: 16px;
+    background-repeat: no-repeat;
+    padding: 12px;
+    position: relative;
+    color: #b1b1b1;
+}
+
+
+div.checkboxes {
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    background-color: #333;
+    border: 2px solid #111;
+    border-radius: 4px;
+    height: 150px;
+    overflow: auto;
+}
+
+div.checkboxes label {
+    display: block;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10px;
+}
+
+div.checkboxes label:hover {
+    background-color: #111;
+}
+
+
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    border: 1px solid #222;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #222;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #1e1e1e;
+}
+
+
+
+
+
+
+
+
+
+
 /*navigation panel*/
 /*#################################################*/
 ul.nav-panel {
@@ -76,7 +186,7 @@ ul.nav-panel {
     min-height: 56px;
     background-color: #333;
     box-shadow: 0 20px 20px -20px #333;
-    border-radius: 8px 8px 8px 0;
+    border-radius: 8px;
 }
 
 div.title-page-div {
@@ -97,7 +207,6 @@ div.title-page-div {
     position: -webkit-sticky; /* Safari */
     position: sticky;
     top: 0;
-    margin-bottom: 100px;
 }
 
 .nav-panel li {
@@ -108,9 +217,9 @@ div.title-page-div {
 .nav-panel li a, .dropdown-content a {
     font-size: 24px;
     color: white;
+    transition: all 0.4s ease;
     padding: 14px 16px;
     text-decoration: none;
-    transition: all 0.4s ease;
     text-align: right;
 }
 
@@ -162,138 +271,3 @@ li a {
     max-width: 1600px;
     margin: auto;
 }
-=======
-
-html {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-button {
-    cursor: pointer;
-    border-radius: 6px;
-}
-
-/*search form*/
-/*#################################################*/
-
-.input-search {
-    width: 250px;
-    box-sizing: border-box;
-    border: none;
-    border-radius: 4px 0 0 4px;
-    font-size: 16px;
-    background-repeat: no-repeat;
-    padding: 12px;
-    transition: width 0.4s ease-in-out;
-}
-
-.input-search:focus {
-    align-items: center;
-    width: 600px;
-}
-
-.search-form {
-    margin-top: 7px;
-    display: flex;
-}
-
-.btn-search {
-    border-radius: 0 4px 4px 0;
-    border: none;
-    width: 43px;
-}
-
-/*navigation panel*/
-/*#################################################*/
-
-ul.nav-panel {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    min-height: 56px;
-    background-color: #333;
-    box-shadow: 0 20px 20px -20px #333;
-    border-radius: 2px;
-}
-
-div.title-page-div {
-    padding: 10px;
-    font-size: 20px;
-    background-color: #222;
-    margin: auto;
-    margin-left: 20px;
-    float: left;
-    max-width: 1000px;
-    color: white;
-    box-shadow: 0 20px 20px -20px #333;
-    border-radius: 0 0 10px 10px;
-    text-align: center;
-}
-.all-nav-panel {
-    position: -webkit-sticky; /* Safari */
-    position: sticky;
-    top: 0;
-    margin-bottom: 100px;
-}
-.nav-panel li {
-    float: left;
-}
-
-.nav-panel li a, .dropdown-content a {
-    font-size: 24px;
-    color: white;
-    padding: 14px 16px;
-    text-decoration: none;
-    transition: all 0.4s ease;
-    text-align: right;
-}
-
-li a {
-    display: inline-block;
-}
-
-/* Change the link color to #111 (black) on hover */
-.nav-panel li a:hover, .dropdown:hover .drop-profile {
-    background-color: #111;
-}
-
-/*dropdown menu*/
-/*#################################################*/
-
-.nav-panel li.dropdown {
-    display: inline-block;
-    position: relative;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    right:0;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    background-color: #333;
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-}
-
-.dropdown-content a:hover {
-    background-color: #111;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/*#################################################*/
-
-.container{
-    max-width:1600px;
-    margin:auto;
-}
->>>>>>> b02f09919de7c81a383be9d9e70f27e1ceffcf41:BookStore/wwwroot/css/site.css

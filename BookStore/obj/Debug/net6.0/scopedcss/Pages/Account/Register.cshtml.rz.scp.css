@@ -1,0 +1,35 @@
+
+div.content[b-3hfo239is1] {
+    max-width: 280px;
+    margin: auto;
+    border: 2px solid gray;
+    padding-bottom: 30px;
+    padding-left: 40px;
+    border-radius: 10px;
+}
+
+input.user-inp[b-3hfo239is1] {
+    margin-bottom: 10px;
+    height: 32px;
+    padding-left: 12px;
+    font-size: 18px;
+}
+
+div.exception[b-3hfo239is1] {
+    color: red;
+    margin-bottom: 1em;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+button.subm-btn[b-3hfo239is1] {
+    margin-top: 10px;
+    width: 100px;
+    font-size: 20px;
+    transition: all 0.4s ease;
+}
+
+    button.subm-btn:hover[b-3hfo239is1] {
+        background-color: black;
+        color: white;
+    }

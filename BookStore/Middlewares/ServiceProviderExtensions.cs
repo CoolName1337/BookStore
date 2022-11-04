@@ -22,4 +22,14 @@ public static class ServiceProviderExtensions
         services.AddTransient<IServiceRole, ServiceRole>();
         services.AddTransient<IRepositoryRole, RepositoryRole>();
     }
+    public static void AddRatingService(this IServiceCollection services)
+    {
+        services.AddTransient<IServiceRating, ServiceRating>();
+        services.AddTransient<IRepositoryRating, RepositoryRating>();
+    }
+    public static void AddGenreService(this IServiceCollection services)
+    {
+        services.AddTransient<IServiceGenre, ServiceGenre>();
+        services.AddTransient<IRepositoryGenre, RepositoryGenre>();
+    }
 }

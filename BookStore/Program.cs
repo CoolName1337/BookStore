@@ -33,6 +33,8 @@ builder.Services.AddAuthorization(ops =>
 builder.Services.AddUserService();
 builder.Services.AddBookService();
 builder.Services.AddRoleService();
+builder.Services.AddRatingService();
+builder.Services.AddGenreService();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

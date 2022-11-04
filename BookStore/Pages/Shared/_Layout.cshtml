@@ -11,17 +11,88 @@
 
     @*general css*@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    
+
     @*is for body of pages (important)*@
     <link rel="stylesheet" href="~/BookStore.styles.css" asp-append-version="true" />
 </head>
 <body>
-    
+
     <div class="all-nav-panel">
         <ul class="nav-panel">
             <li>
                 <a class="nav-a" asp-page="/Index">BookStore</a>
             </li>
+            <li>
+                <div class="dropdown-search">
+                    <button onclick="myFunction()" class="dropbtn-search show" id="myDropdownBtn">🔍</button>
+                    <div id="myDropdown" class="dropdown-content-search">
+                        <form class="search-form" action="/SearchResult" method="get">
+                            <input class="input-search" type="search" name="search" placeholder="Любые ключевые слова..." />
+                            @*<div class="div-genre">
+                            <input class="input-genre" placeholder="Добавить жанры"/>
+                            </div>
+                            <div class="div-genre">
+                            <input class="input-genre" placeholder="Исключить жанры"/>
+                            </div>*@
+
+                            <div class="multiselect">
+                                <div class="selectBox" onclick="showCheckboxes(0)">
+                                    Добавить жанры
+                                </div>
+                                <div id="checkboxes0" class="checkboxes hidden">
+                                    <label>
+                                        <input type="checkbox" />First checkbox
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" />Second checkbox
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" />Third checkbox
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" />Third checkbox
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" />Third checkbox
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" />Third checkbox
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="multiselect">
+                                <div class="selectBox" onclick="showCheckboxes(1)">
+                                    Исключить жанры
+                                </div>
+                                <div id="checkboxes1" class="checkboxes hidden">
+                                    <label>
+                                        <input type="checkbox" />First checkbox
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" />Second checkbox
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" />Third checkbox
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" />Third checkbox
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" />Third checkbox
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" />Third checkbox
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button class="btn-search" type="submit">поиск</button>
+                        </form>
+                    </div>
+                </div>
+            </li>
+
             @if (User.Identity.IsAuthenticated)
             {
                 <li class="dropdown" style="float:right;">
@@ -32,7 +103,7 @@
                         <a href="/Account/MyBooks">Мои книги</a>
                         @if (User.IsInRole("admin") || User.IsInRole("creator"))
                         {
-                            <a asp-page="/Admin/AddBook">Добавить книгу</a>
+                            <a asp-page="/Admin/AdminPage">Admin Page</a>
                         }
                         @if (User.IsInRole("creator"))
                         {
@@ -52,17 +123,9 @@
                 </li>
             }
         </ul>
-        <div class="search-dropdown">
-            <div class="drop-clicker">🔍</div>
-            <div class="dropdown-search-content">
-                <form class="search-form" action="/SearchResult" method="get">
-                    <input class="input-search" type="search" name="search" placeholder="Любые ключевые слова..." />
-                    <button class="btn-search" type="submit">🔍</button>
-                </form>
-            </div>
-        </div>
+
     </div>
-    
+
     <div class="container">
         <main role="main">
             @RenderBody()

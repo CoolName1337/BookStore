@@ -1,0 +1,108 @@
+
+div.admin-nav[b-t189ebkpzk] {
+    background-color: #222;
+    border-radius: 0 0 8px 8px;
+    height: 60px;
+    margin-bottom: 60px;
+    display: flex;
+}
+
+
+div.admin-button[b-t189ebkpzk] {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    padding: 0 40px;
+    padding-top: 1em;
+}
+div.admin-button:hover[b-t189ebkpzk] {
+    background-color: #111;
+    border-radius: 0 0 8px 8px;
+}
+
+
+/*////////////////////////////////////////////   Crete book   ////////////////////////////////////////////*/
+
+div.content[b-t189ebkpzk] {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.handler[b-t189ebkpzk] {
+    display:flex;
+}
+
+.input-img[b-t189ebkpzk] {
+    margin-right:10px;
+    cursor: pointer;
+    border: 1px solid gray;
+    width: 440px;
+    height: 600px;
+}
+
+div.create-container[b-t189ebkpzk]{
+    display: inline-grid;
+}
+
+.input-file[b-t189ebkpzk] {
+    height: 44px;
+    cursor: pointer;
+    border: 1px solid gray;
+}
+
+.input-submit[b-t189ebkpzk] {
+    color: white;
+    height: 50px;
+    font-size: 22px;
+    transition: all 0.6s ease;
+    border: none;
+}
+
+.create-btn[b-t189ebkpzk] {
+    background-color: #64fb4d;
+    padding: 0px 30px;
+}
+.create-btn:hover[b-t189ebkpzk] {
+    background-color: #49c725;
+}
+
+.cancel-btn[b-t189ebkpzk] {
+    background-color: #cacaca;
+    margin-left: 10px;
+    color: black;
+}
+.cancel-btn:hover[b-t189ebkpzk] {
+    background-color: #636363;
+    color: white;
+}
+
+.input-descr[b-t189ebkpzk] {
+    max-width: 300px;
+    min-width: 300px;
+    min-height: 368px;
+    max-height: 368px;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.input-title[b-t189ebkpzk] {
+    width: 300px;
+}
+
+input[b-t189ebkpzk] {
+    padding-left: 10px;
+    height: 40px;
+}
+
+
+/*////////////////////////////////////////////   Edit genres   ////////////////////////////////////////////*/
+
+div.edit-genres-container[b-t189ebkpzk]{
+    width:700px;
+    display:inline-block;
+}
+
+label.genre-name[b-t189ebkpzk]{
+
+}

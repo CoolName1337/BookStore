@@ -1,0 +1,56 @@
+﻿@page
+@model BookStore.Pages.Admin.AdminPageModel
+@{
+    ViewData["Title"] = "Admin Page";
+}
+<div class="admin-nav">
+    <div class="admin-button" onclick="showAdminPage(1)">
+        Добавить книгу
+    </div>
+    <div class="admin-button" onclick="showAdminPage(2)">
+        Редактировать жанры
+    </div>
+</div>
+<div class="content">
+    <form method="post" enctype="multipart/form-data">
+    
+        <div class="create-container admin-page hidden" id="ap1">
+            <input name="postType" value="createBook" hidden/>
+            <input class="input-file" type="file" name="file" /><br />
+            <div class="handler">
+                <input class="input-img" type="file" name="img" />
+                <div>
+                    <input class="input-title" name="title" placeholder="Название" /><br />
+                    <input class="input-writer" name="writer" placeholder="Писатель"  /><br /><br />
+                    <textarea class="input-descr" placeholder="Описание" name="descr"></textarea><br /><br />
+                    <input class="input-price" name="price" placeholder="Цена" value="" /><br />
+                    <button class="input-submit create-btn" type="submit" name="WantToCreate"></button>
+                    <button class="input-submit cancel-btn" type="submit">Отмена</button>
+                </div>
+            </div>
+            <span style="color:red">
+            </span>
+        </div>
+
+    </form>
+    <form method="post">
+        <div class="edit-genres-container admin-page hidden" id="ap2">
+            <input name="postType" value="editGenres" hidden />
+
+            @foreach (var genre in Model._serviceGenre.GetAll())
+            {
+                <div class="genre-container">
+                    <label class="genre-name">@genre.Value</label>
+                    <button class="rem-genre" name="editGenreBtn" value="del_@(genre.Value)" type="submit"></button>
+                </div>
+            }
+
+
+            <div class="genre-container">
+                <input class="genre-name" name="genreName"/>
+                <button class="create-new-genre" name="editGenreBtn" value="add" type="submit"></button>
+            </div>
+        </div>
+    </form>
+</div>
+

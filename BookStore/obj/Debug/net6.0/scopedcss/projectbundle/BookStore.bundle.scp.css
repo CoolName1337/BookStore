@@ -1,0 +1,903 @@
+/* _content/BookStore/Pages/Account/Favorite.cshtml.rz.scp.css */
+
+.books-container[b-ogvrq2ren1] {
+    display: block;
+}
+
+.book-container[b-ogvrq2ren1] {
+    position: relative;
+    display: inline-block;
+    width: 218px;
+    height: 300px;
+}
+a.dwn-btn[b-ogvrq2ren1] {
+    color: #25cc24;
+    border: 2px solid #25cc24;
+    padding: 5px;
+    float: right;
+}
+
+a.dwn-btn:hover[b-ogvrq2ren1] {
+    background: #25cc24;
+    color: white;
+}
+img[b-ogvrq2ren1] {
+    width: 220px;
+    height: 300px;
+}
+
+.hover-book[b-ogvrq2ren1] {
+    transition: opacity 0.6s;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 25%;
+    background: black;
+    padding: 10px;
+    opacity: 0;
+}
+
+a[b-ogvrq2ren1] {
+    text-decoration: none;
+}
+
+a.title[b-ogvrq2ren1] {
+    font-weight: bold;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+a.title:hover[b-ogvrq2ren1] {
+    color: darkgray;
+}
+
+a.buy-btn[b-ogvrq2ren1] {
+    color: orange;
+    border: 2px solid orange;
+    padding: 5px;
+    float: right;
+}
+
+a.buy-btn:hover[b-ogvrq2ren1] {
+    background: orange;
+    color: white;
+}
+
+.writer[b-ogvrq2ren1], a[b-ogvrq2ren1] {
+    color: white;
+}
+
+.book-container:hover .hover-book[b-ogvrq2ren1] {
+    opacity: 0.8;
+}
+/* _content/BookStore/Pages/Account/Login.cshtml.rz.scp.css */
+
+div.content[b-6zlo3m77xp]{
+    max-width:280px;
+    margin:auto;
+    border:2px solid gray;
+    padding-bottom:30px;
+    padding-left:40px;
+    border-radius:10px;
+}
+
+input.user-inp[b-6zlo3m77xp] {
+    margin-bottom:10px;
+    height: 32px;
+    padding-left:12px;
+    font-size:18px;
+}
+
+div.exception[b-6zlo3m77xp] {
+    color: red;
+    margin-bottom: 1em;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+button.subm-btn[b-6zlo3m77xp]{
+    margin-top:10px;
+    width:100px;
+    font-size:20px;
+    transition:all 0.4s ease;
+}
+button.subm-btn:hover[b-6zlo3m77xp] {
+    background-color: black;
+    color: white;
+}
+/* _content/BookStore/Pages/Account/Logout.cshtml.rz.scp.css */
+
+div.content[b-0ljbrzjeew] {
+    font-size: 36px;
+    max-width: 500px;
+    margin: auto;
+    text-align:center;
+    border:2px solid gray;
+    border-radius:10px;
+    padding-bottom:30px;
+}
+
+button.accept-btn[b-0ljbrzjeew] {
+    color: #831818;
+    border-color: #831818;
+}
+
+button.reject-btn[b-0ljbrzjeew] {
+    color: #177e16;
+    border-color: #177e16;
+}
+
+button.reject-btn:hover[b-0ljbrzjeew] {
+    background-color: #177e16;
+    color: white;
+}
+
+
+button.accept-btn:hover[b-0ljbrzjeew] {
+    background-color: #831818;
+    color:white;
+}
+
+button[b-0ljbrzjeew] {
+    font-size: 36px;
+    width: 200px;
+    transition:all 0.8s ease;
+}
+/* _content/BookStore/Pages/Account/MyBooks.cshtml.rz.scp.css */
+
+.books-container[b-wabe51lsf2] {
+    display: block;
+}
+
+.book-container[b-wabe51lsf2] {
+    position: relative;
+    display: inline-block;
+    width: 218px;
+    height: 300px;
+}
+
+a.dwn-btn[b-wabe51lsf2] {
+    color: #25cc24;
+    border: 2px solid #25cc24;
+    padding: 5px;
+    float: right;
+}
+
+    a.dwn-btn:hover[b-wabe51lsf2] {
+        background: #25cc24;
+        color: white;
+    }
+
+img[b-wabe51lsf2] {
+    width: 220px;
+    height: 300px;
+}
+
+.hover-book[b-wabe51lsf2] {
+    transition: opacity 0.6s;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 25%;
+    background: black;
+    padding: 10px;
+    opacity: 0;
+}
+
+a[b-wabe51lsf2] {
+    text-decoration: none;
+}
+
+    a.title[b-wabe51lsf2] {
+        font-weight: bold;
+        max-width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+        a.title:hover[b-wabe51lsf2] {
+            color: darkgray;
+        }
+
+    a.buy-btn[b-wabe51lsf2] {
+        color: orange;
+        border: 2px solid orange;
+        padding: 5px;
+        float: right;
+    }
+
+        a.buy-btn:hover[b-wabe51lsf2] {
+            background: orange;
+            color: white;
+        }
+
+.writer[b-wabe51lsf2], a[b-wabe51lsf2] {
+    color: white;
+}
+
+.book-container:hover .hover-book[b-wabe51lsf2] {
+    opacity: 0.8;
+}
+/* _content/BookStore/Pages/Account/Register.cshtml.rz.scp.css */
+
+div.content[b-3hfo239is1] {
+    max-width: 280px;
+    margin: auto;
+    border: 2px solid gray;
+    padding-bottom: 30px;
+    padding-left: 40px;
+    border-radius: 10px;
+}
+
+input.user-inp[b-3hfo239is1] {
+    margin-bottom: 10px;
+    height: 32px;
+    padding-left: 12px;
+    font-size: 18px;
+}
+
+div.exception[b-3hfo239is1] {
+    color: red;
+    margin-bottom: 1em;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+button.subm-btn[b-3hfo239is1] {
+    margin-top: 10px;
+    width: 100px;
+    font-size: 20px;
+    transition: all 0.4s ease;
+}
+
+    button.subm-btn:hover[b-3hfo239is1] {
+        background-color: black;
+        color: white;
+    }
+/* _content/BookStore/Pages/Admin/AddBook.cshtml.rz.scp.css */
+
+div.content[b-z56e7kzskc] {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.handler[b-z56e7kzskc] {
+    display:flex;
+}
+
+.input-img[b-z56e7kzskc] {
+    margin-right:10px;
+    cursor: pointer;
+    border: 1px solid gray;
+    width: 440px;
+    height: 600px;
+}
+
+div.create-container[b-z56e7kzskc]{
+    display: inline-grid;
+}
+
+.input-file[b-z56e7kzskc] {
+    height: 44px;
+    cursor: pointer;
+    border: 1px solid gray;
+}
+
+.input-submit[b-z56e7kzskc] {
+    color: white;
+    height: 50px;
+    font-size: 22px;
+    transition: all 0.6s ease;
+    border: none;
+}
+
+.create-btn[b-z56e7kzskc] {
+    background-color: #64fb4d;
+    padding: 0px 30px;
+}
+.create-btn:hover[b-z56e7kzskc] {
+    background-color: #49c725;
+}
+
+.cancel-btn[b-z56e7kzskc] {
+    background-color: #cacaca;
+    margin-left: 10px;
+    color: black;
+}
+.cancel-btn:hover[b-z56e7kzskc] {
+    background-color: #636363;
+    color: white;
+}
+
+.input-descr[b-z56e7kzskc] {
+    max-width: 300px;
+    min-width: 300px;
+    min-height: 368px;
+    max-height: 368px;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.input-title[b-z56e7kzskc] {
+    width: 300px;
+}
+
+input[b-z56e7kzskc] {
+    padding-left: 10px;
+    height: 40px;
+}
+/* _content/BookStore/Pages/Admin/AdminPage.cshtml.rz.scp.css */
+
+div.admin-nav[b-t189ebkpzk] {
+    background-color: #222;
+    border-radius: 0 0 8px 8px;
+    height: 60px;
+    margin-bottom: 60px;
+    display: flex;
+}
+
+
+div.admin-button[b-t189ebkpzk] {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    padding: 0 40px;
+    padding-top: 1em;
+}
+div.admin-button:hover[b-t189ebkpzk] {
+    background-color: #111;
+    border-radius: 0 0 8px 8px;
+}
+
+
+/*////////////////////////////////////////////   Crete book   ////////////////////////////////////////////*/
+
+div.content[b-t189ebkpzk] {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.handler[b-t189ebkpzk] {
+    display:flex;
+}
+
+.input-img[b-t189ebkpzk] {
+    margin-right:10px;
+    cursor: pointer;
+    border: 1px solid gray;
+    width: 440px;
+    height: 600px;
+}
+
+div.create-container[b-t189ebkpzk]{
+    display: inline-grid;
+}
+
+.input-file[b-t189ebkpzk] {
+    height: 44px;
+    cursor: pointer;
+    border: 1px solid gray;
+}
+
+.input-submit[b-t189ebkpzk] {
+    color: white;
+    height: 50px;
+    font-size: 22px;
+    transition: all 0.6s ease;
+    border: none;
+}
+
+.create-btn[b-t189ebkpzk] {
+    background-color: #64fb4d;
+    padding: 0px 30px;
+}
+.create-btn:hover[b-t189ebkpzk] {
+    background-color: #49c725;
+}
+
+.cancel-btn[b-t189ebkpzk] {
+    background-color: #cacaca;
+    margin-left: 10px;
+    color: black;
+}
+.cancel-btn:hover[b-t189ebkpzk] {
+    background-color: #636363;
+    color: white;
+}
+
+.input-descr[b-t189ebkpzk] {
+    max-width: 300px;
+    min-width: 300px;
+    min-height: 368px;
+    max-height: 368px;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.input-title[b-t189ebkpzk] {
+    width: 300px;
+}
+
+input[b-t189ebkpzk] {
+    padding-left: 10px;
+    height: 40px;
+}
+
+
+/*////////////////////////////////////////////   Edit genres   ////////////////////////////////////////////*/
+
+div.edit-genres-container[b-t189ebkpzk]{
+    width:700px;
+    display:inline-block;
+}
+
+label.genre-name[b-t189ebkpzk]{
+
+}
+/* _content/BookStore/Pages/Admin/EditBook.cshtml.rz.scp.css */
+
+div.content[b-wos4ygihuw] {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.handler[b-wos4ygihuw] {
+    display: flex;
+}
+
+.input-img[b-wos4ygihuw] {
+    margin-right: 10px;
+    cursor: pointer;
+    border: 1px solid gray;
+    width: 440px;
+    height: 600px;
+}
+
+div.create-container[b-wos4ygihuw] {
+    display: inline-grid;
+}
+
+.input-file[b-wos4ygihuw] {
+    height: 44px;
+    cursor: pointer;
+    border: 1px solid gray;
+}
+
+.input-submit[b-wos4ygihuw] {
+    color: white;
+    height: 50px;
+    font-size: 22px;
+    transition: all 0.6s ease;
+    border: none;
+}
+
+.cancel-btn[b-wos4ygihuw] {
+    background-color: #cacaca;
+    margin-left: 10px;
+    color: black;
+}
+.cancel-btn:hover[b-wos4ygihuw] {
+    background-color: #636363;
+    color: white;
+}
+
+button.update-btn[b-wos4ygihuw]{
+    background-color:#64fb4d;
+    padding:0px 30px;
+}
+.update-btn:hover[b-wos4ygihuw] {
+    background-color: #49c725;
+}
+
+button.delete-btn[b-wos4ygihuw] {
+    background-color: #c32727;
+    margin-top: 50px;
+}
+.delete-btn:hover[b-wos4ygihuw] {
+    background-color: #9a2020;
+}
+
+.input-descr[b-wos4ygihuw] {
+    max-width: 300px;
+    min-width: 300px;
+    min-height: 368px;
+    max-height: 368px;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.input-title[b-wos4ygihuw] {
+    width: 300px;
+}
+
+input[b-wos4ygihuw] {
+    padding-left: 10px;
+    height: 40px;
+}
+/* _content/BookStore/Pages/BookPage.cshtml.rz.scp.css */
+
+h2[b-yajd1ps8dt] {
+    font-size: 24px;
+    margin: 0;
+}
+
+p.description-title[b-yajd1ps8dt] {
+    font-weight: bold;
+}
+
+div.title[b-yajd1ps8dt] {
+    align-items: center;
+}
+
+div.content[b-yajd1ps8dt] {
+    max-width: 1200px;
+    margin: auto;
+}
+
+div.title-container[b-yajd1ps8dt] {
+    display: flex;
+}
+
+img[b-yajd1ps8dt] {
+    width: 440px;
+    height: 600px;
+    margin: 0 20px;
+}
+
+button[b-yajd1ps8dt] {
+    transition: all 0.6s ease;
+}
+
+button.buy-btn[b-yajd1ps8dt] {
+    background-color: #39c724;
+    border-style: none;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    width: 250px;
+    height: 50px;
+}
+
+button.buy-btn:hover[b-yajd1ps8dt] {
+    background-color: darkgreen;
+}
+
+.fav-btn[b-yajd1ps8dt], .unfav-btn[b-yajd1ps8dt] {
+    color: blueviolet;
+    background-color: pink;
+    border: none;
+    width: 50px;
+    font-size: 30px;
+    padding: 0;
+    margin-left: 10px;
+}
+
+button.unfav-btn[b-yajd1ps8dt] {
+    border: 2px solid pink;
+    background-color: white;
+}
+
+button.fav-btn:hover[b-yajd1ps8dt], button.unfav-btn:hover[b-yajd1ps8dt] {
+    background-color: #f18de6;
+}
+
+p[b-yajd1ps8dt] {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+}
+
+img.setting-img[b-yajd1ps8dt] {
+    width: 30px;
+    height: 30px;
+}
+
+div.desription-container[b-yajd1ps8dt] {
+    margin-top: 10px;
+    padding: 20px;
+}
+
+/*////////////////////////////////////////////      ★rating★      //////////////////////////////////////////////////////*/
+
+.filler[b-yajd1ps8dt] {
+    position: absolute;
+    width: 100%;
+    background-color: #fcff00;
+    z-index: -1;
+    bottom: 0;
+}
+
+.rating-button[b-yajd1ps8dt] {
+    border: 2px solid orange;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    position: relative;
+    display: inline-block;
+}
+
+.rating-button:hover[b-yajd1ps8dt] {
+    cursor: pointer;
+}
+
+div.rating-droppanel[b-yajd1ps8dt] {
+    display: none;
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    background-color: whitesmoke;
+    padding: 20px;
+    font-size: 20px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+div.dropdown-rating[b-yajd1ps8dt] {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.star-1[b-yajd1ps8dt] {
+    border: 2px solid orange;
+}
+
+.rating-number[b-yajd1ps8dt] {
+    font-size: 40px;
+    color: orange;
+}
+
+.rating-count[b-yajd1ps8dt] {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+
+.stars-container[b-yajd1ps8dt] {
+    margin-top: 12px;
+    display: flex;
+}
+
+div.dropdown-rating:hover .rating-droppanel[b-yajd1ps8dt] {
+    display: block;
+}
+
+.rate-btn[b-yajd1ps8dt] {
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: orange;
+}
+
+.star[b-yajd1ps8dt] {
+    cursor: pointer;
+    stroke-width: 1px;
+    fill-rule: nonzero;
+}
+
+.taked-star:hover[b-yajd1ps8dt], .not-taked-star[b-yajd1ps8dt] {
+    fill: white;
+    stroke: gray;
+}
+
+.not-taked-star:hover[b-yajd1ps8dt], .taked-star[b-yajd1ps8dt] {
+    fill: orange;
+    stroke: none;
+}
+
+.rate-btn[b-yajd1ps8dt]{
+    padding:0;
+}
+/* _content/BookStore/Pages/Creator/EditRoles.cshtml.rz.scp.css */
+
+div.content[b-xyhszwumjb]{
+    max-width:1000px;
+    margin:auto;
+    font-size:20px;
+}
+
+input.input-user-search[b-xyhszwumjb] {
+    height: 40px;
+    font-size: 20px;
+    border: 3px solid black;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding-left:10px;
+    width:100%;
+}
+
+div.email-div[b-xyhszwumjb]{
+    margin-left:auto;
+    padding:0 10px;
+}
+
+div.user-container[b-xyhszwumjb] {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+.interact-form[b-xyhszwumjb] {
+    margin-left:auto;
+    margin-right:0;
+}
+div.admin-name[b-xyhszwumjb] {
+    font-weight: bold;
+    color: #ffac00;
+    float:left;
+}
+
+button[b-xyhszwumjb] {
+    transition: all 0.5s ease;
+    width: 100px;
+    height: 30px;
+    border-style: solid;
+    border-width: 2px;
+}
+
+button.admin-btn[b-xyhszwumjb] {
+    background-color: #ffac00;
+    color: white;
+    border-color: #ffac00;
+}
+button.nonadmin-btn[b-xyhszwumjb] {
+    color: #ffac00;
+    border-color: #ffac00;
+}
+
+button.nonadmin-btn:hover[b-xyhszwumjb] {
+    color: white;
+    background-color: #ffc346;
+}
+button.admin-btn:hover[b-xyhszwumjb] {
+    color: #ffb61e;
+    background-color:#ffe6b2;
+}
+
+button.deleteUser-btn[b-xyhszwumjb]{
+    color:red;
+    border-color:red;
+}
+button.deleteUser-btn:hover[b-xyhszwumjb]{
+    color:white;
+    background-color:red;
+}
+
+/* _content/BookStore/Pages/Index.cshtml.rz.scp.css */
+
+.books-container[b-ipq4tb4ebs] {
+    display: block;
+}
+
+.book-container[b-ipq4tb4ebs] {
+    position: relative;
+    display: inline-block;
+    width: 218px;
+    height: 300px;
+}
+
+img[b-ipq4tb4ebs] {
+    width: 220px;
+    height: 300px;
+}
+
+.hover-book[b-ipq4tb4ebs] {
+    transition: opacity 0.6s;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 25%;
+    background: black;
+    padding: 10px;
+    opacity: 0;
+}
+
+a.dwn-btn[b-ipq4tb4ebs] {
+    color: #25cc24;
+    border: 2px solid #25cc24;
+    padding: 5px;
+    float: right;
+}
+a.dwn-btn:hover[b-ipq4tb4ebs] {
+    background: #25cc24;
+    color: white;
+}
+a[b-ipq4tb4ebs]{
+    text-decoration:none;
+}
+
+a.title[b-ipq4tb4ebs] {
+    font-weight: bold;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+a.title:hover[b-ipq4tb4ebs] {
+    color:darkgray;
+}
+a.buy-btn[b-ipq4tb4ebs] {
+    color:orange;
+    border:2px solid orange;
+    padding:5px;
+    float:right;
+}
+a.buy-btn:hover[b-ipq4tb4ebs]{
+    background:orange;
+    color:white;
+}
+.writer[b-ipq4tb4ebs], a[b-ipq4tb4ebs] {
+    color: white;
+}
+
+.book-container:hover .hover-book[b-ipq4tb4ebs] {
+    opacity: 0.8;
+}
+/* _content/BookStore/Pages/SearchResult.cshtml.rz.scp.css */
+
+.results-panel[b-us7sphpk9k] {
+    max-width: 1400px;
+    margin: auto;
+}
+
+ul.results-panel[b-us7sphpk9k] {
+    list-style-type: none;
+}
+
+li[b-us7sphpk9k]{
+    padding-bottom: 20px;
+}
+
+a.title[b-us7sphpk9k] {
+    padding-bottom:2px;
+    font-size: 30px;
+}
+
+p[b-us7sphpk9k]{
+    margin: 10px 0 0 0;
+
+}
+
+h1.search-result-title[b-us7sphpk9k] {
+    max-width: 1600px;
+    margin: auto;
+    font-size:18px;
+    font-weight:normal;
+}
+
+a[b-us7sphpk9k] {
+    text-decoration: none;
+    color: black;
+}
+
+div.result-panel[b-us7sphpk9k] {
+    display: flex;
+    border-radius: 10px;
+    margin-top: 40px;
+}
+div.result-info[b-us7sphpk9k] {
+    margin-left: 50px;
+}
+a:hover[b-us7sphpk9k] {
+    color: gray;
+}
+
+img[b-us7sphpk9k] {
+    width: 145px;
+    height: 200px;
+}
+
+img:hover[b-us7sphpk9k]{
+    opacity:0.8;
+}
+
+p.bad-result[b-us7sphpk9k]{
+    font-size: 24px;
+}

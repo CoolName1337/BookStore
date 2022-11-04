@@ -1,13 +1,14 @@
-﻿using BookStore.DAL.Models;
-using BookStore.DAL.Repositories;
+﻿using BookStore.BAL.Interfaces;
+using BookStore.DAL.Interfaces;
+using BookStore.DAL.Models;
 
 namespace BookStore.BAL.Services;
 
-internal class ServiceGenre
+public class ServiceGenre : IServiceGenre
 {
-    private readonly RepositoryGenre _repositoryGenre;
+    private readonly IRepositoryGenre _repositoryGenre;
 
-	public ServiceGenre(RepositoryGenre repositoryGenre)
+	public ServiceGenre(IRepositoryGenre repositoryGenre)
 	{
 		_repositoryGenre = repositoryGenre;
 	}
@@ -22,5 +23,9 @@ internal class ServiceGenre
     public List<Genre> GetAll()
     {
         return _repositoryGenre.GetAll();
+    }
+    public Genre Get(string name)
+    {
+        return _repositoryGenre.Get(name);
     }
 }

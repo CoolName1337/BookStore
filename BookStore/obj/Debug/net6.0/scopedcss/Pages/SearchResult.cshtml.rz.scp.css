@@ -1,0 +1,60 @@
+
+.results-panel[b-us7sphpk9k] {
+    max-width: 1400px;
+    margin: auto;
+}
+
+ul.results-panel[b-us7sphpk9k] {
+    list-style-type: none;
+}
+
+li[b-us7sphpk9k]{
+    padding-bottom: 20px;
+}
+
+a.title[b-us7sphpk9k] {
+    padding-bottom:2px;
+    font-size: 30px;
+}
+
+p[b-us7sphpk9k]{
+    margin: 10px 0 0 0;
+
+}
+
+h1.search-result-title[b-us7sphpk9k] {
+    max-width: 1600px;
+    margin: auto;
+    font-size:18px;
+    font-weight:normal;
+}
+
+a[b-us7sphpk9k] {
+    text-decoration: none;
+    color: black;
+}
+
+div.result-panel[b-us7sphpk9k] {
+    display: flex;
+    border-radius: 10px;
+    margin-top: 40px;
+}
+div.result-info[b-us7sphpk9k] {
+    margin-left: 50px;
+}
+a:hover[b-us7sphpk9k] {
+    color: gray;
+}
+
+img[b-us7sphpk9k] {
+    width: 145px;
+    height: 200px;
+}
+
+img:hover[b-us7sphpk9k]{
+    opacity:0.8;
+}
+
+p.bad-result[b-us7sphpk9k]{
+    font-size: 24px;
+}

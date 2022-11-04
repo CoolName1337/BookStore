@@ -1,0 +1,15 @@
+C:\Users\User\source\repos\BookStore\BookStore.BAL\bin\Debug\net6.0\BookStore.BAL.deps.json
+C:\Users\User\source\repos\BookStore\BookStore.BAL\bin\Debug\net6.0\BookStore.BAL.dll
+C:\Users\User\source\repos\BookStore\BookStore.BAL\bin\Debug\net6.0\BookStore.BAL.pdb
+C:\Users\User\source\repos\BookStore\BookStore.BAL\bin\Debug\net6.0\BookStore.DAL.dll
+C:\Users\User\source\repos\BookStore\BookStore.BAL\bin\Debug\net6.0\BookStore.DAL.pdb
+C:\Users\User\source\repos\BookStore\BookStore.BAL\obj\Debug\net6.0\BookStore.BAL.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\BookStore\BookStore.BAL\obj\Debug\net6.0\BookStore.BAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\source\repos\BookStore\BookStore.BAL\obj\Debug\net6.0\BookStore.BAL.AssemblyInfoInputs.cache
+C:\Users\User\source\repos\BookStore\BookStore.BAL\obj\Debug\net6.0\BookStore.BAL.AssemblyInfo.cs
+C:\Users\User\source\repos\BookStore\BookStore.BAL\obj\Debug\net6.0\BookStore.BAL.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\BookStore\BookStore.BAL\obj\Debug\net6.0\BookStore.BAL.csproj.CopyComplete
+C:\Users\User\source\repos\BookStore\BookStore.BAL\obj\Debug\net6.0\BookStore.BAL.dll
+C:\Users\User\source\repos\BookStore\BookStore.BAL\obj\Debug\net6.0\refint\BookStore.BAL.dll
+C:\Users\User\source\repos\BookStore\BookStore.BAL\obj\Debug\net6.0\BookStore.BAL.pdb
+C:\Users\User\source\repos\BookStore\BookStore.BAL\obj\Debug\net6.0\ref\BookStore.BAL.dll
