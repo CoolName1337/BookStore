@@ -13,15 +13,15 @@
 </div>
 <div class="content">
     <form method="post" enctype="multipart/form-data">
-    
+
         <div class="create-container admin-page hidden" id="ap1">
-            <input name="postType" value="createBook" hidden/>
+            <input name="postType" value="createBook" hidden />
             <input class="input-file" type="file" name="file" /><br />
             <div class="handler">
                 <input class="input-img" type="file" name="img" />
                 <div>
                     <input class="input-title" name="title" placeholder="Название" /><br />
-                    <input class="input-writer" name="writer" placeholder="Писатель"  /><br /><br />
+                    <input class="input-writer" name="writer" placeholder="Писатель" /><br /><br />
                     <textarea class="input-descr" placeholder="Описание" name="descr"></textarea><br /><br />
                     <input class="input-price" name="price" placeholder="Цена" value="" /><br />
                     <button class="input-submit create-btn" type="submit" name="WantToCreate"></button>
@@ -33,24 +33,82 @@
         </div>
 
     </form>
-    <form method="post">
+    <form>
         <div class="edit-genres-container admin-page hidden" id="ap2">
-            <input name="postType" value="editGenres" hidden />
+            @Html.AntiForgeryToken()
 
-            @foreach (var genre in Model._serviceGenre.GetAll())
-            {
+            <div id="genres">
                 <div class="genre-container">
-                    <label class="genre-name">@genre.Value</label>
-                    <button class="rem-genre" name="editGenreBtn" value="del_@(genre.Value)" type="submit"></button>
+                    <input class="genre-name" id="createGenreInput" />
+                    <button class="create-new-genre" type="button" id="add"></button>
                 </div>
-            }
-
-
-            <div class="genre-container">
-                <input class="genre-name" name="genreName"/>
-                <button class="create-new-genre" name="editGenreBtn" value="add" type="submit"></button>
             </div>
+            <div id="msg"></div>
         </div>
     </form>
 </div>
+
+@section Scripts{
+    <script>
+
+        $(document).ready(() => {
+            $.ajax({
+                url: "/Admin/AdminPage?handler=SelectAll",
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json",
+                success: (data) => {
+                    data.forEach((genre) => {
+                        $("#genres").append('<div class="genre-container"><label class="genre-name">' +
+                            genre.value + '</label><button type="button" name="delete" value = "' +
+                            genre.value + '"/></div>');
+                    });
+                },
+                error: () => {
+                    $("#msg").html("Error while making Ajax call!");
+                }
+            });
+
+        });
+
+
+        $("#add").click(() => {
+            $.ajax({
+                url: "/Admin/AdminPage?handler=Create&genreName=" + $("#createGenreInput").val(),
+                type: "POST",
+                contentType: "application/json",
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+
+                success: (genre) => {
+                    $("#genres").append('<div class="genre-container"><label class="genre-name">' +
+                        genre.value + '</label><button type="button" name="delete" value = "' +
+                        genre.value + '"/></div>');
+                },
+                error: () => {
+                    $("#msg").html("error");
+                }   
+            });
+        });
+
+        $("body").on("click", "[name='delete']", (e) => {
+            $.ajax({
+                url: "/Admin/AdminPage?handler=Delete&genreName=" + e.target.classList("value"),
+                type: "DELETE",
+                contentType: "application/json",
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+
+                success: (genre) => {
+
+                },
+                error: () => {
+                    $("#msg").html("error");
+                }
+            });
+        });
+    </script>
+}
 

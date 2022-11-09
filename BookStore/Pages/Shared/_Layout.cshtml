@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="icon" type="image/x-icon" href="icon.ico" />
+    <link rel="icon" type="image/x-icon" href="~/icon.ico" />
 
     @*Set auto name for open page*@
     <title>@ViewData["Title"] - BookStore</title>
@@ -28,13 +28,6 @@
                     <div id="myDropdown" class="dropdown-content-search">
                         <form class="search-form" action="/SearchResult" method="get">
                             <input class="input-search" type="search" name="search" placeholder="Любые ключевые слова..." />
-                            @*<div class="div-genre">
-                            <input class="input-genre" placeholder="Добавить жанры"/>
-                            </div>
-                            <div class="div-genre">
-                            <input class="input-genre" placeholder="Исключить жанры"/>
-                            </div>*@
-
                             <div class="multiselect">
                                 <div class="selectBox" onclick="showCheckboxes(0)">
                                     Добавить жанры

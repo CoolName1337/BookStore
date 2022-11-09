@@ -8,10 +8,11 @@ public class RepositoryGenre : IRepositoryGenre
 {
     private readonly ApplicationContext _db = new();
 
-    public async Task Create(Genre genre)
+    public async Task<Genre> Create(Genre genre)
     {
         _db.Add(genre);
         await _db.SaveChangesAsync();
+        return genre;
     }
     public async Task Delete(Genre genre)
     {

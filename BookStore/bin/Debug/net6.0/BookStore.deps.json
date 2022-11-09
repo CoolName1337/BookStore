@@ -8,9 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "BookStore/1.0.0": {
         "dependencies": {
-          "BookStore.BAL": "1.0.0",
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.10",
-          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.10"
+          "BookStore.BAL": "1.0.0"
         },
         "runtime": {
           "BookStore.dll": {}

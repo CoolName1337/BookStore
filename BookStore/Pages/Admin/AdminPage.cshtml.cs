@@ -21,7 +21,8 @@ public class AdminPageModel : PageModel
         _serviceGenre = serviceGenre;
     }
 
-    public IActionResult OnGet() {
+    public IActionResult OnGet()
+    {
         return Page();
     }
     public async Task<IActionResult> OnPostAsync(string postType)
@@ -32,31 +33,25 @@ public class AdminPageModel : PageModel
             case "createBook":
                 actRes = await TryCreateBook(Request);
                 break;
-            case "editGenres":
-                if (Request.Form["editGenreBtn"].ToString().StartsWith("del"))
-                {
-                    actRes = await TryDeleteGenre(Request);
-                }
-                else
-                {
-                    actRes = await TryAddGenre(Request);
-                }
-                break;
         }
 
         return actRes;
     }
 
-    private async Task<IActionResult> TryAddGenre(HttpRequest Request)
+    public IActionResult OnGetSelectAll()
     {
-        await _serviceGenre.Create(Request.Form["genreName"]);
-        return Page();
+        return new JsonResult(_serviceGenre.GetAll());
     }
 
-    private async Task<IActionResult> TryDeleteGenre(HttpRequest Request)
+    public async Task<IActionResult> OnPostCreate(string genreName)
     {
-        await _serviceGenre.Delete(Request.Form["editGenreBtn"].ToString().Split("_")[1]);
-        return Page();
+        return new JsonResult(await _serviceGenre.Create(genreName));
+    }
+
+    public async Task<IActionResult> OnDeleteDelete(string genreName)
+    {
+        await _serviceGenre.Delete(genreName);
+        return new JsonResult("Genre deleted successfully!");
     }
 
     private async Task<IActionResult> TryCreateBook(HttpRequest Request)

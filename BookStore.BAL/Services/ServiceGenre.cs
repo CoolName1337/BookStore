@@ -12,9 +12,9 @@ public class ServiceGenre : IServiceGenre
 	{
 		_repositoryGenre = repositoryGenre;
 	}
-    public async Task Create(string genreName)
+    public async Task<Genre> Create(string genreName)
     {
-        await _repositoryGenre.Create(new Genre() { Value = genreName });
+        return await _repositoryGenre.Create(new Genre() { Value = genreName });
     }
     public async Task Delete(string genreName)
     {
