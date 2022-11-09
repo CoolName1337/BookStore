@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\source\\repos\\BookStore\\BookStore.DAL\\BookStore.DAL.csproj": {}
+    "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore.DAL\\BookStore.DAL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\source\\repos\\BookStore\\BookStore.DAL\\BookStore.DAL.csproj": {
+    "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore.DAL\\BookStore.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\source\\repos\\BookStore\\BookStore.DAL\\BookStore.DAL.csproj",
+        "projectUniqueName": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore.DAL\\BookStore.DAL.csproj",
         "projectName": "BookStore.DAL",
-        "projectPath": "C:\\Users\\User\\source\\repos\\BookStore\\BookStore.DAL\\BookStore.DAL.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\source\\repos\\BookStore\\BookStore.DAL\\obj\\",
+        "projectPath": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore.DAL\\BookStore.DAL.csproj",
+        "packagesPath": "C:\\Users\\81pud\\.nuget\\packages\\",
+        "outputPath": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore.DAL\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\81pud\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
