@@ -424,21 +424,9 @@ div.create-container[b-t189ebkpzk]{
     width: 300px;
 }
 
-input[b-t189ebkpzk] {
+input.data[b-t189ebkpzk]  {
     padding-left: 10px;
     height: 40px;
-}
-
-
-/*////////////////////////////////////////////   Edit genres   ////////////////////////////////////////////*/
-
-div.edit-genres-container[b-t189ebkpzk]{
-    width:700px;
-    display:inline-block;
-}
-
-label.genre-name[b-t189ebkpzk]{
-
 }
 /* _content/BookStore/Pages/Admin/EditBook.cshtml.rz.scp.css */
 

@@ -15,15 +15,15 @@
     <form method="post" enctype="multipart/form-data">
 
         <div class="create-container admin-page hidden" id="ap1">
-            <input name="postType" value="createBook" hidden />
-            <input class="input-file" type="file" name="file" /><br />
+            <input name="postType data" value="createBook" hidden />
+            <input class="input-file data" type="file" name="file" /><br />
             <div class="handler">
-                <input class="input-img" type="file" name="img" />
+                <input class="input-img data" type="file" name="img" />
                 <div>
-                    <input class="input-title" name="title" placeholder="Название" /><br />
-                    <input class="input-writer" name="writer" placeholder="Писатель" /><br /><br />
+                    <input class="input-title data" name="title" placeholder="Название" /><br />
+                    <input class="input-writer data" name="writer" placeholder="Писатель" /><br /><br />
                     <textarea class="input-descr" placeholder="Описание" name="descr"></textarea><br /><br />
-                    <input class="input-price" name="price" placeholder="Цена" value="" /><br />
+                    <input class="input-price data" name="price" placeholder="Цена" value="" /><br />
                     <button class="input-submit create-btn" type="submit" name="WantToCreate"></button>
                     <button class="input-submit cancel-btn" type="submit">Отмена</button>
                 </div>
@@ -40,13 +40,18 @@
             <div id="genres">
                 <div class="genre-container">
                     <input class="genre-name" id="createGenreInput" />
-                    <button class="create-new-genre" type="button" id="add"></button>
+                    <button class="create-genre genre" type="button" id="add">+</button>
                 </div>
             </div>
             <div id="msg"></div>
         </div>
     </form>
 </div>
+
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/GenreEditorStiles.css" asp-append-version="true" />
+}
 
 @section Scripts{
     <script>
@@ -60,8 +65,8 @@
                 success: (data) => {
                     data.forEach((genre) => {
                         $("#genres").append('<div class="genre-container"><label class="genre-name">' +
-                            genre.value + '</label><button type="button" name="delete" value = "' +
-                            genre.value + '"/></div>');
+                            genre.value + '</label><button type="button" class="remove-genre genre" name="delete" value = "' +
+                            genre.value + '">╳</button></div>');
                     });
                 },
                 error: () => {
@@ -83,18 +88,19 @@
 
                 success: (genre) => {
                     $("#genres").append('<div class="genre-container"><label class="genre-name">' +
-                        genre.value + '</label><button type="button" name="delete" value = "' +
-                        genre.value + '"/></div>');
+                        genre.value + '</label><button type="button" class="remove-genre genre" name="delete" value = "' +
+                        genre.value + '">╳</button></div>');
+                    $("#msg").html(" ");
                 },
                 error: () => {
-                    $("#msg").html("error");
+                    $("#msg").html("Такой жанр уже существует");
                 }   
             });
         });
 
         $("body").on("click", "[name='delete']", (e) => {
             $.ajax({
-                url: "/Admin/AdminPage?handler=Delete&genreName=" + e.target.classList("value"),
+                url: "/Admin/AdminPage?handler=Delete&genreName=" + e.target.value,
                 type: "DELETE",
                 contentType: "application/json",
                 beforeSend: (xhr) => {
@@ -102,7 +108,7 @@
                 },
 
                 success: (genre) => {
-
+                    $(e.target).parent().remove();
                 },
                 error: () => {
                     $("#msg").html("error");

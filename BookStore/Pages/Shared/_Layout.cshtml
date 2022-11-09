@@ -9,6 +9,8 @@
     @*Set auto name for open page*@
     <title>@ViewData["Title"] - BookStore</title>
 
+    @await RenderSectionAsync("Styles", required: false)
+
     @*general css*@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 

@@ -1,0 +1,49 @@
+﻿
+div.edit-genres-container {
+    max-width: 800px;
+}
+
+
+div.genre-container {
+    margin: 3px;
+    align-items: center;
+    height: 50px;
+    display: inline-flex;
+    font-size: 30px;
+    border: 3px solid #860087;
+    background-color: #a100a3;
+    border-radius: 10px;
+}
+
+button.genre {
+    color: white;
+    font-size: 20px;
+    background-color: #860087;
+    border: none;
+    height: 100%;
+    width: 50px;
+    transition: all 0.4s ease;
+}
+button.genre:hover {
+    background-color: #660067;
+}
+button.create-genre {
+    font-size: 40px;
+}
+
+label.genre-name {
+    padding: 10px 10px;
+    color: white;
+}
+
+input.genre-name {
+    color:white;
+    font-size:20px;
+    margin:10px;
+    height:100%;
+    background-color: #a100a3;
+    border: none;
+}
+input.genre-name:focus {
+    outline: none;
+}

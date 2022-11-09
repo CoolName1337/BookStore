@@ -90,19 +90,7 @@ div.create-container{
     width: 300px;
 }
 
-input {
+input.data  {
     padding-left: 10px;
     height: 40px;
-}
-
-
-/*////////////////////////////////////////////   Edit genres   ////////////////////////////////////////////*/
-
-div.edit-genres-container{
-    width:700px;
-    display:inline-block;
-}
-
-label.genre-name{
-
 }

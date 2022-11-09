@@ -14,7 +14,14 @@ public class ServiceGenre : IServiceGenre
 	}
     public async Task<Genre> Create(string genreName)
     {
-        return await _repositoryGenre.Create(new Genre() { Value = genreName });
+        if (Get(genreName) == null)
+        {
+            return await _repositoryGenre.Create(new Genre() { Value = genreName });
+        }
+        else
+        {
+            return null;
+        }
     }
     public async Task Delete(string genreName)
     {

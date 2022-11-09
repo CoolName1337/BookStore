@@ -84,16 +84,12 @@ button {
     border: none;
     font-size: 20px;
     padding: 5px;
+    width: 100%;
 }
 
 .div-genre {
     color: white;
     margin: 10px 0 10px 0;
-}
-
-.input-genre {
-    width:100%;
-
 }
 
 
@@ -271,3 +267,4 @@ li a {
     max-width: 1600px;
     margin: auto;
 }
+
