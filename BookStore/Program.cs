@@ -1,9 +1,5 @@
-using BookStore.BAL.Interfaces;
-using BookStore.BAL.Services;
 using BookStore.DAL.Context;
-using BookStore.DAL.Interfaces;
 using BookStore.DAL.Models;
-using BookStore.DAL.Repositories;
 using BookStore.Middlewares;
 using Microsoft.AspNetCore.Identity;
 
@@ -17,6 +13,8 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
     options.Password.RequireNonAlphanumeric = false;
 })
     .AddEntityFrameworkStores<ApplicationContext>();
+
+builder.Services.AddAntiforgery(options => options.HeaderName = "XSRF-TOKEN");
 
 // Add services to the container.
 builder.Services.AddRazorPages()

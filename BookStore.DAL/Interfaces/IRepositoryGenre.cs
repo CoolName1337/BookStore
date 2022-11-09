@@ -4,7 +4,7 @@ namespace BookStore.DAL.Interfaces;
 
 public interface IRepositoryGenre
 {
-    Task Create(Genre genre);
+    Task<Genre> Create(Genre genre);
     Task Delete(Genre genre);
 
     List<Genre> GetAll();

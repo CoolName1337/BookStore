@@ -2860,9 +2860,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "BookStore.BAL >= 1.0.0",
-      "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.10",
-      "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.10"
+      "BookStore.BAL >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -2907,16 +2905,6 @@
     "frameworks": {
       "net6.0": {
         "targetAlias": "net6.0",
-        "dependencies": {
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "[6.0.10, )"
-          },
-          "Microsoft.EntityFrameworkCore.SqlServer": {
-            "target": "Package",
-            "version": "[6.0.10, )"
-          }
-        },
         "imports": [
           "net461",
           "net462",
