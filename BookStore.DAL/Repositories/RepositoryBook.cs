@@ -7,7 +7,7 @@ namespace BookStore.DAL.Repositories;
 
 public class RepositoryBook : IRepositoryBook
 {
-    
+
     private readonly ApplicationContext _db = new();
     public async Task Create(Book book)
     {
@@ -31,20 +31,23 @@ public class RepositoryBook : IRepositoryBook
         return _db.Books
             .Include(book => book.Ratings)
             .Include(book => book.Favorites)
+            .Include(book => book.Genres)
             .ToList();
     }
     public IEnumerable<Book> GetBooks(Func<Book, bool> predicate)
     {
         return _db.Books
-            .Include(book=>book.Ratings)
+            .Include(book => book.Ratings)
             .Include(book => book.Favorites)
+            .Include(book => book.Genres)
             .Where(predicate);
     }
-    public Book? this[int Id]
+    public Book this[int Id]
     {
         get => _db.Books
             .Include(book => book.Ratings)
             .Include(book => book.Favorites)
-            .FirstOrDefault(book=>book.Id == Id);
+            .Include(book => book.Genres)
+            .FirstOrDefault(book => book.Id == Id);
     }
 }

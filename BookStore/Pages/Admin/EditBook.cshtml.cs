@@ -13,6 +13,10 @@ public class EditBookModel : PageModel
     public Book ChangedBook { get; set; }
     public BAL.Services.ActionResult<Book> ActionResult = new();
 
+    public IFormFile BookFormFile { get; set; }
+    public IFormFile ImageFormFile { get; set; }
+
+
     public EditBookModel(IServiceBook serviceBook)
     {
         _serviceBook = serviceBook;
@@ -35,15 +39,25 @@ public class EditBookModel : PageModel
             return RedirectToPage("/BookPage", new { Id = id });
         }
 
-        ActionResult = await _serviceBook.Edit(
-            id,
-            Request.Form["title"],
-            Request.Form["writer"],
-            Request.Form["descr"],
-            Request.Form["price"],
-            Request.Form.Files["file"],
-            Request.Form.Files["img"]
-            );
+        BookFormFile = Request.Form.Files["file"];
+        ImageFormFile = Request.Form.Files["img"];
+
+        Book book = new()
+        {
+            Title = Request.Form["title"],
+            Writer = Request.Form["writer"],
+            Description = Request.Form["descr"],
+        };
+        if (!decimal.TryParse(Request.Form["price"], out decimal numPrice) || numPrice < 0)
+        {
+            book.Price = -1;
+        }
+        else
+        {
+            book.Price = numPrice;
+        }
+
+        ActionResult = await _serviceBook.Edit(id, book, BookFormFile, ImageFormFile);
 
         ChangedBook = ActionResult.Value;
         if (ActionResult.Succeed)

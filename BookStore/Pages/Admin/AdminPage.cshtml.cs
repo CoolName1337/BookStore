@@ -1,4 +1,5 @@
 using BookStore.BAL.Interfaces;
+using BookStore.BAL.Services;
 using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,9 @@ public class AdminPageModel : PageModel
     public ActionResult ActionResult = new();
     public Book CreatedBook = new();
 
+    public IFormFile BookFormFile { get; set; }
+    public IFormFile ImageFormFile { get; set; }
+
     public AdminPageModel(IServiceBook serviceBook, IServiceGenre serviceGenre)
     {
         _serviceBook = serviceBook;
@@ -25,17 +29,9 @@ public class AdminPageModel : PageModel
     {
         return Page();
     }
-    public async Task<IActionResult> OnPostAsync(string postType)
-    {
-        IActionResult actRes = Page();
-        switch (postType)
-        {
-            case "createBook":
-                actRes = await TryCreateBook(Request);
-                break;
-        }
-
-        return actRes;
+    public async Task<IActionResult> OnPostAsync()
+    {        
+        return await TryCreateBook();
     }
 
     public IActionResult OnGetSelectAll()
@@ -59,17 +55,29 @@ public class AdminPageModel : PageModel
         return new JsonResult(genreName);
     }
 
-    private async Task<IActionResult> TryCreateBook(HttpRequest Request)
+    private async Task<IActionResult> TryCreateBook()
     {
-        ActionResult = await _serviceBook.Add(
-            Request.Form["title"],
-            Request.Form["writer"],
-            Request.Form["descr"],
-            Request.Form["price"],
-            Request.Form.Files["file"],
-            Request.Form.Files["img"]
-            );
-        CreatedBook = ActionResult.Value ?? new();
+        List<Genre> genres = _serviceGenre.GetAll().Where(genre => Request.Form["genres"].ToList().Contains(genre.Id.ToString())).ToList();
+        CreatedBook = new()
+        {
+            Title = Request.Form["title"],
+            Writer = Request.Form["writer"],
+            Description = Request.Form["descr"],
+            Genres = genres
+        };
+        if (!decimal.TryParse(Request.Form["price"], out decimal numPrice) || numPrice < 0)
+        {
+            CreatedBook.Price = -1;
+        }
+        else
+        {
+            CreatedBook.Price = numPrice;
+        }
+        BookFormFile = Request.Form.Files["file"];
+        ImageFormFile = Request.Form.Files["img"];
+
+
+        ActionResult = await _serviceBook.Add(CreatedBook, BookFormFile, ImageFormFile);
         if (ActionResult.Succeed)
         {
             return RedirectToPage("/BookPage", new { Id = ActionResult.Value.Id });
