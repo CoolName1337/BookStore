@@ -1,5 +1,7 @@
 using BookStore.BAL.Interfaces;
 using BookStore.DAL.Models;
+using BookStore.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BookStore.Pages;
@@ -15,15 +17,18 @@ public class SearchResultModel : PageModel
         _serviceBook = serviceBook;
     }
 
-    public void OnGet(string search)
+    public void OnPost([FromBody]Filter filter) 
     {
-        if (string.IsNullOrEmpty(search) || search == " ") return;
-        RequestString = search;
+        if (string.IsNullOrEmpty(filter.SearchRequest) || filter.SearchRequest == " ") return;
+        RequestString = filter.SearchRequest;
         ResultBooks = _serviceBook.GetBooks((book) =>
-            book.Title.ToUpper().Contains(search.ToUpper()) ||
-            book.Writer.ToUpper().Contains(search.ToUpper()) ||
-            book.Description.ToUpper().Contains(search.ToUpper())
-            );
+        {
+            bool res = book.Title.ToUpper().Contains(filter.SearchRequest.ToUpper()) ||
+            book.Writer.ToUpper().Contains(filter.SearchRequest.ToUpper()) ||
+            book.Description.ToUpper().Contains(filter.SearchRequest.ToUpper());
+            return res;
+
+        });
     }
 
 }

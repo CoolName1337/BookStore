@@ -6,10 +6,6 @@ public static class FileService
 {
     public static async Task<string> Save(IFormFile file)
     {
-        if(file == null)
-        {
-            return null;
-        }
         bool isImage = file.ContentType.StartsWith("image");
         string type = isImage ? "images" : "files";
         string filePath = Path.Combine($"/{type}/", file.FileName);

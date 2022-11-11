@@ -28,62 +28,26 @@
                 <div class="dropdown-search">
                     <button onclick="myFunction()" class="dropbtn-search show" id="myDropdownBtn">🔍</button>
                     <div id="myDropdown" class="dropdown-content-search">
-                        <form class="search-form" action="/SearchResult" method="get">
-                            <input class="input-search" type="search" name="search" placeholder="Любые ключевые слова..." />
-                            <div class="multiselect">
-                                <div class="selectBox" onclick="showCheckboxes(0)">
-                                    Добавить жанры
-                                </div>
-                                <div id="checkboxes0" class="checkboxes hidden">
-                                    <label>
-                                        <input type="checkbox" />First checkbox
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" />Second checkbox
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" />Third checkbox
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" />Third checkbox
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" />Third checkbox
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" />Third checkbox
-                                    </label>
-                                </div>
-                            </div>
+                        @Html.AntiForgeryToken()
 
-                            <div class="multiselect">
-                                <div class="selectBox" onclick="showCheckboxes(1)">
-                                    Исключить жанры
-                                </div>
-                                <div id="checkboxes1" class="checkboxes hidden">
-                                    <label>
-                                        <input type="checkbox" />First checkbox
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" />Second checkbox
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" />Third checkbox
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" />Third checkbox
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" />Third checkbox
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" />Third checkbox
-                                    </label>
-                                </div>
+                        <input class="input-search" type="search" name="search" placeholder="Любые ключевые слова..." />
+                        <div class="multiselect">
+                            <div class="selectBox">
+                                Добавить жанры
                             </div>
+                            <div class="checkboxes hidden checkboxes-include">
+                            </div>
+                        </div>
 
-                            <button class="btn-search" type="submit">поиск</button>
-                        </form>
+                        <div class="multiselect">
+                            <div class="selectBox">
+                                Исключить жанры
+                            </div>
+                            <div class="checkboxes hidden checkboxes-exclude">
+                            </div>
+                        </div>
+
+                        <button class="btn-search" type="submit">поиск</button>
                     </div>
                 </div>
             </li>
@@ -132,5 +96,65 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        $(".selectBox").click((e) => {
+            $(e.target).parent().children(".checkboxes").toggleClass("hidden");
+        });
+
+        $(document).ready(() => {
+            $.ajax({
+                url: "/Admin/AdminPage?handler=SelectAll",
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json",
+                success: (data) => {
+                    data.forEach((genre) => {
+                        $(".checkboxes-exclude").append('<label><input class="incl-genre" type = "checkbox" name = "excludingGenres" value ="' + genre.id + '"/>' + genre.value + '</label>');
+                        $(".checkboxes-include").append('<label><input class="excl-genre" type = "checkbox" name = "includingGenres" value ="' + genre.id + '"/>' + genre.value + '</label>');
+                    });
+                },
+                error: () => {
+                    $("#msg").html("Error while making Ajax call!");
+                }
+            });
+
+        });
+
+        $(".btn-search").click((e) => {
+            var incls = [];
+
+            $('input[name="includingGenres"]:checked').each((ind, el) => {
+                incls.push(el.value);
+            });
+            var excls = [];
+            $('input[name="excludingGenres"]:checked').each((ind, el) => {
+                excls.push(el.value);
+            });
+
+            console.log(incls);
+            console.log(excls);
+            var filter = {
+                searchRequest: $(".input-search").val(),
+                inclGenres: incls,
+                exclGenres: excls
+            }
+            $.ajax({
+                url: "/SearchResult",
+                type: "POST",
+                data: JSON.stringify(filter),
+                dataType: 'json',
+                contentType: "application/json",
+
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                success: (response) => { },
+                error: () => {
+                    $("#msg").html("Error while making Ajax call!");
+                }
+            });
+        })
+
+    </script>
 </body>
 </html>

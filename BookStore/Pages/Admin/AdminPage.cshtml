@@ -4,37 +4,58 @@
     ViewData["Title"] = "Admin Page";
 }
 <div class="admin-nav">
-    <div class="admin-button" onclick="showAdminPage(1)">
+    <button class="admin-button" value="0">
         Добавить книгу
-    </div>
-    <div class="admin-button" onclick="showAdminPage(2)">
+    </button>
+    <button class="admin-button" value="1">
         Редактировать жанры
-    </div>
+    </button>
 </div>
 <div class="content">
     <form method="post" enctype="multipart/form-data">
+        <span style="color:red">
+            @foreach (var ex in Model.ActionResult.Errors)
+            {
+                <span>@ex</span>
 
-        <div class="create-container admin-page hidden" id="ap1">
-            <input name="postType data" value="createBook" hidden />
+                <br />
+            }
+        </span>
+        <div class="create-container admin-page">
             <input class="input-file data" type="file" name="file" /><br />
             <div class="handler">
                 <input class="input-img data" type="file" name="img" />
                 <div>
-                    <input class="input-title data" name="title" placeholder="Название" /><br />
-                    <input class="input-writer data" name="writer" placeholder="Писатель" /><br /><br />
-                    <textarea class="input-descr" placeholder="Описание" name="descr"></textarea><br /><br />
-                    <input class="input-price data" name="price" placeholder="Цена" value="" /><br />
-                    <button class="input-submit create-btn" type="submit" name="WantToCreate"></button>
-                    <button class="input-submit cancel-btn" type="submit">Отмена</button>
+                    <input class="input-title data" name="title" placeholder="Название" value="@Model.CreatedBook.Title" /><br />
+                    <input class="input-writer data" name="writer" placeholder="Писатель" value="@Model.CreatedBook.Writer" /><br /><br />
+
+
+                    <div class="multiselect">
+                        <div class="selectBox">
+                            Добавить жанры
+                        </div>
+                        <div class="checkboxes hidden">
+                            @foreach (var item in Model._serviceGenre.GetAll())
+                            {
+                                <label>
+                                    <input type="checkbox" name="genres" value=@item.Id />@item.Value
+                                </label>
+                            }
+                        </div>
+                    </div>
+
+
+
+                    <input class="input-price data" name="price" placeholder="Цена" value="@Model.CreatedBook.Price"/><br />
+                    <button class="input-submit create-btn" type="submit">Сохранить</button>
                 </div>
             </div>
-            <span style="color:red">
-            </span>
+            <textarea class="input-descr" placeholder="Описание" name="descr">@Model.CreatedBook.Description</textarea><br /><br />
         </div>
 
     </form>
     <form>
-        <div class="edit-genres-container admin-page hidden" id="ap2">
+        <div class="edit-genres-container admin-page hidden">
             @Html.AntiForgeryToken()
 
             <div id="genres">
@@ -55,6 +76,13 @@
 
 @section Scripts{
     <script>
+
+
+        $(".admin-button").click((e) => {
+            $(".admin-page").each((index, el) => $(el).addClass("hidden"));
+            document.getElementsByClassName("admin-page").item(e.target.value).classList.remove("hidden");
+        });
+
 
         $(document).ready(() => {
             $.ajax({

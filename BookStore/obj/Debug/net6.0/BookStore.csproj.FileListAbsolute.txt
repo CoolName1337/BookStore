@@ -63,7 +63,6 @@ C:\Users\User\source\repos\BookStore\BookStore\obj\Debug\net6.0\scopedcss\Pages\
 C:\Users\User\source\repos\BookStore\BookStore\obj\Debug\net6.0\scopedcss\Pages\Account\Logout.cshtml.rz.scp.css
 C:\Users\User\source\repos\BookStore\BookStore\obj\Debug\net6.0\scopedcss\Pages\Account\MyBooks.cshtml.rz.scp.css
 C:\Users\User\source\repos\BookStore\BookStore\obj\Debug\net6.0\scopedcss\Pages\Account\Register.cshtml.rz.scp.css
-C:\Users\User\source\repos\BookStore\BookStore\obj\Debug\net6.0\scopedcss\Pages\Admin\AddBook.cshtml.rz.scp.css
 C:\Users\User\source\repos\BookStore\BookStore\obj\Debug\net6.0\scopedcss\Pages\Admin\EditBook.cshtml.rz.scp.css
 C:\Users\User\source\repos\BookStore\BookStore\obj\Debug\net6.0\scopedcss\Pages\BookPage.cshtml.rz.scp.css
 C:\Users\User\source\repos\BookStore\BookStore\obj\Debug\net6.0\scopedcss\Pages\Creator\EditRoles.cshtml.rz.scp.css

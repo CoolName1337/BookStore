@@ -8,85 +8,81 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BookStore
 build_property.RootNamespace = BookStore
-build_property.ProjectDir = E:\Projects\C_Sharp_Proj\BookStore\BookStore\
+build_property.ProjectDir = C:\Users\User\Source\Repos\BookStore\BookStore\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = E:\Projects\C_Sharp_Proj\BookStore\BookStore
+build_property.MSBuildProjectDirectory = C:\Users\User\Source\Repos\BookStore\BookStore
 build_property._RazorSourceGeneratorDebug = 
 
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/Creator/InitializeRoles.cshtml]
+[C:/Users/User/Source/Repos/BookStore/BookStore/Pages/Creator/InitializeRoles.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlYXRvclxJbml0aWFsaXplUm9sZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/Error.cshtml]
+[C:/Users/User/Source/Repos/BookStore/BookStore/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/Privacy.cshtml]
+[C:/Users/User/Source/Repos/BookStore/BookStore/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/Shared/_Layout.cshtml]
+[C:/Users/User/Source/Repos/BookStore/BookStore/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/User/Source/Repos/BookStore/BookStore/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/_ViewImports.cshtml]
+[C:/Users/User/Source/Repos/BookStore/BookStore/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/_ViewStart.cshtml]
+[C:/Users/User/Source/Repos/BookStore/BookStore/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/Account/Favorite.cshtml]
+[C:/Users/User/Source/Repos/BookStore/BookStore/Pages/Account/Favorite.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxGYXZvcml0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = b-ogvrq2ren1
 
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/Account/Login.cshtml]
+[C:/Users/User/Source/Repos/BookStore/BookStore/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = b-6zlo3m77xp
 
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/Account/Logout.cshtml]
+[C:/Users/User/Source/Repos/BookStore/BookStore/Pages/Account/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-0ljbrzjeew
 
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/Account/MyBooks.cshtml]
+[C:/Users/User/Source/Repos/BookStore/BookStore/Pages/Account/MyBooks.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxNeUJvb2tzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = b-wabe51lsf2
 
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/Account/Register.cshtml]
+[C:/Users/User/Source/Repos/BookStore/BookStore/Pages/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = b-3hfo239is1
 
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/Admin/AddBook.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRkQm9vay5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = b-z56e7kzskc
-
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/Admin/AdminPage.cshtml]
+[C:/Users/User/Source/Repos/BookStore/BookStore/Pages/Admin/AdminPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRtaW5QYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = b-t189ebkpzk
 
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/Admin/EditBook.cshtml]
+[C:/Users/User/Source/Repos/BookStore/BookStore/Pages/Admin/EditBook.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cRWRpdEJvb2suY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-wos4ygihuw
 
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/BookPage.cshtml]
+[C:/Users/User/Source/Repos/BookStore/BookStore/Pages/BookPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va1BhZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-yajd1ps8dt
 
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/Creator/EditRoles.cshtml]
+[C:/Users/User/Source/Repos/BookStore/BookStore/Pages/Creator/EditRoles.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlYXRvclxFZGl0Um9sZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-xyhszwumjb
 
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/Index.cshtml]
+[C:/Users/User/Source/Repos/BookStore/BookStore/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-ipq4tb4ebs
 
-[E:/Projects/C_Sharp_Proj/BookStore/BookStore/Pages/SearchResult.cshtml]
+[C:/Users/User/Source/Repos/BookStore/BookStore/Pages/SearchResult.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VhcmNoUmVzdWx0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = b-us7sphpk9k

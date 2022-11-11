@@ -11,5 +11,5 @@ public interface IRepositoryBook
     Task Update(Book book);
     IEnumerable<Book> GetBooks();
     IEnumerable<Book> GetBooks(Func<Book, bool> predicate);
-    Book? this[int Id] { get; }
+    Book this[int Id] { get; }
 }

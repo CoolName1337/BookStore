@@ -14,72 +14,62 @@ public class ServiceBook : IServiceBook
         _repositoryBook = repositoryBook;
     }
 
-    public async Task<ActionResult<Book>> Verificate(string title, string writer, string descr, string price, IFormFile sourceFile, IFormFile sourceImage)
+    public async Task<ActionResult<Book>> Verificate(Book book, IFormFile bookFile, IFormFile imageFile)
     {
         //sorry...
 
         ActionResult<Book> actionResult = new(); 
 
-        Book book = new Book()
-        {
-            Title = title,
-            Description = descr,
-            Writer = writer,
-            SourceFile = await FileService.Save(sourceFile),
-            SourceImage = await FileService.Save(sourceImage)
-        };
         if (string.IsNullOrWhiteSpace(book.Title)) actionResult.Errors.Add("Название не указано");
         if (string.IsNullOrWhiteSpace(book.Description)) actionResult.Errors.Add("Описание не указано");
         if (string.IsNullOrWhiteSpace(book.SourceImage)) actionResult.Errors.Add("Картинка не добавлена");
         if (string.IsNullOrWhiteSpace(book.SourceFile)) actionResult.Errors.Add("Файл книги не добавлен");
-        if (string.IsNullOrWhiteSpace(book.Writer)) actionResult.Errors.Add("Писатель не указан"); 
-        if (!decimal.TryParse(price, out decimal numPrice) || numPrice < 0)
-        {
-            actionResult.Errors.Add("Цена должна быть числом и неменьше нуля");
-        }
-        else
-        {
-            book.Price = numPrice;
-        }
+        if (string.IsNullOrWhiteSpace(book.Writer)) actionResult.Errors.Add("Писатель не указан");
+        if (book.Price < 0) actionResult.Errors.Add("Цена должна быть числом и неменьше нуля");
+        if (bookFile == null) actionResult.Errors.Add("Файл книги не указан");
+        else book.SourceFile = await FileService.Save(bookFile);
+        if (imageFile == null) actionResult.Errors.Add("Картинка не указана");
+        else book.SourceImage = await FileService.Save(imageFile);
+
         actionResult.Value = book;
         return actionResult;
     }
-    public async Task<ActionResult<Book>> Add(string title, string writer, string descr, string price, IFormFile sourceFile, IFormFile sourceImage)
+    public async Task<ActionResult<Book>> Add(Book book, IFormFile bookFile, IFormFile imageFile)
     {
-        var res = await Verificate(title, writer, descr, price, sourceFile, sourceImage);
+        var res = await Verificate(book, bookFile, imageFile);
         
         if (res.Succeed)
         {
-            await _repositoryBook.Create(res.Value);
+            await _repositoryBook.Create(book);
         }
         else
         {
-            FileService.Delete(res.Value.SourceFile);
-            FileService.Delete(res.Value.SourceImage);
+            FileService.Delete(book.SourceFile);
+            FileService.Delete(book.SourceImage);
         }
         return res;
     }
-    public async Task<ActionResult<Book>> Edit(int id, string title, string writer, string descr, string price, IFormFile sourceFile, IFormFile sourceImage)
+    public async Task<ActionResult<Book>> Edit(int id, Book book, IFormFile bookFile, IFormFile imageFile)
     {
-        var res = await Verificate(title, writer, descr, price, sourceFile, sourceImage);
-        
+        var res = await Verificate(book, bookFile, imageFile);
         if (res.Succeed)
         {
-            var book = _repositoryBook[id];
+            Book currentBook = _repositoryBook[id];
 
-            book.Title = res.Value.Title;
-            book.Writer = res.Value.Writer;
-            book.Description = res.Value.Description;
-            book.Price = res.Value.Price;
-            book.SourceImage = res.Value.SourceImage;
-            book.SourceFile = res.Value.SourceFile;
+            currentBook.Genres = book.Genres;
+            currentBook.Title = book.Title;
+            currentBook.Writer = book.Writer;
+            currentBook.Price = book.Price;
+            currentBook.SourceFile = book.SourceFile;
+            currentBook.SourceImage = book.SourceImage;
+            currentBook.Description = book.Description;
 
-            _repositoryBook.Update(book);
+            await _repositoryBook.Update(book);
         }
         else
         {
-            FileService.Delete(res.Value.SourceFile);
-            FileService.Delete(res.Value.SourceImage);
+            FileService.Delete(book.SourceFile);
+            FileService.Delete(book.SourceImage);
         }
         return res;
     }
@@ -108,7 +98,7 @@ public class ServiceBook : IServiceBook
     {
         await _repositoryBook.Update(book);
     }
-    public Book? this[int Id]
+    public Book this[int Id]
     {
         get => _repositoryBook[Id];
     }
