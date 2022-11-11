@@ -142,7 +142,6 @@ E:\Projects\C_Sharp_Proj\BookStore\BookStore\obj\Debug\net6.0\scopedcss\Pages\Ac
 E:\Projects\C_Sharp_Proj\BookStore\BookStore\obj\Debug\net6.0\scopedcss\Pages\Account\Logout.cshtml.rz.scp.css
 E:\Projects\C_Sharp_Proj\BookStore\BookStore\obj\Debug\net6.0\scopedcss\Pages\Account\MyBooks.cshtml.rz.scp.css
 E:\Projects\C_Sharp_Proj\BookStore\BookStore\obj\Debug\net6.0\scopedcss\Pages\Account\Register.cshtml.rz.scp.css
-E:\Projects\C_Sharp_Proj\BookStore\BookStore\obj\Debug\net6.0\scopedcss\Pages\Admin\AddBook.cshtml.rz.scp.css
 E:\Projects\C_Sharp_Proj\BookStore\BookStore\obj\Debug\net6.0\scopedcss\Pages\Admin\AdminPage.cshtml.rz.scp.css
 E:\Projects\C_Sharp_Proj\BookStore\BookStore\obj\Debug\net6.0\scopedcss\Pages\Admin\EditBook.cshtml.rz.scp.css
 E:\Projects\C_Sharp_Proj\BookStore\BookStore\obj\Debug\net6.0\scopedcss\Pages\BookPage.cshtml.rz.scp.css
@@ -157,3 +156,7 @@ E:\Projects\C_Sharp_Proj\BookStore\BookStore\obj\Debug\net6.0\refint\BookStore.d
 E:\Projects\C_Sharp_Proj\BookStore\BookStore\obj\Debug\net6.0\BookStore.pdb
 E:\Projects\C_Sharp_Proj\BookStore\BookStore\obj\Debug\net6.0\BookStore.genruntimeconfig.cache
 E:\Projects\C_Sharp_Proj\BookStore\BookStore\obj\Debug\net6.0\ref\BookStore.dll
+E:\Projects\C_Sharp_Proj\BookStore\BookStore\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+E:\Projects\C_Sharp_Proj\BookStore\BookStore\bin\Debug\net6.0\System.Web.Http.dll
+E:\Projects\C_Sharp_Proj\BookStore\BookStore\bin\Debug\net6.0\Newtonsoft.Json.dll
+E:\Projects\C_Sharp_Proj\BookStore\BookStore\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

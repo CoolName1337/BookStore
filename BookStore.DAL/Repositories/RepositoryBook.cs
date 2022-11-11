@@ -7,7 +7,6 @@ namespace BookStore.DAL.Repositories;
 
 public class RepositoryBook : IRepositoryBook
 {
-
     private readonly ApplicationContext _db = new();
     public async Task Create(Book book)
     {

@@ -25,31 +25,33 @@
                 <a class="nav-a" asp-page="/Index">BookStore</a>
             </li>
             <li>
-                <div class="dropdown-search">
-                    <button onclick="myFunction()" class="dropbtn-search show" id="myDropdownBtn">🔍</button>
-                    <div id="myDropdown" class="dropdown-content-search">
-                        @Html.AntiForgeryToken()
+                <form method="post" asp-page="/SearchResult">
+                    <div class="dropdown-search">
+                        <button onclick="myFunction()" class="dropbtn-search show" type="button" id="myDropdownBtn">🔍</button>
+                        <div id="myDropdown" class="dropdown-content-search">
+                            @Html.AntiForgeryToken()
 
-                        <input class="input-search" type="search" name="search" placeholder="Любые ключевые слова..." />
-                        <div class="multiselect">
-                            <div class="selectBox">
-                                Добавить жанры
+                            <input class="input-search" type="search" name="search" placeholder="Любые ключевые слова..." />
+                            <div class="multiselect">
+                                <div class="selectBox">
+                                    Добавить жанры
+                                </div>
+                                <div class="checkboxes hidden checkboxes-include">
+                                </div>
                             </div>
-                            <div class="checkboxes hidden checkboxes-include">
+
+                            <div class="multiselect">
+                                <div class="selectBox">
+                                    Исключить жанры
+                                </div>
+                                <div class="checkboxes hidden checkboxes-exclude">
+                                </div>
                             </div>
+
+                            <button class="btn-search" type="submit">поиск</button>
                         </div>
-
-                        <div class="multiselect">
-                            <div class="selectBox">
-                                Исключить жанры
-                            </div>
-                            <div class="checkboxes hidden checkboxes-exclude">
-                            </div>
-                        </div>
-
-                        <button class="btn-search" type="submit">поиск</button>
                     </div>
-                </div>
+                </form>
             </li>
 
             @if (User.Identity.IsAuthenticated)
@@ -120,40 +122,33 @@
 
         });
 
-        $(".btn-search").click((e) => {
-            var incls = [];
+        //$(".btn-search").click((e) => {
+        //    var incls = [];
 
-            $('input[name="includingGenres"]:checked').each((ind, el) => {
-                incls.push(el.value);
-            });
-            var excls = [];
-            $('input[name="excludingGenres"]:checked').each((ind, el) => {
-                excls.push(el.value);
-            });
+        //    $('input[name="includingGenres"]:checked').each((ind, el) => {
+        //        incls.push(el.value);
+        //    });
+        //    var excls = [];
+        //    $('input[name="excludingGenres"]:checked').each((ind, el) => {
+        //        excls.push(el.value);
+        //    });
+        //    var filter = {
+        //        searchRequest: $(".input-search").val(),
+        //        inclGenres: incls,
+        //        exclGenres: excls
+        //    }
+        //    $.ajax({
+        //        url: "/SearchResult",
+        //        type: "GET",
+        //        data: JSON.stringify(filter),
+        //        dataType: 'json',
+        //        contentType: "application/json",
 
-            console.log(incls);
-            console.log(excls);
-            var filter = {
-                searchRequest: $(".input-search").val(),
-                inclGenres: incls,
-                exclGenres: excls
-            }
-            $.ajax({
-                url: "/SearchResult",
-                type: "POST",
-                data: JSON.stringify(filter),
-                dataType: 'json',
-                contentType: "application/json",
-
-                beforeSend: (xhr) => {
-                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
-                },
-                success: (response) => { },
-                error: () => {
-                    $("#msg").html("Error while making Ajax call!");
-                }
-            });
-        })
+        //        beforeSend: (xhr) => {
+        //            xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+        //        },
+        //    });
+        //})
 
     </script>
 </body>

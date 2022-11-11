@@ -20,7 +20,17 @@
                     <a href="/Admin/EditBook?Id=@Model.TakedBook.Id"><img class="setting-img" src="/images/server/setting.png" /></a>
                 }
             </div>
-            <p class="writer">Автор: @Model.TakedBook.Writer</p><br />
+            <p class="writer">Автор: @Model.TakedBook.Writer</p>
+
+            <h3 class="genres-title">Жанры:</h3>
+            <div class="genres">
+                @foreach (var genre in Model.TakedBook.Genres)
+                {
+                    <div class="genre">
+                        <a class="genre-ref" href="#">@genre.Value</a>
+                    </div>
+                }
+            </div>
 
             <div class="dropdown-rating">
                 <div class="rating-button">

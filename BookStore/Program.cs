@@ -31,6 +31,7 @@ builder.Services.AddAuthorization(ops =>
 builder.Services.AddUserService();
 builder.Services.AddBookService();
 builder.Services.AddRoleService();
+builder.Services.AddFavoriteService();
 builder.Services.AddRatingService();
 builder.Services.AddGenreService();
 

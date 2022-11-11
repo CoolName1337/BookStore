@@ -29,18 +29,16 @@ button {
     position: relative;
     display: inline-block;
 }
-
 .dropdown-content-search {
-    padding:8px;
+    padding: 8px;
     display: none;
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
     transition: all 0.4s ease;
     width: 300px;
-    min-height:100%;
+    min-height: 100%;
     background-color: #333;
 }
 
@@ -202,6 +200,7 @@ div.title-page-div {
 .all-nav-panel {
     position: -webkit-sticky; /* Safari */
     position: sticky;
+    z-index:2;
     top: 0;
 }
 
@@ -241,7 +240,6 @@ li a {
     position: absolute;
     right: 0;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
 }
 
 .dropdown-content a {

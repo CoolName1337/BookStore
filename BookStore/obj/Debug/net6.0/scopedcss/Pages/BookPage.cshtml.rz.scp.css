@@ -169,3 +169,26 @@ div.dropdown-rating:hover .rating-droppanel[b-yajd1ps8dt] {
 .rate-btn[b-yajd1ps8dt]{
     padding:0;
 }
+
+/*////////////////////////////////////////////      ★genres★      //////////////////////////////////////////////////////*/
+
+
+.genres[b-yajd1ps8dt] {
+    margin-bottom: 20px;
+}
+
+.genre[b-yajd1ps8dt] {
+    display: inline-flex;
+    background-color: #333;
+    border-radius: 10px;
+    font-size: 20px;
+    transition: all 0.4s ease;
+}
+.genre-ref[b-yajd1ps8dt] {
+    text-decoration: none;
+    color: white;
+    padding: 5px 20px;
+}
+.genre:hover[b-yajd1ps8dt] {
+    background-color: #222;
+}

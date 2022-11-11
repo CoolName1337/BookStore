@@ -3,6 +3,9 @@ using BookStore.DAL.Models;
 using BookStore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Web.Http;
 
 namespace BookStore.Pages;
 
@@ -17,18 +20,30 @@ public class SearchResultModel : PageModel
         _serviceBook = serviceBook;
     }
 
-    public void OnPost([FromBody]Filter filter) 
+    public IActionResult OnPost()
     {
-        if (string.IsNullOrEmpty(filter.SearchRequest) || filter.SearchRequest == " ") return;
-        RequestString = filter.SearchRequest;
+        RequestString = Request.Form["search"];
+        var IncludingGenres = Request.Form["IncludingGenres"].Select(str=>int.Parse(str));
+        var ExcludingGenres = Request.Form["ExcludingGenres"].Select(str=>int.Parse(str));
+
+        Book _book = _serviceBook[5];
+        bool res = (!IncludingGenres.Except(_book.Genres.Select(genre => genre.Id)).Any() &&
+            !(_book.Genres.Select(genre => genre.Id).Except(ExcludingGenres).Count() < _book.Genres.Count()));
+
+
+
         ResultBooks = _serviceBook.GetBooks((book) =>
         {
-            bool res = book.Title.ToUpper().Contains(filter.SearchRequest.ToUpper()) ||
-            book.Writer.ToUpper().Contains(filter.SearchRequest.ToUpper()) ||
-            book.Description.ToUpper().Contains(filter.SearchRequest.ToUpper());
+            bool res =
+            // Search by name, writer and description
+            (book.Title.ToUpper().Contains(RequestString.ToUpper()) ||
+            book.Writer.ToUpper().Contains(RequestString.ToUpper()) ||
+            book.Description.ToUpper().Contains(RequestString.ToUpper())) &&
+            // Search by including and excluding genres
+            (!IncludingGenres.Except(book.Genres.Select(genre => genre.Id)).Any() &&
+            !(book.Genres.Select(genre => genre.Id).Except(ExcludingGenres).Count() < book.Genres.Count()));
             return res;
-
         });
+        return Page();
     }
-
 }

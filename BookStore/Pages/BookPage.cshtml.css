@@ -169,3 +169,26 @@ div.dropdown-rating:hover .rating-droppanel {
 .rate-btn{
     padding:0;
 }
+
+/*////////////////////////////////////////////      ★genres★      //////////////////////////////////////////////////////*/
+
+
+.genres {
+    margin-bottom: 20px;
+}
+
+.genre {
+    display: inline-flex;
+    background-color: #333;
+    border-radius: 10px;
+    font-size: 20px;
+    transition: all 0.4s ease;
+}
+.genre-ref {
+    text-decoration: none;
+    color: white;
+    padding: 5px 20px;
+}
+.genre:hover {
+    background-color: #222;
+}

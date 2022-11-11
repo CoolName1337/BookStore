@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JWjj9cqIzEhMy7Fw4gX894WU+YkFupJ5YmhtCjVoDBE=",
+  "Hash": "aqBTjRH5/r/0NEDhxfSSX6ejwOIEpjC0J5yhHUfhEDQ=",
   "Source": "BookStore",
   "BasePath": "_content/BookStore",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "BookStore\\wwwroot",
       "Source": "BookStore",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\obj\\Debug\\net6.0\\scopedcss\\bundle\\BookStore.styles.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\obj\\Debug\\net6.0\\scopedcss\\bundle\\BookStore.styles.css",
       "SourceId": "BookStore",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\obj\\Debug\\net6.0\\scopedcss\\bundle\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\obj\\Debug\\net6.0\\scopedcss\\bundle\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "BookStore.styles.css",
       "AssetKind": "All",
@@ -31,13 +31,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\obj\\Debug\\net6.0\\scopedcss\\bundle\\BookStore.styles.css"
+      "OriginalItemSpec": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\obj\\Debug\\net6.0\\scopedcss\\bundle\\BookStore.styles.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\BookStore.bundle.scp.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\BookStore.bundle.scp.css",
       "SourceId": "BookStore",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "BookStore.bundle.scp.css",
       "AssetKind": "All",
@@ -48,13 +48,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\BookStore.bundle.scp.css"
+      "OriginalItemSpec": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\BookStore.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\css\\GenreEditorStiles.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\css\\GenreEditorStiles.css",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "css/GenreEditorStiles.css",
       "AssetKind": "All",
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "wwwroot\\css\\GenreEditorStiles.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\css\\site.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\css\\site.css",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "css/site.css",
       "AssetKind": "All",
@@ -85,10 +85,44 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\icon.ico",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\files\\60a754b5-4f6e-4dc1-8699-55780a438d30.pdf",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
+      "BasePath": "_content/BookStore",
+      "RelativePath": "files/60a754b5-4f6e-4dc1-8699-55780a438d30.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\60a754b5-4f6e-4dc1-8699-55780a438d30.pdf"
+    },
+    {
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\files\\Python_для_сложных_задач_наука_о_данных_и_машинное_обучение_PDFDrive.pdf",
+      "SourceId": "BookStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
+      "BasePath": "_content/BookStore",
+      "RelativePath": "files/Python_для_сложных_задач_наука_о_данных_и_машинное_обучение_PDFDrive.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\Python_для_сложных_задач_наука_о_данных_и_машинное_обучение_PDFDrive.pdf"
+    },
+    {
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\icon.ico",
+      "SourceId": "BookStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "icon.ico",
       "AssetKind": "All",
@@ -102,10 +136,10 @@
       "OriginalItemSpec": "wwwroot\\icon.ico"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\images\\2000px-Five-pointed_star.svg.png",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\images\\2000px-Five-pointed_star.svg.png",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "images/2000px-Five-pointed_star.svg.png",
       "AssetKind": "All",
@@ -119,10 +153,95 @@
       "OriginalItemSpec": "wwwroot\\images\\2000px-Five-pointed_star.svg.png"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\images\\server\\accountLogo.png",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\images\\64995439_2431246596931407_8361720760151140615_n.jpg",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
+      "BasePath": "_content/BookStore",
+      "RelativePath": "images/64995439_2431246596931407_8361720760151140615_n.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\64995439_2431246596931407_8361720760151140615_n.jpg"
+    },
+    {
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\images\\asphalt_texture3728.jpg",
+      "SourceId": "BookStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
+      "BasePath": "_content/BookStore",
+      "RelativePath": "images/asphalt_texture3728.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\asphalt_texture3728.jpg"
+    },
+    {
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\images\\de553831-ff9e-403d-a5a9-23f8672913e1.jpg",
+      "SourceId": "BookStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
+      "BasePath": "_content/BookStore",
+      "RelativePath": "images/de553831-ff9e-403d-a5a9-23f8672913e1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\de553831-ff9e-403d-a5a9-23f8672913e1.jpg"
+    },
+    {
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\images\\df21a4c5-e490-4497-b2bd-fe2ce5f59b0b.jpg",
+      "SourceId": "BookStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
+      "BasePath": "_content/BookStore",
+      "RelativePath": "images/df21a4c5-e490-4497-b2bd-fe2ce5f59b0b.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\df21a4c5-e490-4497-b2bd-fe2ce5f59b0b.jpg"
+    },
+    {
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\images\\IMG_20221029_131941.jpg",
+      "SourceId": "BookStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
+      "BasePath": "_content/BookStore",
+      "RelativePath": "images/IMG_20221029_131941.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\IMG_20221029_131941.jpg"
+    },
+    {
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\images\\server\\accountLogo.png",
+      "SourceId": "BookStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "images/server/accountLogo.png",
       "AssetKind": "All",
@@ -136,10 +255,10 @@
       "OriginalItemSpec": "wwwroot\\images\\server\\accountLogo.png"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\images\\server\\setting.png",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\images\\server\\setting.png",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "images/server/setting.png",
       "AssetKind": "All",
@@ -153,10 +272,10 @@
       "OriginalItemSpec": "wwwroot\\images\\server\\setting.png"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\js\\site.js",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\js\\site.js",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "js/site.js",
       "AssetKind": "All",
@@ -170,10 +289,10 @@
       "OriginalItemSpec": "wwwroot\\js\\site.js"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.css",
       "AssetKind": "All",
@@ -187,10 +306,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.css.map",
       "AssetKind": "All",
@@ -204,10 +323,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css",
       "AssetKind": "All",
@@ -221,10 +340,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -238,10 +357,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css",
       "AssetKind": "All",
@@ -255,10 +374,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css.map",
       "AssetKind": "All",
@@ -272,10 +391,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css",
       "AssetKind": "All",
@@ -289,10 +408,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
       "AssetKind": "All",
@@ -306,10 +425,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css",
       "AssetKind": "All",
@@ -323,10 +442,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css.map",
       "AssetKind": "All",
@@ -340,10 +459,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css",
       "AssetKind": "All",
@@ -357,10 +476,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
       "AssetKind": "All",
@@ -374,10 +493,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
       "AssetKind": "All",
@@ -391,10 +510,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
       "AssetKind": "All",
@@ -408,10 +527,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
       "AssetKind": "All",
@@ -425,10 +544,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
       "AssetKind": "All",
@@ -442,10 +561,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css",
       "AssetKind": "All",
@@ -459,10 +578,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css.map",
       "AssetKind": "All",
@@ -476,10 +595,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css",
       "AssetKind": "All",
@@ -493,10 +612,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
       "AssetKind": "All",
@@ -510,10 +629,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
       "AssetKind": "All",
@@ -527,10 +646,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
       "AssetKind": "All",
@@ -544,10 +663,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
       "AssetKind": "All",
@@ -561,10 +680,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
       "AssetKind": "All",
@@ -578,10 +697,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css",
       "AssetKind": "All",
@@ -595,10 +714,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css.map",
       "AssetKind": "All",
@@ -612,10 +731,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css",
       "AssetKind": "All",
@@ -629,10 +748,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
       "AssetKind": "All",
@@ -646,10 +765,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
       "AssetKind": "All",
@@ -663,10 +782,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
       "AssetKind": "All",
@@ -680,10 +799,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
       "AssetKind": "All",
@@ -697,10 +816,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
       "AssetKind": "All",
@@ -714,10 +833,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js",
       "AssetKind": "All",
@@ -731,10 +850,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js.map",
       "AssetKind": "All",
@@ -748,10 +867,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js",
       "AssetKind": "All",
@@ -765,10 +884,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
       "AssetKind": "All",
@@ -782,10 +901,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js",
       "AssetKind": "All",
@@ -799,10 +918,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js.map",
       "AssetKind": "All",
@@ -816,10 +935,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js",
       "AssetKind": "All",
@@ -833,10 +952,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
       "AssetKind": "All",
@@ -850,10 +969,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.js",
       "AssetKind": "All",
@@ -867,10 +986,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.js.map",
       "AssetKind": "All",
@@ -884,10 +1003,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js",
       "AssetKind": "All",
@@ -901,10 +1020,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js.map",
       "AssetKind": "All",
@@ -918,10 +1037,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\bootstrap\\LICENSE",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/bootstrap/LICENSE",
       "AssetKind": "All",
@@ -935,10 +1054,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\LICENSE"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/jquery/dist/jquery.js",
       "AssetKind": "All",
@@ -952,10 +1071,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/jquery/dist/jquery.min.js",
       "AssetKind": "All",
@@ -969,10 +1088,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/jquery/dist/jquery.min.map",
       "AssetKind": "All",
@@ -986,10 +1105,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/jquery/LICENSE.txt",
       "AssetKind": "All",
@@ -1003,10 +1122,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/jquery-validation/dist/additional-methods.js",
       "AssetKind": "All",
@@ -1020,10 +1139,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/jquery-validation/dist/additional-methods.min.js",
       "AssetKind": "All",
@@ -1037,10 +1156,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate.js",
       "AssetKind": "All",
@@ -1054,10 +1173,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate.min.js",
       "AssetKind": "All",
@@ -1071,10 +1190,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/jquery-validation/LICENSE.md",
       "AssetKind": "All",
@@ -1088,10 +1207,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
       "AssetKind": "All",
@@ -1105,10 +1224,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
       "AssetKind": "All",
@@ -1122,10 +1241,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Identity": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Identity": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "SourceId": "BookStore",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Source\\Repos\\BookStore\\BookStore\\wwwroot\\",
+      "ContentRoot": "E:\\Projects\\C_Sharp_Proj\\BookStore\\BookStore\\wwwroot\\",
       "BasePath": "_content/BookStore",
       "RelativePath": "lib/jquery-validation-unobtrusive/LICENSE.txt",
       "AssetKind": "All",

@@ -1,5 +1,4 @@
 using BookStore.BAL.Interfaces;
-using BookStore.BAL.Services;
 using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -30,7 +29,7 @@ public class AdminPageModel : PageModel
         return Page();
     }
     public async Task<IActionResult> OnPostAsync()
-    {        
+    {
         return await TryCreateBook();
     }
 
@@ -57,13 +56,11 @@ public class AdminPageModel : PageModel
 
     private async Task<IActionResult> TryCreateBook()
     {
-        List<Genre> genres = _serviceGenre.GetAll().Where(genre => Request.Form["genres"].ToList().Contains(genre.Id.ToString())).ToList();
         CreatedBook = new()
         {
             Title = Request.Form["title"],
             Writer = Request.Form["writer"],
-            Description = Request.Form["descr"],
-            Genres = genres
+            Description = Request.Form["descr"]
         };
         if (!decimal.TryParse(Request.Form["price"], out decimal numPrice) || numPrice < 0)
         {
@@ -80,10 +77,14 @@ public class AdminPageModel : PageModel
         ActionResult = await _serviceBook.Add(CreatedBook, BookFormFile, ImageFormFile);
         if (ActionResult.Succeed)
         {
+            _serviceBook.AddGenres(
+                CreatedBook, 
+                _serviceGenre.GetAll().Where(genre => Request.Form["genres"].Contains(genre.Id.ToString())).ToArray()
+                );
+            _serviceBook.Update(CreatedBook);
             return RedirectToPage("/BookPage", new { Id = ActionResult.Value.Id });
         }
         return Page();
-
     }
 
 }

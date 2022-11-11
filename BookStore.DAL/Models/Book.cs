@@ -16,6 +16,4 @@ public class Book
     public List<Favorite> Favorites { get; set; } = new();
     public List<Genre> Genres { get; set; } = new();
     public int Bought { get; set; }
-    public string _genreString { get; set; } = "";
-    public string _commentString { get; set; } = "";
 }

@@ -27,6 +27,11 @@ public static class ServiceProviderExtensions
         services.AddTransient<IServiceRating, ServiceRating>();
         services.AddTransient<IRepositoryRating, RepositoryRating>();
     }
+    public static void AddFavoriteService(this IServiceCollection services)
+    {
+        services.AddTransient<IServiceFavorite, ServiceFavorite>();
+        services.AddTransient<IRepositoryFavorite, RepositoryFavorite>();
+    }
     public static void AddGenreService(this IServiceCollection services)
     {
         services.AddTransient<IServiceGenre, ServiceGenre>();

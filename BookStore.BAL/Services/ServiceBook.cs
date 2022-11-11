@@ -22,8 +22,6 @@ public class ServiceBook : IServiceBook
 
         if (string.IsNullOrWhiteSpace(book.Title)) actionResult.Errors.Add("Название не указано");
         if (string.IsNullOrWhiteSpace(book.Description)) actionResult.Errors.Add("Описание не указано");
-        if (string.IsNullOrWhiteSpace(book.SourceImage)) actionResult.Errors.Add("Картинка не добавлена");
-        if (string.IsNullOrWhiteSpace(book.SourceFile)) actionResult.Errors.Add("Файл книги не добавлен");
         if (string.IsNullOrWhiteSpace(book.Writer)) actionResult.Errors.Add("Писатель не указан");
         if (book.Price < 0) actionResult.Errors.Add("Цена должна быть числом и неменьше нуля");
         if (bookFile == null) actionResult.Errors.Add("Файл книги не указан");
@@ -79,6 +77,17 @@ public class ServiceBook : IServiceBook
         string file = book.SourceFile;
         return "files/" + System.Net.WebUtility.UrlEncode(file.Replace("/files/", "")).Replace("+", " ").Replace(" ", "%20");
     }
+
+    public void AddGenres(Book book, Genre[] genres)
+    {
+        book.Genres.AddRange(genres);
+        book.Genres = book.Genres.Distinct().ToList();
+    }
+    public void RemoveGenres(Book book, Genre[] genres)
+    {
+        book.Genres = book.Genres.Where(genre => !genres.Contains(genre)).ToList();
+    }
+
 
     public void Delete(Book book)
     {
