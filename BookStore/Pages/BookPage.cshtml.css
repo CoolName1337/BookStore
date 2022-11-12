@@ -119,10 +119,6 @@ div.dropdown-rating {
     margin-bottom: 10px;
 }
 
-.star-1 {
-    border: 2px solid orange;
-}
-
 .rating-number {
     font-size: 40px;
     color: orange;
@@ -150,13 +146,16 @@ div.dropdown-rating:hover .rating-droppanel {
     color: orange;
 }
 
-.star {
+svg[name='star'] {
     cursor: pointer;
+}
+
+.star {
     stroke-width: 1px;
     fill-rule: nonzero;
 }
 
-.taked-star:hover, .not-taked-star {
+.not-taked-star {
     fill: white;
     stroke: gray;
 }
@@ -164,10 +163,6 @@ div.dropdown-rating:hover .rating-droppanel {
 .not-taked-star:hover, .taked-star {
     fill: orange;
     stroke: none;
-}
-
-.rate-btn{
-    padding:0;
 }
 
 /*////////////////////////////////////////////      ★genres★      //////////////////////////////////////////////////////*/

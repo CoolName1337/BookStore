@@ -12,19 +12,22 @@ public class ServiceFavorite : IServiceFavorite
     {
         _repositoryFavorite = repositoryFavorite;
     }
-    public async Task TryLike(User user, Book book)
+    public async Task<bool> TryLike(User user, Book book)
     {
         Favorite favorite = user.Favorites.FirstOrDefault(fav => fav.BookId == book.Id);
         if (favorite == null)
         {
             favorite = new Favorite() { BookId = book.Id, UserId = user.Id };
             await _repositoryFavorite.Create(favorite);
-            user.Favorites.Add(favorite);
+            user.Favorites.Add(favorite); 
+            return true;
         }
         else
         {
             await _repositoryFavorite.Delete(favorite);
             user.Favorites.Remove(favorite);
+            return false;
         }
+        
     }
 }

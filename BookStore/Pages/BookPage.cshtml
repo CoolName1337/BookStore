@@ -45,11 +45,12 @@
                     <div class="rate-container">
                         <span>Оцените книгу:</span>
                         <div class="stars-container">
-                            <form method="post" style="display:flex">
+                            <form style="display:flex">
                                 <input name="id" value=@Model.TakedBook.Id hidden />
+                                @Html.AntiForgeryToken()
                                 @for (int i = 1; i <= 5; i++)
                                 {
-                                    <button class="rate-btn" type="submit" name="interact_btn" value=@i>
+                                    <button class="rate-btn" type="button" name="star" value=@i>
                                         <svg width="40" height="40">
                                             <polygon class="star-@i star @(userRating >= i ? "taked-star" : "not-taked-star")"
                                                  points="20,0 26,16 40,16 28,25 34,40 20,30 6,40 12,25 0,16 14,16 " />
@@ -74,8 +75,9 @@
                 }
                 @if (User.Identity.IsAuthenticated)
                 {
-                    string id = Model.CurrentUser.Favorites.FirstOrDefault(fav => fav.BookId == Model.TakedBook.Id)?.UserId;
-                    <button class=@(string.IsNullOrEmpty(id) ? "unfav-btn" : "fav-btn") type="submit" name="interact_btn" value="fav">♡</button>
+                    var fav = Model.CurrentUser.Favorites.FirstOrDefault(fav => fav.BookId == Model.TakedBook.Id);
+                    @Html.AntiForgeryToken()
+                    <button class=@(fav == null ? "unfav-btn" : "fav-btn") type="button" name="fav-btn" value="fav">♡</button>
                 }
             </form>
 
@@ -93,3 +95,81 @@
         </p>
     </div>
 </div>
+
+
+@section Scripts{
+    <script>
+
+        $("button[name='fav-btn']").click((e) => {
+
+            $.ajax({
+                url: "/BookPage?handler=Favorite&id=" + $("input[name='id']").val(),
+                type: "POST",
+                contentType: "application/json",
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+
+                success: (res) => {
+                    if (res) {
+                        e.target.classList.remove("unfav-btn")
+                        e.target.classList.add("fav-btn")
+                    }
+                    else {
+                        e.target.classList.remove("fav-btn")
+                        e.target.classList.add("unfav-btn")
+                    }
+                }
+            });
+        });
+
+        $("button[name='star']").hover(
+            (e) => {
+                $(document.getElementsByClassName("star")).each((ind, el) => {
+                    el.classList.add(ind < e.currentTarget.value ? "taked-star" : "not-taked-star");
+                    el.classList.remove(ind < e.currentTarget.value ? "not-taked-star" : "taked-star");
+
+                });
+            },
+            (e) => {
+                $(document.getElementsByClassName("star")).each((ind, el) => {
+                    el.classList.add("not-taked-star");
+                    el.classList.remove("taked-star");
+                });
+            }
+        );
+
+        $("button[name='star']").click((e) => {
+
+            $.ajax({
+                url: "/BookPage?handler=RateBook&id=" + $("input[name='id']").val() + "&stars=" + e.currentTarget.value,
+                type: "POST",
+                contentType: "application/json",
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+
+                success: (res) => {
+                    $('.rating-number').text(res.rating);
+                    $('.rating-count').text("Оценили: " + res.count);
+
+                    $('.filler').css("height", `${res.rating * 20}%`);
+
+                    $(document.getElementsByClassName("star")).each((ind, el) => {
+
+                        if (ind < res.stars) {
+                            el.classList.add("taked-star");
+                            el.classList.remove("not-taked-star");
+                        }
+                        else {
+                            el.classList.add("not-taked-star");
+                            el.classList.remove("taked-star");
+                        }
+                    });
+                }
+            });
+        })
+
+    </script>
+
+}

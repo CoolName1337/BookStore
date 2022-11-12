@@ -40,16 +40,13 @@ public class BookPageModel : PageModel
         if (!User.Identity.IsAuthenticated) return RedirectToPage("/Account/Login");
 
         CurrentUser = _serviceUser.GetUser(User);
-        TakedBook = _serviceBook[int.Parse(Request.Form["Id"])];
+        TakedBook = _serviceBook[int.Parse(Request.Form["id"])];
         switch (interact_btn)
         {
             case "dwn":
                 return Redirect(_serviceBook.GetCorrectPath(TakedBook));
             case "buy":
                 await _serviceUser.TryBuyBook(CurrentUser, TakedBook);
-                break;
-            case "fav":
-                await _serviceFavorite.TryLike(CurrentUser, TakedBook);
                 break;
             default:
                 if (int.TryParse(interact_btn, out int rating) && rating > 0 && rating <= 5)
@@ -59,5 +56,23 @@ public class BookPageModel : PageModel
                 break;
         }
         return RedirectToPage("/BookPage", new { Id = Request.Form["Id"] });
+    }
+
+    public async Task<IActionResult> OnPostRateBook(int id, int stars)
+    {
+        CurrentUser = _serviceUser.GetUser(User);
+        TakedBook = _serviceBook[id]; 
+        await _serviceRating.TryRateBook(CurrentUser, TakedBook, stars);
+        double rating = _serviceRating.GetRating(TakedBook);
+        double count = _serviceRating.GetRatingCount(TakedBook);
+        return new JsonResult(new { stars, rating, count });
+    }
+
+
+    public async Task<IActionResult> OnPostFavorite(int id)
+    {
+        CurrentUser = _serviceUser.GetUser(User);
+        TakedBook = _serviceBook[id];
+        return new JsonResult(await _serviceFavorite.TryLike(CurrentUser, TakedBook));
     }
 }

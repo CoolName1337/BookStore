@@ -4,5 +4,5 @@ namespace BookStore.BAL.Interfaces;
 
 public interface IServiceFavorite
 {
-    Task TryLike(User user, Book book);
+    Task<bool> TryLike(User user, Book book);
 }

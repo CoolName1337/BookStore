@@ -549,10 +549,6 @@ div.dropdown-rating[b-yajd1ps8dt] {
     margin-bottom: 10px;
 }
 
-.star-1[b-yajd1ps8dt] {
-    border: 2px solid orange;
-}
-
 .rating-number[b-yajd1ps8dt] {
     font-size: 40px;
     color: orange;
@@ -580,13 +576,16 @@ div.dropdown-rating:hover .rating-droppanel[b-yajd1ps8dt] {
     color: orange;
 }
 
-.star[b-yajd1ps8dt] {
+svg[name='star'][b-yajd1ps8dt] {
     cursor: pointer;
+}
+
+.star[b-yajd1ps8dt] {
     stroke-width: 1px;
     fill-rule: nonzero;
 }
 
-.taked-star:hover[b-yajd1ps8dt], .not-taked-star[b-yajd1ps8dt] {
+.not-taked-star[b-yajd1ps8dt] {
     fill: white;
     stroke: gray;
 }
@@ -594,10 +593,6 @@ div.dropdown-rating:hover .rating-droppanel[b-yajd1ps8dt] {
 .not-taked-star:hover[b-yajd1ps8dt], .taked-star[b-yajd1ps8dt] {
     fill: orange;
     stroke: none;
-}
-
-.rate-btn[b-yajd1ps8dt]{
-    padding:0;
 }
 
 /*////////////////////////////////////////////      ★genres★      //////////////////////////////////////////////////////*/
