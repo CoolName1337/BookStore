@@ -37,4 +37,9 @@ public static class ServiceProviderExtensions
         services.AddTransient<IServiceGenre, ServiceGenre>();
         services.AddTransient<IRepositoryGenre, RepositoryGenre>();
     }
+    public static void AddReviewService(this IServiceCollection services)
+    {
+        services.AddTransient<IServiceReview, ServiceReview>();
+        services.AddTransient<IRepositoryReview, RepositoryReview>();
+    }
 }

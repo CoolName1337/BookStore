@@ -13,6 +13,7 @@
     <div class="title-container">
         <img src=@Model.TakedBook.SourceImage alt="Картинка не найдена" />
         <div>
+            @Html.AntiForgeryToken()
             <div class="title" style="display:flex">
                 <h2>@Model.TakedBook.Title</h2>
                 @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.IsInRole("creator")))
@@ -32,35 +33,47 @@
                 }
             </div>
 
-            <div class="dropdown-rating">
-                <div class="rating-button">
-                    <div class="filler" style="height:@($"{Model._serviceRating.GetRating(Model.TakedBook)*20}%")">
-                    </div><svg class="rate-star" width="40" height="40">
-                        <polygon points="20,0 6,40 40,16 0,16 34,40" style="fill:orange;fill-rule:nonzero;" />
-                    </svg>
-                </div>
-                <div class="rating-droppanel">
-                    <div class="rating-number">@Model._serviceRating.GetRating(Model.TakedBook)</div>
-                    <div class="rating-count">Оценили: @Model._serviceRating.GetRatingCount(Model.TakedBook)</div>
-                    <div class="rate-container">
-                        <span>Оцените книгу:</span>
-                        <div class="stars-container">
-                            <form style="display:flex">
-                                <input name="id" value=@Model.TakedBook.Id hidden />
-                                @Html.AntiForgeryToken()
-                                @for (int i = 1; i <= 5; i++)
-                                {
-                                    <button class="rate-btn" type="button" name="star" value=@i>
-                                        <svg width="40" height="40">
-                                            <polygon class="star-@i star @(userRating >= i ? "taked-star" : "not-taked-star")"
-                                                 points="20,0 26,16 40,16 28,25 34,40 20,30 6,40 12,25 0,16 14,16 " />
-                                        </svg>
-                                    </button>
-                                }
-                            </form>
+            <div class="rating-and-review-container" style="display:flex">
+                <div class="dropdown-rating">
+                    <div class="rating-button">
+                        <div class="filler" style="height:@($"{Model._serviceRating.GetRating(Model.TakedBook)*20}%")">
+                        </div><svg class="rate-star" width="40" height="40">
+                            <polygon points="20,0 6,40 40,16 0,16 34,40" style="fill:orange;fill-rule:nonzero;" />
+                        </svg>
+                    </div>
+                    <div class="rating-droppanel">
+                        <div class="rating-number">@Model._serviceRating.GetRating(Model.TakedBook)</div>
+                        <div class="rating-count">Оценили: @Model._serviceRating.GetRatingCount(Model.TakedBook)</div>
+                        <div class="rate-container">
+                            <span>Оцените книгу:</span>
+                            <div class="stars-container">
+                                <form style="display:flex">
+                                    <input name="id" value=@Model.TakedBook.Id hidden />
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        <button class="rate-btn" type="button" name="star" value=@i>
+                                            <svg width="40" height="40">
+                                                <polygon class="star-@i star @(userRating >= i ? "taked-star" : "not-taked-star")"
+                                                     points="20,0 26,16 40,16 28,25 34,40 20,30 6,40 12,25 0,16 14,16 " />
+                                            </svg>
+                                        </button>
+                                    }
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="add-review-container">
+                    <button class="toggle-review-text-container" type="button">Оставить рецензию</button>
+                    <div class="review-text-container hidden">
+                        <span>Ваша рецензия</span>
+                        <textarea style="white-space:pre-wrap" class="review-text"></textarea>
+                        <button type="button" class="add-review-btn review-btn">Добавить</button>
+                        <button type="button" class="cancel-review-btn review-btn">Отмена</button>
+                    </div>
+                </div>
+
             </div>
 
             <form method="post" style="display:flex">
@@ -76,34 +89,167 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     var fav = Model.CurrentUser.Favorites.FirstOrDefault(fav => fav.BookId == Model.TakedBook.Id);
-                    @Html.AntiForgeryToken()
+                    
                     <button class=@(fav == null ? "unfav-btn" : "fav-btn") type="button" name="fav-btn" value="fav">♡</button>
                 }
             </form>
 
         </div>
     </div>
-    <div class="desription-container">
+    <div class="description-container">
 
         <p class="description-title">Описание книги</p>
-        <p class="description">
-            @foreach (string str in @Model.TakedBook.Description.Split('\n'))
-            {
-                @str
-                <br />
-            }
-        </p>
+        <span style="white-space: pre-line" class="description">
+            @Model.TakedBook.Description
+        </span>
     </div>
+    @if(Model.TakedBook.Reviews.Any()){
+        <div class="reviews-container">
+            <hr />
+            <span class="reviews-title">Рецензии:</span>
+            @foreach (var review in Model.TakedBook.Reviews)
+            {
+                var user = Model._serviceUser[review.UserId];
+                var ratingForBook = @Model._serviceRating.GetUserRating(user, Model.TakedBook);
+                string ratingColor = "red";
+
+                switch (ratingForBook)
+                {
+                    case 1:
+                    case 2:
+                        ratingColor = "#ff0000";
+                        break;
+                    case 3:
+                        ratingColor = "#aaaa00";
+                        break;
+                    case 4:
+                    case 5:
+                        ratingColor = "#00ff00";
+                        break;
+                }
+
+
+                <div class="review-container">
+                    <div class="review-header">
+                        <input name="userId" value="@user.Id" hidden />
+                        <span class="review-owner">@user.UserName</span>
+                        @if(ratingForBook > 0){
+                            <span class="review-user-rating" style="color:@ratingColor">@ratingForBook</span>
+                        }
+                        @if (Model._serviceUser[user.Id] == Model.CurrentUser || User.IsInRole("admin") || User.IsInRole("creator"))
+                        {
+                            <button class="delete-review" value="@review.Id">Удалить рецензию</button>
+                        }
+                    </div>
+                    <span class="created-date">@review.Created</span><br>
+                    <span style="white-space:pre-wrap" class="review-text">@review.Text.Replace("<br/>", "\n")</span>
+                </div>
+            }
+        </div>
+    }
+
 </div>
 
 
 @section Scripts{
     <script>
+        let currentStars = @userRating;
+
+
+        $(document).on("click", ".delete-review", (e)=>{
+            $.ajax({
+                url: `/BookPage?handler=Review&reviewId=${e.currentTarget.value}&userId=${$(e.currentTarget).parent().find('input[name="userId"]').val()}`,
+                type: "DELETE",
+                contentType: "application/json",
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                success: (res) => { 
+                    $(e.currentTarget).parent().parent().remove();
+                    if (!$(".reviews-container").has($(".review-container")).length){
+                        $(".reviews-container").remove();
+                    }
+                }
+            });
+        })
+
+
+
+        $(document).on("click", ".toggle-review-text-container, .cancel-review-btn", (e) => {
+            $(".review-text-container").toggleClass("hidden");
+        });
+
+        $(".add-review-btn").click((e) => {
+
+            $.ajax({
+                url: `/BookPage?handler=Review&bookId=${$('input[name = "id"]').val()}&text=${$(".review-text").val().replaceAll("\n", "<br/>")}`,
+                type: "POST",
+                contentType: "application/json",
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+
+                success: (res) => {
+                    $(".review-text-container").toggleClass("hidden");
+
+                }
+            });
+        });
+
+
+
+        $("button[name='star']").hover(
+            (e) => {
+                $(document.getElementsByClassName("star")).each((ind, el) => {
+                    el.classList.add(ind < e.currentTarget.value ? "taked-star" : "not-taked-star");
+                    el.classList.remove(ind < e.currentTarget.value ? "not-taked-star" : "taked-star");
+
+                });
+            },
+            (e) => {
+                $(document.getElementsByClassName("star")).each((ind, el) => {
+                    el.classList.add(ind < currentStars ? "taked-star" : "not-taked-star");
+                    el.classList.remove(ind < currentStars ? "not-taked-star" : "taked-star");
+                });
+            }
+        );
+
+        $("button[name='star']").click((e) => {
+
+            $.ajax({
+                url: "/BookPage?handler=RateBook&bookId=" + $("input[name='id']").val() + "&stars=" + e.currentTarget.value,
+                type: "POST",
+                contentType: "application/json",
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+
+                success: (res) => {
+                    $('.rating-number').text(res.rating);
+                    $('.rating-count').text("Оценили: " + res.count);
+
+                    currentStars = res.userRating;
+                    $('.filler').css("height", `${res.rating * 20}%`);
+
+                    $(document.getElementsByClassName("star")).each((ind, el) => {
+
+                        if (ind < res.userRating) {
+                            el.classList.add("taked-star");
+                            el.classList.remove("not-taked-star");
+                        }
+                        else {
+                            el.classList.add("not-taked-star");
+                            el.classList.remove("taked-star");
+                        }
+                    });
+                }
+            });
+        })
 
         $("button[name='fav-btn']").click((e) => {
 
             $.ajax({
-                url: "/BookPage?handler=Favorite&id=" + $("input[name='id']").val(),
+                url: "/BookPage?handler=Favorite&bookId=" + $("input[name='id']").val(),
                 type: "POST",
                 contentType: "application/json",
                 beforeSend: (xhr) => {
@@ -122,54 +268,6 @@
                 }
             });
         });
-
-        $("button[name='star']").hover(
-            (e) => {
-                $(document.getElementsByClassName("star")).each((ind, el) => {
-                    el.classList.add(ind < e.currentTarget.value ? "taked-star" : "not-taked-star");
-                    el.classList.remove(ind < e.currentTarget.value ? "not-taked-star" : "taked-star");
-
-                });
-            },
-            (e) => {
-                $(document.getElementsByClassName("star")).each((ind, el) => {
-                    el.classList.add("not-taked-star");
-                    el.classList.remove("taked-star");
-                });
-            }
-        );
-
-        $("button[name='star']").click((e) => {
-
-            $.ajax({
-                url: "/BookPage?handler=RateBook&id=" + $("input[name='id']").val() + "&stars=" + e.currentTarget.value,
-                type: "POST",
-                contentType: "application/json",
-                beforeSend: (xhr) => {
-                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
-                },
-
-                success: (res) => {
-                    $('.rating-number').text(res.rating);
-                    $('.rating-count').text("Оценили: " + res.count);
-
-                    $('.filler').css("height", `${res.rating * 20}%`);
-
-                    $(document.getElementsByClassName("star")).each((ind, el) => {
-
-                        if (ind < res.stars) {
-                            el.classList.add("taked-star");
-                            el.classList.remove("not-taked-star");
-                        }
-                        else {
-                            el.classList.add("not-taked-star");
-                            el.classList.remove("taked-star");
-                        }
-                    });
-                }
-            });
-        })
-
     </script>
 
 }

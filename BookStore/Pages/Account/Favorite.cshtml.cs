@@ -17,7 +17,7 @@ public class FavoriteModel : PageModel
         _serviceBook = serviceBook;
     }
 
-    public async Task OnGet()
+    public void OnGet()
     {
         CurrentUser = _serviceUser.GetUser(User);
         foreach (var bookId in CurrentUser.Favorites.Select(favBook => favBook.BookId))

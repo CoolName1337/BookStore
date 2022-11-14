@@ -10,6 +10,7 @@ public class RepositoryBook : IRepositoryBook
     private readonly ApplicationContext _db = new();
     public async Task Create(Book book)
     {
+        book.AddingDate = DateTime.Now;
         _db.Add(book);
         await _db.SaveChangesAsync();
     }
@@ -31,6 +32,7 @@ public class RepositoryBook : IRepositoryBook
             .Include(book => book.Ratings)
             .Include(book => book.Favorites)
             .Include(book => book.Genres)
+            .Include(book => book.Reviews)
             .ToList();
     }
     public IEnumerable<Book> GetBooks(Func<Book, bool> predicate)
@@ -39,6 +41,7 @@ public class RepositoryBook : IRepositoryBook
             .Include(book => book.Ratings)
             .Include(book => book.Favorites)
             .Include(book => book.Genres)
+            .Include(book => book.Reviews)
             .Where(predicate);
     }
     public Book this[int Id]
@@ -47,6 +50,7 @@ public class RepositoryBook : IRepositoryBook
             .Include(book => book.Ratings)
             .Include(book => book.Favorites)
             .Include(book => book.Genres)
+            .Include(book => book.Reviews)
             .FirstOrDefault(book => book.Id == Id);
     }
 }

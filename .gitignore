@@ -1,0 +1,14 @@
+/obj
+
+/bin
+
+/BookStore.BAL/obj
+/BookStore/obj/Release/net6.0
+/BookStore.DAL/obj
+/BookStore/obj
+/BookStore/bin/Debug/net6.0/runtimes/win/lib
+/BookStore/bin/Debug/net6.0/runtimes
+/BookStore/bin/Debug/net6.0
+/BookStore.BAL/bin/Debug/net6.0
+/BookStore.DAL/bin/Debug/net6.0
+*.vsidx
