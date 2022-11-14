@@ -15,5 +15,6 @@ public class Book
     public List<Rating> Ratings { get; set; } = new();
     public List<Favorite> Favorites { get; set; } = new();
     public List<Genre> Genres { get; set; } = new();
+    public List<Review> Reviews { get; set; } = new();
     public int Bought { get; set; }
 }

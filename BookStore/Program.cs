@@ -34,6 +34,7 @@ builder.Services.AddRoleService();
 builder.Services.AddFavoriteService();
 builder.Services.AddRatingService();
 builder.Services.AddGenreService();
+builder.Services.AddReviewService();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
