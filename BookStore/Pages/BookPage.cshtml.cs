@@ -95,12 +95,25 @@ public class BookPageModel : PageModel
     public async Task<IActionResult> OnDeleteReview(int reviewId, string userId)
     {
         CurrentUser = _serviceUser.GetUser(User);
-        var userReview = CurrentUser.Reviews.Find(review => review.Id==reviewId);
+        var userReview = CurrentUser.Reviews.Find(review => review.Id == reviewId);
         if (User.IsInRole("admin") || User.IsInRole("creator"))
         {
             userReview = _serviceUser[userId].Reviews.Find(review => review.Id == reviewId);
         }
         await _serviceReview.DeleteReview(userReview);
         return new JsonResult("kaka");
+    }
+    public async Task<IActionResult> OnPostReviewRate(int reviewId, string userId, bool like)
+    {
+        CurrentUser = _serviceUser.GetUser(User);
+        var review = _serviceUser[userId].Reviews.Find(review => review.Id == reviewId);
+        await _serviceReview.TryRateReview(CurrentUser, review, like);
+        return new JsonResult(
+            new
+            {
+                likes = review.Rates.Count(rate => rate.Like),
+                dislikes = review.Rates.Count(rate => !rate.Like)
+            }
+            );
     }
 }

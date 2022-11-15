@@ -89,24 +89,51 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     var fav = Model.CurrentUser.Favorites.FirstOrDefault(fav => fav.BookId == Model.TakedBook.Id);
-                    
+
                     <button class=@(fav == null ? "unfav-btn" : "fav-btn") type="button" name="fav-btn" value="fav">♡</button>
                 }
             </form>
 
         </div>
     </div>
-    <div class="description-container">
 
-        <p class="description-title">Описание книги</p>
-        <span style="white-space: pre-line" class="description">
+    <div class="description-container vertical-container">
+        <hr />
+        <span class="description-title vertical-container-title">Описание книги</span>
+        <div style="white-space: pre-line" class="description">
             @Model.TakedBook.Description
-        </span>
+        </div>
     </div>
-    @if(Model.TakedBook.Reviews.Any()){
-        <div class="reviews-container">
+
+
+    <div class="detailed-info-container vertical-container"> 
+        <hr />
+        <span class="detailed-info-title vertical-container-title">Подробная информация</span>
+        <div class="detailed-info">
+            <div class="info-div age-limit">
+                <span>Возрастное ограничение:</span>
+                <span>@Model.TakedBook.AgeLimit</span>
+            </div>
+            <div class="info-div page-count">
+                <span>Количество страниц:</span>
+                <span>@Model.TakedBook.Pages</span>
+            </div>
+            <div class="info-div adding-date">
+                <span>Дата добавления:</span>
+                <span>@Model.TakedBook.AddingDate.ToShortDateString()</span>
+            </div>
+            <div class="info-div creating-date">
+                <span>Дата написания:</span>
+                <span>@Model.TakedBook.DateOfCreation.ToShortDateString()</span>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.TakedBook.Reviews.Any())
+    {
+        <div class="reviews-container vertical-container">
             <hr />
-            <span class="reviews-title">Рецензии:</span>
+            <span class="reviews-title vertical-container-title">Рецензии</span>
             @foreach (var review in Model.TakedBook.Reviews)
             {
                 var user = Model._serviceUser[review.UserId];
@@ -132,53 +159,98 @@
                 <div class="review-container">
                     <div class="review-header">
                         <input name="userId" value="@user.Id" hidden />
+                        <input name="reviewId" value="@review.Id" hidden />
                         <span class="review-owner">@user.UserName</span>
-                        @if(ratingForBook > 0){
+                        @if (ratingForBook > 0)
+                        {
                             <span class="review-user-rating" style="color:@ratingColor">@ratingForBook</span>
                         }
                         @if (Model._serviceUser[user.Id] == Model.CurrentUser || User.IsInRole("admin") || User.IsInRole("creator"))
                         {
-                            <button class="delete-review" value="@review.Id">Удалить рецензию</button>
+                            <button class="delete-review">Удалить рецензию</button>
                         }
                     </div>
                     <span class="created-date">@review.Created</span><br>
                     <span style="white-space:pre-wrap" class="review-text">@review.Text.Replace("<br/>", "\n")</span>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        var userRate = review.Rates.Find(rate => rate.UserId == Model.CurrentUser.Id);
+                        bool selectLike = userRate?.Like ?? false;
+                        bool selectDislike = !userRate?.Like ?? false;
+                        <div class="rate-review-container">
+                            <div class="like-container @(selectLike ? "selected" : "")">
+                                <div class="like-count">@review.Rates.Count(rate=>rate.Like)</div>
+                                <button class="review-like-btn" value="true">👍</button>
+                            </div>
+                            <div class="dislike-container @(selectDislike ? "selected" :"" )">
+                                <div class="dislike-count">@review.Rates.Count(rate=>!rate.Like)</div>
+                                <button class="review-dislike-btn" value="false">👎</button>
+                            </div>
+                        </div>
+                    }
                 </div>
             }
         </div>
     }
-
 </div>
 
 
 @section Scripts{
     <script>
-        let currentStars = @userRating;
 
-
-        $(document).on("click", ".delete-review", (e)=>{
+        $(document).on("click", ".like-container, .dislike-container", (e) => {
             $.ajax({
-                url: `/BookPage?handler=Review&reviewId=${e.currentTarget.value}&userId=${$(e.currentTarget).parent().find('input[name="userId"]').val()}`,
+                url: `/BookPage?handler=ReviewRate` +
+                `&reviewId=${$(e.currentTarget).parent().parent().find('input[name="reviewId"]').val()}` + 
+                `&userId=${$(e.currentTarget).parent().parent().find('input[name="userId"]').val()}` +
+                `&like=${$(e.currentTarget).children("button").val()}`,
+                type: "POST",
+                contentType: "application/json",
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                success: (res) => {
+                    $(".like-count").text(res.likes);
+                    $(".dislike-count").text(res.dislikes);
+                    $(e.currentTarget).parent().children().each((ind,el) => {
+                        if(e.currentTarget == el){
+                            el.classList.toggle("selected");
+                        }
+                        else{
+                            el.classList.remove("selected");
+                        }
+                    })
+                }
+            });
+
+        });
+
+        // Handler for delete review
+        $(document).on("click", ".delete-review", (e) => {
+            $.ajax({
+                url: `/BookPage?handler=Review` +
+                `&reviewId=${$(e.currentTarget).parent().find('input[name="reviewId"]').val()}` +
+                `&userId=${$(e.currentTarget).parent().find('input[name="userId"]').val()}`,
                 type: "DELETE",
                 contentType: "application/json",
                 beforeSend: (xhr) => {
                     xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
                 },
-                success: (res) => { 
+                success: (res) => {
                     $(e.currentTarget).parent().parent().remove();
-                    if (!$(".reviews-container").has($(".review-container")).length){
+                    if (!$(".reviews-container").has($(".review-container")).length) {
                         $(".reviews-container").remove();
                     }
                 }
             });
         })
 
-
-
+        // Handler for toggle review input
         $(document).on("click", ".toggle-review-text-container, .cancel-review-btn", (e) => {
             $(".review-text-container").toggleClass("hidden");
         });
 
+        // Handler for set review
         $(".add-review-btn").click((e) => {
 
             $.ajax({
@@ -196,8 +268,8 @@
             });
         });
 
-
-
+        // Handler for rating animation
+        let currentStars = @userRating;
         $("button[name='star']").hover(
             (e) => {
                 $(document.getElementsByClassName("star")).each((ind, el) => {
@@ -214,6 +286,7 @@
             }
         );
 
+        // Handler for set rating
         $("button[name='star']").click((e) => {
 
             $.ajax({
@@ -246,6 +319,7 @@
             });
         })
 
+        // Handler for set favorite
         $("button[name='fav-btn']").click((e) => {
 
             $.ajax({
@@ -268,6 +342,7 @@
                 }
             });
         });
+
     </script>
 
 }

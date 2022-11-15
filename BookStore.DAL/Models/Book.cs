@@ -9,7 +9,7 @@ public class Book
     public string SourceImage { get; set; } = "";
     public string SourceFile { get; set; } = "";
     public string Writer { get; set; } = "";
-    public DateTime AddingDate { get; set; }
+    public DateTime AddingDate { get; set; } = DateTime.Now;
     public DateTime DateOfCreation { get; set; }
     public List<User> Users { get; set; } = new();
     public List<Rating> Ratings { get; set; } = new();
@@ -17,4 +17,6 @@ public class Book
     public List<Genre> Genres { get; set; } = new();
     public List<Review> Reviews { get; set; } = new();
     public int Bought { get; set; }
+    public int Pages { get; set; }
+    public int AgeLimit { get; set; }
 }

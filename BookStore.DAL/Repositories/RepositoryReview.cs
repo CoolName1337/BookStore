@@ -19,4 +19,16 @@ public class RepositoryReview : IRepositoryReview
         _db.Remove(review);
         await _db.SaveChangesAsync();
     }
+
+    public async Task CreateRate(ReviewRate reviewRate)
+    {
+        _db.Add(reviewRate);
+        await _db.SaveChangesAsync();
+    }
+    public async Task DeleteRate(ReviewRate reviewRate)
+    {
+        _db.Remove(reviewRate);
+        await _db.SaveChangesAsync();
+    }
+
 }

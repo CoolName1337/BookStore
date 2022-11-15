@@ -1,0 +1,25 @@
+﻿
+.profile-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.vertical-nav{
+    padding: 0 200px;
+    text-align:right;
+    margin-top:30px;
+    border-bottom:1px solid gray;
+}
+
+.vertical-nav button {
+    transition:all 0.2s ease;
+    display: inline-block;
+    height: 40px;
+    border: none;
+    background: none;
+    font-size: 20px;
+}
+
+.vertical-nav button:hover {
+    background-color:#eaeaea;
+}

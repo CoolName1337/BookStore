@@ -57,7 +57,7 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <li class="dropdown" style="float:right;">
-                    <a class="drop-profile" class="nav-a" asp-page="#">@User.Identity.Name</a>
+                    <a class="drop-profile" class="nav-a" asp-page="Account/ProfilePage">@User.Identity.Name</a>
 
                     <div class="dropdown-content">
                         <a href="/Account/Favorite">Избранное</a>

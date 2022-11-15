@@ -4,10 +4,6 @@ h2 {
     margin: 0;
 }
 
-p.description-title {
-    font-weight: bold;
-}
-
 div.title {
     align-items: center;
 }
@@ -74,11 +70,19 @@ img.setting-img {
     height: 30px;
 }
 
-div.desription-container {
-    margin-top: 10px;
-    padding: 20px;
+
+.vertical-container {
+    margin-top: 40px;
+}
+.vertical-container-title {
+    font-weight: bold;
+    font-size: 30px;
 }
 
+.description{
+    font-size:20px;
+    margin-left:10px;
+}
 /*////////////////////////////////////////////      ★rating★      //////////////////////////////////////////////////////*/
 .filler {
     position: absolute;
@@ -143,6 +147,7 @@ div.dropdown-rating:hover .rating-droppanel {
     padding: 0;
     margin: 0;
     color: orange;
+    background:none;
 }
 
 svg[name='star'] {
@@ -253,14 +258,6 @@ button.review-btn{
     background-color: red;
     color: white;
 }
-.reviews-title{
-    font-weight:bold;
-    font-size:30px;
-}
-.reviews-container{
-    margin-top:40px;
-}
-
 .review-container {
     box-sizing: border-box;
     padding: 20px;
@@ -280,4 +277,52 @@ button.review-btn{
 .review-user-rating{
     font-weight:bold;
     font-size:24px;
+}
+
+.rate-review-container {
+    margin-top:10px;
+    color: gray;
+    display:flex;
+}
+.rate-review-container div.like-container, div.dislike-container {
+    cursor: pointer;
+    border: 2px solid gray;
+    width: 60px;
+    display: flex;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+.rate-review-container div button {
+    background:none;
+    border: none;
+    height: 100%;
+    width: 150%;
+    margin-right: 0;
+    margin-left:auto;
+}
+
+.rate-review-container div div {
+    width: 100%;
+    margin:auto;
+    text-align:center;
+}
+
+.selected{
+    background-color:gray;
+    color:white;
+}
+
+
+/*/////////////////////////////////////////      ★details★      ///////////////////////////////////////////////////*/
+
+.detailed-info {
+    font-size: 20px;
+    margin-left: 10px;
+    margin-top: 30px;
+}
+
+.info-div span:first-child{
+    margin-top:4px;
+    font-weight:bold;
 }

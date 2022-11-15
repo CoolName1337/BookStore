@@ -33,6 +33,7 @@ public class RepositoryBook : IRepositoryBook
             .Include(book => book.Favorites)
             .Include(book => book.Genres)
             .Include(book => book.Reviews)
+                .ThenInclude(review => review.Rates)
             .ToList();
     }
     public IEnumerable<Book> GetBooks(Func<Book, bool> predicate)
@@ -42,6 +43,7 @@ public class RepositoryBook : IRepositoryBook
             .Include(book => book.Favorites)
             .Include(book => book.Genres)
             .Include(book => book.Reviews)
+                .ThenInclude(review => review.Rates)
             .Where(predicate);
     }
     public Book this[int Id]
@@ -51,6 +53,7 @@ public class RepositoryBook : IRepositoryBook
             .Include(book => book.Favorites)
             .Include(book => book.Genres)
             .Include(book => book.Reviews)
+                .ThenInclude(review => review.Rates)
             .FirstOrDefault(book => book.Id == Id);
     }
 }

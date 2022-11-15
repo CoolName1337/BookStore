@@ -6,4 +6,6 @@ public interface IServiceReview
 {
     Task AddReview(Book book, User user, string reviewText);
     Task DeleteReview(Review review);
+
+    Task TryRateReview(User user, Review review, bool like);
 }

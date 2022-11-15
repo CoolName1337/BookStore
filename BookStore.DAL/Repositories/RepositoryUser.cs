@@ -61,6 +61,7 @@ public class RepositoryUser : IRepositoryUser
             .Include(user => user.Ratings)
             .Include(user => user.Favorites)
             .Include(book => book.Reviews)
+                .ThenInclude(review=>review.Rates)
             .ToList();
     }
     public IEnumerable<User> GetUsers(Func<User,bool> predicate)
@@ -70,6 +71,7 @@ public class RepositoryUser : IRepositoryUser
             .Include(user => user.Ratings)
             .Include(user => user.Favorites)
             .Include(book => book.Reviews)
+                .ThenInclude(review => review.Rates)
             .Where(predicate);
     }
     public User this[string Id]
@@ -79,6 +81,7 @@ public class RepositoryUser : IRepositoryUser
             .Include(user=>user.Ratings)
             .Include(user => user.Favorites)
             .Include(book => book.Reviews)
+                .ThenInclude(review => review.Rates)
             .First(user=>user.Id == Id);
     }
 }

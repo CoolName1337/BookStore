@@ -7,4 +7,5 @@ public class Review
     public int BookId { get; set; }
     public string Text { get; set; } = "";
     public DateTime Created { get; set; }
+    public List<ReviewRate> Rates { get; set; } = new();
 }
