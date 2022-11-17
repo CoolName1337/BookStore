@@ -1,0 +1,43 @@
+﻿@model ProfilePageModel
+
+<ul class="reviews-container">
+    @foreach (var review in Model.ProfileUser.Reviews)
+    {
+        <li class="review-container">
+            @{
+                var userRate = review.Rates.Find(rate => rate.UserId == Model.ProfileUser.Id);
+                bool selectLike = userRate?.Like ?? false;
+                bool selectDislike = !userRate?.Like ?? false;
+                var book = Model._serviceBook[review.BookId];
+                string BookHref = $"/BookPage?id={book.Id}";
+            }
+            <a href="@BookHref"><img class="review-book-preview" src=@book.SourceImage /></a>
+            <div class="review-text-container">
+                <div class="review-header">
+                    <a class="review-book-title" href="@BookHref">@book.Title</a>
+                    <button class="delete-review">Удалить рецензию</button>
+                    <span class="rating-for-book">
+                        @for (int i = 0; i < @Model._serviceRating.GetUserRating(Model.ProfileUser, book); i++)
+                        {
+                            <svg class="rate-star" width="20" height="20">
+                                <polygon points="10,0 17,20 0,8 20,8 3,20" style="fill:orange;fill-rule:nonzero;" />
+                            </svg>
+                        }
+                    </span>
+                </div>
+                <span class="created-date">@review.Created</span><br>
+                <span style="white-space:pre-wrap" class="review-text">@review.Text</span>
+                <div class="rate-review-container">
+                    <div class="like-container @(selectLike ? "selected" : "")">
+                        <div class="like-count">@review.Rates.Count(rate=>rate.Like)</div>
+                        <button class="review-like-btn" value="true">👍</button>
+                    </div>
+                    <div class="dislike-container @(selectDislike ? "selected" :"" )">
+                        <div class="dislike-count">@review.Rates.Count(rate=>!rate.Like)</div>
+                        <button class="review-dislike-btn" value="false">👎</button>
+                    </div>
+                </div>
+            </div>
+        </li>
+    }
+</ul>

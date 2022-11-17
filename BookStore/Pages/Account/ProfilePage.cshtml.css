@@ -1,25 +1,59 @@
 ﻿
+#panel {
+    width: 100%;
+}
+
 .profile-container {
     max-width: 1200px;
     margin: auto;
 }
 
-.vertical-nav{
+.vertical-nav {
+    text-align: right;
     padding: 0 200px;
-    text-align:right;
-    margin-top:30px;
-    border-bottom:1px solid gray;
+    margin-top: 30px;
+    border-bottom: 1px solid gray;
 }
 
-.vertical-nav button {
-    transition:all 0.2s ease;
+.vertical-nav a {
+    padding: 10px;
+    cursor: pointer;
     display: inline-block;
-    height: 40px;
-    border: none;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
     background: none;
     font-size: 20px;
 }
 
-.vertical-nav button:hover {
+.vertical-nav a:hover {
     background-color:#eaeaea;
+}
+
+.selected {
+    margin-right: 200px;
+    border-bottom: 2px solid black !important;
+    background-color: #eaeaea !important;
+    border-radius: 0;
+}
+
+
+.profile-info{
+    margin-right:30px;
+}
+
+.profile-pic {
+    margin-top: -40px;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.profile-container {
+    display: flex;
+}
+.profile-name {
+    width: 300px;
+    display: block;
+    word-wrap: anywhere;
+    font-size: 40px;
 }

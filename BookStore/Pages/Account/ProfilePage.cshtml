@@ -6,10 +6,38 @@
 
 
 <div>
-    <div class="vertical-nav">
-        <button>Мои книги</button>
-        <button>Избранное</button>
-        <button>Мои рецензии</button>
-        <button>Настройки</button>
+    <div class="vertical-nav"> 
+        <a data-ajax="true" data-ajax-url="/Account/ProfilePage?handler=MyBooks" data-ajax-update="#panel">Мои книги</a>
+        <a data-ajax="true" data-ajax-url="/Account/ProfilePage?handler=MyFavorites" data-ajax-update="#panel">Избранное</a>
+        <a data-ajax="true" data-ajax-url="/Account/ProfilePage?handler=MyReviews" data-ajax-update="#panel">Мои рецензии</a>
+        <a data-ajax="true" data-ajax-url="/Account/ProfilePage?handler=Settings" data-ajax-update="#panel">Настройки</a>
+    </div>
+    <div class="profile-container">
+
+        <div class="profile-info">
+            <img class="profile-pic" src="/images/IMG_20221029_131941.jpg" />
+            <span class="profile-name">@User.Identity.Name</span>
+            <span>Куплено книг:</span>
+            <span class="bought-books">@Model.AvailableBooks.Count()</span>
+        </div>
+        <div id="panel">
+        </div>
     </div>
 </div>
+
+@section Styles{
+    <link rel="stylesheet" href="/css/Profile/ProfileBookStyles.css" />
+    <link rel="stylesheet" href="/css/Profile/ProfileReviewStyles.css" />
+}
+
+@section Scripts{
+    <script>
+        $(document).on("click", ".vertical-nav a", (e) => {
+            $(document.querySelectorAll(".vertical-nav a")).each((ind, el) => {
+                el.classList.remove("selected");
+                if (e.currentTarget == el) el.classList.add("selected");
+            });
+        });
+    </script>
+    <script src="/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+}

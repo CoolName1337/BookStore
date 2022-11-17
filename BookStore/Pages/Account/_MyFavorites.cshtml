@@ -1,0 +1,25 @@
+﻿@model ProfilePageModel
+<ul class="books-container">
+    @foreach (var book in Model.FavoriteBooks)
+    {
+        string BookHref = $"/BookPage?id={book.Id}";
+        <li class="book-container">
+            <a href=@BookHref><img class="book-preview" src=@book.SourceImage /></a>
+            <div class="hover-book">
+                <div class="hover-title">
+                    <a href=@BookHref class="title">@book.Title</a>
+                    <div class="writer">@book.Writer</div>
+                </div>
+                @if (User.Identity.IsAuthenticated &&
+               Model.AvailableBooks.Any(uBook => book.Id == uBook.Id))
+                {
+                    <a class="dwn-btn" href=@BookHref>Скачать</a>
+                }
+                else
+                {
+                    <a class="buy-btn" href=@BookHref>Купить</a>
+                }
+            </div>
+        </li>
+    }
+</ul>

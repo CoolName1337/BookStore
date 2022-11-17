@@ -36,8 +36,8 @@
             <div class="rating-and-review-container" style="display:flex">
                 <div class="dropdown-rating">
                     <div class="rating-button">
-                        <div class="filler" style="height:@($"{Model._serviceRating.GetRating(Model.TakedBook)*20}%")">
-                        </div><svg class="rate-star" width="40" height="40">
+                        <div class="filler" style="height:@($"{Model._serviceRating.GetRating(Model.TakedBook)*20}%")"></div>
+                        <svg class="rate-star" width="40" height="40">
                             <polygon points="20,0 6,40 40,16 0,16 34,40" style="fill:orange;fill-rule:nonzero;" />
                         </svg>
                     </div>
@@ -137,34 +137,20 @@
             @foreach (var review in Model.TakedBook.Reviews)
             {
                 var user = Model._serviceUser[review.UserId];
-                var ratingForBook = @Model._serviceRating.GetUserRating(user, Model.TakedBook);
-                string ratingColor = "red";
-
-                switch (ratingForBook)
-                {
-                    case 1:
-                    case 2:
-                        ratingColor = "#ff0000";
-                        break;
-                    case 3:
-                        ratingColor = "#aaaa00";
-                        break;
-                    case 4:
-                    case 5:
-                        ratingColor = "#00ff00";
-                        break;
-                }
-
-
                 <div class="review-container">
                     <div class="review-header">
                         <input name="userId" value="@user.Id" hidden />
                         <input name="reviewId" value="@review.Id" hidden />
                         <span class="review-owner">@user.UserName</span>
-                        @if (ratingForBook > 0)
-                        {
-                            <span class="review-user-rating" style="color:@ratingColor">@ratingForBook</span>
-                        }
+                        <span class="rating-for-book">
+                            @for (int i = 0; i < @Model._serviceRating.GetUserRating(user, Model.TakedBook); i++)
+                            {
+                                <svg class="rate-star" width="20" height="20">
+                                    <polygon points="10,0 17,20 0,8 20,8 3,20" style="fill:orange;fill-rule:nonzero;" />
+                                </svg>
+                            }
+                        </span>
+                        
                         @if (Model._serviceUser[user.Id] == Model.CurrentUser || User.IsInRole("admin") || User.IsInRole("creator"))
                         {
                             <button class="delete-review">Удалить рецензию</button>

@@ -28,6 +28,5 @@ public class ServiceFavorite : IServiceFavorite
             user.Favorites.Remove(favorite);
             return false;
         }
-        
     }
 }
