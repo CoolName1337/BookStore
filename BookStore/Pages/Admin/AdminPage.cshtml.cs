@@ -24,14 +24,7 @@ public class AdminPageModel : PageModel
         _serviceGenre = serviceGenre;
     }
 
-    public IActionResult OnGet()
-    {
-        return Page();
-    }
-    public async Task<IActionResult> OnPostAsync()
-    {
-        return await TryCreateBook();
-    }
+    public IActionResult OnGet() { return Page(); }
 
     public IActionResult OnGetSelectAll()
     {
@@ -43,7 +36,7 @@ public class AdminPageModel : PageModel
         Genre genre = await _serviceGenre.Create(genreName);
         if (genre != null)
         {
-            return new JsonResult(genre);
+            return new JsonResult(_serviceGenre.GetAll());
         }
         return new ConflictResult();
     }
@@ -51,28 +44,31 @@ public class AdminPageModel : PageModel
     public async Task<IActionResult> OnDeleteDelete(string genreName)
     {
         await _serviceGenre.Delete(genreName);
-        return new JsonResult(genreName);
+        return new JsonResult(_serviceGenre.GetAll());
     }
 
-    private async Task<IActionResult> TryCreateBook()
+    public async Task<IActionResult> OnPostCreateBook()
     {
+        DateTime.TryParse(Request.Form["creatingDate"], out DateTime res);
         CreatedBook = new()
         {
             Title = Request.Form["title"],
             Writer = Request.Form["writer"],
-            Description = Request.Form["descr"]
+            Description = Request.Form["descr"],
+            DateOfCreation = res
         };
-        if (!decimal.TryParse(Request.Form["price"], out decimal numPrice) || numPrice < 0)
-        {
-            CreatedBook.Price = -1;
-        }
-        else
-        {
-            CreatedBook.Price = numPrice;
-        }
+
+        if (!decimal.TryParse(Request.Form["price"], out decimal numPrice) || numPrice < 0) CreatedBook.Price = -1;
+        else CreatedBook.Price = numPrice;
+        
+        if (!int.TryParse(Request.Form["ageLimit"], out int ageLimit) || ageLimit < 0) CreatedBook.AgeLimit = -1;
+        else CreatedBook.AgeLimit = ageLimit;
+        
+        if (!int.TryParse(Request.Form["pagesCount"], out int pagesCount) || pagesCount < 0) CreatedBook.Pages = -1;
+        else CreatedBook.Pages = pagesCount;
+
         BookFormFile = Request.Form.Files["file"];
         ImageFormFile = Request.Form.Files["img"];
-
 
         ActionResult = await _serviceBook.Add(CreatedBook, BookFormFile, ImageFormFile);
         if (ActionResult.Succeed)
@@ -84,7 +80,7 @@ public class AdminPageModel : PageModel
             _serviceBook.Update(CreatedBook);
             return RedirectToPage("/BookPage", new { Id = ActionResult.Value.Id });
         }
+        CreatedBook.Genres = _serviceGenre.GetAll().Where(genre => Request.Form["genres"].Contains(genre.Id.ToString())).ToList();
         return Page();
     }
-
 }

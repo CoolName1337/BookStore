@@ -7,9 +7,15 @@
 
 <div>
     <div class="vertical-nav"> 
-        <a data-ajax="true" data-ajax-url="/Account/ProfilePage?handler=MyBooks" data-ajax-update="#panel">Мои книги</a>
-        <a data-ajax="true" data-ajax-url="/Account/ProfilePage?handler=MyFavorites" data-ajax-update="#panel">Избранное</a>
-        <a data-ajax="true" data-ajax-url="/Account/ProfilePage?handler=MyReviews" data-ajax-update="#panel">Мои рецензии</a>
+        <a data-ajax="true" data-ajax-url="/Account/ProfilePage?handler=MyBooks" data-ajax-update="#panel">Мои книги 
+            <span class="items-count">@Model.AvailableBooks.Count</span>
+            </a>
+        <a data-ajax="true" data-ajax-url="/Account/ProfilePage?handler=MyFavorites" data-ajax-update="#panel">Избранное 
+            <span class="items-count">@Model.FavoriteBooks.Count</span>
+            </a>
+        <a data-ajax="true" data-ajax-url="/Account/ProfilePage?handler=MyReviews" data-ajax-update="#panel">Мои рецензии 
+            <span class="items-count">@Model.ProfileUser.Reviews.Count</span>
+            </a>
         <a data-ajax="true" data-ajax-url="/Account/ProfilePage?handler=Settings" data-ajax-update="#panel">Настройки</a>
     </div>
     <div class="profile-container">
@@ -17,8 +23,8 @@
         <div class="profile-info">
             <img class="profile-pic" src="/images/IMG_20221029_131941.jpg" />
             <span class="profile-name">@User.Identity.Name</span>
-            <span>Куплено книг:</span>
-            <span class="bought-books">@Model.AvailableBooks.Count()</span>
+            <span>Зарегестрирован:</span>
+            <span class="bought-books">@Model.ProfileUser.CreatedDate.ToString()</span>
         </div>
         <div id="panel">
         </div>
@@ -32,12 +38,30 @@
 
 @section Scripts{
     <script>
+
+        $(document).on("click", ".delete-review", (e) => {
+            $.ajax({
+                url: `/BookPage?handler=Review` +
+                    `&reviewId=${$(e.currentTarget).parent().find('input[name="reviewId"]').val()}` +
+                    `&userId=${$(e.currentTarget).parent().find('input[name="userId"]').val()}`,
+                type: "DELETE",
+                contentType: "application/json",
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                success: (res) => {
+                    $(e.currentTarget).parent().parent().parent().remove();
+                }
+            });
+        })
+
         $(document).on("click", ".vertical-nav a", (e) => {
             $(document.querySelectorAll(".vertical-nav a")).each((ind, el) => {
                 el.classList.remove("selected");
                 if (e.currentTarget == el) el.classList.add("selected");
             });
         });
+
     </script>
     <script src="/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
 }

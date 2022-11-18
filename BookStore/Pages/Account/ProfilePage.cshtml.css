@@ -57,3 +57,10 @@
     word-wrap: anywhere;
     font-size: 40px;
 }
+
+.items-count{
+    font-size:18px;
+    background-color:#dbdbdb;
+    border-radius:20px;
+    padding:8px;
+}

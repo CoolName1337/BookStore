@@ -24,6 +24,8 @@ public class ServiceBook : IServiceBook
         if (string.IsNullOrWhiteSpace(book.Description)) actionResult.Errors.Add("Описание не указано");
         if (string.IsNullOrWhiteSpace(book.Writer)) actionResult.Errors.Add("Писатель не указан");
         if (book.Price < 0) actionResult.Errors.Add("Цена должна быть числом и неменьше нуля");
+        if (book.AgeLimit < 0) actionResult.Errors.Add("Возрастно ограничение должно быть числом и неменьше нуля");
+        if (book.Pages < 0) actionResult.Errors.Add("Количество страниц должно быть числом и неменьше нуля");
         if (bookFile == null) actionResult.Errors.Add("Файл книги не указан");
         else book.SourceFile = await FileService.Save(bookFile);
         if (imageFile == null) actionResult.Errors.Add("Картинка не указана");

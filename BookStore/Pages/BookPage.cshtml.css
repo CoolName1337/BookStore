@@ -274,11 +274,6 @@ button.review-btn{
     font-size: 24px;
     font-weight:bold;
 }
-.review-user-rating{
-    font-weight:bold;
-    font-size:24px;
-}
-
 .rate-review-container {
     margin-top:10px;
     color: gray;

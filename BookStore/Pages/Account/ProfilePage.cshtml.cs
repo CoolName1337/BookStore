@@ -51,4 +51,12 @@ public class ProfilePageModel : PageModel
             ViewData = this.ViewData
         };
     }
+    public IActionResult OnGetSettings()
+    {
+        return new PartialViewResult()
+        {
+            ViewName = "_ProfileSettings",
+            ViewData = this.ViewData
+        };
+    }
 }

@@ -49,3 +49,28 @@ a.review-book-title{
     background-color: red;
     color: white;
 }
+
+.rate-review-container {
+    margin-top:10px;
+    color: gray;
+    display:flex;
+}
+.rate-review-container div.like-container, div.dislike-container {
+    border: 2px solid gray;
+    width: 60px;
+    display: flex;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.rate-review-container div div {
+    width: 100%;
+    margin:auto;
+    text-align:center;
+}
+
+div.selected {
+    background-color: gray;
+    color: white;
+}

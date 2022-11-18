@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -57,11 +57,10 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <li class="dropdown" style="float:right;">
-                    <a class="drop-profile" class="nav-a" asp-page="Account/ProfilePage">@User.Identity.Name</a>
+                    <a class="drop-profile" class="nav-a" href="/Account/ProfilePage">@User.Identity.Name</a>
 
                     <div class="dropdown-content">
-                        <a href="/Account/Favorite">Избранное</a>
-                        <a href="/Account/MyBooks">Мои книги</a>
+                        <a href="/Account/ProfilePage">Профиль</a>
                         @if (User.IsInRole("admin") || User.IsInRole("creator"))
                         {
                             <a asp-page="/Admin/AdminPage">Admin Page</a>
@@ -99,7 +98,7 @@
 
     @await RenderSectionAsync("Scripts", required: false)
     <script>
-        $(".selectBox").click((e) => {
+        $(document).on("click", ".selectBox", (e)=>{
             $(e.target).parent().children(".checkboxes").toggleClass("hidden");
         });
 
@@ -121,35 +120,6 @@
             });
 
         });
-
-        //$(".btn-search").click((e) => {
-        //    var incls = [];
-
-        //    $('input[name="includingGenres"]:checked').each((ind, el) => {
-        //        incls.push(el.value);
-        //    });
-        //    var excls = [];
-        //    $('input[name="excludingGenres"]:checked').each((ind, el) => {
-        //        excls.push(el.value);
-        //    });
-        //    var filter = {
-        //        searchRequest: $(".input-search").val(),
-        //        inclGenres: incls,
-        //        exclGenres: excls
-        //    }
-        //    $.ajax({
-        //        url: "/SearchResult",
-        //        type: "GET",
-        //        data: JSON.stringify(filter),
-        //        dataType: 'json',
-        //        contentType: "application/json",
-
-        //        beforeSend: (xhr) => {
-        //            xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
-        //        },
-        //    });
-        //})
-
     </script>
 </body>
 </html>

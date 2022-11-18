@@ -184,6 +184,7 @@
 @section Scripts{
     <script>
 
+        // Handler for rate review
         $(document).on("click", ".like-container, .dislike-container", (e) => {
             $.ajax({
                 url: `/BookPage?handler=ReviewRate` +

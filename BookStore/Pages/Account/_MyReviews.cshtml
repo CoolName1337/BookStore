@@ -14,6 +14,8 @@
             <a href="@BookHref"><img class="review-book-preview" src=@book.SourceImage /></a>
             <div class="review-text-container">
                 <div class="review-header">
+                    <input name="userId" value="@Model.ProfileUser.Id" hidden />
+                    <input name="reviewId" value="@review.Id" hidden />
                     <a class="review-book-title" href="@BookHref">@book.Title</a>
                     <button class="delete-review">Удалить рецензию</button>
                     <span class="rating-for-book">
@@ -30,11 +32,11 @@
                 <div class="rate-review-container">
                     <div class="like-container @(selectLike ? "selected" : "")">
                         <div class="like-count">@review.Rates.Count(rate=>rate.Like)</div>
-                        <button class="review-like-btn" value="true">👍</button>
+                        <span class="review-like-btn" value="true">👍</span>
                     </div>
                     <div class="dislike-container @(selectDislike ? "selected" :"" )">
                         <div class="dislike-count">@review.Rates.Count(rate=>!rate.Like)</div>
-                        <button class="review-dislike-btn" value="false">👎</button>
+                        <span class="review-dislike-btn" value="false">👎</span>
                     </div>
                 </div>
             </div>

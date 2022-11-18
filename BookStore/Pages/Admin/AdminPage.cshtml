@@ -3,109 +3,131 @@
 @{
     ViewData["Title"] = "Admin Page";
 }
-<div class="admin-nav">
-    <button class="admin-button" value="0">
-        Добавить книгу
-    </button>
-    <button class="admin-button" value="1">
-        Редактировать жанры
-    </button>
-</div>
+@Html.AntiForgeryToken()
 <div class="content">
-    <form method="post" enctype="multipart/form-data">
-        <span style="color:red">
-            @foreach (var ex in Model.ActionResult.Errors)
-            {
-                <span>@ex</span>
-
-                <br />
-            }
-        </span>
-        <div class="create-container admin-page">
-            <input class="input-file data" type="file" name="file" /><br />
-            <div class="handler">
-                <input class="input-img data" type="file" name="img" />
-                <div>
-                    <input class="input-title data" name="title" placeholder="Название" value="@Model.CreatedBook.Title" /><br />
-                    <input class="input-writer data" name="writer" placeholder="Писатель" value="@Model.CreatedBook.Writer" /><br /><br />
-
-
-                    <div class="multiselect">
-                        <div class="selectBox">
-                            Добавить жанры
-                        </div>
-                        <div class="checkboxes hidden">
-                            @foreach (var item in Model._serviceGenre.GetAll())
-                            {
-                                <label>
-                                    <input type="checkbox" name="genres" value=@item.Id />@item.Value
-                                </label>
-                            }
-                        </div>
-                    </div>
-
-
-
-                    <input class="input-price data" name="price" placeholder="Цена" value="@Model.CreatedBook.Price"/><br />
-                    <button class="input-submit create-btn" type="submit">Сохранить</button>
-                </div>
+    <div class="genres-container">
+        <div class="edit-genres-container">
+            <div class="genres-title-container">
+                <span class="genres-title">Жанры</span>
+                <div class="toggle-genres-container">˅</div>
             </div>
-            <textarea class="input-descr" placeholder="Описание" name="descr">@Model.CreatedBook.Description</textarea><br /><br />
-        </div>
-
-    </form>
-    <form>
-        <div class="edit-genres-container admin-page hidden">
-            @Html.AntiForgeryToken()
-
-            <div id="genres">
+            <div id="genres" class="hidden">
                 <div class="genre-container">
                     <input class="genre-name" id="createGenreInput" />
                     <button class="create-genre genre" type="button" id="add">+</button>
                 </div>
             </div>
-            <div id="msg"></div>
+            <div id="msg" style="color:red"></div>
         </div>
-    </form>
+    </div>
+    <div class="book-container">
+        <form method="post" asp-page-handler="CreateBook" enctype="multipart/form-data">
+            <span style="color:red">
+                @foreach (var ex in Model.ActionResult.Errors)
+                {
+                    <span>@ex</span>
+
+                    <br />
+                }
+            </span>
+            <div class="create-container">
+                <input class="input-file data" type="file" name="file" /><br />
+                <div class="handler">
+                    <input class="input-img data" type="file" name="img" />
+                    <div>
+                        <input class="input-title data" name="title" placeholder="Название" value="@Model.CreatedBook.Title" /><br />
+                        <input class="input-writer data" name="writer" placeholder="Писатель" value="@Model.CreatedBook.Writer" /><br /><br />
+
+
+                        <div class="multiselect">
+                            <div class="selectBox">
+                                Добавить жанры
+                            </div>
+                            <div class="checkboxes book-genres hidden">
+                                @foreach (var item in Model._serviceGenre.GetAll())
+                                {
+                                    bool isChecked = Model.CreatedBook.Genres.Contains(item);
+                                    <label>
+                                        @if(isChecked){
+                                            <input type="checkbox" name="genres" value="@item.Id" checked/>@item.Value
+                                        }
+                                        else{
+                                            <input type="checkbox" name="genres" value="@item.Id"/>@item.Value
+                                        }
+
+                                    </label>
+                                }
+                            </div>
+                        </div>
+                        <input class="input-price data" name="price" placeholder="Цена" value="@Model.CreatedBook.Price" /><br />
+                        <input class="input-age-limit data" name="ageLimit" placeholder="Возврастное ограничение" value="@Model.CreatedBook.AgeLimit" /><br />
+                        <input class="input-pages-count data" name="pagesCount" placeholder="Количество страниц" value="@Model.CreatedBook.Pages" /><br />
+                        <input class="input-creating-date data" type="date" name="creatingDate" placeholder="Дата создания" value="@Model.CreatedBook.DateOfCreation" /><br />
+                    </div>
+                </div>
+                <textarea class="input-descr" placeholder="Описание" name="descr">@Model.CreatedBook.Description</textarea><br /><br />
+                <button class="input-submit create-btn" type="submit">Сохранить</button>
+            </div>
+
+        </form>
+    </div>
+
 </div>
 
-
 @section Styles{
-    <link rel="stylesheet" href="~/css/GenreEditorStyles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Admin/AdminPageStyles.css" asp-append-version="true" />
 }
 
 @section Scripts{
+
     <script>
 
-
-        $(".admin-button").click((e) => {
-            $(".admin-page").each((index, el) => $(el).addClass("hidden"));
-            document.getElementsByClassName("admin-page").item(e.target.value).classList.remove("hidden");
+        var genres;
+        $(document).on("input", "input.genre-name", (e) => {
+            $('#genres').children().slice(1).remove();
+            genres.forEach((genre) => {
+                if (genre.value.includes(e.currentTarget.value)) {
+                    $("#genres").append('<div class="genre-container"><label class="genre-name">' +
+                        genre.value + '</label><button type="button" class="remove-genre genre" name="delete" value = "' +
+                        genre.value + '">╳</button></div>');
+                }
+            });
         });
 
+        $(document).on("click", ".toggle-genres-container", (e)=>{
+            $("#genres").toggleClass("hidden");
+            $(e.currentTarget).text($(e.currentTarget).text() == "˄" ? "˅" : "˄");
+        });
 
-        $(document).ready(() => {
+        $(".edit-genres-container").ready(() => {
             $.ajax({
                 url: "/Admin/AdminPage?handler=SelectAll",
                 type: "GET",
                 dataType: "json",
                 contentType: "application/json",
                 success: (data) => {
-                    data.forEach((genre) => {
-                        $("#genres").append('<div class="genre-container"><label class="genre-name">' +
-                            genre.value + '</label><button type="button" class="remove-genre genre" name="delete" value = "' +
-                            genre.value + '">╳</button></div>');
-                    });
+                    ResetGenres(data);
                 },
                 error: () => {
                     $("#msg").html("Error while making Ajax call!");
                 }
             });
-
         });
 
+        function ResetGenres(data){
+            genres = data;
+            $("#genres").children().slice(1).remove();
 
-        $("#add").click(() => {
+            data.forEach((genre) => {
+                $("#genres").append('<div class="genre-container"><label class="genre-name">' +
+                    genre.value + '</label><button type="button" class="remove-genre genre" name="delete" value = "' +
+                    genre.value + '">╳</button></div>');
+
+            });
+        }
+
+
+        $(document).on("click", "#add", () => {
             $.ajax({
                 url: "/Admin/AdminPage?handler=Create&genreName=" + $("#createGenreInput").val(),
                 type: "POST",
@@ -114,19 +136,20 @@
                     xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
                 },
 
-                success: (genre) => {
-                    $("#genres").append('<div class="genre-container"><label class="genre-name">' +
-                        genre.value + '</label><button type="button" class="remove-genre genre" name="delete" value = "' +
-                        genre.value + '">╳</button></div>');
+                success: (data) => {
+                    ResetGenres(data); 
+                    $(".book-genres").empty();
+                    data.forEach((genre) => {
+                        $(".book-genres").append(`<label><input type = "checkbox" name = "genres" value = "${genre.id}" />${genre.value}</label>`);
+                    });
                     $("#msg").html(" ");
                 },
                 error: () => {
                     $("#msg").html("Такой жанр уже существует");
-                }   
+                }
             });
         });
-
-        $("body").on("click", "[name='delete']", (e) => {
+        $(document).on("click", "[name='delete']", (e) => {
             $.ajax({
                 url: "/Admin/AdminPage?handler=Delete&genreName=" + e.target.value,
                 type: "DELETE",
@@ -135,14 +158,22 @@
                     xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
                 },
 
-                success: (genre) => {
-                    $(e.target).parent().remove();
+                success: (data) => {
+                    ResetGenres(data); 
+                    $(".book-genres").empty();
+                    data.forEach((genre) => {
+                        $(".book-genres").append(`<label><input type = "checkbox" name = "genres" value = "${genre.id}" />${genre.value}</label>`);
+                    });
+                    
                 },
                 error: () => {
                     $("#msg").html("error");
                 }
             });
         });
+
     </script>
+
+    <script src="/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
 }
 
