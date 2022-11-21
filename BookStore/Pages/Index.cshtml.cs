@@ -8,8 +8,8 @@ public class IndexModel : PageModel
 {
     public readonly IServiceUser _serviceUser;
     public readonly IServiceBook _serviceBook;
-
     public IEnumerable<Book> Books { get; set; }
+
     public IndexModel(IServiceBook serviceBook, IServiceUser serviceUser)
     {
         _serviceUser = serviceUser;

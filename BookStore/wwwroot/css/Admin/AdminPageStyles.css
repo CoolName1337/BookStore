@@ -1,9 +1,6 @@
 ﻿
 
 /*////////////////////////////////////////////   Create book   ////////////////////////////////////////////*/
-.book-container{
-    margin-top:50px;
-}
 
 
 div.content {
@@ -23,8 +20,9 @@ div.content {
     height: 600px;
 }
 
-div.create-container{
+div.create-container {
     display: inline-grid;
+    margin-top: 60px;
 }
 
 .input-file {
@@ -67,6 +65,10 @@ input.data:not(.input-img)  {
     height: 40px;
 }
 
+.data-info {
+    font-size: 12px;
+    font-weight: bold;
+}
 /*////////////////////////////////////////////   Genres   ////////////////////////////////////////////*/
 
 .content {
@@ -128,4 +130,41 @@ input.genre-name:focus {
 }
 .create-genre:hover, .remove-genre:hover {
     background-color: #111;
+}
+
+.selectBox {
+    margin: 5px 0 5px 0;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #808080;
+    font-size: 16px;
+    background-repeat: no-repeat;
+    padding: 12px;
+    position: relative;
+    color: black;
+}
+
+div.checkboxes {
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    border: 2px solid #111;
+    border-radius: 4px;
+    height: 150px;
+    overflow: auto;
+}
+
+div.checkboxes label {
+    display: block;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10px;
+    color:black;
+    transition:all 0.4s ease;
+}
+
+div.checkboxes label:hover {
+    background-color: #111;
+    color: white;
 }

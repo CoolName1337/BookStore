@@ -15,10 +15,9 @@ public class SearchResultModel : PageModel
     {
         _serviceBook = serviceBook;
     }
-
     public IActionResult OnPost()
     {
-        RequestString = Request.Form["search"];
+        RequestString = Request.Form["search"].ToString();
         var IncludingGenres = Request.Form["IncludingGenres"].Select(str=>int.Parse(str));
         var ExcludingGenres = Request.Form["ExcludingGenres"].Select(str=>int.Parse(str));
 

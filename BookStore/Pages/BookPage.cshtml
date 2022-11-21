@@ -25,12 +25,13 @@
 
             <h3 class="genres-title">Жанры:</h3>
             <div class="genres">
-                @foreach (var genre in Model.TakedBook.Genres)
-                {
-                    <div class="genre">
-                        <a class="genre-ref" href="#">@genre.Value</a>
-                    </div>
-                }
+                <form method="post" asp-page="/SearchResult">
+                    @foreach (var genre in Model.TakedBook.Genres)
+                    {
+                        <button class="genre-ref" type="submit" name="IncludingGenres" value="@genre.Id">@genre.Value</button>
+                    }
+                </form>
+                
             </div>
 
             <div class="rating-and-review-container" style="display:flex">

@@ -11,6 +11,7 @@ div.title {
 div.content {
     max-width: 1200px;
     margin: auto;
+    margin-top: 60px;
 }
 
 div.title-container {
@@ -176,21 +177,20 @@ svg[name='star'] {
     margin-bottom: 20px;
 }
 
-.genre {
+button.genre-ref {
+    white-space: nowrap;
     display: inline-flex;
     background-color: #333;
     border-radius: 10px;
+    border: none;
     font-size: 20px;
     transition: all 0.4s ease;
-}
-
-.genre-ref {
     text-decoration: none;
     color: white;
     padding: 5px 20px;
 }
 
-.genre:hover {
+.genre-ref:hover {
     background-color: #222;
 }
 

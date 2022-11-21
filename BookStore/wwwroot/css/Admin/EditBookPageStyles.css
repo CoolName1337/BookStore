@@ -1,0 +1,11 @@
+﻿
+.update-btn {
+    background-color: #4cff00;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #ff2323;
+    color: white;
+    margin-top:100px;
+}

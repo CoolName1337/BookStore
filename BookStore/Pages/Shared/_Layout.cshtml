@@ -22,14 +22,13 @@
     <div class="all-nav-panel">
         <ul class="nav-panel">
             <li>
-                <a class="nav-a" asp-page="/Index">BookStore</a>
+                <a asp-page="/Index">BookStore</a>
             </li>
             <li>
                 <form method="post" asp-page="/SearchResult">
                     <div class="dropdown-search">
                         <button onclick="myFunction()" class="dropbtn-search show" type="button" id="myDropdownBtn">🔍</button>
                         <div id="myDropdown" class="dropdown-content-search">
-                            @Html.AntiForgeryToken()
 
                             <input class="input-search" type="search" name="search" placeholder="Любые ключевые слова..." />
                             <div class="multiselect">
@@ -52,6 +51,15 @@
                         </div>
                     </div>
                 </form>
+            </li>
+            <li>
+                <a asp-page="/WhatToRead">Че почитать?</a>
+            </li>
+            <li>
+                <a asp-page="#">Новенькое че-нить</a>
+            </li>
+            <li>
+                <a asp-page="#">Популярное</a>
             </li>
 
             @if (User.Identity.IsAuthenticated)

@@ -2,7 +2,6 @@ using BookStore.BAL.Interfaces;
 using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace BookStore.Pages;
 
@@ -44,20 +43,13 @@ public class BookPageModel : PageModel
     {
         if (!User.Identity.IsAuthenticated) return RedirectToPage("/Account/Login");
 
-        CurrentUser = _serviceUser.GetUser(User);
-        TakedBook = _serviceBook[int.Parse(Request.Form["id"])];
+        PostInitialize(int.Parse(Request.Form["id"]));
         switch (interact_btn)
         {
             case "dwn":
                 return Redirect(_serviceBook.GetCorrectPath(TakedBook));
             case "buy":
                 await _serviceUser.TryBuyBook(CurrentUser, TakedBook);
-                break;
-            default:
-                if (int.TryParse(interact_btn, out int rating) && rating > 0 && rating <= 5)
-                {
-                    await _serviceRating.TryRateBook(CurrentUser, TakedBook, rating);
-                }
                 break;
         }
         return RedirectToPage("/BookPage", new { Id = Request.Form["Id"] });
@@ -116,4 +108,6 @@ public class BookPageModel : PageModel
             }
             );
     }
+
+
 }

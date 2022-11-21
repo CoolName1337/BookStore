@@ -11,8 +11,8 @@ public interface IServiceBook
     Task<ActionResult<Book>> Edit(int id, Book book, IFormFile bookFile, IFormFile imageFile);
     string GetCorrectPath(Book book);
     void Delete(Book book);
-    void AddGenres(Book book, Genre[] genres);
-    void RemoveGenres(Book book, Genre[] genres);
+    void AddGenres(Book book, IEnumerable<Genre> genres);
+    void RemoveGenres(Book book, IEnumerable<Genre> genres);
     IEnumerable<Book> GetBooks();
     IEnumerable<Book> GetBooks(Func<Book, bool> predicate);
     Task Update(Book book);

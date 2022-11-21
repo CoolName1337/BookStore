@@ -10,6 +10,7 @@ namespace BookStore.Pages.Admin;
 public class EditBookModel : PageModel
 {
     private readonly IServiceBook _serviceBook;
+    public readonly IServiceGenre _serviceGenre;
     public Book ChangedBook { get; set; }
     public BAL.Services.ActionResult<Book> ActionResult = new();
 
@@ -17,9 +18,10 @@ public class EditBookModel : PageModel
     public IFormFile ImageFormFile { get; set; }
 
 
-    public EditBookModel(IServiceBook serviceBook)
+    public EditBookModel(IServiceBook serviceBook, IServiceGenre serviceGenre)
     {
         _serviceBook = serviceBook;
+        _serviceGenre = serviceGenre;
     }
 
     public void OnGet(int id)
@@ -27,43 +29,48 @@ public class EditBookModel : PageModel
         ChangedBook = _serviceBook[id];
     }
 
-    public async Task<IActionResult> OnPostAsync(int id, bool WantToUpdate, bool WantToDelete)
+    public async Task<IActionResult> OnPostAsync(int id, bool WantToDelete)
     {
         if (WantToDelete)
         {
             _serviceBook.Delete(_serviceBook[id]);
             return RedirectToPage("/Index");
         }
-        if (!WantToUpdate)
-        {
-            return RedirectToPage("/BookPage", new { Id = id });
-        }
-
         BookFormFile = Request.Form.Files["file"];
         ImageFormFile = Request.Form.Files["img"];
+        DateTime.TryParse(Request.Form["creatingDate"], out DateTime res);
 
         Book book = new()
         {
             Title = Request.Form["title"],
             Writer = Request.Form["writer"],
             Description = Request.Form["descr"],
+            DateOfCreation = res
         };
-        if (!decimal.TryParse(Request.Form["price"], out decimal numPrice) || numPrice < 0)
-        {
-            book.Price = -1;
-        }
-        else
-        {
-            book.Price = numPrice;
-        }
+
+        if (!decimal.TryParse(Request.Form["price"], out decimal numPrice) || numPrice< 0) book.Price = -1;
+        else book.Price = numPrice;
+        
+        if (!int.TryParse(Request.Form["ageLimit"], out int ageLimit) || ageLimit< 0) book.AgeLimit = -1;
+        else book.AgeLimit = ageLimit;
+        
+        if (!int.TryParse(Request.Form["pagesCount"], out int pagesCount) || pagesCount< 0) book.Pages = -1;
+        else book.Pages = pagesCount;
 
         ActionResult = await _serviceBook.Edit(id, book, BookFormFile, ImageFormFile);
 
         ChangedBook = ActionResult.Value;
         if (ActionResult.Succeed)
         {
-            return RedirectToPage("/BookPage", new { Id = ChangedBook.Id });
+            _serviceBook.RemoveGenres(ChangedBook, ChangedBook.Genres);
+            _serviceBook.AddGenres(
+                ChangedBook,
+                _serviceGenre.GetAll().Where(genre => Request.Form["genres"].Contains(genre.Id.ToString())).ToArray()
+                );
+            _serviceBook.Update(ChangedBook);
+            return RedirectToPage("/BookPage", new { Id = ActionResult.Value.Id });
         }
+        ChangedBook.Genres = _serviceGenre.GetAll().Where(genre => Request.Form["genres"].Contains(genre.Id.ToString())).ToList();
         return Page();
     }
 }

@@ -1,0 +1,72 @@
+﻿
+div.container {
+    margin-top: 60px;
+}
+
+
+.scroll-container {
+    overflow: auto;
+    white-space: nowrap;
+    display: flex;
+}
+
+.book-container {
+    width: 220px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    margin: 8px;
+}
+
+.book-container a {
+    display: block;
+}
+
+img.book-preview {
+    width: 220px;
+    height: 300px;
+}
+a{
+    text-decoration:none;
+}
+
+a.title {
+    font-weight: bold;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition:all 0.4s ease;
+}
+
+.writer, a {
+    color: black;
+}
+a.title:hover {
+    color: #646464;
+}
+
+
+.container-title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+
+.more-books {
+    width: 220px;
+    height: 96%;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    margin: 8px;
+    padding-top: 65%;
+    text-align: center;
+    box-sizing: border-box;
+}
+.more-books span {
+    transition: all 0.4s ease;
+    font-size: 30px;
+    color: gray;
+}
+.more-books:hover span {
+    color: black;
+}

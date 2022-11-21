@@ -6,28 +6,66 @@
 <div class="content">
     <form method="post" enctype="multipart/form-data">
         <div class="create-container">
-            <input class="input-file" type="file" name="file" value="@Model.ChangedBook.SourceFile" /><br />
-            <div class="handler">
-                <input class="input-img" type="file" name="img" value="@Model.ChangedBook.SourceImage" />
-                <div>
-                    <input class="input-title" name="title" placeholder="Название" value="@Model.ChangedBook.Title" /><br />
-                    <input class="input-writer" name="writer" placeholder="Писатель" value="@Model.ChangedBook.Writer" /><br /><br />
-                    <textarea class="input-descr" placeholder="Описание" name="descr">@Model.ChangedBook.Description</textarea><br /><br />
-                    <input class="input-price" name="price" placeholder="Цена" value="@Model.ChangedBook.Price" /><br />
-                    <button class="input-submit update-btn" type="submit" name="WantToUpdate" value="true">Сохранить</button>
-                    <button class="input-submit cancel-btn" type="submit">Отмена</button>
-                </div>
-            </div>
             <span style="color:red">
-                @foreach (string err in Model.ActionResult.Errors)
+                @foreach (var ex in Model.ActionResult.Errors)
                 {
-                    <span>@err</span>
+                    <span>@ex</span>
+
                     <br />
                 }
             </span>
+            <input class="input-file data" type="file" name="file" title="тут файл книги" /><br />
+            <div class="handler">
+                <input class="input-img data" type="file" name="img" title="тут картинка" />
+                <div>
+                    <span class="data-info">Наименование</span><br />
+                    <input class="input-title data" name="title" placeholder="Название" value="@Model.ChangedBook.Title" /><br />
+                    <span class="data-info">Писатель</span><br />
+                    <input class="input-writer data" name="writer" placeholder="Писатель" value="@Model.ChangedBook.Writer" /><br /><br />
+                    <div class="multiselect">
+                        <div class="selectBox">
+                            Добавить жанры
+                        </div>
+                        <div class="checkboxes book-genres hidden">
+                            @foreach (var item in Model._serviceGenre.GetAll())
+                            {
+                                bool isChecked = Model.ChangedBook.Genres.Contains(item);
+                                <label>
+                                    @if (isChecked)
+                                    {
+                                        <input type="checkbox" name="genres" value="@item.Id" checked />
+
+                                        @item.Value
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" name="genres" value="@item.Id" />
+
+                                        @item.Value
+                                    }
+
+                                </label>
+                            }
+                        </div>
+                    </div>
+                    <span class="data-info">Цена</span><br />
+                    <input class="input-price data" name="price" placeholder="Цена" value="@Model.ChangedBook.Price" /><br />
+                    <span class="data-info">Возрастное ограничение</span><br />
+                    <input class="input-age-limit data" name="ageLimit" placeholder="Возврастное ограничение" value="@Model.ChangedBook.AgeLimit" /><br />
+                    <span class="data-info">Количество страниц</span><br />
+                    <input class="input-pages-count data" name="pagesCount" placeholder="Количество страниц" value="@Model.ChangedBook.Pages" /><br />
+                    <span class="data-info">Дата написания</span><br />
+                    <input class="input-creating-date data" type="date" name="creatingDate" placeholder="Дата создания" value="@Model.ChangedBook.DateOfCreation.ToString("yyyy-MM-dd")" /><br />
+                </div>
+            </div>
+            <textarea class="input-descr" placeholder="Описание" name="descr">@Model.ChangedBook.Description</textarea><br /><br />
+            <button class="input-submit update-btn" type="submit">Сохранить</button>
             <button class="input-submit delete-btn" type="submit" name="WantToDelete" value="true">Удалить</button>
         </div>
-
-
     </form>
 </div>
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/Admin/AdminPageStyles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Admin/EditBookPageStyles.css" asp-append-version="true" />
+}

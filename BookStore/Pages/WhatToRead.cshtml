@@ -1,0 +1,57 @@
+﻿@page
+@model BookStore.Pages.WhatToReadModel
+@{
+    ViewData["Title"] = "Что почитать?";
+}
+
+<div class="popular-books">
+    <div class="container-title">Популярное</div>
+    <div class="scroll-container">
+        @foreach (var book in Model._serviceBook.GetBooks().OrderBy(book=>book.Bought).Take(10))
+        {
+            string BookHref = $"/BookPage?id={book.Id}";
+            <div class="book-container">
+                <a href=@BookHref><img class="book-preview" src=@book.SourceImage /></a>
+                <a href=@BookHref class="title" title="@book.Title">@book.Title</a>
+                <div class="writer">@book.Writer</div>
+            </div>
+        }
+        <a asp-page="">
+            <div class="more-books">
+                <span>Ещё...</span>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+<div class="new-books">
+    <div class="container-title">Новинки</div>
+    <div class="scroll-container">
+        @foreach (var book in Model._serviceBook.GetBooks().OrderBy(book => book.AddingDate).Take(10))
+        {
+            string BookHref = $"/BookPage?id={book.Id}";
+            <div class="book-container">
+                <a href=@BookHref><img class="book-preview" src=@book.SourceImage /></a>
+                <a href=@BookHref class="title" title="@book.Title">@book.Title</a>
+                <div class="writer">@book.Writer</div>
+            </div>
+        }
+        <a asp-page="">
+            <div class="more-books">
+                <span>Ещё...</span>
+            </div>
+        </a>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/BooksPage/WhatToReadStyles.css" asp-append-version="true" />
+}

@@ -42,7 +42,6 @@ button {
     background-color: #333;
 }
 
-/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
     display: block;
 }
@@ -103,7 +102,7 @@ button {
 
 
 
-.selectBox {
+.dropdown-content-search .selectBox {
     margin: 5px 0 5px 0;
     cursor: pointer;
     width: 100%;
@@ -118,7 +117,7 @@ button {
 }
 
 
-div.checkboxes {
+.dropdown-content-search div.checkboxes {
     width: 100%;
     box-sizing: border-box;
     position: relative;
@@ -129,7 +128,7 @@ div.checkboxes {
     overflow: auto;
 }
 
-div.checkboxes label {
+.dropdown-content-search div.checkboxes label {
     display: block;
     color: white;
     cursor: pointer;
@@ -137,7 +136,7 @@ div.checkboxes label {
     padding: 10px;
 }
 
-div.checkboxes label:hover {
+.dropdown-content-search div.checkboxes label:hover {
     background-color: #111;
 }
 

@@ -31,11 +31,13 @@
                 }
             </span>
             <div class="create-container">
-                <input class="input-file data" type="file" name="file" /><br />
+                <input class="input-file data" type="file" name="file" title="тут файл книги" /><br />
                 <div class="handler">
-                    <input class="input-img data" type="file" name="img" />
+                    <input class="input-img data" type="file" name="img" title="тут картинка" />
                     <div>
+                        <span class="data-info">Наименование</span><br />
                         <input class="input-title data" name="title" placeholder="Название" value="@Model.CreatedBook.Title" /><br />
+                        <span class="data-info">Писатель</span><br />
                         <input class="input-writer data" name="writer" placeholder="Писатель" value="@Model.CreatedBook.Writer" /><br /><br />
 
 
@@ -59,10 +61,14 @@
                                 }
                             </div>
                         </div>
+                        <span class="data-info">Цена</span><br />
                         <input class="input-price data" name="price" placeholder="Цена" value="@Model.CreatedBook.Price" /><br />
+                        <span class="data-info">Возрастное ограничение</span><br />
                         <input class="input-age-limit data" name="ageLimit" placeholder="Возврастное ограничение" value="@Model.CreatedBook.AgeLimit" /><br />
+                        <span class="data-info">Количество страниц</span><br />
                         <input class="input-pages-count data" name="pagesCount" placeholder="Количество страниц" value="@Model.CreatedBook.Pages" /><br />
-                        <input class="input-creating-date data" type="date" name="creatingDate" placeholder="Дата создания" value="@Model.CreatedBook.DateOfCreation" /><br />
+                        <span class="data-info">Дата написания</span><br />
+                        <input class="input-creating-date data" type="date" name="creatingDate" placeholder="Дата создания" value="@Model.CreatedBook.DateOfCreation.ToString("yyyy-mm-dd")" /><br />
                     </div>
                 </div>
                 <textarea class="input-descr" placeholder="Описание" name="descr">@Model.CreatedBook.Description</textarea><br /><br />

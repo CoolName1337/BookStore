@@ -80,12 +80,12 @@ public class ServiceBook : IServiceBook
         return "files/" + System.Net.WebUtility.UrlEncode(file.Replace("/files/", "")).Replace("+", " ").Replace(" ", "%20");
     }
 
-    public void AddGenres(Book book, Genre[] genres)
+    public void AddGenres(Book book, IEnumerable<Genre> genres)
     {
         book.Genres.AddRange(genres);
         book.Genres = book.Genres.Distinct().ToList();
     }
-    public void RemoveGenres(Book book, Genre[] genres)
+    public void RemoveGenres(Book book, IEnumerable<Genre> genres)
     {
         book.Genres = book.Genres.Where(genre => !genres.Contains(genre)).ToList();
     }
