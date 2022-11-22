@@ -31,9 +31,9 @@
                 }
             </span>
             <div class="create-container">
-                <input class="input-file data" type="file" name="file" title="тут файл книги" /><br />
+                <input class="input-file data" accept=".pdf, .doc, .docx, .fb2" type="file" name="file" title="тут файл книги" /><br />
                 <div class="handler">
-                    <input class="input-img data" type="file" name="img" title="тут картинка" />
+                    <input class="input-img data" accept="image/png,image/jpeg,image/gif" type="file" name="img" title="тут картинка" />
                     <div>
                         <span class="data-info">Наименование</span><br />
                         <input class="input-title data" name="title" placeholder="Название" value="@Model.CreatedBook.Title" /><br />

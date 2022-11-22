@@ -40,6 +40,7 @@ public class RepositoryUser : IRepositoryUser
     }
     public async Task<IdentityResult> Create(User user, string password)
     {
+        user.ProfilePicture = "/images/server/generalProfile.png";
         var result = await _userManager.CreateAsync(user, password);
         return result;
     }
@@ -74,6 +75,18 @@ public class RepositoryUser : IRepositoryUser
                 .ThenInclude(review => review.Rates)
             .Where(predicate);
     }
+
+    public User GetUserByName(string userName)
+    {
+        return _userManager.Users
+            .Include(user => user.AvailableBooks)
+            .Include(user => user.Ratings)
+            .Include(user => user.Favorites)
+            .Include(book => book.Reviews)
+                .ThenInclude(review => review.Rates)
+            .First(user => user.UserName == userName);
+    }
+
     public User this[string Id]
     {
         get => _userManager.Users

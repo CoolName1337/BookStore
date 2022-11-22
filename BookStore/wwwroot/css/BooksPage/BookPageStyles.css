@@ -1,0 +1,335 @@
+﻿
+h2 {
+    font-size: 24px;
+    margin: 0;
+}
+
+div.title {
+    align-items: center;
+}
+
+div.content {
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 60px;
+}
+
+div.title-container {
+    display: flex;
+}
+
+img.book-preview {
+    width: 440px;
+    height: 600px;
+    margin: 0 20px;
+}
+
+button {
+    transition: all 0.6s ease;
+}
+
+button.buy-btn {
+    background-color: #39c724;
+    border-style: none;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    width: 250px;
+    height: 50px;
+}
+
+button.buy-btn:hover {
+    background-color: darkgreen;
+}
+
+.fav-btn, .unfav-btn {
+    color: blueviolet;
+    background-color: pink;
+    border: none;
+    width: 50px;
+    font-size: 30px;
+    padding: 0;
+    margin-left: 10px;
+}
+
+button.unfav-btn {
+    border: 2px solid pink;
+    background-color: white;
+}
+
+button.fav-btn:hover, button.unfav-btn:hover {
+    background-color: #f18de6;
+}
+
+p {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+}
+
+img.setting-img {
+    width: 30px;
+    height: 30px;
+}
+
+
+.vertical-container {
+    margin-top: 40px;
+}
+.vertical-container-title {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.description{
+    font-size:20px;
+    margin-left:10px;
+}
+/*////////////////////////////////////////////      ★rating★      //////////////////////////////////////////////////////*/
+.filler {
+    position: absolute;
+    width: 100%;
+    background-color: #fcff00;
+    z-index: -1;
+    bottom: 0;
+}
+
+.rating-button {
+    border: 2px solid orange;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    position: relative;
+    display: inline-block;
+}
+
+.rating-button:hover {
+    cursor: pointer;
+}
+
+div.rating-droppanel {
+    display: none;
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    background-color: whitesmoke;
+    padding: 20px;
+    font-size: 20px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+div.dropdown-rating {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.rating-number {
+    font-size: 40px;
+    color: orange;
+}
+
+.rating-count {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+
+.stars-container {
+    margin-top: 12px;
+    display: flex;
+}
+
+div.dropdown-rating:hover .rating-droppanel {
+    display: block;
+}
+
+.rate-btn {
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: orange;
+    background:none;
+}
+
+svg[name='star'] {
+    cursor: pointer;
+}
+
+.star {
+    stroke-width: 1px;
+    fill-rule: nonzero;
+}
+
+.not-taked-star {
+    fill: white;
+    stroke: gray;
+}
+
+.not-taked-star:hover, .taked-star {
+    fill: orange;
+    stroke: none;
+}
+
+/*////////////////////////////////////////////      ★genres★      //////////////////////////////////////////////////////*/
+
+
+.genres {
+    margin-bottom: 20px;
+}
+
+button.genre-ref {
+    white-space: nowrap;
+    display: inline-flex;
+    background-color: #333;
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    transition: all 0.4s ease;
+    text-decoration: none;
+    color: white;
+    padding: 5px 20px;
+}
+
+.genre-ref:hover {
+    background-color: #222;
+}
+
+
+/*///////////////////////////////////////////      ★reviews★      /////////////////////////////////////////////////////*/
+
+
+.add-review-container {
+    width:100%;
+    margin-left: 10px;
+    margin-bottom: 6px;
+}
+
+.toggle-review-text-container {
+    height: 100%;
+    width: 100%;
+    font-size: 20px;
+    color: gray;
+    border: 1px solid gray;
+}
+
+.toggle-review-text-container:hover {
+    color: #585858;
+    border: 1px solid #585858;
+}
+
+.review-text-container {
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    background-color: white;
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    top: 100px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 20px;
+}
+
+textarea.review-text {
+    width: 100%;
+    height: 90%;
+    resize: none;
+    box-sizing: border-box;
+    font-size: 20px;
+    padding: 10px;
+}
+
+button.review-btn{
+    width:40%;
+    font-size: 20px;
+}
+
+.delete-review {
+    float:right;
+    padding:10px;
+    align-self: center;
+    color: red;
+    border: 1px solid red;
+}
+
+.delete-review:hover {
+    background-color: red;
+    color: white;
+}
+.review-container {
+    box-sizing: border-box;
+    padding: 20px;
+    margin-top: 30px;
+    margin-left: 10px;
+    font-size: 20px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+.created-date{
+    font-size:10px;
+    display:block;
+}
+.review-owner {
+    font-size: 30px;
+    font-weight:bold;
+}
+.review-owner-pic {
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    margin:0;
+    margin-right:8px;
+}
+.rate-review-container {
+    margin-top:10px;
+    color: gray;
+    display:flex;
+}
+.rate-review-container div.like-container, div.dislike-container {
+    cursor: pointer;
+    border: 2px solid gray;
+    width: 60px;
+    display: flex;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+.rate-review-container div button {
+    background:none;
+    border: none;
+    height: 100%;
+    width: 150%;
+    margin-right: 0;
+    margin-left:auto;
+}
+
+.rate-review-container div div {
+    width: 100%;
+    margin:auto;
+    text-align:center;
+}
+
+.selected{
+    background-color:gray;
+    color:white;
+}
+
+a.review-owner-container {
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+
+/*/////////////////////////////////////////      ★details★      ///////////////////////////////////////////////////*/
+
+.detailed-info {
+    font-size: 20px;
+    margin-left: 10px;
+    margin-top: 30px;
+}
+
+.info-div span:first-child{
+    margin-top:4px;
+    font-weight:bold;
+}

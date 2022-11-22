@@ -1,0 +1,26 @@
+﻿@page
+@model BookStore.Pages.FilterBooksPageModel
+@{
+    ViewData["Title"] = Model.FilterString;
+}
+<div class="all-books-container">
+    <ul class="books-container">
+        @foreach (var book in Model.FilterFunc(10))
+        {
+            string BookHref = $"/BookPage?id={book.Id}";
+            <li class="book-container">
+                <a href=@BookHref><img class="book-preview" src=@book.SourceImage /></a>
+                <div class="hover-book">
+                    <div class="hover-title">
+                        <a href=@BookHref class="title">@book.Title</a>
+                        <div class="writer">@book.Writer</div>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/BooksPage/FilterBooksPageStyles.css"/>
+}

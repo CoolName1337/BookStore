@@ -11,9 +11,8 @@
 
 <div class="content">
     <div class="title-container">
-        <img src=@Model.TakedBook.SourceImage alt="Картинка не найдена" />
+        <img class="book-preview" src="@Model.TakedBook.SourceImage" alt="Картинка не найдена" />
         <div>
-            @Html.AntiForgeryToken()
             <div class="title" style="display:flex">
                 <h2>@Model.TakedBook.Title</h2>
                 @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.IsInRole("creator")))
@@ -142,7 +141,10 @@
                     <div class="review-header">
                         <input name="userId" value="@user.Id" hidden />
                         <input name="reviewId" value="@review.Id" hidden />
-                        <span class="review-owner">@user.UserName</span>
+                        <a class="review-owner-container" asp-page="/Account/ProfilePage" asp-route-userName="@user.UserName">
+                            <img class="review-owner-pic" src="@user.ProfilePicture" />
+                            <span class="review-owner">@user.UserName</span>
+                        </a>
                         <span class="rating-for-book">
                             @for (int i = 0; i < @Model._serviceRating.GetUserRating(user, Model.TakedBook); i++)
                             {
@@ -181,6 +183,9 @@
     }
 </div>
 
+@section Styles{
+    <link rel="stylesheet" href="~/css/BooksPage/BookPageStyles.css"/>
+}
 
 @section Scripts{
     <script>

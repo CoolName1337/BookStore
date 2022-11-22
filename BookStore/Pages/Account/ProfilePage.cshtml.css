@@ -47,7 +47,13 @@
     height: 300px;
     object-fit: cover;
     border-radius: 50%;
+    cursor:pointer;
+    transition:all 0.4s ease;
 }
+.profile-pic:hover{
+    opacity:0.9;
+}
+
 .profile-container {
     display: flex;
 }
@@ -64,3 +70,4 @@
     border-radius:20px;
     padding:8px;
 }
+

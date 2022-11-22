@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="~/BookStore.styles.css" asp-append-version="true" />
 </head>
 <body>
-
     <div class="all-nav-panel">
         <ul class="nav-panel">
             <li>
@@ -56,19 +55,21 @@
                 <a asp-page="/WhatToRead">Че почитать?</a>
             </li>
             <li>
-                <a asp-page="#">Новенькое че-нить</a>
+                <a asp-page="/FilterBooksPage" asp-route-filterString="DATE">Новенькое че-нить</a>
             </li>
             <li>
-                <a asp-page="#">Популярное</a>
+                <a asp-page="/FilterBooksPage" asp-route-filterString="POPULARITY">Популярное</a>
             </li>
 
             @if (User.Identity.IsAuthenticated)
             {
                 <li class="dropdown" style="float:right;">
-                    <a class="drop-profile" class="nav-a" href="/Account/ProfilePage">@User.Identity.Name</a>
-
+                    <a asp-page="/Account/ProfilePage" asp-route-userName="@User.Identity.Name">
+                        <img src="@User.Claims.Where(claim => claim.Value == "ProfilePicture").FirstOrDefault()?.Value" />
+                        <span>@User.Identity.Name</span>
+                    </a>
                     <div class="dropdown-content">
-                        <a href="/Account/ProfilePage">Профиль</a>
+                        <a asp-page="/Account/ProfilePage" asp-route-userName="@User.Identity.Name">Профиль</a>
                         @if (User.IsInRole("admin") || User.IsInRole("creator"))
                         {
                             <a asp-page="/Admin/AdminPage">Admin Page</a>
@@ -96,6 +97,7 @@
 
     <div class="container">
         <main role="main">
+            @Html.AntiForgeryToken()
             @RenderBody()
         </main>
     </div>
@@ -106,7 +108,7 @@
 
     @await RenderSectionAsync("Scripts", required: false)
     <script>
-        $(document).on("click", ".selectBox", (e)=>{
+        $(document).on("click", ".selectBox", (e) => {
             $(e.target).parent().children(".checkboxes").toggleClass("hidden");
         });
 

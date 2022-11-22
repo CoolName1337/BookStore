@@ -16,7 +16,7 @@
                 <div class="writer">@book.Writer</div>
             </div>
         }
-        <a asp-page="">
+        <a asp-page="/FilterBooksPage" asp-route-filterString="POPULARITY">
             <div class="more-books">
                 <span>Ещё...</span>
             </div>
@@ -37,7 +37,7 @@
                 <div class="writer">@book.Writer</div>
             </div>
         }
-        <a asp-page="">
+        <a asp-page="/FilterBooksPage" asp-route-filterString="DATE">
             <div class="more-books">
                 <span>Ещё...</span>
             </div>

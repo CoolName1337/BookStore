@@ -18,5 +18,6 @@ public interface IRepositoryUser
 
     IEnumerable<User> GetUsers();
     IEnumerable<User> GetUsers(Func<User, bool> predicate);
+    User GetUserByName(string userName);
     User this[string Id] { get; }
 }

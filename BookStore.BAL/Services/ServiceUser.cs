@@ -1,6 +1,7 @@
 ﻿using BookStore.BAL.Interfaces;
 using BookStore.DAL.Interfaces;
 using BookStore.DAL.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
@@ -64,8 +65,16 @@ public class ServiceUser : IServiceUser
         return result;
     }
 
+    public async Task UpdateProfilePicture(User user, IFormFile img)
+    {
+        FileService.Delete(user.ProfilePicture);
+        user.ProfilePicture = await FileService.SaveProfilePic(img);
+        await _repository.Update(user);
+    }
+
     public async Task DeleteUser(User user)
     {
+        FileService.Delete(user.ProfilePicture);
         await _repository.Delete(user);
     }
     public async Task DeleteUser(string id) => await DeleteUser(_repository[id]);
@@ -81,6 +90,10 @@ public class ServiceUser : IServiceUser
     public IEnumerable<User> GetUsers(Func<User, bool> predicate)
     {
         return _repository.GetUsers(predicate);
+    }
+    public User GetUserByName(string userName)
+    {
+        return _repository.GetUserByName(userName);
     }
     public User this[string Id]
     {
