@@ -15,11 +15,11 @@ public class ServiceRating : IServiceRating
 
     public async Task TryRateBook(User user, Book book, int stars)
     {
-        int _r = GetUserRating(user, book);
-        if (_r > 0)
+        int userRating = GetUserRating(user, book);
+        if (userRating > 0)
         {
             await UnrateBook(user, book);
-            if (_r == stars) return;
+            if (userRating == stars) return;
         }
         await RateBook(user, book, stars);
     }

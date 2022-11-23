@@ -2,6 +2,7 @@ using BookStore.BAL.Interfaces;
 using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Pages.Account;
 
@@ -13,7 +14,7 @@ public class ProfilePageModel : PageModel
     public User ProfileUser { get; set; }
     public List<Book> AvailableBooks { get; set; } = new();
     public List<Book> FavoriteBooks { get; set; } = new();
-    public ProfilePageModel(IHttpContextAccessor httpContextAccessor, IServiceUser serviceUser, 
+    public ProfilePageModel(IHttpContextAccessor httpContextAccessor, IServiceUser serviceUser,
         IServiceBook serviceBook, IServiceRating serviceRating)
     {
         _serviceUser = serviceUser;
@@ -28,25 +29,41 @@ public class ProfilePageModel : PageModel
 
     private void SetUserData(string userName)
     {
-        ProfileUser = _serviceUser.GetUserByName(userName);
+        ProfileUser = _serviceUser.Users
+            .Include(user => user.AvailableBooks)
+            .Include(user => user.Favorites)
+            .Include(user => user.Reviews)
+                .ThenInclude(review => review.Rates)
+            .First(user => user.UserName == userName);
 
         AvailableBooks = ProfileUser.AvailableBooks;
 
-        foreach (var bookId in ProfileUser.Favorites.Select(favBook => favBook.BookId)) FavoriteBooks.Add(_serviceBook[bookId]);
+        foreach (var bookId in ProfileUser.Favorites.Select(favBook => favBook.BookId)) FavoriteBooks.Add(_serviceBook.GetBook(bookId));
         FavoriteBooks.Remove(null);
+    }
+
+    public IActionResult OnGetProfilePicture()
+    {
+        return new JsonResult(_serviceUser.GetUser(User).ProfilePicture);
     }
 
     public async Task<IActionResult> OnPostProfilePicture(string userName, IFormFile image)
     {
-        if (userName == User.Identity.Name)
+        if (userName != User.Identity.Name)
         {
-            SetUserData(userName);
-            if (!image.ContentType.StartsWith("image")) throw new Exception();
-            var user = _serviceUser.GetUser(User);
-            await _serviceUser.UpdateProfilePicture(user, image);
-            return new JsonResult(user.ProfilePicture);
+            throw new Exception("Ошибка доступа");
         }
-        throw new Exception();
+        if (image == null)
+        {
+            throw new Exception("Файл не выбран");
+        }
+        if (!image.ContentType.StartsWith("image"))
+        {
+            throw new Exception("Файл не подходит");
+        }
+        SetUserData(userName);
+        await _serviceUser.UpdateProfilePicture(ProfileUser, image);
+        return new JsonResult(ProfileUser.ProfilePicture);
     }
     public IActionResult OnGetAvailableBooks(string userName)
     {

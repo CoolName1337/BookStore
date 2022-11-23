@@ -28,7 +28,7 @@ public class EditRolesModel : PageModel
     public IActionResult OnGet(string searchReq)
     {
         SearchReq = searchReq;
-        foreach (User user in _serviceUser.GetUsers())
+        foreach (User user in _serviceUser.Users)
         {
             if (user == _serviceUser.GetUser(User)) continue;
             Users.Add(new UserRoleModel() { currentUser = user, userRoles = _serviceUser.GetRoles(user).ToList() });
@@ -40,21 +40,22 @@ public class EditRolesModel : PageModel
     {
         if (interactBtn == null && !string.IsNullOrEmpty(searchReq))
         {
-            SearchReq = searchReq;
-            foreach (User user in _serviceUser.GetUsers(user => user.UserName.Contains(searchReq) || user.Email.Contains(searchReq)))
-            {
-                if (user == _serviceUser.GetUser(User)) continue;
-                Users.Add(new UserRoleModel() { currentUser = user, userRoles = _serviceUser.GetRoles(user).ToList() });
-            }
-            return Page();
+            ////////////// ALLERT !!!!!!! 
+            //SearchReq = searchReq;
+            //foreach (User user in _serviceUser.GetUsers(user => user.UserName.Contains(searchReq) || user.Email.Contains(searchReq)))
+            //{
+            //    if (user == _serviceUser.GetUser(User)) continue;
+            //    Users.Add(new UserRoleModel() { currentUser = user, userRoles = _serviceUser.GetRoles(user).ToList() });
+            //}
+            //return Page();
         }
         else
         {
-            User user = _serviceUser[id];
+            User user = _serviceUser.GetUser(id);
             switch (interactBtn)
             {
                 case "delUser":
-                    await _serviceUser.DeleteUser(user);
+                    await _serviceUser.Delete(user);
                     break;
                 case "setAdmin":
                     await _serviceUser.AddRole(user, "admin");

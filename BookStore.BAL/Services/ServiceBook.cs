@@ -2,12 +2,15 @@
 using BookStore.DAL.Interfaces;
 using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.BAL.Services;
 
 public class ServiceBook : IServiceBook
 {
     private IRepositoryBook _repositoryBook;
+
+    public DbSet<Book> Books => _repositoryBook.Books;
 
     public ServiceBook(IRepositoryBook repositoryBook)
     {
@@ -54,7 +57,7 @@ public class ServiceBook : IServiceBook
         var res = await Verificate(book, bookFile, imageFile);
         if (res.Succeed)
         {
-            Book currentBook = _repositoryBook[id];
+            Book currentBook = GetBook(id);
 
             currentBook.Genres = book.Genres;
             currentBook.Title = book.Title;
@@ -76,6 +79,7 @@ public class ServiceBook : IServiceBook
 
     public string GetCorrectPath(Book book)
     {
+        if (book == null) return "";
         string file = book.SourceFile;
         return "files/" + System.Net.WebUtility.UrlEncode(file.Replace("/files/", "")).Replace("+", " ").Replace(" ", "%20");
     }
@@ -89,28 +93,14 @@ public class ServiceBook : IServiceBook
     {
         book.Genres = book.Genres.Where(genre => !genres.Contains(genre)).ToList();
     }
-
-
     public void Delete(Book book)
     {
         FileService.Delete(book.SourceFile);
         FileService.Delete(book.SourceImage);
         _repositoryBook.Delete(book);
     }
-    public IEnumerable<Book> GetBooks()
-    {
-        return _repositoryBook.GetBooks();
-    }
-    public IEnumerable<Book> GetBooks(Func<Book, bool> predicate)
-    {
-        return _repositoryBook.GetBooks(predicate);
-    }
-    public async Task Update(Book book)
-    {
-        await _repositoryBook.Update(book);
-    }
-    public Book this[int Id]
-    {
-        get => _repositoryBook[Id];
-    }
+
+    public Task Update(Book book) => _repositoryBook.Update(book);
+    public Book GetBook(int bookId) => _repositoryBook.GetBook(bookId);
+
 }

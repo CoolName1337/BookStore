@@ -8,7 +8,7 @@
                 var userRate = review.Rates.Find(rate => rate.UserId == Model.ProfileUser.Id);
                 bool selectLike = userRate?.Like ?? false;
                 bool selectDislike = !userRate?.Like ?? false;
-                var book = Model._serviceBook[review.BookId];
+                var book = Model._serviceBook.GetBook(review.BookId);
                 string BookHref = $"/BookPage?id={book.Id}";
             }
             <a href="@BookHref"><img class="review-book-preview" src=@book.SourceImage /></a>

@@ -8,6 +8,7 @@ namespace BookStore.DAL.Repositories;
 public class RepositoryBook : IRepositoryBook
 {
     private readonly ApplicationContext _db = new();
+    public DbSet<Book> Books { get => _db.Books; }
     public async Task Create(Book book)
     {
         book.AddingDate = DateTime.Now;
@@ -26,34 +27,16 @@ public class RepositoryBook : IRepositoryBook
         _db.Update(book);
         await _db.SaveChangesAsync();
     }
-    public IEnumerable<Book> GetBooks()
+
+    public Book GetBook(int bookId)
     {
-        return _db.Books
+        return Books
+            .Include(book => book.Users)
             .Include(book => book.Ratings)
-            .Include(book => book.Favorites)
             .Include(book => book.Genres)
             .Include(book => book.Reviews)
-                .ThenInclude(review => review.Rates)
-            .ToList();
-    }
-    public IEnumerable<Book> GetBooks(Func<Book, bool> predicate)
-    {
-        return _db.Books
-            .Include(book => book.Ratings)
-            .Include(book => book.Favorites)
-            .Include(book => book.Genres)
-            .Include(book => book.Reviews)
-                .ThenInclude(review => review.Rates)
-            .Where(predicate);
-    }
-    public Book this[int Id]
-    {
-        get => _db.Books
-            .Include(book => book.Ratings)
-            .Include(book => book.Favorites)
-            .Include(book => book.Genres)
-            .Include(book => book.Reviews)
-                .ThenInclude(review => review.Rates)
-            .FirstOrDefault(book => book.Id == Id);
+                .ThenInclude(review=>review.Rates)
+            .First(book => book.Id == bookId);
+            
     }
 }

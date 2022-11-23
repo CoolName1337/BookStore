@@ -7,7 +7,7 @@
 <div class="popular-books">
     <div class="container-title">Популярное</div>
     <div class="scroll-container">
-        @foreach (var book in Model._serviceBook.GetBooks().OrderBy(book=>book.Bought).Take(10))
+        @foreach (var book in Model._serviceBook.Books.OrderBy(book=>book.Bought).Take(10))
         {
             string BookHref = $"/BookPage?id={book.Id}";
             <div class="book-container">
@@ -28,7 +28,7 @@
 <div class="new-books">
     <div class="container-title">Новинки</div>
     <div class="scroll-container">
-        @foreach (var book in Model._serviceBook.GetBooks().OrderBy(book => book.AddingDate).Take(10))
+        @foreach (var book in Model._serviceBook.Books.OrderBy(book => book.AddingDate).Take(10))
         {
             string BookHref = $"/BookPage?id={book.Id}";
             <div class="book-container">

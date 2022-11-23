@@ -47,8 +47,9 @@
     height: 300px;
     object-fit: cover;
     border-radius: 50%;
-    cursor:pointer;
-    transition:all 0.4s ease;
+    transition: all 0.4s ease;
+    border: 1px solid #1e98ff;
+    box-shadow: 0px 0px 20px #1e98ff;
 }
 .profile-pic:hover{
     opacity:0.9;

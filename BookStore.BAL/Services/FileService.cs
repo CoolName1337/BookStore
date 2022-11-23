@@ -22,9 +22,10 @@ public static class FileService
             File.Delete("wwwroot" + sourceFile);
     }
 
-    public static async Task<string> SaveProfilePic(IFormFile img)
+    public static async Task<string> SaveProfilePic(IFormFile img, string imgName)
     {
-        string filePath = Path.Combine($"/images/profile/", img.FileName);
+        string fileName = string.Join(".", imgName, img.ContentType.Split("/").Last());
+        string filePath = Path.Combine($"/images/profile/", fileName);
         using (var fileStream = new FileStream("wwwroot" + filePath, FileMode.Create))
         {
             await img.CopyToAsync(fileStream);

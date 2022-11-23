@@ -2,6 +2,7 @@ using BookStore.BAL.Interfaces;
 using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System.Net;
 
 namespace BookStore.Pages
@@ -28,15 +29,15 @@ namespace BookStore.Pages
             {
                 case "DATE":
                     FilterString = "Новое";
-                    FilterFunc = _serviceBook.GetBooks().OrderBy(book => book.Bought).Take;
+                    FilterFunc = _serviceBook.Books.OrderBy(book => book.Bought).Take;
                     break;
                 case "POPULARITY":
                     FilterString = "Популярное";
-                    FilterFunc = _serviceBook.GetBooks().OrderBy(book => book.AddingDate).Take;
+                    FilterFunc = _serviceBook.Books.OrderBy(book => book.AddingDate).Take;
                     break;
                 case "RATING":
                     FilterString = "Топ по оценкам";
-                    FilterFunc = _serviceBook.GetBooks().OrderBy(book => _serviceRating.GetRating(book)).Take;
+                    FilterFunc = _serviceBook.Books.Include(book=>book.Ratings).OrderBy(book => _serviceRating.GetRating(book)).Take;
                     break;
                 default:
                     return BadRequest();

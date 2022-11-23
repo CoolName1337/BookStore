@@ -3,6 +3,7 @@ using BookStore.DAL.Interfaces;
 using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace BookStore.BAL.Services;
@@ -10,17 +11,17 @@ namespace BookStore.BAL.Services;
 public class ServiceUser : IServiceUser
 {
     public readonly IRepositoryUser _repository;
+    public IQueryable<User> Users { get => _repository.Users; }
 
     public ServiceUser(IRepositoryUser repository)
     {
         _repository = repository;
     }
-    
-    
     public async Task TryBuyBook(User user, Book book)
     {
         book.Bought++;
         user.AvailableBooks.Add(book);
+        await Update(user);
     }
     public async Task AddRole(User user, string roleName)
     {
@@ -34,11 +35,6 @@ public class ServiceUser : IServiceUser
     public async Task RemoveRole(User user, string roleName)
     {
         await _repository.RemoveRole(user, roleName);
-    }
-
-    public User GetUser(ClaimsPrincipal claimsPrincipal)
-    {
-        return this[claimsPrincipal.Claims.First().Value];
     }
 
     public async Task<SignInResult> Login(string username, string password, bool remember)
@@ -68,35 +64,32 @@ public class ServiceUser : IServiceUser
     public async Task UpdateProfilePicture(User user, IFormFile img)
     {
         FileService.Delete(user.ProfilePicture);
-        user.ProfilePicture = await FileService.SaveProfilePic(img);
-        await _repository.Update(user);
+        user.ProfilePicture = await FileService.SaveProfilePic(img, user.UserName);
+        await Update(user);
     }
 
-    public async Task DeleteUser(User user)
+    public async Task Delete(User user)
     {
         FileService.Delete(user.ProfilePicture);
         await _repository.Delete(user);
     }
-    public async Task DeleteUser(string id) => await DeleteUser(_repository[id]);
+    public async Task Delete(string id) => await Delete(Users.First(user=>user.Id == id));
 
-    public async Task UpdateUser(User user) => await _repository.Update(user);
-    public async Task UpdateUser(string id) => await UpdateUser(_repository[id]);
+    public async Task Update(User user) => await _repository.Update(user);
+    public async Task Update(string id) => await Update(Users.First(user => user.Id == id));
 
-    public IEnumerable<User> GetUsers()
+    public User GetUser(ClaimsPrincipal claimsPrincipal)
     {
-        return _repository.GetUsers();
+        return GetUser(claimsPrincipal.Claims.First().Value);
     }
-
-    public IEnumerable<User> GetUsers(Func<User, bool> predicate)
+    public User GetUser(string id)
     {
-        return _repository.GetUsers(predicate);
-    }
-    public User GetUserByName(string userName)
-    {
-        return _repository.GetUserByName(userName);
-    }
-    public User this[string Id]
-    {
-        get => _repository[Id];
+        return Users
+            .Include(user => user.AvailableBooks)
+            .Include(user => user.Favorites)
+            .Include(user => user.Ratings)
+            .Include(user => user.Reviews)
+                .ThenInclude(review=>review.Rates)
+            .FirstOrDefault(user => user.Id == id);
     }
 }

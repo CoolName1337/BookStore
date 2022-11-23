@@ -24,7 +24,9 @@ button {
     background-color: #111;
 }
 
-/* The container <div> - needed to position the dropdown content */
+.search-container{
+    display:flex;
+}
 .dropdown-search {
     position: relative;
     display: inline-block;
@@ -51,14 +53,20 @@ button {
 }
 
 .input-search {
-    width: 100%;
+    overflow-wrap:break-word;
+    overflow-block:hidden;
+    width: 100px;
     box-sizing: border-box;
     border: 2px solid #111;
     border-radius: 4px;
     font-size: 16px;
     background-repeat: no-repeat;
     padding: 12px;
+    transition:all 0.4s ease;
 }
+.input-search:focus{
+    width: 100%;
+} 
 
 .btn-search {
     transition: all 0.4s ease;
@@ -177,6 +185,7 @@ ul.nav-panel {
     margin: 0;
     padding: 0;
     min-height: 56px;
+    height: 56px;
     background-color: #333;
     box-shadow: 0 20px 20px -20px #333;
     border-radius: 8px;
@@ -205,16 +214,19 @@ div.title-page-div {
 
 .nav-panel li {
     float: left;
+    height: 100%;
 }
 
 
 .nav-panel li a, .dropdown-content a {
+    height: 100%;
     font-size: 24px;
     color: white;
     transition: all 0.4s ease;
-    padding: 14px 16px;
     text-decoration: none;
     text-align: right;
+    padding: 12px 10px;
+    box-sizing: border-box;
 }
 
 li a {
@@ -230,7 +242,6 @@ li a {
 /*#################################################*/
 
 .nav-panel li.dropdown {
-    display: inline-block;
     position: relative;
 }
 
@@ -265,3 +276,12 @@ li a {
     margin: auto;
 }
 
+.username-header{
+    display:flex;
+}
+.profile-mini-picture {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+}

@@ -7,25 +7,19 @@ namespace BookStore.BAL.Interfaces;
 
 public interface IServiceUser
 {
+    public IQueryable<User> Users { get; }
     Task TryBuyBook(User user, Book book);
     Task AddRole(User user, string roleName);
-
     IList<string> GetRoles(User user);
     Task RemoveRole(User user, string roleName);
-    User GetUser(ClaimsPrincipal claimsPrincipal);
-
     Task<SignInResult> Login(string username, string password, bool remember);
     Task Logout();
     Task<IdentityResult> Register(string username, string email, string passwordConfirm, string password);
     Task UpdateProfilePicture(User user, IFormFile img);
-    Task DeleteUser(User user);
-    Task DeleteUser(string id);
-    Task UpdateUser(User user);
-    Task UpdateUser(string id);
-
-    IEnumerable<User> GetUsers();
-
-    IEnumerable<User> GetUsers(Func<User, bool> predicate);
-    User GetUserByName(string userName);
-    User this[string Id] { get; }
+    Task Delete(User user);
+    Task Delete(string id);
+    Task Update(User user);
+    Task Update(string id);
+    User GetUser(string id);
+    User GetUser(ClaimsPrincipal claimsPrincipal);
 }

@@ -6,18 +6,19 @@
 
 
 <div>
-    <div class="vertical-nav"> 
+    <div class="vertical-nav">
         <a data-ajax="true" data-ajax-url="/Account/ProfilePage?handler=AvailableBooks&userName=@Model.ProfileUser.UserName" data-ajax-update="#panel">
-            Доступные книги 
+            Доступные книги
             <span class="items-count">@Model.AvailableBooks.Count</span>
-            </a>
+        </a>
         <a data-ajax="true" data-ajax-url="/Account/ProfilePage?handler=Favorites&userName=@Model.ProfileUser.UserName" data-ajax-update="#panel">
             Избранное
             <span class="items-count">@Model.FavoriteBooks.Count</span>
-            </a>
-        <a data-ajax="true" data-ajax-url="/Account/ProfilePage?handler=Reviews&userName=@Model.ProfileUser.UserName" data-ajax-update="#panel">Рецензии 
+        </a>
+        <a data-ajax="true" data-ajax-url="/Account/ProfilePage?handler=Reviews&userName=@Model.ProfileUser.UserName" data-ajax-update="#panel">
+            Рецензии
             <span class="items-count">@Model.ProfileUser.Reviews.Count</span>
-            </a>
+        </a>
         @if (Model.ProfileUser.UserName == User.Identity.Name)
         {
             <a data-ajax="true" data-ajax-url="/Account/ProfilePage?handler=Settings&userName=@Model.ProfileUser.UserName" data-ajax-update="#panel">Настройки</a>
@@ -26,9 +27,16 @@
     <div class="profile-container">
 
         <div class="profile-info">
-            <img class="profile-pic" src="@Model.ProfileUser.ProfilePicture" title="Изменить картинку" />
-            <input class="change-profile-pic" type="file" accept="image/png,image/jpeg,image/gif" hidden />
-            <span class="profile-name">@User.Identity.Name</span>
+            @if (@Model.ProfileUser.UserName == User.Identity.Name)
+            {
+                <img class="profile-pic" style="cursor: pointer;" src="@Model.ProfileUser.ProfilePicture" title="Изменить картинку" />
+                <input class="change-profile-pic" type="file" accept="image/png,image/jpeg,image/gif" hidden />
+            }
+            else
+            {
+                <img class="profile-pic" src="@Model.ProfileUser.ProfilePicture" />
+            }
+            <span class="profile-name">@Model.ProfileUser.UserName</span>
             <span>Зарегестрирован:</span>
             <span class="bought-books">@Model.ProfileUser.CreatedDate.ToShortDateString()</span>
         </div>
@@ -43,38 +51,44 @@
 }
 
 @section Scripts{
-    <script>
+    @if (Model.ProfileUser.UserName == User.Identity.Name)
+    {
+        <script>
+            $(document).on("change", ".change-profile-pic", (e) => {
 
-        $(document).on("change", ".change-profile-pic", (e) => {
+                var formData = new FormData();
+                formData.append("image", $('.change-profile-pic').prop("files")[0]);
+                $.ajax(
+                    {
+                        url: `/Account/ProfilePage?handler=ProfilePicture&userName=@Model.ProfileUser.UserName`,
+                        type: 'POST',
+                        data: formData,
 
-            var formData = new FormData();
-            formData.append("image", $('.change-profile-pic').prop("files")[0]);
-            $.ajax(
-                {
-                    url: "/Account/ProfilePage?handler=ProfilePicture",
-                    type: 'POST',
-                    data: formData,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
 
-                    beforeSend: (xhr) => {
-                        xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
+                        beforeSend: (xhr) => {
+                            xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                        },
 
-                    success: (data) => {
-                        document.querySelector(".profile-pic").src = data;
-                    },
+                        success: (data) => {
+                            console.log(data);
+                            document.querySelector(".profile-pic").src = data;
+                        },
 
-                    error: () => {
-                        alert("Файл не подходит");
+                        error: (xhr, status, error) => {
+                            alert(error.Message);
+                        }
                     }
-                }
-            );
-        });
+                );
+            });
 
-        document.getElementsByClassName('profile-pic').item(0)
-            .addEventListener('click', () => document.getElementsByClassName('change-profile-pic').item(0).click())
+            document.getElementsByClassName('profile-pic').item(0)
+                .addEventListener('click', () => document.getElementsByClassName('change-profile-pic').item(0).click())
+        </script>
+    }
+    <script>
 
         $(document).on("click", ".delete-review", (e) => {
             $.ajax({

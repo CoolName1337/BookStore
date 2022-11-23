@@ -26,14 +26,14 @@ public class EditBookModel : PageModel
 
     public void OnGet(int id)
     {
-        ChangedBook = _serviceBook[id];
+        ChangedBook = _serviceBook.GetBook(id);
     }
 
     public async Task<IActionResult> OnPostAsync(int id, bool WantToDelete)
     {
         if (WantToDelete)
         {
-            _serviceBook.Delete(_serviceBook[id]);
+            _serviceBook.Delete(_serviceBook.GetBook(id));
             return RedirectToPage("/Index");
         }
         BookFormFile = Request.Form.Files["file"];

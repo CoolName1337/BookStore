@@ -2,6 +2,7 @@ using BookStore.BAL.Interfaces;
 using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Pages;
 
@@ -31,7 +32,7 @@ public class BookPageModel : PageModel
         {
             CurrentUser = _serviceUser.GetUser(User);
         }
-        TakedBook = _serviceBook[id];
+        TakedBook = _serviceBook.GetBook(id);
         if (TakedBook == null)
         {
             return RedirectToPage("/Index");
@@ -39,26 +40,25 @@ public class BookPageModel : PageModel
         return Page();
     }
 
-    public async Task<IActionResult> OnPost(string interact_btn)
+    public IActionResult OnGetDwnBook(int bookId)
     {
         if (!User.Identity.IsAuthenticated) return RedirectToPage("/Account/Login");
+        return new JsonResult(_serviceBook.GetCorrectPath(_serviceBook.Books.Find(bookId)));
+    }
 
-        PostInitialize(int.Parse(Request.Form["id"]));
-        switch (interact_btn)
-        {
-            case "dwn":
-                return Redirect(_serviceBook.GetCorrectPath(TakedBook));
-            case "buy":
-                await _serviceUser.TryBuyBook(CurrentUser, TakedBook);
-                break;
-        }
-        return RedirectToPage("/BookPage", new { Id = Request.Form["Id"] });
+    public async Task<IActionResult> OnPostBuyBook(int bookId)
+    {
+        if (!User.Identity.IsAuthenticated) return RedirectToPage("/Account/Login");
+        var user = _serviceUser.Users.First(user => user.Id == User.Claims.First().Value);
+        var book = _serviceBook.Books.Find(bookId);
+        await _serviceUser.TryBuyBook(user, book);
+        return new JsonResult("Success");
     }
 
     private void PostInitialize(int bookId)
     {
         CurrentUser = _serviceUser.GetUser(User);
-        TakedBook = _serviceBook[bookId];
+        TakedBook = _serviceBook.GetBook(bookId);
     }
     public async Task<IActionResult> OnPostRateBook(int bookId, int stars)
     {
@@ -74,7 +74,7 @@ public class BookPageModel : PageModel
     public async Task<IActionResult> OnPostFavorite(int bookId)
     {
         CurrentUser = _serviceUser.GetUser(User);
-        TakedBook = _serviceBook[bookId];
+        TakedBook = _serviceBook.GetBook(bookId);
         bool res = await _serviceFavorite.TryLike(CurrentUser, TakedBook);
         return new JsonResult(res);
     }
@@ -90,7 +90,7 @@ public class BookPageModel : PageModel
         var userReview = CurrentUser.Reviews.Find(review => review.Id == reviewId);
         if (User.IsInRole("admin") || User.IsInRole("creator"))
         {
-            userReview = _serviceUser[userId].Reviews.Find(review => review.Id == reviewId);
+            userReview = _serviceUser.GetUser(userId)?.Reviews.Find(review => review.Id == reviewId);
         }
         await _serviceReview.DeleteReview(userReview);
         return new JsonResult("kaka");
@@ -98,7 +98,7 @@ public class BookPageModel : PageModel
     public async Task<IActionResult> OnPostReviewRate(int reviewId, string userId, bool like)
     {
         CurrentUser = _serviceUser.GetUser(User);
-        var review = _serviceUser[userId].Reviews.Find(review => review.Id == reviewId);
+        var review = _serviceUser.GetUser(userId)?.Reviews.Find(review => review.Id == reviewId);
         await _serviceReview.TryRateReview(CurrentUser, review, like);
         return new JsonResult(
             new

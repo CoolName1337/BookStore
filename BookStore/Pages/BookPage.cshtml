@@ -30,7 +30,7 @@
                         <button class="genre-ref" type="submit" name="IncludingGenres" value="@genre.Id">@genre.Value</button>
                     }
                 </form>
-                
+
             </div>
 
             <div class="rating-and-review-container" style="display:flex">
@@ -75,16 +75,14 @@
                 </div>
 
             </div>
-
-            <form method="post" style="display:flex">
-                <input name="id" value=@Model.TakedBook.Id hidden />
+            <div style="display:flex;">
                 @if (User.Identity.IsAuthenticated && Model.CurrentUser.AvailableBooks.Any(book => book.Id == Model.TakedBook.Id))
                 {
-                    <button class="buy-btn" type="submit" name="interact_btn" value="dwn">Скачать</button>
+                    <button class="dwn-btn">Скачать</button>
                 }
                 else
                 {
-                    <button class="buy-btn" type="submit" name="interact_btn" value="buy">КУПИТЬ ЗА @Model.TakedBook.Price</button>
+                    <button class="buy-btn">КУПИТЬ ЗА @Model.TakedBook.Price</button>
                 }
                 @if (User.Identity.IsAuthenticated)
                 {
@@ -92,8 +90,7 @@
 
                     <button class=@(fav == null ? "unfav-btn" : "fav-btn") type="button" name="fav-btn" value="fav">♡</button>
                 }
-            </form>
-
+            </div>
         </div>
     </div>
 
@@ -106,7 +103,7 @@
     </div>
 
 
-    <div class="detailed-info-container vertical-container"> 
+    <div class="detailed-info-container vertical-container">
         <hr />
         <span class="detailed-info-title vertical-container-title">Подробная информация</span>
         <div class="detailed-info">
@@ -136,7 +133,7 @@
             <span class="reviews-title vertical-container-title">Рецензии</span>
             @foreach (var review in Model.TakedBook.Reviews)
             {
-                var user = Model._serviceUser[review.UserId];
+                var user = Model._serviceUser.GetUser(review.UserId);
                 <div class="review-container">
                     <div class="review-header">
                         <input name="userId" value="@user.Id" hidden />
@@ -153,8 +150,8 @@
                                 </svg>
                             }
                         </span>
-                        
-                        @if (Model._serviceUser[user.Id] == Model.CurrentUser || User.IsInRole("admin") || User.IsInRole("creator"))
+
+                        @if (user == Model.CurrentUser || User.IsInRole("admin") || User.IsInRole("creator"))
                         {
                             <button class="delete-review">Удалить рецензию</button>
                         }
@@ -184,32 +181,63 @@
 </div>
 
 @section Styles{
-    <link rel="stylesheet" href="~/css/BooksPage/BookPageStyles.css"/>
+    <link rel="stylesheet" href="~/css/BooksPage/BookPageStyles.css" />
 }
 
 @section Scripts{
+    @if (User.Identity.IsAuthenticated)
+    {
+        <script>
+            $(document).on("click", ".buy-btn", (e) => {
+
+                $.ajax({
+                    url: "/BookPage?handler=BuyBook&bookId=@Model.TakedBook.Id",
+                    type: "POST",
+                    beforeSend: (xhr) => {
+                        xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+
+                    success: (res) => {
+                        document.querySelector(".buy-btn").outerHTML = "<button class='dwn-btn'>Скачать</button>";
+                    },
+
+                    error: (xhr, status, error) => {
+                        console.log(xhr.responseText);
+                        alert(xhr.responseText);
+                    }
+                });
+            });
+
+
+            $(document).on("click", ".dwn-btn", (e) => {
+                $.get("/BookPage?handler=DwnBook&bookId=@Model.TakedBook.Id", (url) => {
+                    window.location = url;
+                });
+            });
+        </script>
+    }
     <script>
 
         // Handler for rate review
         $(document).on("click", ".like-container, .dislike-container", (e) => {
             $.ajax({
                 url: `/BookPage?handler=ReviewRate` +
-                `&reviewId=${$(e.currentTarget).parent().parent().find('input[name="reviewId"]').val()}` + 
-                `&userId=${$(e.currentTarget).parent().parent().find('input[name="userId"]').val()}` +
-                `&like=${$(e.currentTarget).children("button").val()}`,
+                    `&reviewId=${$(e.currentTarget).parent().parent().find('input[name="reviewId"]').val()}` +
+                    `&userId=${$(e.currentTarget).parent().parent().find('input[name="userId"]').val()}` +
+                    `&like=${$(e.currentTarget).children("button").val()}`,
                 type: "POST",
                 contentType: "application/json",
                 beforeSend: (xhr) => {
                     xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
                 },
                 success: (res) => {
-                    $(".like-count").text(res.likes);
-                    $(".dislike-count").text(res.dislikes);
-                    $(e.currentTarget).parent().children().each((ind,el) => {
-                        if(e.currentTarget == el){
+                    $(e.currentTarget).parent().find(".like-count").text(res.likes);
+                    $(e.currentTarget).parent().find(".dislike-count").text(res.dislikes);
+                    $(e.currentTarget).parent().children().each((ind, el) => {
+                        if (e.currentTarget == el) {
                             el.classList.toggle("selected");
                         }
-                        else{
+                        else {
                             el.classList.remove("selected");
                         }
                     })
@@ -222,8 +250,8 @@
         $(document).on("click", ".delete-review", (e) => {
             $.ajax({
                 url: `/BookPage?handler=Review` +
-                `&reviewId=${$(e.currentTarget).parent().find('input[name="reviewId"]').val()}` +
-                `&userId=${$(e.currentTarget).parent().find('input[name="userId"]').val()}`,
+                    `&reviewId=${$(e.currentTarget).parent().find('input[name="reviewId"]').val()}` +
+                    `&userId=${$(e.currentTarget).parent().find('input[name="userId"]').val()}`,
                 type: "DELETE",
                 contentType: "application/json",
                 beforeSend: (xhr) => {
@@ -337,5 +365,4 @@
         });
 
     </script>
-
 }

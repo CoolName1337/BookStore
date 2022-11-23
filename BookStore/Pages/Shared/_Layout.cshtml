@@ -14,7 +14,7 @@
     @*general css*@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
-    @*is for body of pages (important)*@
+    @*it's for body of pages (important)*@
     <link rel="stylesheet" href="~/BookStore.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -24,12 +24,23 @@
                 <a asp-page="/Index">BookStore</a>
             </li>
             <li>
+                <a asp-page="/WhatToRead">Че почитать?</a>
+            </li>
+            <li>
+                <a asp-page="/FilterBooksPage" asp-route-filterString="DATE">Новенькое че-нить</a>
+            </li>
+            <li>
+                <a asp-page="/FilterBooksPage" asp-route-filterString="POPULARITY">Популярное</a>
+            </li>
+            <li>
                 <form method="post" asp-page="/SearchResult">
                     <div class="dropdown-search">
-                        <button onclick="myFunction()" class="dropbtn-search show" type="button" id="myDropdownBtn">🔍</button>
+                        <div class="search-container">
+                            <input class="input-search" type="search" name="search" placeholder="Поиск..." />
+                            <button onclick="myFunction()" class="dropbtn-search show" type="button" id="myDropdownBtn">🔍</button>
+                        </div>
                         <div id="myDropdown" class="dropdown-content-search">
 
-                            <input class="input-search" type="search" name="search" placeholder="Любые ключевые слова..." />
                             <div class="multiselect">
                                 <div class="selectBox">
                                     Добавить жанры
@@ -51,25 +62,14 @@
                     </div>
                 </form>
             </li>
-            <li>
-                <a asp-page="/WhatToRead">Че почитать?</a>
-            </li>
-            <li>
-                <a asp-page="/FilterBooksPage" asp-route-filterString="DATE">Новенькое че-нить</a>
-            </li>
-            <li>
-                <a asp-page="/FilterBooksPage" asp-route-filterString="POPULARITY">Популярное</a>
-            </li>
-
             @if (User.Identity.IsAuthenticated)
             {
                 <li class="dropdown" style="float:right;">
-                    <a asp-page="/Account/ProfilePage" asp-route-userName="@User.Identity.Name">
-                        <img src="@User.Claims.Where(claim => claim.Value == "ProfilePicture").FirstOrDefault()?.Value" />
-                        <span>@User.Identity.Name</span>
+                    <a class="username-header" asp-page="/Account/ProfilePage" asp-route-userName="@User.Identity.Name">
+                        <img class="profile-mini-picture"/>
                     </a>
                     <div class="dropdown-content">
-                        <a asp-page="/Account/ProfilePage" asp-route-userName="@User.Identity.Name">Профиль</a>
+                        <a asp-page="/Account/ProfilePage" asp-route-userName="@User.Identity.Name">@User.Identity.Name</a>
                         @if (User.IsInRole("admin") || User.IsInRole("creator"))
                         {
                             <a asp-page="/Admin/AdminPage">Admin Page</a>
@@ -107,14 +107,26 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <script>
+            $.get("/Account/ProfilePage?handler=ProfilePicture", (data) => {
+                document.querySelector(".profile-mini-picture").src = data;
+            })
+        </script>
+    }
+
     <script>
         $(document).on("click", ".selectBox", (e) => {
             $(e.target).parent().children(".checkboxes").toggleClass("hidden");
         });
-
         $(document).ready(() => {
+            
+
+
             $.ajax({
-                url: "/Admin/AdminPage?handler=SelectAll",
+                url: "/Index?handler=SelectAllGenres",
                 type: "GET",
                 dataType: "json",
                 contentType: "application/json",

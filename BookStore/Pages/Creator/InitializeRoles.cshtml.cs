@@ -15,7 +15,7 @@ public class InitializeRolesModel : PageModel
     }
     public async Task<IActionResult> OnGet()
     {
-        if (User.Identity?.IsAuthenticated ?? false && _serviceUser.GetUsers().Count() > 0)
+        if (User.Identity?.IsAuthenticated ?? false && _serviceUser.Users.Count() == 1)
         {
             await _serviceRole.Create("admin");
             await _serviceRole.Create("creator");

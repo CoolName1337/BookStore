@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using BookStore.DAL.Interfaces;
 using BookStore.DAL.Models;
-using Microsoft.EntityFrameworkCore;
-using BookStore.DAL.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace BookStore.DAL.Repositories;
 
@@ -10,13 +9,13 @@ public class RepositoryUser : IRepositoryUser
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;
 
+    public IQueryable<User> Users { get => _userManager.Users; }
+
     public RepositoryUser(UserManager<User> userManager, SignInManager<User> signInManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
     }
-
-
     public async Task AddRole(User user, string role)
     {
         await _userManager.AddToRoleAsync(user, role);
@@ -53,48 +52,5 @@ public class RepositoryUser : IRepositoryUser
     public async Task Update(User user)
     {
         await _userManager.UpdateAsync(user);
-    }
-
-    public IEnumerable<User> GetUsers()
-    {
-        return _userManager.Users
-            .Include(user => user.AvailableBooks)
-            .Include(user => user.Ratings)
-            .Include(user => user.Favorites)
-            .Include(book => book.Reviews)
-                .ThenInclude(review=>review.Rates)
-            .ToList();
-    }
-    public IEnumerable<User> GetUsers(Func<User,bool> predicate)
-    {
-        return _userManager.Users
-            .Include(user => user.AvailableBooks)
-            .Include(user => user.Ratings)
-            .Include(user => user.Favorites)
-            .Include(book => book.Reviews)
-                .ThenInclude(review => review.Rates)
-            .Where(predicate);
-    }
-
-    public User GetUserByName(string userName)
-    {
-        return _userManager.Users
-            .Include(user => user.AvailableBooks)
-            .Include(user => user.Ratings)
-            .Include(user => user.Favorites)
-            .Include(book => book.Reviews)
-                .ThenInclude(review => review.Rates)
-            .First(user => user.UserName == userName);
-    }
-
-    public User this[string Id]
-    {
-        get => _userManager.Users
-            .Include(user=>user.AvailableBooks)
-            .Include(user=>user.Ratings)
-            .Include(user => user.Favorites)
-            .Include(book => book.Reviews)
-                .ThenInclude(review => review.Rates)
-            .First(user=>user.Id == Id);
     }
 }

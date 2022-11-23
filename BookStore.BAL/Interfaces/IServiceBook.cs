@@ -1,11 +1,13 @@
 ﻿using BookStore.BAL.Services;
 using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.BAL.Interfaces;
 
 public interface IServiceBook
 {
+    DbSet<Book> Books { get; }
     Task<ActionResult<Book>> Verificate(Book book, IFormFile bookFile, IFormFile imageFile);
     Task<ActionResult<Book>> Add(Book book, IFormFile bookFile, IFormFile imageFile);
     Task<ActionResult<Book>> Edit(int id, Book book, IFormFile bookFile, IFormFile imageFile);
@@ -13,8 +15,6 @@ public interface IServiceBook
     void Delete(Book book);
     void AddGenres(Book book, IEnumerable<Genre> genres);
     void RemoveGenres(Book book, IEnumerable<Genre> genres);
-    IEnumerable<Book> GetBooks();
-    IEnumerable<Book> GetBooks(Func<Book, bool> predicate);
     Task Update(Book book);
-    Book this[int Id] { get; }
+    Book GetBook(int id);
 }
