@@ -7,65 +7,59 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace BookStore.Pages.Creator;
 
-public class UserRoleModel
-{
-    public User currentUser { get; set; }
-    public List<string> userRoles { get; set; }
-
-}
 
 [Authorize(Roles = "creator")]
 public class EditRolesModel : PageModel
 {
-    private readonly IServiceUser _serviceUser;
-    public string SearchReq { get; set; } = "";
-    public List<UserRoleModel> Users { get; set; } = new();
+    public readonly IServiceUser _serviceUser;
+    public List<User> Users { get; set; } = new();
 
     public EditRolesModel(IServiceUser serviceUser)
     {
         _serviceUser = serviceUser;
     }
-    public IActionResult OnGet(string searchReq)
+    public IActionResult OnGet()
     {
-        SearchReq = searchReq;
         foreach (User user in _serviceUser.Users)
         {
-            if (user == _serviceUser.GetUser(User)) continue;
-            Users.Add(new UserRoleModel() { currentUser = user, userRoles = _serviceUser.GetRoles(user).ToList() });
+            if (user.UserName == User.Identity.Name) continue;
+            Users.Add(user);
         }
         return Page();
     }
 
-    public async Task<IActionResult> OnPost(string searchReq, string interactBtn, string id)
+    public async Task<IActionResult> OnPostSwitchAdminRole(string id)
     {
-        if (interactBtn == null && !string.IsNullOrEmpty(searchReq))
+        User user = _serviceUser.GetUser(id);
+        if (_serviceUser.GetRoles(user).Contains("admin"))
         {
-            ////////////// ALLERT !!!!!!! 
-            //SearchReq = searchReq;
-            //foreach (User user in _serviceUser.GetUsers(user => user.UserName.Contains(searchReq) || user.Email.Contains(searchReq)))
-            //{
-            //    if (user == _serviceUser.GetUser(User)) continue;
-            //    Users.Add(new UserRoleModel() { currentUser = user, userRoles = _serviceUser.GetRoles(user).ToList() });
-            //}
-            //return Page();
+            await _serviceUser.RemoveRole(user, "admin");
         }
         else
         {
-            User user = _serviceUser.GetUser(id);
-            switch (interactBtn)
-            {
-                case "delUser":
-                    await _serviceUser.Delete(user);
-                    break;
-                case "setAdmin":
-                    await _serviceUser.AddRole(user, "admin");
-                    break;
-                case "remAdmin":
-                    await _serviceUser.RemoveRole(user, "admin");
-                    break;
-            }
+            await _serviceUser.AddRole(user, "admin");
         }
-        return RedirectToPage("/Creator/EditRoles");
+        return new JsonResult(_serviceUser.GetRoles(user).Contains("admin"));
+    }
 
+    public async Task OnDeleteUser(string id)
+    {
+        await _serviceUser.Delete(id);
+    }
+
+    public IActionResult OnPostFindUsers(string req)
+    {
+        req = req?.ToUpper() ?? "";
+        Users = _serviceUser.Users
+            .Where(user =>
+            (user.NormalizedUserName.Contains(req) ||
+            user.NormalizedEmail.Contains(req)) &&
+            user.UserName != User.Identity.Name
+            ).ToList();
+        return new PartialViewResult()
+        {
+            ViewName = "_UsersContainer",
+            ViewData = this.ViewData
+        };
     }
 }

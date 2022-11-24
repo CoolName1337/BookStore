@@ -10,16 +10,14 @@
 }
 
 <div class="content">
+    @if (User.IsInRole("admin") || User.IsInRole("creator"))
+    {
+        <a class="edit-btn" href="/Admin/EditBook?Id=@Model.TakedBook.Id">Редактировать</a>
+    }
     <div class="title-container">
         <img class="book-preview" src="@Model.TakedBook.SourceImage" alt="Картинка не найдена" />
         <div>
-            <div class="title" style="display:flex">
-                <h2>@Model.TakedBook.Title</h2>
-                @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.IsInRole("creator")))
-                {
-                    <a href="/Admin/EditBook?Id=@Model.TakedBook.Id"><img class="setting-img" src="/images/server/setting.png" /></a>
-                }
-            </div>
+            <h2>@Model.TakedBook.Title</h2>
             <p class="writer">Автор: @Model.TakedBook.Writer</p>
 
             <h3 class="genres-title">Жанры:</h3>
@@ -131,51 +129,74 @@
         <div class="reviews-container vertical-container">
             <hr />
             <span class="reviews-title vertical-container-title">Рецензии</span>
-            @foreach (var review in Model.TakedBook.Reviews)
-            {
-                var user = Model._serviceUser.GetUser(review.UserId);
-                <div class="review-container">
-                    <div class="review-header">
-                        <input name="userId" value="@user.Id" hidden />
-                        <input name="reviewId" value="@review.Id" hidden />
-                        <a class="review-owner-container" asp-page="/Account/ProfilePage" asp-route-userName="@user.UserName">
-                            <img class="review-owner-pic" src="@user.ProfilePicture" />
-                            <span class="review-owner">@user.UserName</span>
-                        </a>
-                        <span class="rating-for-book">
-                            @for (int i = 0; i < @Model._serviceRating.GetUserRating(user, Model.TakedBook); i++)
-                            {
-                                <svg class="rate-star" width="20" height="20">
-                                    <polygon points="10,0 17,20 0,8 20,8 3,20" style="fill:orange;fill-rule:nonzero;" />
-                                </svg>
-                            }
-                        </span>
 
-                        @if (user == Model.CurrentUser || User.IsInRole("admin") || User.IsInRole("creator"))
+            <div class="drop-sort-container">
+                <button class="drop-clicker">Сначала новые</button>
+                <div class="drop-sort-content">
+                    <a class="date-review-sort" data-ajax="true"
+                        data-ajax-url="/BookPage?handler=ReviewSort&bookId=@Model.TakedBook.Id&req=date"
+                        data-ajax-update="#reviewsPanel">
+                        Сначала новые
+                    </a>
+                    <a class="popularity-review-sort" data-ajax="true"
+                        data-ajax-url="/BookPage?handler=ReviewSort&bookId=@Model.TakedBook.Id&req=popularity"
+                        data-ajax-update="#reviewsPanel">
+                        Сначала популярные
+                    </a>
+                </div>
+            </div> 
+
+            <div id="reviewsPanel">
+
+                @foreach (var review in Model.TakedBook.Reviews.OrderByDescending(review => review.Created).ToList())
+                {
+                    var user = Model._serviceUser.GetUser(review.UserId);
+                    <div class="review-container">
+                        <div class="review-header">
+                            <input name="userId" value="@user.Id" hidden />
+                            <input name="reviewId" value="@review.Id" hidden />
+                            <a class="review-owner-container" asp-page="/Account/ProfilePage" asp-route-userName="@user.UserName">
+                                <img class="review-owner-pic" src="@user.ProfilePicture" />
+                            </a>
+                            <a class="review-owner-container" asp-page="/Account/ProfilePage" asp-route-userName="@user.UserName">
+                                <span class="review-owner">@user.UserName</span>
+                            </a>
+                            <span class="rating-for-book">
+                                @for (int i = 0; i < @Model._serviceRating.GetUserRating(user, Model.TakedBook); i++)
+                                {
+                                    <svg class="rate-star" width="20" height="20">
+                                        <polygon points="10,0 17,20 0,8 20,8 3,20" style="fill:orange;fill-rule:nonzero;" />
+                                    </svg>
+                                }
+                            </span>
+
+                            @if (user == Model.CurrentUser || User.IsInRole("admin") || User.IsInRole("creator"))
+                            {
+                                <button class="delete-review">Удалить рецензию</button>
+                            }
+                        </div>
+                        <span class="created-date">@review.Created</span><br>
+                        <span style="white-space:pre-wrap" class="review-text">@review.Text.Replace("<br/>", "\n")</span>
+                        @if (User.Identity.IsAuthenticated)
                         {
-                            <button class="delete-review">Удалить рецензию</button>
+                            var userRate = review.Rates.Find(rate => rate.UserId == Model.CurrentUser.Id);
+                            bool selectLike = userRate?.Like ?? false;
+                            bool selectDislike = !userRate?.Like ?? false;
+                            <div class="rate-review-container">
+                                <div class="like-container @(selectLike ? "selected" : "")">
+                                    <div class="like-count">@review.Rates.Count(rate=>rate.Like)</div>
+                                    <button class="review-like-btn" value="true">👍</button>
+                                </div>
+                                <div class="dislike-container @(selectDislike ? "selected" :"" )">
+                                    <div class="dislike-count">@review.Rates.Count(rate=>!rate.Like)</div>
+                                    <button class="review-dislike-btn" value="false">👎</button>
+                                </div>
+                            </div>
                         }
                     </div>
-                    <span class="created-date">@review.Created</span><br>
-                    <span style="white-space:pre-wrap" class="review-text">@review.Text.Replace("<br/>", "\n")</span>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        var userRate = review.Rates.Find(rate => rate.UserId == Model.CurrentUser.Id);
-                        bool selectLike = userRate?.Like ?? false;
-                        bool selectDislike = !userRate?.Like ?? false;
-                        <div class="rate-review-container">
-                            <div class="like-container @(selectLike ? "selected" : "")">
-                                <div class="like-count">@review.Rates.Count(rate=>rate.Like)</div>
-                                <button class="review-like-btn" value="true">👍</button>
-                            </div>
-                            <div class="dislike-container @(selectDislike ? "selected" :"" )">
-                                <div class="dislike-count">@review.Rates.Count(rate=>!rate.Like)</div>
-                                <button class="review-dislike-btn" value="false">👎</button>
-                            </div>
-                        </div>
-                    }
-                </div>
-            }
+                }
+            </div>
+            
         </div>
     }
 </div>
@@ -217,6 +238,16 @@
         </script>
     }
     <script>
+
+
+
+        $(document).on("click", ".drop-sort-content a", (e) => {
+            $(e.target).parent().parent().children(".drop-clicker").text(e.currentTarget.text);
+        });
+        
+        $(document).on("click", ".drop-clicker", (e) => {
+            $(e.target).parent().children(".drop-sort-content").toggleClass("show");
+        });
 
         // Handler for rate review
         $(document).on("click", ".like-container, .dislike-container", (e) => {
@@ -365,4 +396,6 @@
         });
 
     </script>
+
+    <script src="/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
 }

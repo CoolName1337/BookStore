@@ -4,6 +4,23 @@ h2 {
     margin: 0;
 }
 
+.edit-btn {
+    display: block;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    font-size: 40px;
+    color: black;
+    border: 3px solid black;
+    margin-bottom: 10px;
+}
+
+.edit-btn:hover {
+    color: white;
+    background-color: black;
+}
+
 div.title {
     align-items: center;
 }
@@ -175,12 +192,11 @@ svg[name='star'] {
 
 
 .genres {
+    width:300px;
     margin-bottom: 20px;
 }
 
 button.genre-ref {
-    white-space: nowrap;
-    display: inline-flex;
     background-color: #333;
     border-radius: 10px;
     border: none;
@@ -189,6 +205,7 @@ button.genre-ref {
     text-decoration: none;
     color: white;
     padding: 5px 20px;
+    margin-bottom: 6px;
 }
 
 .genre-ref:hover {
@@ -248,9 +265,9 @@ button.review-btn{
 }
 
 .delete-review {
-    float:right;
-    padding:10px;
-    align-self: center;
+    margin-left: auto;
+    margin-right: 0;
+    padding: 10px;
     color: red;
     border: 1px solid red;
 }
@@ -316,11 +333,69 @@ button.review-btn{
     color:white;
 }
 
+.review-header {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
 a.review-owner-container {
-    text-align: center;
     text-decoration: none;
     color: black;
 }
+
+.drop-sort-container {
+    position: absolute;
+    display: inline-block;
+    float: right;
+}
+
+.drop-clicker {
+    border: none;
+    padding: 8px;
+    font-size: 20px;
+    background-color: #d7d7d7;
+}
+
+.drop-clicker:hover {    
+    background-color: #cfcfcf;
+}
+
+.drop-sort-content {
+    display: none;
+    top: 20px;
+    border: 2px solid #00000071;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.drop-sort-content a {
+    box-sizing:border-box;
+    cursor:pointer;
+    display: block;
+    font-size: 20px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+}
+
+.drop-sort-content button:hover{
+    background-color:#cacaca;
+}
+
+
+
+
+
+
+
+
+
+
 
 /*/////////////////////////////////////////      ★details★      ///////////////////////////////////////////////////*/
 

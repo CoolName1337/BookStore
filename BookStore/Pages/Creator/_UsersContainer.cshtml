@@ -1,0 +1,23 @@
+﻿@model EditRolesModel
+
+@foreach (var user in Model.Users)
+{
+    bool isAdmin = Model._serviceUser.GetRoles(user).Contains("admin");
+    <div class="user-container">
+        <a href="/Account/ProfilePage?userName=@user.UserName">
+            <img class="user-profile-pic" src="@user.ProfilePicture" />
+        </a>
+        <a href="/Account/ProfilePage?userName=@user.UserName">
+            <div class="user-name">@user.UserName</div>
+        </a>
+        <div class="email-div">@user.Email</div>
+        <div class="interact-form">
+            <input name="id" value=@user.Id hidden />
+            <button class=@(isAdmin ? "admin-btn" : "nonadmin-btn") name="switch-admin-role">Admin</button>
+            <button class="delete-user">Delete</button>
+        </div>
+    </div>
+}
+@if(!Model.Users.Any()){
+    <span>Такой чел отсутствует</span>
+}

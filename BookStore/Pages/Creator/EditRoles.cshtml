@@ -5,30 +5,84 @@
 }
 
 <div class="content">
-    <form method="post">
-        <input class="input-user-search" type="search" name="searchReq" value=@Model.SearchReq />
-    </form>
-    @foreach (var user in Model.Users)
-    {
-        <div class="user-container">
-
-            <div class=@((user.userRoles.Contains("admin") ? "admin" : "user") + "-name")>@user.currentUser.UserName</div>
-            <div class="email-div">@user.currentUser.Email</div>
-            <div class="interact-form">
-                <form method="post">
-                    <input name="id" value=@user.currentUser.Id hidden />
-                    @if (user.userRoles.Contains("admin"))
-                    {
-                        <button type="submit" class="admin-btn" name="interactBtn" value="remAdmin">Admin</button>
-                    }
-                    else
-                    {
-                        <button type="submit" class="nonadmin-btn" name="interactBtn" value="setAdmin">Admin</button>
-                    }
-                    <button type="submit" class="deleteUser-btn" name="interactBtn" value="delUser">Delete</button>
-                </form>
-            </div>
-        </div>
-        <hr />
-    }
+    <input class="input-user-search"/>
+    <div id="usersContainer"></div>
 </div>
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/Admin/EditRolesStyles.css"/>
+}
+
+@section Scripts{
+    <script>
+
+        $(document).on("click", 'button[name="switch-admin-role"]', (e) => {
+            $.ajax({
+                url: "/Creator/EditRoles?handler=SwitchAdminRole&id=" + $(e.currentTarget).parent().find("input[name='id']").val(),
+                type: "POST",
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                success: (res) => {
+                    var container = $(e.currentTarget).parent().parent();
+                    var btn = $(e.currentTarget);
+
+                    btn.removeClass("admin-btn");
+                    btn.removeClass("nonadmin-btn");
+
+                    if (res) {
+                        btn.addClass("admin-btn")
+                        container.addClass("admin-container");
+                    }
+                    else {
+                        btn.addClass("nonadmin-btn")
+                        container.removeClass("admin-container");
+                    }
+                },
+                error: () => {
+                    $("#msg").html("Error while making Ajax call!");
+                }
+            });
+        });
+
+        $(document).on("click", ".delete-user", (e) => {
+            $.ajax({
+                type: "DELETE",
+                url: "/Creator/EditRoles?handler=User&id=" + $(e.currentTarget).parent().find("input[name='id']").val(),
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                success: () => {
+                    $(e.currentTarget).parent().parent().remove();
+                },
+                error: () => {
+                    $("#msg").html("Error while making Ajax call!");
+                }
+            });
+        });
+
+        $(document).ready(() => {
+            FindUsers("");
+        });
+
+        $(document).on("input", ".input-user-search", (e) => {
+            FindUsers(e.currentTarget.value);
+        });
+
+        function FindUsers(req) {
+            $.ajax({
+                url: "/Creator/EditRoles?handler=FindUsers&req=" + req,
+                type: "POST",
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                success: (view) => {
+                    document.getElementById("usersContainer").innerHTML = view;
+                },
+                error: () => {
+                    $("#msg").html("Error while making Ajax call!");
+                }
+            });
+        }
+    </script>
+}

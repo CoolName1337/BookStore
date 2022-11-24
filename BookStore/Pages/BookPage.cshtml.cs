@@ -3,6 +3,7 @@ using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace BookStore.Pages;
 
@@ -109,5 +110,15 @@ public class BookPageModel : PageModel
             );
     }
 
+    public IActionResult OnGetReviewSort(int bookId, string req)
+    {
+        PostInitialize(bookId);
+        ViewData["req"] = req;
+        return new PartialViewResult()
+        {
+            ViewName = "_ReviewsForBookPage",
+            ViewData = this.ViewData
+        };
+    }
 
 }

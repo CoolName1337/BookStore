@@ -1,0 +1,93 @@
+﻿
+div.content{
+    max-width:1000px;
+    margin:auto;
+    font-size:20px;
+    margin-top:60px;
+}
+
+input.input-user-search {
+    height: 40px;
+    font-size: 20px;
+    border: 3px solid black;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding-left:10px;
+    width:100%;
+}
+
+div.email-div{
+    margin-left:auto;
+    padding:0 10px;
+}
+
+div.user-container {
+    border-bottom: 2px solid #9b9b9b;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+div.admin-container {
+    border-bottom: 2px solid #ffb61e;
+}
+
+.interact-form {
+    margin-left:auto;
+    margin-right:0;
+}
+
+.user-name:hover {
+    opacity: 0.5;
+}
+button {
+    transition: all 0.5s ease;
+    width: 100px;
+    height: 30px;
+    border-style: solid;
+    border-width: 2px;
+}
+
+button.admin-btn {
+    background-color: #ffac00;
+    color: white;
+    border-color: #ffac00;
+}
+button.nonadmin-btn {
+    color: #ffac00;
+    border-color: #ffac00;
+}
+
+button.nonadmin-btn:hover {
+    color: white;
+    background-color: #ffc346;
+}
+button.admin-btn:hover {
+    color: #ffb61e;
+    background-color:#ffe6b2;
+}
+
+button.delete-user{
+    color:red;
+    border-color:red;
+}
+button.delete-user:hover{
+    color:white;
+    background-color:red;
+}
+
+.user-profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right:8px;
+}
+
+.user-container a{
+    text-decoration:none;
+    color:black;
+}
+

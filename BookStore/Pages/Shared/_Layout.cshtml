@@ -35,12 +35,10 @@
             <li>
                 <form method="post" asp-page="/SearchResult">
                     <div class="dropdown-search">
-                        <div class="search-container">
-                            <input class="input-search" type="search" name="search" placeholder="Поиск..." />
-                            <button onclick="myFunction()" class="dropbtn-search show" type="button" id="myDropdownBtn">🔍</button>
-                        </div>
+                        <button class="dropbtn-search" type="button">🔍</button>
                         <div id="myDropdown" class="dropdown-content-search">
 
+                            <input class="input-search" type="search" name="search" placeholder="Поиск..." />
                             <div class="multiselect">
                                 <div class="selectBox">
                                     Добавить жанры
@@ -121,10 +119,12 @@
         $(document).on("click", ".selectBox", (e) => {
             $(e.target).parent().children(".checkboxes").toggleClass("hidden");
         });
+        $(document).on("click", ".dropbtn-search", (e) => {
+            document.getElementById("myDropdown").classList.toggle("show");
+        });
+
+
         $(document).ready(() => {
-            
-
-
             $.ajax({
                 url: "/Index?handler=SelectAllGenres",
                 type: "GET",
