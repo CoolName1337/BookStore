@@ -15,6 +15,8 @@ public interface IServiceBook
     void Delete(Book book);
     void AddGenres(Book book, IEnumerable<Genre> genres);
     void RemoveGenres(Book book, IEnumerable<Genre> genres);
+    void AddAuthors(Book book, IEnumerable<Author> authors);
+    void RemoveAuthors(Book book, IEnumerable<Author> authors);
     Task Update(Book book);
     Book GetBook(int id);
 }

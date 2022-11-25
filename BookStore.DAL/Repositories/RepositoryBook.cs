@@ -31,6 +31,7 @@ public class RepositoryBook : IRepositoryBook
     public Book GetBook(int bookId)
     {
         return Books
+            .Include(book => book.Authors)
             .Include(book => book.Users)
             .Include(book => book.Ratings)
             .Include(book => book.Genres)

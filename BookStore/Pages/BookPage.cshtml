@@ -18,7 +18,14 @@
         <img class="book-preview" src="@Model.TakedBook.SourceImage" alt="Картинка не найдена" />
         <div>
             <h2>@Model.TakedBook.Title</h2>
-            <p class="writer">Автор: @Model.TakedBook.Writer</p>
+            <div class="writer">
+                <span>@(Model.TakedBook.Authors.Count == 1 ? "Автор:" : "Авторы:")</span>
+                @{
+                    var res = string.Join(", ", Model.TakedBook.Authors
+                    .Select(author => $"<span><a href='/Writer/AuthorPage?authorId={author.Id}'>{author.Name}</a></span>"));
+                }
+                @Html.Raw(res)
+            </div>
 
             <h3 class="genres-title">Жанры:</h3>
             <div class="genres">

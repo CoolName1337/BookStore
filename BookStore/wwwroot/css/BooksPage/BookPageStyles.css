@@ -25,6 +25,10 @@ div.title {
     align-items: center;
 }
 
+.writer a{
+    color: blue;
+}
+
 div.content {
     max-width: 1200px;
     margin: auto;

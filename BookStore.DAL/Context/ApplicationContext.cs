@@ -10,6 +10,7 @@ public class ApplicationContext : IdentityDbContext<User>
     public DbSet<Rating> Ratings { get; set; }
     public DbSet<Genre> Genres { get; set; }
     public DbSet<Review> Reviews { get; set; }
+    public DbSet<Author> Authors { get; set; }
     public ApplicationContext()
     {
         Database.EnsureCreated();

@@ -14,6 +14,7 @@
     <Folder Include="wwwroot\files\" />
     <Folder Include="wwwroot\images\profile\" />
     <Folder Include="wwwroot\images\book\" />
+    <Folder Include="wwwroot\images\author\" />
   </ItemGroup>
 
 </Project>

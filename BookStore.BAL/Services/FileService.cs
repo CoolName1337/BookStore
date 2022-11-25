@@ -32,4 +32,14 @@ public static class FileService
         }
         return filePath;
     }
+    public static async Task<string> SaveAuthorPic(IFormFile img, string imgName)
+    {
+        string fileName = string.Join(".", imgName, img.ContentType.Split("/").Last());
+        string filePath = Path.Combine($"/images/author/", fileName);
+        using (var fileStream = new FileStream("wwwroot" + filePath, FileMode.Create))
+        {
+            await img.CopyToAsync(fileStream);
+        }
+        return filePath;
+    }
 }

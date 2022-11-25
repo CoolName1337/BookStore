@@ -1,13 +1,28 @@
 ﻿
-
-/*////////////////////////////////////////////   Create book   ////////////////////////////////////////////*/
-
-
+.admin-nav-panel{
+    background-color:#222;
+    display:flex;
+}
+.admin-nav-panel button {
+    font-size: 26px;
+    padding: 10px;
+    width:100%;
+    background-color: #222;
+    border: none;
+    color: white;
+    transition:all 0.4s ease;
+    border-radius:0;
+}
+.admin-nav-panel button:hover {
+    background-color: #111;
+}
 div.content {
     max-width: 1000px;
     margin: auto;
+    margin-top: 60px;
 }
 
+/*////////////////////////////////////////////   Create book   ////////////////////////////////////////////*/
 .handler {
     display:flex;
 }
@@ -22,7 +37,6 @@ div.content {
 
 div.create-container {
     display: inline-grid;
-    margin-top: 60px;
 }
 
 .input-file {
@@ -60,7 +74,12 @@ div.create-container {
     width: 300px;
 }
 
-input.data:not(.input-img)  {
+.input-in-box{
+    width:100%;
+    box-sizing:border-box;
+}
+
+input.data:not(.input-img) {
     padding-left: 10px;
     height: 40px;
 }
@@ -68,68 +87,6 @@ input.data:not(.input-img)  {
 .data-info {
     font-size: 12px;
     font-weight: bold;
-}
-/*////////////////////////////////////////////   Genres   ////////////////////////////////////////////*/
-
-.content {
-    display: flex;
-}
-
-.edit-genres-container {
-    background-color: #333;
-    max-width: 300px;
-    position: absolute;
-    left: 0;
-    margin-left: 20px;
-    padding: 10px;
-    width: 100%;
-}
-
-.toggle-genres-container{
-    cursor:pointer;
-    background-color:#333;
-    transition:all 0.4s ease;
-}
-.toggle-genres-container:hover{
-    background-color:#222;
-}
-.genres-title-container {
-    color: white;
-    text-align: center;
-    padding: 6px;
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.genre-container {
-    margin-bottom: 5px;
-    display: flex;
-    box-sizing: border-box;
-    word-break: Normal;
-}
-
-.genre-name {
-    min-height:20px;
-    font-size:20px;
-    width:100%;
-    background-color: #222;
-    color: white;
-    border: none;
-    border-radius: 0;
-    padding: 5px;
-}
-input.genre-name:focus {
-    outline: none;
-}
-.create-genre, .remove-genre {
-    background-color: #222;
-    color: white;
-    border: none;
-    margin: 0;
-    border-radius: 0;
-}
-.create-genre:hover, .remove-genre:hover {
-    background-color: #111;
 }
 
 .selectBox {
@@ -167,4 +124,211 @@ div.checkboxes label {
 div.checkboxes label:hover {
     background-color: #111;
     color: white;
+}
+
+
+
+
+/*////////////////////////////////////////////   Genres   ////////////////////////////////////////////*/
+
+
+.genre-create-container{
+    width:100%;
+    display:flex;
+    margin: 20px 0;
+}
+.genre-name-input{
+    width:100%;
+    font-size:20px;
+    padding:8px;
+    border-radius:10px 0 0 10px;
+    border-color:black;
+}
+
+.genre-name-input:focus {
+    outline: none;
+}
+
+.create-genre-btn {
+    border-radius: 0 10px 10px 0;
+    border-left:none;
+    width:20%;
+    font-size:30px;
+}
+.create-genre-btn:hover{
+    background-color:#d8d8d8;
+}
+
+div.genre-container {
+    display: inline-block;
+    background-color: #333;
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    transition: all 0.4s ease;
+    text-decoration: none;
+    color: white;
+    margin: 5px;
+}
+
+button.genre {
+    color: white;
+    font-size: 20px;
+    background-color: #333;
+    border: none;
+    height: 100%;
+    width: 50px;
+    transition: all 0.4s ease;
+}
+button.genre:hover {
+    background-color: #222;
+}
+button.create-genre {
+    font-size: 40px;
+}
+
+label.genre-name {
+    display:inline-block;
+    padding: 8px 20px;
+}
+
+
+/*////////////////////////////////////////////   Authors   ////////////////////////////////////////////*/
+
+.author-name-input {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 20px;
+    padding: 8px;
+    border-radius: 10px;
+    border-color: black;
+}
+
+.author-name-input:focus{
+    outline:none;
+}
+
+.author-container a{
+    text-decoration: none;
+    color: black;
+}
+.author-container {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #343434bb;
+}
+
+.author-container img{
+    object-fit: cover;
+    height:100px;
+    width:100px;
+    border-radius:30px;
+    box-shadow: 0 0 30px #00f7ff;
+}
+
+.author-container .author-name{
+    margin-left: 20px;
+    font-size: 30px;
+}
+
+.author-container button{
+    transition: all 0.4s ease;
+    margin-right:0;
+    margin-left:auto;
+    color:red;
+    border:2px solid red;
+    padding:8px;
+    font-size:20px;
+}
+.author-container button:hover{
+    background-color:red;
+    color:white;
+}
+
+.new-author-clicker{
+    transition:all 0.4s ease;
+    display:block;
+    width:100%;
+    padding:10px;
+    font-size:30px;
+}
+.new-author-clicker:hover{
+    background-color:#dcdcdc;
+}
+
+.new-author-container {
+    display: none;
+    position: fixed;
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    top: 100px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 3px solid black;
+    background-color: white;
+}
+
+.new-author-container-title{
+    display:flex;
+}
+
+.new-author-container-title span{
+    font-size:40px;
+    font-weight:bold;
+}
+
+.close-author-create-container {
+    margin-left: auto;
+    margin-right: 0;
+    border: none;
+    font-size: 40px;
+    padding: 8px;
+    background: none;
+}
+
+.new-author-title{
+    display:flex;
+}
+
+.author-picture {
+    object-fit: cover;
+    cursor: pointer;
+    width: 200px;
+    height: 200px;
+}
+
+[name="author-description"] {
+    margin-top: 20px;
+    display: block;
+    font-size:20px;
+    width: 100%;
+    height: 400px;
+    resize: none;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+[name="author-name"] {
+    font-size:30px;
+    padding:8px;
+    height:100%;
+    margin-left:20px;
+}
+
+.add-author{
+    background-color: #00ff0d;
+    color:white;
+    display:block;
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    font-size:20px;
+    border:none;
 }

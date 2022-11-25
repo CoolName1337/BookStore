@@ -8,7 +8,7 @@ public class Book
     public string Description { get; set; } = "";
     public string SourceImage { get; set; } = "";
     public string SourceFile { get; set; } = "";
-    public string Writer { get; set; } = "";
+    public List<Author> Authors { get; set; } = new();
     public DateTime AddingDate { get; set; } = DateTime.Now;
     public DateTime DateOfCreation { get; set; }
     public List<User> Users { get; set; } = new();

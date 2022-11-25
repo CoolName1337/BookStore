@@ -26,7 +26,6 @@ public class SearchResultModel : PageModel
             return
             // Search by name, writer and description
             (book.Title.ToUpper().Contains(RequestString.ToUpper()) ||
-            book.Writer.ToUpper().Contains(RequestString.ToUpper()) ||
             book.Description.ToUpper().Contains(RequestString.ToUpper())) &&
             // Search by including and excluding genres
             (!IncludingGenres.Except(book.Genres.Select(genre => genre.Id)).Any() &&

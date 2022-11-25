@@ -1,4 +1,5 @@
 using BookStore.BAL.Interfaces;
+using BookStore.BAL.Services;
 using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,7 @@ public class EditBookModel : PageModel
 {
     private readonly IServiceBook _serviceBook;
     public readonly IServiceGenre _serviceGenre;
+    public readonly IServiceAuthor _serviceAuthor;
     public Book ChangedBook { get; set; }
     public BAL.Services.ActionResult<Book> ActionResult = new();
 
@@ -18,10 +20,11 @@ public class EditBookModel : PageModel
     public IFormFile ImageFormFile { get; set; }
 
 
-    public EditBookModel(IServiceBook serviceBook, IServiceGenre serviceGenre)
+    public EditBookModel(IServiceBook serviceBook, IServiceGenre serviceGenre, IServiceAuthor serviceAuthor)
     {
         _serviceBook = serviceBook;
         _serviceGenre = serviceGenre;
+        _serviceAuthor = serviceAuthor;
     }
 
     public void OnGet(int id)
@@ -43,7 +46,6 @@ public class EditBookModel : PageModel
         Book book = new()
         {
             Title = Request.Form["title"],
-            Writer = Request.Form["writer"],
             Description = Request.Form["descr"],
             DateOfCreation = res
         };
@@ -66,6 +68,10 @@ public class EditBookModel : PageModel
             _serviceBook.AddGenres(
                 ChangedBook,
                 _serviceGenre.GetAll().Where(genre => Request.Form["genres"].Contains(genre.Id.ToString())).ToArray()
+                );
+            _serviceBook.AddAuthors(
+                ChangedBook,
+                Request.Form["authors"].Select(authId => _serviceAuthor.Authors.Find(int.Parse(authId))).ToList()
                 );
             _serviceBook.Update(ChangedBook);
             return RedirectToPage("/BookPage", new { Id = ActionResult.Value.Id });

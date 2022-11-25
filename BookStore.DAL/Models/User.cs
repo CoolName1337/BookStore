@@ -9,5 +9,6 @@ public class User : IdentityUser
     public List<Rating> Ratings { get; set; } = new();
     public List<Favorite> Favorites { get; set; } = new();
     public List<Review> Reviews { get; set; } = new();
+    public List<AuthorReview> AuthorReviews { get; set; } = new();
     public string ProfilePicture { get; set; } = "";
 }

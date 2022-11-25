@@ -1,0 +1,7 @@
+﻿@model BookStore.Pages.AuthorPageModel
+@foreach (var review in Model.Author.Reviews)
+{
+    <div class="book-container">
+        <div>@review.Text</div>
+    </div>
+}

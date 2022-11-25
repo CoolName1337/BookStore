@@ -1,0 +1,59 @@
+﻿.content {
+    max-width: 1000px;
+    margin: auto;
+    margin-top: 60px;
+}
+.author-title{
+    display:flex;
+}
+.author-title img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.author-title span {
+    font-size:40px;
+    padding-left:10px;
+}
+.author-nav-panel {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    border-bottom: 1px solid #565656be;
+    margin-top: 8px;
+}
+.author-nav-panel li{
+    transition: all 0.4s ease;
+    border-bottom:3px solid #00000000;
+}
+.author-nav-panel li:hover {
+    border-bottom-color: black;
+    background-color:#d5d5d59e;
+}
+.author-nav-panel li a {
+    cursor:pointer;
+    font-size: 20px;
+    padding: 10px;
+}
+
+
+/*//////////////////////////////////////////////// Books //////////////////////////////////////////////////////*/
+
+
+
+
+
+
+/*//////////////////////////////////////////////// Description //////////////////////////////////////////////////////*/
+
+
+
+
+
+
+
+
+
+/*//////////////////////////////////////////////// Reviews //////////////////////////////////////////////////////*/

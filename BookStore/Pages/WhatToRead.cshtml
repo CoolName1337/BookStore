@@ -13,7 +13,6 @@
             <div class="book-container">
                 <a href=@BookHref><img class="book-preview" src=@book.SourceImage /></a>
                 <a href=@BookHref class="title" title="@book.Title">@book.Title</a>
-                <div class="writer">@book.Writer</div>
             </div>
         }
         <a asp-page="/FilterBooksPage" asp-route-filterString="POPULARITY">
@@ -34,7 +33,6 @@
             <div class="book-container">
                 <a href=@BookHref><img class="book-preview" src=@book.SourceImage /></a>
                 <a href=@BookHref class="title" title="@book.Title">@book.Title</a>
-                <div class="writer">@book.Writer</div>
             </div>
         }
         <a asp-page="/FilterBooksPage" asp-route-filterString="DATE">

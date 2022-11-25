@@ -42,4 +42,9 @@ public static class ServiceProviderExtensions
         services.AddTransient<IServiceReview, ServiceReview>();
         services.AddTransient<IRepositoryReview, RepositoryReview>();
     }
+    public static void AddAuthorService(this IServiceCollection services)
+    {
+        services.AddTransient<IServiceAuthor, ServiceAuthor>();
+        services.AddTransient<IRepositoryAuthor, RepositoryAuthor>();
+    }
 }

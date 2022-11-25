@@ -3,6 +3,7 @@ using BookStore.DAL.Interfaces;
 using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace BookStore.BAL.Services;
 
@@ -25,7 +26,6 @@ public class ServiceBook : IServiceBook
 
         if (string.IsNullOrWhiteSpace(book.Title)) actionResult.Errors.Add("Название не указано");
         if (string.IsNullOrWhiteSpace(book.Description)) actionResult.Errors.Add("Описание не указано");
-        if (string.IsNullOrWhiteSpace(book.Writer)) actionResult.Errors.Add("Писатель не указан");
         if (book.Price < 0) actionResult.Errors.Add("Цена должна быть числом и неменьше нуля");
         if (book.AgeLimit < 0) actionResult.Errors.Add("Возрастно ограничение должно быть числом и неменьше нуля");
         if (book.Pages < 0) actionResult.Errors.Add("Количество страниц должно быть числом и неменьше нуля");
@@ -61,7 +61,7 @@ public class ServiceBook : IServiceBook
 
             currentBook.Genres = book.Genres;
             currentBook.Title = book.Title;
-            currentBook.Writer = book.Writer;
+            currentBook.Authors = book.Authors;
             currentBook.Price = book.Price;
             currentBook.SourceFile = book.SourceFile;
             currentBook.SourceImage = book.SourceImage;
@@ -82,6 +82,17 @@ public class ServiceBook : IServiceBook
         if (book == null) return "";
         string file = book.SourceFile;
         return "files/" + System.Net.WebUtility.UrlEncode(file.Replace("/files/", "")).Replace("+", " ").Replace(" ", "%20");
+    }
+
+    public void AddAuthors(Book book, IEnumerable<Author> authors)
+    {
+        book.Authors.AddRange(authors);
+        book.Authors = book.Authors.Distinct().ToList();
+    }
+
+    public void RemoveAuthors(Book book, IEnumerable<Author> authors)
+    {
+        book.Authors = book.Authors.Where(author => !authors.Contains(author)).ToList();
     }
 
     public void AddGenres(Book book, IEnumerable<Genre> genres)

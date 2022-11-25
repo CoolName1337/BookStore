@@ -1,0 +1,10 @@
+﻿@model BookStore.Pages.AuthorPageModel
+@{
+}
+
+@foreach (var book in Model.Author.Books)
+{
+    <div class="book-container">
+        <div>@book.Title</div>
+    </div>  
+}

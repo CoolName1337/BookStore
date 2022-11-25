@@ -1,0 +1,47 @@
+﻿@page
+@model BookStore.Pages.AuthorPageModel
+@{
+    ViewData["Title"] = Model.Author.Name;
+}
+
+<div class="content">
+    <div class="author-title">
+        <img src="@Model.Author.ProfilePicture" />
+        <span>@Model.Author.Name</span>
+    </div>
+    <ul class="author-nav-panel">
+        @if (Model.Author.Books.Any())
+        {
+            <li>
+                <a data-ajax="true" data-ajax-url="/Writer/AuthorPage?handler=Books&authorId=@Model.Author.Id" data-ajax-update="#content">
+                    Книги
+                    <span class="items-count">@Model.Author.Books.Count</span>
+                </a>
+            </li>
+        }
+        @if (Model.Author.Description != "")
+        {
+            <li>
+                <a data-ajax="true" data-ajax-url="/Writer/AuthorPage?handler=Description&authorId=@Model.Author.Id" data-ajax-update="#content">
+                    Об авторе
+                </a>
+            </li>
+        }
+        <li>
+            <a data-ajax="true" data-ajax-url="/Writer/AuthorPage?handler=Reviews&authorId=@Model.Author.Id" data-ajax-update="#content">
+                Отзывы об авторе
+                <span class="items-count">@Model.Author.Reviews.Count</span>
+            </a>
+        </li>
+    </ul>
+    <div id="content"></div>
+</div>
+
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/Author/AuthorPageStyles.css"/>
+}
+
+@section Scripts{
+    <script src="/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+}

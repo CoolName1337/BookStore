@@ -8,7 +8,6 @@
             <div class="hover-book">
                 <div class="hover-title">
                     <a href=@BookHref class="title">@book.Title</a>
-                    <div class="writer">@book.Writer</div>
                 </div>
                 @if (User.Identity.IsAuthenticated &&
                Model.AvailableBooks.Any(uBook => book.Id == uBook.Id))
