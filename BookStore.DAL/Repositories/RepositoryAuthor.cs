@@ -31,6 +31,7 @@ namespace BookStore.DAL.Repositories
         {
             return Authors
                 .Include(author => author.Books)
+                    .ThenInclude(book=>book.Ratings)
                 .Include(author => author.Reviews)
                     .ThenInclude(review => review.Rates)
                 .First(author => author.Id == authorId);

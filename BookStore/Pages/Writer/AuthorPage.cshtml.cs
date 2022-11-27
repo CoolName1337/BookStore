@@ -1,4 +1,5 @@
 using BookStore.BAL.Interfaces;
+using BookStore.BAL.Services;
 using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,13 +11,15 @@ public class AuthorPageModel : PageModel
     public IServiceUser _serviceUser { get; init; }
     public IServiceBook _serviceBook { get; init; }
     public IServiceAuthor _serviceAuthor { get; init; }
+    public IServiceRating _serviceRating { get; init; }
     public Author Author { get; set; }
 
-    public AuthorPageModel(IServiceBook serviceBook, IServiceAuthor serviceAuthor, IServiceUser serviceUser)
+    public AuthorPageModel(IServiceBook serviceBook, IServiceAuthor serviceAuthor, IServiceUser serviceUser, IServiceRating serviceRating)
     {
         _serviceUser = serviceUser;
         _serviceBook = serviceBook;
         _serviceAuthor = serviceAuthor;
+        _serviceRating = serviceRating;
     }
     public void OnGet(int authorId)
     {

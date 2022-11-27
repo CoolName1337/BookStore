@@ -1,0 +1,17 @@
+﻿@model AdminPageModel
+@{
+    var req = ViewData["req"]?.ToString() ?? "";
+    var books = Model._serviceBook.Books.Where(book => book.Title.ToUpper().Contains(req.ToUpper())).ToList();
+}
+@foreach (var book in books)
+{
+    <div class="book-container">
+        <a href="/BookPage?id=@book.Id">
+            <img src="@book.SourceImage" />
+        </a>
+        <a href="/BookPage?id=@book.Id">
+            <span class="book-title">@book.Title</span>
+        </a>
+        <button class="delete-book" value="@book.Id">Delete</button>
+    </div>
+}

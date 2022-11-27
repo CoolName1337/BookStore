@@ -12,7 +12,7 @@
     <ul class="author-nav-panel">
         @if (Model.Author.Books.Any())
         {
-            <li>
+            <li class="selected">
                 <a data-ajax="true" data-ajax-url="/Writer/AuthorPage?handler=Books&authorId=@Model.Author.Id" data-ajax-update="#content">
                     Книги
                     <span class="items-count">@Model.Author.Books.Count</span>
@@ -34,7 +34,11 @@
             </a>
         </li>
     </ul>
-    <div id="content"></div>
+    <div id="content">
+        @if (Model.Author.Books.Any()){
+            @await Html.PartialAsync("_BooksView")
+        }
+    </div>
 </div>
 
 
@@ -43,5 +47,22 @@
 }
 
 @section Scripts{
+    <script>
+
+        $(document).on("click", ".author-nav-panel li", (e) => {
+            $(".author-nav-panel").children().removeClass("selected");
+            $(e.currentTarget).addClass("selected");
+        });
+
+
+        $(document).on("click", ".author-books-filter-panel button", (e) => {
+            var ind = Array.prototype.slice.call($(".author-books-filter-panel").children()).indexOf(e.currentTarget);
+            $(".filter-books").children().hide();
+            $(".filter-books").children().eq(ind).show();
+            $(".author-books-filter-panel").children().removeClass("selected");
+            $(e.currentTarget).addClass("selected");
+        });
+
+    </script>
     <script src="/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
 }

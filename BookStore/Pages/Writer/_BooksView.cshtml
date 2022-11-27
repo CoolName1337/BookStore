@@ -1,10 +1,120 @@
 ﻿@model BookStore.Pages.AuthorPageModel
 @{
+    var popularBooks = Model.Author.Books.OrderByDescending(book => book.Bought);
 }
+<h1>Самое популярное</h1>
+<div class="popular-container">
+    @foreach (var book in popularBooks.Take(10))
+    {
+        <div class="book-container">
+            <a href="/BookPage?id=@book.Id">
+                <img class="book-preview" src="@book.SourceImage" />
+            </a>
+            <div class="book-title-container">
+                <a class="book-title" href="/BookPage?id=@book.Id">
+                    @book.Title
+                </a>
+                <div class="book-rating" title="Оценка: @Model._serviceRating.GetRating(book)&#013;Оценили: @Model._serviceRating.GetRatingCount(book)">
+                    @for (int j = 0; j < Math.Ceiling(Model._serviceRating.GetRating(book)); j++)
+                    {
+                        @if (j == Math.Ceiling(Model._serviceRating.GetRating(book)) - 1)
+                        {
+                            <svg class="rate-star" width="@(Model._serviceRating.GetRating(book)%1 * 20)" height="20">
+                                <polygon points="10,0 17,20 0,8 20,8 3,20" style="fill:orange;fill-rule:nonzero;" />
+                            </svg>
+                        }
+                        else
+                        {
+                            <svg class="rate-star" width="20" height="20">
+                                <polygon points="10,0 17,20 0,8 20,8 3,20" style="fill:orange;fill-rule:nonzero;" />
+                            </svg>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="author-books-filter-panel">
+    <button class="selected">По популярности</button>
+    <button>По дате</button>
+</div>
+<div class="filter-books">
+    <div class="popularity-filter-container">
+        @foreach (var book in popularBooks)
+        {
+            <div class="book-container">
+                <a href="/BookPage?id=@book.Id">
+                    <img class="book-preview" src="@book.SourceImage" />
+                </a>
+                <div class="book-title-container">
+                    <a class="book-title" href="/BookPage?id=@book.Id">
+                        @book.Title
+                    </a>
+                    <div class="book-rating" title="Оценка: @Model._serviceRating.GetRating(book)&#013;Оценили: @Model._serviceRating.GetRatingCount(book)">
+                        @for (int j = 0; j < Math.Ceiling(Model._serviceRating.GetRating(book)); j++)
+                        {
+                            @if (j == Math.Ceiling(Model._serviceRating.GetRating(book)) - 1)
+                            {
+                                <svg class="rate-star" width="@(Model._serviceRating.GetRating(book)%1 * 20)" height="20">
+                                    <polygon points="10,0 17,20 0,8 20,8 3,20" style="fill:orange;fill-rule:nonzero;" />
+                                </svg>
+                            }
+                            else
+                            {
+                                <svg class="rate-star" width="20" height="20">
+                                    <polygon points="10,0 17,20 0,8 20,8 3,20" style="fill:orange;fill-rule:nonzero;" />
+                                </svg>
+                            }
+                        }
+                    </div>
 
-@foreach (var book in Model.Author.Books)
-{
-    <div class="book-container">
-        <div>@book.Title</div>
-    </div>  
-}
+                    <div class="book-description">
+                        @book.Description
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="date-filter-container" style="display:none">
+        @for (int i = 0; i < Model.Author.Books.Count; i++)
+        {
+            var book = Model.Author.Books[i];
+            @if (i == 0 || book.DateOfCreation.Year != Model.Author.Books[i - 1].DateOfCreation.Year)
+            {
+                <h2>@book.DateOfCreation.Year</h2>
+            }
+            <div class="book-container">
+                <a href="/BookPage?id=@book.Id">
+                    <img class="book-preview" src="@book.SourceImage" />
+                </a>
+                <div class="book-title-container">
+                    <a class="book-title" href="/BookPage?id=@book.Id">
+                        @book.Title
+                    </a>
+                    <div class="book-rating" title="Оценка: @Model._serviceRating.GetRating(book)&#013;Оценили: @Model._serviceRating.GetRatingCount(book)">
+                        @for (int j = 0; j < Math.Ceiling(Model._serviceRating.GetRating(book)); j++)
+                        {
+                            @if (j == Math.Ceiling(Model._serviceRating.GetRating(book)) - 1)
+                            {
+                                <svg class="rate-star" width="@(Model._serviceRating.GetRating(book)%1 * 20)" height="20">
+                                    <polygon points="10,0 17,20 0,8 20,8 3,20" style="fill:orange;fill-rule:nonzero;" />
+                                </svg>
+                            }
+                            else
+                            {
+                                <svg class="rate-star" width="20" height="20">
+                                    <polygon points="10,0 17,20 0,8 20,8 3,20" style="fill:orange;fill-rule:nonzero;" />
+                                </svg>
+                            }
+                        }
+                    </div>
+
+                    <div class="book-description">
+                        @book.Description
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

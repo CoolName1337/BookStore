@@ -18,9 +18,6 @@
 else{
     @foreach (var genre in genres)
     {
-        <label>
-            <input type="checkbox" name="genres" value="@genre.Id">
-            @genre.Value
-        </label>
+        <option value="@genre.Id">@genre.Value</option>
     }
 }

@@ -2,7 +2,7 @@
 @model BookStore.Pages.Admin.AdminPageModel
 @{
     ViewData["Title"] = "Admin Page";
-    ViewData["type"] = "nonadmin";
+    ViewData["type"] = "sorry";
 }
 <div class="admin-nav-panel">
     <button>Добавить книгу</button>
@@ -11,34 +11,33 @@
 </div>
 <div class="content">
 
+    <div class="books-container">
+        <input class="book-search-input" placeholder="Поиск..." />
 
-    <div class="book-container">
-        <form method="post" asp-page-handler="CreateBook" enctype="multipart/form-data">
-            <span style="color:red">
-                @foreach (var ex in Model.ActionResult.Errors)
-                {
-                    <span>@ex</span>
-
-                    <br />
-                }
-            </span>
-            <div class="create-container">
-                <input class="input-file data" accept=".pdf, .doc, .docx, .fb2" type="file" name="file" title="тут файл книги" /><br />
+        <button class="new-book-clicker">Добавить книгу</button>
+        <form id="bookForm">
+            <div class="new-book-container">
+                <input class="input-file" accept=".pdf, .doc, .docx, .fb2" type="file" name="file" title="файл книги" /><br />
                 <div class="handler">
-                    <input class="input-img data" accept="image/png,image/jpeg,image/gif" type="file" name="img" title="тут картинка" />
-                    <div>
+                    <input name="bookPicture" accept="image/png,image/jpeg,image/gif" type="file" hidden />
+                    <img class="book-picture" title="картинка книги" />
+                    <div class="title-container">
                         <span class="data-info">Название</span><br />
-                        <input class="input-title data" name="title" placeholder="Название" value="@Model.CreatedBook.Title" /><br />
-                        
+                        <input asp-for="CreatedBook.Title" autocomplete="off" class="input-title data" placeholder="Название" /><br />
+                        <span class="text-danger" asp-validation-for="CreatedBook.Title"></span><br />
+
                         <div class="multiselect">
                             <div class="selectBox">
                                 Добавить авторов
                             </div>
                             <div class="checkboxes hidden">
-                                <input class="input-in-box data" name="author" placeholder="Писатель..." />
-                                <div id="bookAuthors">
-                                    @await Html.PartialAsync("_AuthorsView", ViewData)
-                                </div>
+                            <input class="input-in-box data" placeholder="Писатель..." />
+                            <select asp-for="CreatedBook.Authors" id="bookAuthors">
+                                    @foreach (var author in Model._serviceAuthor.Authors)
+                                    {
+                                        <option value="@author.Id">@author.Name</option>
+                                    }
+                            </select>
                             </div>
                         </div>
 
@@ -47,34 +46,41 @@
                                 Добавить жанры
                             </div>
                             <div class="checkboxes hidden">
-                                <input class="input-in-box data" name="genre" placeholder="Жанр..." />
-                                <div id="bookGenres">
-                                    @await Html.PartialAsync("_GenresView", ViewData)
-                                </div>
+                            <input class="input-in-box data" placeholder="Жанр..." />
+                                <select asp-for="CreatedBook.Genres" id="bookGenres">
+                                    @foreach (var genre in Model._serviceGenre.GetAll())
+                                    {
+                                        <option value="@genre.Id">@genre.Value</option>
+                                    }
+                            </select>
                             </div>
                         </div>
                         <span class="data-info">Цена</span><br />
-                        <input class="input-price data" name="price" placeholder="Цена" value="@Model.CreatedBook.Price" /><br />
-                        </div>
+                        <input asp-for="CreatedBook.Price" class="input-price data" placeholder="Цена" /><br />
+                        <span class="text-danger" asp-validation-for="CreatedBook.Price"></span><br />
+                    </div>
                 </div>
                 <div>
                     <span class="data-info">Возрастное ограничение</span><br />
-                    <input class="input-age-limit data" name="ageLimit" placeholder="Возврастное ограничение" value="@Model.CreatedBook.AgeLimit" /><br />
+                    <input asp-for="CreatedBook.AgeLimit" class="input-age-limit data" placeholder="Возврастное ограничение" /><br />
+                    <span class="text-danger" asp-validation-for="CreatedBook.AgeLimit"></span><br />
                     <span class="data-info">Количество страниц</span><br />
-                    <input class="input-pages-count data" name="pagesCount" placeholder="Количество страниц" value="@Model.CreatedBook.Pages" /><br />
+                    <input asp-for="CreatedBook.Pages" class="input-pages-count data" placeholder="Количество страниц" /><br />
+                    <span class="text-danger" asp-validation-for="CreatedBook.Pages"></span><br />
                     <span class="data-info">Дата написания</span><br />
-                    <input class="input-creating-date data" type="date" name="creatingDate" placeholder="Дата создания" value="@Model.CreatedBook.DateOfCreation.ToString("yyyy-mm-dd")" /><br />
-
+                    <input asp-for="CreatedBook.DateOfCreation" class="input-creating-date data" placeholder="Дата создания" /><br />
                 </div>
-                <textarea class="input-descr" placeholder="Описание" name="descr">@Model.CreatedBook.Description</textarea><br /><br />
-                <button class="input-submit create-btn" type="submit">Сохранить</button>
+                <textarea asp-for="CreatedBook.Description" class="input-descr" placeholder="Описание"></textarea><br />
+                <span class="text-danger" asp-validation-for="CreatedBook.Description"></span>
+                <button class="create-book-btn">Сохранить</button>
             </div>
-
         </form>
+        <div class="finded-books">
+            @await Html.PartialAsync("_BooksView")
+        </div>
     </div>
 
-    @(ViewData["type"]="")
-
+    @(ViewData["type"] = "")
     <div class="genres-container">
         <div class="edit-genres-container">
             <div class="genre-create-container">
@@ -82,7 +88,7 @@
                 <button class="create-genre-btn" type="button">+</button>
             </div>
             <div id="genres">
-                @Html.Partial("_GenresView")
+                @await Html.PartialAsync("_GenresView")
             </div>
             <div id="msg" style="color:red"></div>
         </div>
@@ -90,9 +96,7 @@
    
     <div class="authors-container">
         <input class="author-name-input" placeholder="Поиск..." />
-        <div class="finded-authors">
-            @Html.Partial("_AuthorsView")
-        </div>
+
         <button class="new-author-clicker">Добавить автора</button>
         <div class="new-author-container">
             <input name="author-picture" accept="image/png,image/jpeg,image/gif" type="file" hidden />
@@ -101,12 +105,17 @@
                 <button class="close-author-create-container" type="button">╳</button>
             </div>
             <div class="new-author-title">
-                <img class="author-picture" title="Картинка автора"/>
-                <input name="author-name" placeholder="Имя автора..."/>
+                <img class="author-picture" title="Картинка автора" />
+                <input name="author-name" placeholder="Имя автора..." />
             </div>
             <textarea name="author-description" placeholder="Описание автора..."></textarea>
             <button class="add-author" type="button">Добавить</button>
         </div>
+
+        <div class="finded-authors">
+            @await Html.PartialAsync("_AuthorsView")
+        </div>
+        
     </div>
 
 </div>
@@ -116,7 +125,55 @@
 }
 
 @section Scripts{
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js" integrity="sha512-xq+Vm8jC94ynOikewaQXMEkJIOBp7iArs3IhFWSWdRT3Pq8wFz46p+ZDFAR7kHnSFf+zUv52B3prRYnbDRdgog==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
+        $(document).ready(() => {
+            $.validator.unobtrusive.parse($("#bookForm"));
+
+            $(".content").children().hide();
+            $(".content").children().eq(0).show();
+
+            document.getElementsByClassName('book-picture').item(0)
+                .addEventListener('click', () => document.querySelector('input[name="bookPicture"]').click());
+
+            document.getElementsByClassName('author-picture').item(0)
+                .addEventListener('click', () => document.querySelector('input[name="author-picture"]').click());
+
+        })
+
+        $(document).on("click", ".create-book-btn", (e) => {
+            if ($("#bookForm").valid()) {
+                var formData = $("#bookForm").serialize();
+                $.ajax({
+                    url: "AdminPage?handler=CreateBook",
+                    type: "POST",
+                    data: formData,
+                    beforeSend: (xhr) => {
+                        xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+                    success: (response) => {
+                        alert(response);
+                    },
+                    error: (request, status, error) => {
+                        alert(request.responseText);
+                    }
+
+                });
+            }
+        });
+
+        $(document).on("change", "input[name='bookPicture']", (e) => {
+            fr = $("input[name='bookPicture']").prop("files")[0];
+            document.querySelector(".book-picture").src = URL.createObjectURL(fr)
+        });
+
+        $(document).on("change", "input[name='author-picture']", (e) => {
+            fr = $("input[name='author-picture']").prop("files")[0];
+            document.querySelector(".author-picture").src = URL.createObjectURL(fr)
+        });
 
         $(document).on("input", ".input-in-box", (e) => {
             var name = $(e.currentTarget).prop("name");
@@ -150,17 +207,10 @@
             });
         });
         
-        $(".content").children().hide();
-        $(".content").children().eq(0).show();
 
-        $(document).on("change", "input[name='author-picture']", (e) => {
-            fr = $("input[name='author-picture']").prop("files")[0];
-            document.querySelector(".author-picture").src = URL.createObjectURL(fr)
+        $(document).on("click", ".new-book-clicker, .close-book-create-container", (e) => {
+            $(".new-book-container").toggleClass("show");
         });
-
-        document.getElementsByClassName('author-picture').item(0)
-            .addEventListener('click', () => document.querySelector('input[name="author-picture"]').click())
-
         $(document).on("click", ".new-author-clicker, .close-author-create-container", (e) => {
             $(".new-author-container").toggleClass("show");
         });
@@ -170,6 +220,30 @@
             $(".content").children().hide();
             $(".content").children().eq(ind).show();
         });
+
+        $(document).on("input", ".book-search-input", (e) => {
+            $.ajax({
+                url: "/Admin/AdminPage?handler=FindBooks&req=" + $(e.currentTarget).val(),
+                type: "POST",
+
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                success: (view) => {
+                    document.querySelector(".finded-books").innerHTML = view;
+                },
+                error: (xhr, status, error) => {
+                    alert(error.Text);
+                }
+            });
+        });
+
+
+
+
+
+
+
 
         $(document).on("click", ".add-author", (e) => {
 

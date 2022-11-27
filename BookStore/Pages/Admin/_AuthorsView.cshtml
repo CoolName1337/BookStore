@@ -22,9 +22,6 @@ else
 {
     @foreach (var author in authors)
     {
-        <label>
-            <input type="checkbox" name="authors" value="@author.Id">
-            @author.Name
-        </label>
+        <option value="@author.Id">@author.Name</option>
     }
 }

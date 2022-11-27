@@ -22,12 +22,82 @@ div.content {
     margin-top: 60px;
 }
 
+.text-danger{
+    color:red;
+}
 /*////////////////////////////////////////////   Create book   ////////////////////////////////////////////*/
-.handler {
-    display:flex;
+.book-search-input {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 20px;
+    padding: 8px;
+    border-radius: 10px;
+    border-color: black;
 }
 
-.input-img {
+.book-search-input:focus {
+    outline: none;
+}
+
+.book-container a {
+    text-decoration: none;
+    color: black;
+    height:100%;
+}
+.book-container {
+    margin: 20px 0;
+    display: flex;  
+    padding-bottom: 10px;
+    border-bottom: 3px solid #343434bb;
+}
+
+.book-container img{
+    width:220px;
+    height:300px;
+    box-shadow: 0 10px 20px gray;
+    margin-right: 20px;
+}
+
+.book-container .book-title {
+    font-size: 30px;
+}
+
+.book-container button{
+    align-self:center;
+    transition: all 0.4s ease;
+    margin-right:0;
+    margin-left:auto;
+    color:red;
+    border:2px solid red;
+    padding:8px;
+    font-size:20px;
+}
+.book-container button:hover{
+    background-color:red;
+    color:white;
+}
+
+.new-book-clicker{
+    transition:all 0.4s ease;
+    display:block;
+    width:100%;
+    padding:10px;
+    font-size:30px;
+}
+.new-book-clicker:hover{
+    background-color:#dcdcdc;
+}
+
+.new-book-container {
+    width: 100%;
+    margin-top: 20px;
+    padding: 20px;
+    display: none;
+    box-sizing: border-box;
+    border: 3px solid black;
+}
+
+.book-picture {
     margin-right: 10px;
     cursor: pointer;
     border: 1px solid gray;
@@ -35,48 +105,57 @@ div.content {
     height: 600px;
 }
 
+.handler {
+    display: flex;
+    width: 100%;
+}
+
 div.create-container {
     display: inline-grid;
 }
 
 .input-file {
+    width:100%;
     box-sizing: border-box;
     height: 44px;
     cursor: pointer;
     border: 1px solid gray;
 }
 
-.input-submit {
+.create-book-btn {
+    width: 100%;
     color: white;
     height: 50px;
     font-size: 22px;
     transition: all 0.6s ease;
     border: none;
-}
-
-.create-btn {
     background-color: #64fb4d;
     padding: 0px 30px;
 }
-.create-btn:hover {
+
+.create-book-btn:hover {
     background-color: #49c725;
 }
 .input-descr {
-    margin-top:20px;
-    box-sizing:border-box;
-    height:400px;
-    resize:none;
+    width: 100%;
+    margin-top: 20px;
+    box-sizing: border-box;
+    height: 400px;
+    resize: none;
     padding: 10px;
     font-size: 16px;
 }
 
 .input-title {
-    width: 300px;
+    box-sizing: border-box;
+    width: 100%;
 }
-
-.input-in-box{
-    width:100%;
-    box-sizing:border-box;
+.title-container {
+    width: 100%;
+}
+.input-in-box {
+    width: 100%;
+    box-sizing: border-box;
 }
 
 input.data:not(.input-img) {
