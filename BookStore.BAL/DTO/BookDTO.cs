@@ -20,6 +20,7 @@ public class BookDTO
     public IFormFile SourceFile { get; set; }
     public string Genres { get; set; }
     public string Authors { get; set; }
+    [Required(ErrorMessage = "Укажите дату написания")]
     public DateTime DateOfCreation { get; set; }
     [Range(0, int.MaxValue, ErrorMessage = "Введите количество страниц (больше или равно нулю)")]
     public int Pages { get; set; }

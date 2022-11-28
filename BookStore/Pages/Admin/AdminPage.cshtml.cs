@@ -14,7 +14,7 @@ public class AdminPageModel : PageModel
     public readonly IServiceGenre _serviceGenre;
     public readonly IServiceAuthor _serviceAuthor;
 
-    public BookDTO CreatedBook { get; set; }
+    public BookDTO CreatedBook { get; set; } = new();
     public IFormFile BookFormFile { get; set; }
     public IFormFile ImageFormFile { get; set; }
 
@@ -42,14 +42,15 @@ public class AdminPageModel : PageModel
     public async Task<IActionResult> OnPostCreateBook(BookDTO CreatedBook)
     {
         var book = await _serviceBook.Add(CreatedBook);
+        if(CreatedBook.Genres)
         _serviceBook.AddGenres(
             book,
             CreatedBook.Genres.Split(";").ToList().Where(str => int.TryParse(str, out int res))
-            .Select(genreId =>_serviceGenre.GetById(int.Parse(genreId)))
+            .Select(genreId => _serviceGenre.GetById(int.Parse(genreId)))
             );
         _serviceBook.AddAuthors(
             book,
-            CreatedBook.Authors.Split(";").ToList().Where(str => int.TryParse(str, out int res))
+            CreatedBook.Authors?.Split(";").ToList().Where(str => int.TryParse(str, out int res))
             .Select(authorId => _serviceAuthor.Authors.Find(int.Parse(authorId)))
             );
         await _serviceBook.Update(book);

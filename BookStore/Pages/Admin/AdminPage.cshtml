@@ -69,8 +69,6 @@
                     <span class="data-info">Количество страниц</span><br />
                     <input asp-for="CreatedBook.Pages" class="input-pages-count data" placeholder="Количество страниц" /><br />
                     <span class="text-danger" asp-validation-for="CreatedBook.Pages"></span><br />
-                    <span class="data-info">Дата написания</span><br />
-                    <input asp-for="CreatedBook.DateOfCreation" class="input-creating-date data" placeholder="Дата создания" /><br />
                 </div>
                 <textarea asp-for="CreatedBook.Description" class="input-descr" placeholder="Описание"></textarea><br />
                 <span class="text-danger" asp-validation-for="CreatedBook.Description"></span>
@@ -181,33 +179,12 @@
         });
 
         $(document).on("input", ".input-in-box", (e) => {
-            var name = $(e.currentTarget).prop("name");
-            var linkAppend = "";
-            if (name === "author") {
-                linkAppend = "FindAuthors";
-            }
-            else if (name === "genre") {
-                linkAppend = "FindGenres";
-            }
-            var url = `/Admin/AdminPage?handler=${linkAppend}&req=${$(e.currentTarget).val()}&type=nonmain`
-            console.log(url);
-            $.ajax({
-                url: url,
-                type: "POST",
-
-                beforeSend: (xhr) => {
-                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
-                },
-                success: (view) => {
-                    if (name === "author") {
-                        document.querySelector("#bookAuthors").innerHTML = view;
-                    }
-                    else if (name === "genre") {
-                        document.querySelector("#bookGenres").innerHTML = view;
-                    }
-                },
-                error: (xhr, status, error) => {
-                    alert(error.response);
+            $(e.currentTarget).parent().children("button").each((ind, el) => {
+                if ($(el).text().toUpperCase().includes($(e.currentTarget).val().toUpperCase())) {
+                    $(el).show()
+                }
+                else{
+                    $(el).hide()
                 }
             });
         });
@@ -230,6 +207,8 @@
 
         $(document).on("click", ".create-book-btn", (e) => {
             if ($("#bookForm").valid()) {
+                var formData = new FormData(document.getElementById("bookForm"));
+                console.log(formData);
                 $.ajax({
                     url: "AdminPage?handler=CreateBook",
                     type: "POST",
