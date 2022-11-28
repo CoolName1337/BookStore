@@ -9,5 +9,6 @@ public interface IRepositoryGenre
 
     List<Genre> GetAll();
 
-    Genre Get(string name);
+    Genre GetByName(string name);
+    Genre GetById(int id);
 }

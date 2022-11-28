@@ -181,32 +181,40 @@ input.data:not(.input-img) {
     color: black;
 }
 
-div.checkboxes {
-    width: 100%;
+div.selectboxes {
+    width: 500px;
     box-sizing: border-box;
-    position: relative;
     border: 2px solid #111;
     border-radius: 4px;
-    height: 150px;
+    height: 400px;
     overflow: auto;
+    position:absolute;
+    background-color:white;
+    z-index:3;
 }
 
-div.checkboxes label {
+div.selectboxes button {
     display: block;
+    width:100%;
+    border:none;
+    border-radius:0;
     cursor: pointer;
+    text-align:left;
     font-size: 20px;
     padding: 10px;
     color:black;
     transition:all 0.4s ease;
 }
 
-div.checkboxes label:hover {
+div.selectboxes button:hover {
     background-color: #111;
     color: white;
 }
 
-
-
+.selected-item {
+    background-color: #111 !important;
+    color: white !important;
+}
 
 /*////////////////////////////////////////////   Genres   ////////////////////////////////////////////*/
 

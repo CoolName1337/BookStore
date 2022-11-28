@@ -4,11 +4,12 @@ namespace BookStore.BAL.Services;
 
 public static class FileService
 {
-    public static async Task<string> Save(IFormFile file)
+    public static async Task<string> SaveBookFile(IFormFile file, string name)
     {
+        string fileName = string.Join(".", name, file.ContentType.Split("/").Last());
         bool isImage = file.ContentType.StartsWith("image");
         string type = isImage ? "images/book" : "files";
-        string filePath = Path.Combine($"/{type}/", file.FileName);
+        string filePath = Path.Combine($"/{type}/", fileName);
         using (var fileStream = new FileStream("wwwroot" + filePath, FileMode.Create))
         {
             await file.CopyToAsync(fileStream);

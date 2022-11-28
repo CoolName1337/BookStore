@@ -4,7 +4,7 @@
     ViewData["Title"] = "Редактировать книгу";
 }
 <div class="content">
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" asp-action="DeleteBook" enctype="multipart/form-data">
         <div class="create-container">
             <span style="color:red">
                 @foreach (var ex in Model.ActionResult.Errors)
@@ -60,7 +60,7 @@
             </div>
             <textarea class="input-descr" placeholder="Описание" name="descr">@Model.ChangedBook.Description</textarea><br /><br />
             <button class="input-submit update-btn" type="submit">Сохранить</button>
-            <button class="input-submit delete-btn" type="submit" name="WantToDelete" value="true">Удалить</button>
+            <button class="input-submit delete-btn" type="submit" >Удалить</button>
         </div>
     </form>
 </div>

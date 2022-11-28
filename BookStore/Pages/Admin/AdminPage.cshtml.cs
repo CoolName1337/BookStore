@@ -1,9 +1,9 @@
+using BookStore.BAL.DTO;
 using BookStore.BAL.Interfaces;
 using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ActionResult = BookStore.BAL.Services.ActionResult<BookStore.DAL.Models.Book>;
 
 namespace BookStore.Pages.Admin;
 
@@ -14,8 +14,7 @@ public class AdminPageModel : PageModel
     public readonly IServiceGenre _serviceGenre;
     public readonly IServiceAuthor _serviceAuthor;
 
-    public ActionResult ActionResult { get; set; } = new();
-    public Book CreatedBook { get; set; } = new();
+    public BookDTO CreatedBook { get; set; }
     public IFormFile BookFormFile { get; set; }
     public IFormFile ImageFormFile { get; set; }
 
@@ -40,21 +39,25 @@ public class AdminPageModel : PageModel
         ViewData["req"] = req ?? "";
         return GetPartialBooks();
     }
-    public IActionResult OnPostCreateBook(Book CreatedBook)
+    public async Task<IActionResult> OnPostCreateBook(BookDTO CreatedBook)
     {
-        //_serviceBook.AddGenres(
-        //        CreatedBook,
-        //        _serviceGenre.GetAll().Where(genre => Request.Form["genres"].Contains(genre.Id.ToString())).ToArray()
-        //        );
-        //_serviceBook.AddAuthors(
-        //    CreatedBook,
-        //    Request.Form["authors"].Select(authId => _serviceAuthor.Authors.Find(int.Parse(authId))).ToList()
-        //    );
+        var book = await _serviceBook.Add(CreatedBook);
+        _serviceBook.AddGenres(
+            book,
+            CreatedBook.Genres.Split(";").ToList().Where(str => int.TryParse(str, out int res))
+            .Select(genreId =>_serviceGenre.GetById(int.Parse(genreId)))
+            );
+        _serviceBook.AddAuthors(
+            book,
+            CreatedBook.Authors.Split(";").ToList().Where(str => int.TryParse(str, out int res))
+            .Select(authorId => _serviceAuthor.Authors.Find(int.Parse(authorId)))
+            );
+        await _serviceBook.Update(book);
         return GetPartialBooks();
     }
-    public async Task<IActionResult> OnDeleteDeleteBook(string genreName)
+    public IActionResult OnDeleteDeleteBook(int bookId)
     {
-        await _serviceGenre.Delete(genreName);
+        _serviceBook.Delete(_serviceBook.Books.Find(bookId));
         return GetPartialBooks();
     }
 

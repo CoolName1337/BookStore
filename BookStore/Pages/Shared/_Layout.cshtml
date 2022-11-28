@@ -119,6 +119,9 @@
         $(document).on("click", ".selectBox", (e) => {
             $(e.target).parent().children(".checkboxes").toggleClass("hidden");
         });
+        $(document).on("click", ".selectBox", (e) => {
+            $(e.target).parent().children(".selectboxes").toggleClass("hidden");
+        });
         $(document).on("click", ".dropbtn-search", (e) => {
             document.getElementById("myDropdown").classList.toggle("show");
         });

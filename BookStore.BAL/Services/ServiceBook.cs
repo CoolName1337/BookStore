@@ -1,4 +1,5 @@
-﻿using BookStore.BAL.Interfaces;
+﻿using BookStore.BAL.DTO;
+using BookStore.BAL.Interfaces;
 using BookStore.DAL.Interfaces;
 using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Http;
@@ -18,63 +19,18 @@ public class ServiceBook : IServiceBook
         _repositoryBook = repositoryBook;
     }
 
-    public async Task<ActionResult<Book>> Verificate(Book book, IFormFile bookFile, IFormFile imageFile)
+    public async Task<Book> Add(BookDTO bookDTO)
     {
-        //sorry...
-
-        ActionResult<Book> actionResult = new(); 
-
-        if (string.IsNullOrWhiteSpace(book.Title)) actionResult.Errors.Add("Название не указано");
-        if (string.IsNullOrWhiteSpace(book.Description)) actionResult.Errors.Add("Описание не указано");
-        if (book.Price < 0) actionResult.Errors.Add("Цена должна быть числом и неменьше нуля");
-        if (book.AgeLimit < 0) actionResult.Errors.Add("Возрастно ограничение должно быть числом и неменьше нуля");
-        if (book.Pages < 0) actionResult.Errors.Add("Количество страниц должно быть числом и неменьше нуля");
-        if (bookFile == null) actionResult.Errors.Add("Файл книги не указан");
-        else book.SourceFile = await FileService.Save(bookFile);
-        if (imageFile == null) actionResult.Errors.Add("Картинка не указана");
-        else book.SourceImage = await FileService.Save(imageFile);
-
-        actionResult.Value = book;
-        return actionResult;
+        var book = await bookDTO.ToBook();
+        await _repositoryBook.Create(book);
+        return book;
     }
-    public async Task<ActionResult<Book>> Add(Book book, IFormFile bookFile, IFormFile imageFile)
+    public async Task<Book> Edit(int bookId, BookDTO bookDTO)
     {
-        var res = await Verificate(book, bookFile, imageFile);
-        
-        if (res.Succeed)
-        {
-            await _repositoryBook.Create(book);
-        }
-        else
-        {
-            FileService.Delete(book.SourceFile);
-            FileService.Delete(book.SourceImage);
-        }
-        return res;
-    }
-    public async Task<ActionResult<Book>> Edit(int id, Book book, IFormFile bookFile, IFormFile imageFile)
-    {
-        var res = await Verificate(book, bookFile, imageFile);
-        if (res.Succeed)
-        {
-            Book currentBook = GetBook(id);
-
-            currentBook.Genres = book.Genres;
-            currentBook.Title = book.Title;
-            currentBook.Authors = book.Authors;
-            currentBook.Price = book.Price;
-            currentBook.SourceFile = book.SourceFile;
-            currentBook.SourceImage = book.SourceImage;
-            currentBook.Description = book.Description;
-
-            await _repositoryBook.Update(book);
-        }
-        else
-        {
-            FileService.Delete(book.SourceFile);
-            FileService.Delete(book.SourceImage);
-        }
-        return res;
+        var book = GetBook(bookId);
+        await bookDTO.ToBook(book);
+        await Update(book);
+        return book;
     }
 
     public string GetCorrectPath(Book book)

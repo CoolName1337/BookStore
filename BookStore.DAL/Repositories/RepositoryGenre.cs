@@ -25,8 +25,12 @@ public class RepositoryGenre : IRepositoryGenre
         return _db.Genres.ToList();
     }
 
-    public Genre Get(string name)
+    public Genre GetByName(string name)
     {
         return _db.Genres.FirstOrDefault(genre => genre.Value == name);
+    }
+    public Genre GetById(int id)
+    {
+        return _db.Genres.Find(id);
     }
 }

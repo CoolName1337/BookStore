@@ -44,7 +44,7 @@ public class ProfilePageModel : PageModel
 
     public IActionResult OnGetProfilePicture()
     {
-        return new JsonResult(_serviceUser.GetUser(User).ProfilePicture);
+        return new JsonResult(_serviceUser.GetUser(User)?.ProfilePicture);
     }
 
     public async Task<IActionResult> OnPostProfilePicture(string userName, IFormFile image)

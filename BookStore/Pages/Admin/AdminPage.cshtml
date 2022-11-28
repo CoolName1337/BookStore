@@ -15,12 +15,16 @@
         <input class="book-search-input" placeholder="Поиск..." />
 
         <button class="new-book-clicker">Добавить книгу</button>
-        <form id="bookForm">
+        <form id="bookForm" enctype="multipart/form-data">
             <div class="new-book-container">
-                <input class="input-file" accept=".pdf, .doc, .docx, .fb2" type="file" name="file" title="файл книги" /><br />
+                <input asp-for="CreatedBook.SourceFile" class="input-file" accept=".pdf, .doc, .docx, .fb2" title="файл книги" /><br />
+                <input asp-for="CreatedBook.SourceImage" class="input-book-image" accept="image/png,image/jpeg,image/gif" style="width:0" />
+                <span class="text-danger" asp-validation-for="CreatedBook.SourceFile"></span>
                 <div class="handler">
-                    <input name="bookPicture" accept="image/png,image/jpeg,image/gif" type="file" hidden />
-                    <img class="book-picture" title="картинка книги" />
+                    <div>
+                        <img class="book-picture" title="картинка книги" />
+                        <span class="text-danger" asp-validation-for="CreatedBook.SourceImage"></span>
+                    </div>
                     <div class="title-container">
                         <span class="data-info">Название</span><br />
                         <input asp-for="CreatedBook.Title" autocomplete="off" class="input-title data" placeholder="Название" /><br />
@@ -30,14 +34,13 @@
                             <div class="selectBox">
                                 Добавить авторов
                             </div>
-                            <div class="checkboxes hidden">
-                            <input class="input-in-box data" placeholder="Писатель..." />
-                            <select asp-for="CreatedBook.Authors" id="bookAuthors">
-                                    @foreach (var author in Model._serviceAuthor.Authors)
-                                    {
-                                        <option value="@author.Id">@author.Name</option>
-                                    }
-                            </select>
+                            <div class="selectboxes hidden">
+                                <input asp-for="CreatedBook.Authors" class="authors-input" hidden/>
+                                <input class="input-in-box data" placeholder="Писатель..." />
+                                @foreach (var author in Model._serviceAuthor.Authors)
+                                {
+                                    <button class="author-select" type="button" value="@author.Id">@author.Name</button>
+                                }
                             </div>
                         </div>
 
@@ -45,14 +48,13 @@
                             <div class="selectBox">
                                 Добавить жанры
                             </div>
-                            <div class="checkboxes hidden">
-                            <input class="input-in-box data" placeholder="Жанр..." />
-                                <select asp-for="CreatedBook.Genres" id="bookGenres">
-                                    @foreach (var genre in Model._serviceGenre.GetAll())
-                                    {
-                                        <option value="@genre.Id">@genre.Value</option>
-                                    }
-                            </select>
+                            <div class="selectboxes hidden">
+                                <input asp-for="CreatedBook.Genres" class="genres-input" hidden />
+                                <input class="input-in-box data" placeholder="Жанр..." />
+                                @foreach (var genre in Model._serviceGenre.GetAll())
+                                {
+                                    <button class="genre-select" type="button" value="@genre.Id">@genre.Value</button>
+                                }
                             </div>
                         </div>
                         <span class="data-info">Цена</span><br />
@@ -93,7 +95,7 @@
             <div id="msg" style="color:red"></div>
         </div>
     </div>
-   
+
     <div class="authors-container">
         <input class="author-name-input" placeholder="Поиск..." />
 
@@ -115,7 +117,7 @@
         <div class="finded-authors">
             @await Html.PartialAsync("_AuthorsView")
         </div>
-        
+
     </div>
 
 </div>
@@ -124,8 +126,8 @@
     <link rel="stylesheet" href="~/css/Admin/AdminPageStyles.css" asp-append-version="true" />
 }
 
-@section Scripts{
-    
+    @section Scripts{
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js" integrity="sha512-xq+Vm8jC94ynOikewaQXMEkJIOBp7iArs3IhFWSWdRT3Pq8wFz46p+ZDFAR7kHnSFf+zUv52B3prRYnbDRdgog==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -137,37 +139,40 @@
             $(".content").children().eq(0).show();
 
             document.getElementsByClassName('book-picture').item(0)
-                .addEventListener('click', () => document.querySelector('input[name="bookPicture"]').click());
+                .addEventListener('click', () => document.querySelector('input.input-book-image').click());
 
             document.getElementsByClassName('author-picture').item(0)
                 .addEventListener('click', () => document.querySelector('input[name="author-picture"]').click());
 
         })
 
-        $(document).on("click", ".create-book-btn", (e) => {
-            if ($("#bookForm").valid()) {
-                var formData = $("#bookForm").serialize();
-                $.ajax({
-                    url: "AdminPage?handler=CreateBook",
-                    type: "POST",
-                    data: formData,
-                    beforeSend: (xhr) => {
-                        xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: (response) => {
-                        alert(response);
-                    },
-                    error: (request, status, error) => {
-                        alert(request.responseText);
-                    }
-
-                });
+        $(document).on("click", ".genre-select", (e) => {
+            e.currentTarget.classList.toggle("selected-item");
+            if(e.currentTarget.classList.contains("selected-item")){
+                document.querySelector(".genres-input").value += `${$(e.currentTarget).val()};`;
+            }
+            else {
+                $(".genres-input").val($(".genres-input").val().replace(`${$(e.currentTarget).val()};`, ''));
+            }
+        });
+        $(document).on("click", ".author-select", (e) => {
+            e.currentTarget.classList.toggle("selected-item");
+            if (e.currentTarget.classList.contains("selected-item")) {
+                document.querySelector(".authors-input").value += `${$(e.currentTarget).val()};`;
+            }
+            else {
+                $(".authors-input").val($(".authors-input").val().replace(`${$(e.currentTarget).val()};`, ''));
             }
         });
 
-        $(document).on("change", "input[name='bookPicture']", (e) => {
-            fr = $("input[name='bookPicture']").prop("files")[0];
-            document.querySelector(".book-picture").src = URL.createObjectURL(fr)
+        $(document).on("change", "input.input-book-image", (e) => {
+            fr = $("input.input-book-image").prop("files")[0];
+            if (fr != null){
+                document.querySelector(".book-picture").src = URL.createObjectURL(fr);
+            }
+            else{
+                document.querySelector(".book-picture").src = "";
+            }
         });
 
         $(document).on("change", "input[name='author-picture']", (e) => {
@@ -178,10 +183,10 @@
         $(document).on("input", ".input-in-box", (e) => {
             var name = $(e.currentTarget).prop("name");
             var linkAppend = "";
-            if(name === "author"){
+            if (name === "author") {
                 linkAppend = "FindAuthors";
             }
-            else if(name === "genre"){
+            else if (name === "genre") {
                 linkAppend = "FindGenres";
             }
             var url = `/Admin/AdminPage?handler=${linkAppend}&req=${$(e.currentTarget).val()}&type=nonmain`
@@ -206,7 +211,7 @@
                 }
             });
         });
-        
+
 
         $(document).on("click", ".new-book-clicker, .close-book-create-container", (e) => {
             $(".new-book-container").toggleClass("show");
@@ -219,6 +224,31 @@
             var ind = Array.prototype.slice.call($(".admin-nav-panel").children()).indexOf(e.currentTarget);
             $(".content").children().hide();
             $(".content").children().eq(ind).show();
+        });
+
+
+
+        $(document).on("click", ".create-book-btn", (e) => {
+            if ($("#bookForm").valid()) {
+                $.ajax({
+                    url: "AdminPage?handler=CreateBook",
+                    type: "POST",
+                    data: new FormData(document.getElementById("bookForm")),
+
+                    processData: false,
+                    contentType: false,
+
+                    beforeSend: (xhr) => {
+                        xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+                    success: (response) => {
+                    },
+                    error: (request, status, error) => {
+                        alert(request.responseText);
+                    }
+
+                });
+            }
         });
 
         $(document).on("input", ".book-search-input", (e) => {
@@ -238,7 +268,21 @@
             });
         });
 
-
+        $(document).on("click", ".delete-book", (e) => {
+            $.ajax({
+                url: "/Admin/AdminPage?handler=DeleteBook&bookId=" + e.target.value,
+                type: "DELETE",
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                success: (view) => {
+                    document.querySelector(".finded-books").innerHTML = view;
+                },
+                error: () => {
+                    $("#msg").html("error");
+                }
+            });
+        });
 
 
 

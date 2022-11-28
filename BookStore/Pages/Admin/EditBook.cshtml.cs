@@ -32,51 +32,14 @@ public class EditBookModel : PageModel
         ChangedBook = _serviceBook.GetBook(id);
     }
 
-    public async Task<IActionResult> OnPostAsync(int id, bool WantToDelete)
+    public IActionResult OnPostAsync(int id, bool WantToDelete)
     {
-        if (WantToDelete)
-        {
-            _serviceBook.Delete(_serviceBook.GetBook(id));
-            return RedirectToPage("/Index");
-        }
-        BookFormFile = Request.Form.Files["file"];
-        ImageFormFile = Request.Form.Files["img"];
-        DateTime.TryParse(Request.Form["creatingDate"], out DateTime res);
+        _serviceBook.Delete(_serviceBook.Books.Find(id));
+        return RedirectToPage("/Index");
+    }
 
-        Book book = new()
-        {
-            Title = Request.Form["title"],
-            Description = Request.Form["descr"],
-            DateOfCreation = res
-        };
-
-        if (!decimal.TryParse(Request.Form["price"], out decimal numPrice) || numPrice< 0) book.Price = -1;
-        else book.Price = numPrice;
-        
-        if (!int.TryParse(Request.Form["ageLimit"], out int ageLimit) || ageLimit< 0) book.AgeLimit = -1;
-        else book.AgeLimit = ageLimit;
-        
-        if (!int.TryParse(Request.Form["pagesCount"], out int pagesCount) || pagesCount< 0) book.Pages = -1;
-        else book.Pages = pagesCount;
-
-        ActionResult = await _serviceBook.Edit(id, book, BookFormFile, ImageFormFile);
-
-        ChangedBook = ActionResult.Value;
-        if (ActionResult.Succeed)
-        {
-            _serviceBook.RemoveGenres(ChangedBook, ChangedBook.Genres);
-            _serviceBook.AddGenres(
-                ChangedBook,
-                _serviceGenre.GetAll().Where(genre => Request.Form["genres"].Contains(genre.Id.ToString())).ToArray()
-                );
-            _serviceBook.AddAuthors(
-                ChangedBook,
-                Request.Form["authors"].Select(authId => _serviceAuthor.Authors.Find(int.Parse(authId))).ToList()
-                );
-            _serviceBook.Update(ChangedBook);
-            return RedirectToPage("/BookPage", new { Id = ActionResult.Value.Id });
-        }
-        ChangedBook.Genres = _serviceGenre.GetAll().Where(genre => Request.Form["genres"].Contains(genre.Id.ToString())).ToList();
-        return Page();
+    public void OnPostDeleteBook(int id)
+    {
+        _serviceBook.Delete(_serviceBook.GetBook(id));
     }
 }

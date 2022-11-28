@@ -1,4 +1,5 @@
-﻿using BookStore.BAL.Services;
+﻿using BookStore.BAL.DTO;
+using BookStore.BAL.Services;
 using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -8,9 +9,8 @@ namespace BookStore.BAL.Interfaces;
 public interface IServiceBook
 {
     DbSet<Book> Books { get; }
-    Task<ActionResult<Book>> Verificate(Book book, IFormFile bookFile, IFormFile imageFile);
-    Task<ActionResult<Book>> Add(Book book, IFormFile bookFile, IFormFile imageFile);
-    Task<ActionResult<Book>> Edit(int id, Book book, IFormFile bookFile, IFormFile imageFile);
+    Task<Book> Add(BookDTO bookDTO);
+    Task<Book> Edit(int bookId, BookDTO bookDTO);
     string GetCorrectPath(Book book);
     void Delete(Book book);
     void AddGenres(Book book, IEnumerable<Genre> genres);

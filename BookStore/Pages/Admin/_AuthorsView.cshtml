@@ -3,25 +3,15 @@
     var req = ViewData["req"]?.ToString() ?? "";
     var authors = Model._serviceAuthor.Authors.Where(author => author.Name.ToUpper().Contains(req.ToUpper())).ToList();
 }
-@if (string.IsNullOrEmpty(ViewData["type"] as string))
+@foreach (var author in authors)
 {
-    @foreach (var author in authors)
-    {
-        <div class="author-container">
-            <a href="/Writer/AuthorPage?authorId=@author.Id">
-                <img src="@author.ProfilePicture" />
-            </a>
-            <a href="/Writer/AuthorPage?authorId=@author.Id">
-                <span class="author-name">@author.Name</span>
-            </a>
-            <button class="delete-author" value="@author.Id">Delete</button>
-        </div>  
-    }
-}
-else
-{
-    @foreach (var author in authors)
-    {
-        <option value="@author.Id">@author.Name</option>
-    }
+    <div class="author-container">
+        <a href="/Writer/AuthorPage?authorId=@author.Id">
+            <img src="@author.ProfilePicture" />
+        </a>
+        <a href="/Writer/AuthorPage?authorId=@author.Id">
+            <span class="author-name">@author.Name</span>
+        </a>
+        <button class="delete-author" value="@author.Id">Delete</button>
+    </div>  
 }

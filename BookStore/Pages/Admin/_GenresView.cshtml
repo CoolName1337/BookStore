@@ -3,21 +3,12 @@
     var req = ViewData["req"]?.ToString() ?? "";
     var genres = Model._serviceGenre.GetAll().Where(genre => genre.Value.ToUpper().Contains(req.ToUpper())).ToList();
 }
-@if (string.IsNullOrEmpty(ViewData["type"] as string))
+@foreach (var genre in genres)
 {
-    @foreach (var genre in genres)
-    {
-        <div class="genre-container">
-            <label class="genre-name">
-                @genre.Value
-            </label>
-            <button type="button" class="remove-genre genre" name="delete" value="@genre.Value">╳</button>
-        </div>
-    }
-}
-else{
-    @foreach (var genre in genres)
-    {
-        <option value="@genre.Id">@genre.Value</option>
-    }
+    <div class="genre-container">
+        <label class="genre-name">
+            @genre.Value
+        </label>
+        <button type="button" class="remove-genre genre" name="delete" value="@genre.Value">╳</button>
+    </div>
 }

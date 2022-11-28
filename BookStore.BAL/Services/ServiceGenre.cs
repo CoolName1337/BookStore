@@ -14,7 +14,7 @@ public class ServiceGenre : IServiceGenre
 	}
     public async Task<Genre> Create(string genreName)
     {
-        if (Get(genreName) == null)
+        if (GetByName(genreName) == null)
         {
             return await _repositoryGenre.Create(new Genre() { Value = genreName });
         }
@@ -25,14 +25,18 @@ public class ServiceGenre : IServiceGenre
     }
     public async Task Delete(string genreName)
     {
-        await _repositoryGenre.Delete(_repositoryGenre.Get(genreName));
+        await _repositoryGenre.Delete(_repositoryGenre.GetByName(genreName));
     }
     public List<Genre> GetAll()
     {
         return _repositoryGenre.GetAll();
     }
-    public Genre Get(string name)
+    public Genre GetByName(string name)
     {
-        return _repositoryGenre.Get(name);
+        return _repositoryGenre.GetByName(name);
+    }
+    public Genre GetById(int id)
+    {
+        return _repositoryGenre.GetById(id);
     }
 }

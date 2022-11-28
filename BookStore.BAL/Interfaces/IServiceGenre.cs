@@ -7,5 +7,6 @@ public interface IServiceGenre
     Task<Genre> Create(string genreName);
     Task Delete(string genreName);
     List<Genre> GetAll();
-    Genre Get(string name);
+    Genre GetByName(string name);
+    Genre GetById(int id);
 }
