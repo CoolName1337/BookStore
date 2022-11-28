@@ -69,6 +69,9 @@
                     <span class="data-info">Количество страниц</span><br />
                     <input asp-for="CreatedBook.Pages" class="input-pages-count data" placeholder="Количество страниц" /><br />
                     <span class="text-danger" asp-validation-for="CreatedBook.Pages"></span><br />
+                    <span class="data-info">Дата написания</span><br />
+                    <input asp-for="CreatedBook.DateOfCreation" class="input-creating-date data" placeholder="Дата создания" /><br />
+                    <span class="text-danger" asp-validation-for="CreatedBook.DateOfCreation"></span><br />
                 </div>
                 <textarea asp-for="CreatedBook.Description" class="input-descr" placeholder="Описание"></textarea><br />
                 <span class="text-danger" asp-validation-for="CreatedBook.Description"></span>
