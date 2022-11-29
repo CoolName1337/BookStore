@@ -6,7 +6,7 @@ public static class FileService
 {
     public static async Task<string> SaveBookFile(IFormFile file, string name)
     {
-        string fileName = string.Join(".", name, file.ContentType.Split("/").Last());
+        string fileName = string.Join(".", name.Replace(" ", ""), file.FileName.Split(".").Last());
         bool isImage = file.ContentType.StartsWith("image");
         string type = isImage ? "images/book" : "files";
         string filePath = Path.Combine($"/{type}/", fileName);
@@ -25,7 +25,7 @@ public static class FileService
 
     public static async Task<string> SaveProfilePic(IFormFile img, string imgName)
     {
-        string fileName = string.Join(".", imgName, img.ContentType.Split("/").Last());
+        string fileName = string.Join(".", imgName, img.FileName.Split("/").Last());
         string filePath = Path.Combine($"/images/profile/", fileName);
         using (var fileStream = new FileStream("wwwroot" + filePath, FileMode.Create))
         {
@@ -35,7 +35,7 @@ public static class FileService
     }
     public static async Task<string> SaveAuthorPic(IFormFile img, string imgName)
     {
-        string fileName = string.Join(".", imgName, img.ContentType.Split("/").Last());
+        string fileName = string.Join(".", imgName, img.FileName.Split("/").Last());
         string filePath = Path.Combine($"/images/author/", fileName);
         using (var fileStream = new FileStream("wwwroot" + filePath, FileMode.Create))
         {

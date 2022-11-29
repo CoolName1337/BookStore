@@ -14,9 +14,7 @@ public class AdminPageModel : PageModel
     public readonly IServiceGenre _serviceGenre;
     public readonly IServiceAuthor _serviceAuthor;
 
-    public BookDTO CreatedBook { get; set; } = new();
-    public IFormFile BookFormFile { get; set; }
-    public IFormFile ImageFormFile { get; set; }
+    public BookDTO CreatedBook { get; set; }
 
     public AdminPageModel(IServiceBook serviceBook, IServiceGenre serviceGenre, IServiceAuthor serviceAuthor)
     {
@@ -42,18 +40,30 @@ public class AdminPageModel : PageModel
     public async Task<IActionResult> OnPostCreateBook(BookDTO CreatedBook)
     {
         var book = await _serviceBook.Add(CreatedBook);
-        if(CreatedBook.Genres)
-        _serviceBook.AddGenres(
+        if(CreatedBook.Genres != null)
+        {
+            await _serviceBook.AddGenres(
             book,
             CreatedBook.Genres.Split(";").ToList().Where(str => int.TryParse(str, out int res))
             .Select(genreId => _serviceGenre.GetById(int.Parse(genreId)))
             );
-        _serviceBook.AddAuthors(
+        }
+        else
+        {
+            await _serviceBook.RemoveGenres(book, book.Genres);
+        }
+        if (CreatedBook.Authors != null)
+        {
+            await _serviceBook.AddAuthors(
             book,
-            CreatedBook.Authors?.Split(";").ToList().Where(str => int.TryParse(str, out int res))
+            CreatedBook.Authors.Split(";").ToList().Where(str => int.TryParse(str, out int res))
             .Select(authorId => _serviceAuthor.Authors.Find(int.Parse(authorId)))
             );
-        await _serviceBook.Update(book);
+        }
+        else
+        {
+            await _serviceBook.RemoveAuthors(book, book.Authors);
+        }
         return GetPartialBooks();
     }
     public IActionResult OnDeleteDeleteBook(int bookId)

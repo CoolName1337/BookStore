@@ -12,6 +12,9 @@
         <a href="/BookPage?id=@book.Id">
             <span class="book-title">@book.Title</span>
         </a>
-        <button class="delete-book" value="@book.Id">Delete</button>
+        <div class="control-btn-container">
+            <a class="edit-book" href="/Admin/EditBook?id=@book.Id">Edit</a>
+            <button class="delete-book" value="@book.Id">Delete</button>
+        </div>
     </div>
 }

@@ -18,7 +18,7 @@
         <form id="bookForm" enctype="multipart/form-data">
             <div class="new-book-container">
                 <input asp-for="CreatedBook.SourceFile" class="input-file" accept=".pdf, .doc, .docx, .fb2" title="файл книги" /><br />
-                <input asp-for="CreatedBook.SourceImage" class="input-book-image" accept="image/png,image/jpeg,image/gif" style="width:0" />
+                <input asp-for="CreatedBook.SourceImage" class="input-book-image" accept="image/png,image/jpeg,image/gif" style="width:0;height:0" />
                 <span class="text-danger" asp-validation-for="CreatedBook.SourceFile"></span>
                 <div class="handler">
                     <div>
@@ -70,12 +70,13 @@
                     <input asp-for="CreatedBook.Pages" class="input-pages-count data" placeholder="Количество страниц" /><br />
                     <span class="text-danger" asp-validation-for="CreatedBook.Pages"></span><br />
                     <span class="data-info">Дата написания</span><br />
-                    <input asp-for="CreatedBook.DateOfCreation" class="input-creating-date data" placeholder="Дата создания" /><br />
+                    <input asp-for="CreatedBook.DateOfCreation" type="date" class="input-creating-date data" placeholder="Дата создания" /><br />
                     <span class="text-danger" asp-validation-for="CreatedBook.DateOfCreation"></span><br />
                 </div>
+                <label class="data-info">Описание</label>
                 <textarea asp-for="CreatedBook.Description" class="input-descr" placeholder="Описание"></textarea><br />
                 <span class="text-danger" asp-validation-for="CreatedBook.Description"></span>
-                <button class="create-book-btn">Сохранить</button>
+                <button class="create-book-btn" type="button">Сохранить</button>
             </div>
         </form>
         <div class="finded-books">
@@ -210,8 +211,6 @@
 
         $(document).on("click", ".create-book-btn", (e) => {
             if ($("#bookForm").valid()) {
-                var formData = new FormData(document.getElementById("bookForm"));
-                console.log(formData);
                 $.ajax({
                     url: "AdminPage?handler=CreateBook",
                     type: "POST",
@@ -224,6 +223,7 @@
                         xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
                     },
                     success: (response) => {
+                        document.querySelector(".finded-books").innerHTML = view;
                     },
                     error: (request, status, error) => {
                         alert(request.responseText);

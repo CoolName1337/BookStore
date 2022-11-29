@@ -4,63 +4,69 @@
     ViewData["Title"] = "Редактировать книгу";
 }
 <div class="content">
-    <form method="post" asp-action="DeleteBook" enctype="multipart/form-data">
-        <div class="create-container">
-            <span style="color:red">
-                @foreach (var ex in Model.ActionResult.Errors)
-                {
-                    <span>@ex</span>
-
-                    <br />
-                }
-            </span>
-            <input class="input-file data"  accept=".pdf, .doc, .docx, .fb2" type="file" name="file" title="тут файл книги" /><br />
+    <input id="bookId" value="@Model.BookId" hidden/>
+    <form id="bookForm" enctype="multipart/form-data">
+        <div class="new-book-container show">
+            <input name="ChangedBook.SourceFile" type="file" class="input-file" accept=".pdf, .doc, .docx, .fb2" title="файл книги" /><br />
+            <input name="ChangedBook.SourceImage" type="file" class="input-book-image" accept="image/png,image/jpeg,image/gif" style="width:0;height:0" />
+            <span class="text-danger" asp-validation-for="ChangedBook.SourceFile"></span>
             <div class="handler">
-                <input class="input-img data" accept="image/png,image/jpeg,image/gif" type="file" name="img" title="тут картинка" />
                 <div>
-                    <span class="data-info">Наименование</span><br />
-                    <input class="input-title data" name="title" placeholder="Название" value="@Model.ChangedBook.Title" /><br />
-                    <span class="data-info">Писатель</span><br />
-                    <input class="input-writer data" name="writer" placeholder="Писатель" /><br /><br />
+                    <img class="book-picture" title="картинка книги" />
+                    <span class="text-danger" asp-validation-for="ChangedBook.SourceImage"></span>
+                </div>
+                <div class="title-container">
+                    <label class="data-info">Название</label><br />
+                    <input asp-for="ChangedBook.Title" autocomplete="off" class="input-title data" placeholder="Название" /><br />
+                    <span class="text-danger" asp-validation-for="ChangedBook.Title"></span><br />
+
+                    <div class="multiselect">
+                        <div class="selectBox">
+                            Добавить авторов
+                        </div>
+                        <div class="selectboxes hidden">
+                            <input asp-for="ChangedBook.Authors" class="authors-input" hidden />
+                            <input class="input-in-box data" placeholder="Писатель..." />
+                            @foreach (var author in Model._serviceAuthor.Authors)
+                            {
+                                <button class="author-select" type="button" value="@author.Id">@author.Name</button>
+                            }
+                        </div>
+                    </div>
+
                     <div class="multiselect">
                         <div class="selectBox">
                             Добавить жанры
                         </div>
-                        <div class="checkboxes book-genres hidden">
-                            @foreach (var item in Model._serviceGenre.GetAll())
+                        <div class="selectboxes hidden">
+                            <input asp-for="ChangedBook.Genres" class="genres-input" hidden />
+                            <input class="input-in-box data" placeholder="Жанр..." />
+                            @foreach (var genre in Model._serviceGenre.GetAll())
                             {
-                                bool isChecked = Model.ChangedBook.Genres.Contains(item);
-                                <label>
-                                    @if (isChecked)
-                                    {
-                                        <input type="checkbox" name="genres" value="@item.Id" checked />
-
-                                        @item.Value
-                                    }
-                                    else
-                                    {
-                                        <input type="checkbox" name="genres" value="@item.Id" />
-
-                                        @item.Value
-                                    }
-
-                                </label>
+                                <button class="genre-select" type="button" value="@genre.Id">@genre.Value</button>
                             }
                         </div>
                     </div>
-                    <span class="data-info">Цена</span><br />
-                    <input class="input-price data" name="price" placeholder="Цена" value="@Model.ChangedBook.Price" /><br />
-                    <span class="data-info">Возрастное ограничение</span><br />
-                    <input class="input-age-limit data" name="ageLimit" placeholder="Возврастное ограничение" value="@Model.ChangedBook.AgeLimit" /><br />
-                    <span class="data-info">Количество страниц</span><br />
-                    <input class="input-pages-count data" name="pagesCount" placeholder="Количество страниц" value="@Model.ChangedBook.Pages" /><br />
-                    <span class="data-info">Дата написания</span><br />
-                    <input class="input-creating-date data" type="date" name="creatingDate" placeholder="Дата создания" value="@Model.ChangedBook.DateOfCreation.ToString("yyyy-MM-dd")" /><br />
+                    <label class="data-info">Цена</label><br />
+                    <input asp-for="ChangedBook.Price" class="input-price data" placeholder="Цена" /><br />
+                    <span class="text-danger" asp-validation-for="ChangedBook.Price"></span><br />
                 </div>
             </div>
-            <textarea class="input-descr" placeholder="Описание" name="descr">@Model.ChangedBook.Description</textarea><br /><br />
-            <button class="input-submit update-btn" type="submit">Сохранить</button>
-            <button class="input-submit delete-btn" type="submit" >Удалить</button>
+            <div>
+                <label class="data-info">Возрастное ограничение</label><br />
+                <input asp-for="ChangedBook.AgeLimit" class="input-age-limit data" placeholder="Возврастное ограничение" /><br />
+                <span class="text-danger" asp-validation-for="ChangedBook.AgeLimit"></span><br />
+                <label class="data-info">Количество страниц</label><br />
+                <input asp-for="ChangedBook.Pages" class="input-pages-count data" placeholder="Количество страниц" /><br />
+                <span class="text-danger" asp-validation-for="ChangedBook.Pages"></span><br />
+                <label class="data-info">Дата написания</label><br />
+                <input asp-for="ChangedBook.DateOfCreation" type="date" class="input-creating-date data" placeholder="Дата создания" /><br />
+                <span class="text-danger" asp-validation-for="ChangedBook.DateOfCreation"></span><br />
+            </div>
+            <label class="data-info">Описание</label>
+            <textarea asp-for="ChangedBook.Description" class="input-descr" placeholder="Описание"></textarea><br />
+            <span class="text-danger" asp-validation-for="ChangedBook.Description"></span>
+            <button class="create-book-btn" type="button">Сохранить</button>
         </div>
     </form>
 </div>
@@ -68,4 +74,103 @@
 @section Styles{
     <link rel="stylesheet" href="~/css/Admin/AdminPageStyles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Admin/EditBookPageStyles.css" asp-append-version="true" />
+}
+
+@section Scripts{
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js" integrity="sha512-xq+Vm8jC94ynOikewaQXMEkJIOBp7iArs3IhFWSWdRT3Pq8wFz46p+ZDFAR7kHnSFf+zUv52B3prRYnbDRdgog==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+
+        $(document).ready(() => {
+            $.validator.unobtrusive.parse($("#bookForm"));
+
+            document.getElementsByClassName('book-picture').item(0)
+                .addEventListener('click', () => document.querySelector('input.input-book-image').click());
+
+            var genres = $(".genres-input").val().split(";");
+            genres.forEach(
+                (el) => { 
+                    $(".genre-select").each(
+                        (ind, elem) => { 
+                            if (el == elem.value) elem.classList.add("selected-item") 
+                        });
+                });
+            var authors = $(".authors-input").val().split(";");
+            authors.forEach(
+                (el) => { 
+                    $(".author-select").each(
+                        (ind, elem) => { 
+                            if (el == elem.value) elem.classList.add("selected-item") 
+                        });
+                });
+        })
+
+        $(document).on("click", ".genre-select", (e) => {
+            e.currentTarget.classList.toggle("selected-item");
+            if (e.currentTarget.classList.contains("selected-item")) {
+                document.querySelector(".genres-input").value += `${$(e.currentTarget).val()};`;
+            }
+            else {
+                $(".genres-input").val($(".genres-input").val().replace(`${$(e.currentTarget).val()};`, ''));
+            }
+        });
+        $(document).on("click", ".author-select", (e) => {
+            e.currentTarget.classList.toggle("selected-item");
+            if (e.currentTarget.classList.contains("selected-item")) {
+                document.querySelector(".authors-input").value += `${$(e.currentTarget).val()};`;
+            }
+            else {
+                $(".authors-input").val($(".authors-input").val().replace(`${$(e.currentTarget).val()};`, ''));
+            }
+        });
+
+        $(document).on("input", ".input-in-box", (e) => {
+            $(e.currentTarget).parent().children("button").each((ind, el) => {
+                if ($(el).text().toUpperCase().includes($(e.currentTarget).val().toUpperCase())) {
+                    $(el).show()
+                }
+                else {
+                    $(el).hide()
+                }
+            });
+        });
+
+        $(document).on("change", "input.input-book-image", (e) => {
+            fr = $("input.input-book-image").prop("files")[0];
+            if (fr != null) {
+                document.querySelector(".book-picture").src = URL.createObjectURL(fr);
+            }
+            else {
+                document.querySelector(".book-picture").src = "";
+            }
+        });
+
+
+
+        $(document).on("click", ".create-book-btn", (e) => {
+            if ($("#bookForm").valid()) {
+                $.ajax({
+                    url: "EditBook?handler=UpdateBook&id=" + $("#bookId").val(),
+                    type: "POST",
+                    data: new FormData(document.getElementById("bookForm")),
+
+                    processData: false,
+                    contentType: false,
+
+                    beforeSend: (xhr) => {
+                        xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+                    success: (id) => {
+                        window.location = `/BookPage?id=${id}`
+                    },
+                    error: (request, status, error) => {
+                        alert(request.responseText);
+                    }
+
+                });
+            }
+        });
+    </script>
 }

@@ -1,9 +1,12 @@
+using BookStore.BAL.DTO;
 using BookStore.BAL.Interfaces;
 using BookStore.BAL.Services;
 using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace BookStore.Pages.Admin;
 
@@ -13,13 +16,8 @@ public class EditBookModel : PageModel
     private readonly IServiceBook _serviceBook;
     public readonly IServiceGenre _serviceGenre;
     public readonly IServiceAuthor _serviceAuthor;
-    public Book ChangedBook { get; set; }
-    public BAL.Services.ActionResult<Book> ActionResult = new();
-
-    public IFormFile BookFormFile { get; set; }
-    public IFormFile ImageFormFile { get; set; }
-
-
+    public int BookId;
+    public BookDTO ChangedBook { get; set; }
     public EditBookModel(IServiceBook serviceBook, IServiceGenre serviceGenre, IServiceAuthor serviceAuthor)
     {
         _serviceBook = serviceBook;
@@ -29,17 +27,38 @@ public class EditBookModel : PageModel
 
     public void OnGet(int id)
     {
-        ChangedBook = _serviceBook.GetBook(id);
+        BookId = id;
+        ChangedBook = BookDTO.FromBook(_serviceBook.GetBook(id));
     }
-
-    public IActionResult OnPostAsync(int id, bool WantToDelete)
+    public async Task<JsonResult> OnPostUpdateBook(int id, BookDTO ChangedBook)
     {
-        _serviceBook.Delete(_serviceBook.Books.Find(id));
-        return RedirectToPage("/Index");
+        var book = await _serviceBook.Edit(id, ChangedBook);
+
+        await _serviceBook.RemoveGenres(book, book.Genres);
+        if (ChangedBook.Genres != null)
+        {
+            await _serviceBook.AddGenres(
+            book,
+            ChangedBook.Genres.Split(";").ToList().Where(str => int.TryParse(str, out int res))
+            .Select(genreId => _serviceGenre.GetById(int.Parse(genreId)))
+            );
+        }
+
+        await _serviceBook.RemoveAuthors(book, book.Authors);
+        if (ChangedBook.Authors != null)
+        {
+            await _serviceBook.AddAuthors(
+            book,
+            ChangedBook.Authors.Split(";").ToList().Where(str => int.TryParse(str, out int res))
+            .Select(authorId => _serviceAuthor.Authors.Find(int.Parse(authorId)))
+            );
+        }
+        return new JsonResult(id);
     }
 
-    public void OnPostDeleteBook(int id)
+    public IActionResult OnPostDeleteBook(int id)
     {
         _serviceBook.Delete(_serviceBook.GetBook(id));
+        return RedirectToPage("/Index");
     }
 }

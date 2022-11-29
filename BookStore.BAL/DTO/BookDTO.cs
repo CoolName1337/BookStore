@@ -1,5 +1,4 @@
-﻿using BookStore.BAL.Interfaces;
-using BookStore.BAL.Services;
+﻿using BookStore.BAL.Services;
 using BookStore.DAL.Models;
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
@@ -21,7 +20,7 @@ public class BookDTO
     public string Genres { get; set; }
     public string Authors { get; set; }
     [Required(ErrorMessage = "Укажите дату написания")]
-    public DateTime DateOfCreation { get; set; }
+    public string DateOfCreation { get; set; }
     [Range(0, int.MaxValue, ErrorMessage = "Введите количество страниц (больше или равно нулю)")]
     public int Pages { get; set; }
     [Range(0, int.MaxValue, ErrorMessage = "Введите возрастное ограничение (больше или равно нулю)")]
@@ -31,21 +30,18 @@ public class BookDTO
     /// Returns new Book instance with adding book file and image file to server directory
     /// </summary>
     /// <returns>Book instance</returns>
-    public async Task<Book> ToBook()
+    public async Task<Book> ToBook() => new Book()
     {
-        return new Book()
-        {
-            Title = this.Title,
-            Description = this.Description,
-            DateOfCreation = this.DateOfCreation,
-            Price = this.Price,
-            AgeLimit = this.AgeLimit,
-            Pages = this.Pages,
-            SourceFile = await FileService.SaveBookFile(this.SourceFile, this.Title),
-            SourceImage = await FileService.SaveBookFile(this.SourceImage, this.Title),
-            AddingDate = DateTime.Now,
-        };
-    }
+        Title = this.Title,
+        Description = this.Description,
+        DateOfCreation = DateTime.Parse(this.DateOfCreation),
+        AddingDate = DateTime.Now,
+        Price = this.Price,
+        AgeLimit = this.AgeLimit,
+        Pages = this.Pages,
+        SourceFile = await FileService.SaveBookFile(this.SourceFile, this.Title + this.DateOfCreation + DateTime.Now.Ticks.ToString()),
+        SourceImage = await FileService.SaveBookFile(this.SourceImage, this.Title + this.DateOfCreation + DateTime.Now.Ticks.ToString())
+    };
     /// <summary>
     /// Fills the Book instance properties with property values of this BookDTO instance
     /// </summary>
@@ -55,19 +51,40 @@ public class BookDTO
     /// <returns>Rhe same Book instance with filled properties</returns>
     public async Task<Book> ToBook(Book book)
     {
-        FileService.Delete(book.SourceFile);
-        FileService.Delete(book.SourceImage);
+        if (this.SourceFile != null)
+        {
+            FileService.Delete(book.SourceFile);
+            book.SourceFile = await FileService.SaveBookFile(this.SourceFile, this.Title + this.DateOfCreation + DateTime.Now.Ticks.ToString());
+        }
+        if(this.SourceImage != null)
+        {
+            FileService.Delete(book.SourceImage);
+            book.SourceImage = await FileService.SaveBookFile(this.SourceImage, this.Title + this.DateOfCreation + DateTime.Now.Ticks.ToString());
+        }
 
         book.Title = this.Title;
         book.Description = this.Description;
-        book.DateOfCreation = this.DateOfCreation;
+        book.DateOfCreation = DateTime.Parse(this.DateOfCreation);
         book.Price = this.Price;
         book.AgeLimit = this.AgeLimit;
         book.Pages = this.Pages;
-        book.SourceFile = await FileService.SaveBookFile(this.SourceFile, this.Title);
-        book.SourceImage = await FileService.SaveBookFile(this.SourceImage, this.Title);
 
         return book;
     }
 
+    public static BookDTO FromBook(Book book)
+    {
+        var bookDTO = new BookDTO()
+        {
+            Title = book.Title,
+            Description = book.Description,
+            DateOfCreation = book.DateOfCreation.ToString("yyyy-MM-dd"),
+            Price = book.Price,
+            AgeLimit = book.AgeLimit,
+            Pages = book.Pages,
+            Genres = String.Join(";", book.Genres.Select(genre => genre.Id)) + ";",
+            Authors = String.Join(";", book.Authors.Select(author => author.Id)) + ";",
+        };
+        return bookDTO;
+    }
 }

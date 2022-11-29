@@ -2,9 +2,7 @@
 using BookStore.BAL.Interfaces;
 using BookStore.DAL.Interfaces;
 using BookStore.DAL.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace BookStore.BAL.Services;
 
@@ -40,25 +38,29 @@ public class ServiceBook : IServiceBook
         return "files/" + System.Net.WebUtility.UrlEncode(file.Replace("/files/", "")).Replace("+", " ").Replace(" ", "%20");
     }
 
-    public void AddAuthors(Book book, IEnumerable<Author> authors)
+    public async Task AddAuthors(Book book, IEnumerable<Author> authors)
     {
         book.Authors.AddRange(authors);
         book.Authors = book.Authors.Distinct().ToList();
+        await Update(book);
     }
 
-    public void RemoveAuthors(Book book, IEnumerable<Author> authors)
+    public async Task RemoveAuthors(Book book, IEnumerable<Author> authors)
     {
         book.Authors = book.Authors.Where(author => !authors.Contains(author)).ToList();
+        await Update(book);
     }
 
-    public void AddGenres(Book book, IEnumerable<Genre> genres)
+    public async Task AddGenres(Book book, IEnumerable<Genre> genres)
     {
         book.Genres.AddRange(genres);
         book.Genres = book.Genres.Distinct().ToList();
+        await Update(book);
     }
-    public void RemoveGenres(Book book, IEnumerable<Genre> genres)
+    public async Task RemoveGenres(Book book, IEnumerable<Genre> genres)
     {
         book.Genres = book.Genres.Where(genre => !genres.Contains(genre)).ToList();
+        await Update(book);
     }
     public void Delete(Book book)
     {

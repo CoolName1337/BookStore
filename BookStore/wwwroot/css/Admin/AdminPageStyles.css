@@ -22,8 +22,11 @@ div.content {
     margin-top: 60px;
 }
 
-.text-danger{
-    color:red;
+.text-danger {
+    color: red !important;
+}
+.input-validation-error{
+    border:1px solid red !important;
 }
 /*////////////////////////////////////////////   Create book   ////////////////////////////////////////////*/
 .book-search-input {
@@ -62,19 +65,35 @@ div.content {
     font-size: 30px;
 }
 
-.book-container button{
-    align-self:center;
-    transition: all 0.4s ease;
-    margin-right:0;
-    margin-left:auto;
-    color:red;
-    border:2px solid red;
-    padding:8px;
-    font-size:20px;
+.control-btn-container {
+    align-self: center;
+    margin-right: 0;
+    margin-left: auto;
 }
+
+.control-btn-container .delete-book {
+    transition: all 0.4s ease;
+    border: 2px solid red;
+    padding: 8px;
+    font-size: 20px;
+    color: red;
+}
+.control-btn-container .edit-book{
+    transition: all 0.4s ease;
+    border: 2px solid green;
+    padding: 8px;
+    border-radius:6px;
+    font-size: 20px;
+    color: green;
+}
+
 .book-container button:hover{
     background-color:red;
     color:white;
+}
+.book-container .edit-book:hover {
+    background-color: green;
+    color: white;
 }
 
 .new-book-clicker{
@@ -138,7 +157,6 @@ div.create-container {
 }
 .input-descr {
     width: 100%;
-    margin-top: 20px;
     box-sizing: border-box;
     height: 400px;
     resize: none;

@@ -13,10 +13,10 @@ public interface IServiceBook
     Task<Book> Edit(int bookId, BookDTO bookDTO);
     string GetCorrectPath(Book book);
     void Delete(Book book);
-    void AddGenres(Book book, IEnumerable<Genre> genres);
-    void RemoveGenres(Book book, IEnumerable<Genre> genres);
-    void AddAuthors(Book book, IEnumerable<Author> authors);
-    void RemoveAuthors(Book book, IEnumerable<Author> authors);
+    Task AddGenres(Book book, IEnumerable<Genre> genres);
+    Task RemoveGenres(Book book, IEnumerable<Genre> genres);
+    Task AddAuthors(Book book, IEnumerable<Author> authors);
+    Task RemoveAuthors(Book book, IEnumerable<Author> authors);
     Task Update(Book book);
     Book GetBook(int id);
 }
